@@ -6,6 +6,8 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import WelcomePage from './Welcome/Welcome';
+import MainLogin from './MainLogin/MainLogin';
 import IndexPage from './Index/Index';
 
 const root = ReactDOM.createRoot(
@@ -15,7 +17,15 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <IndexPage title="Добро пожаловать!" />
+    element: <IndexPage title="Помощник поиска неисправностей" />
+  },
+  {
+    path: "/welcome",
+    element: <WelcomePage title="Добро пожаловать!" />
+  },
+  {
+    path: "/login",
+    element: <MainLogin title="Вход" />
   }
 ]);
 

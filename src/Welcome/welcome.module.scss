@@ -1,12 +1,12 @@
-.indexWrapper {
+.welcomeWrapper {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .indexPage {
+  .welcomePage {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,6 +18,10 @@
       color: #333;
       margin-top: 60px;
       margin-bottom: 0;
+
+      @media(max-width: 580px) {
+        font-size: 42px;
+      }
     }
 
     button {
@@ -38,11 +42,18 @@
       font-size: 18px;
       margin-top: 64px;
       line-height: 1.51;
+      @media(max-width: 580px) {
+        font-size: 16px;
+      }
     }
 
     svg {
       width: 80px;
       height: 80px;
+      @media(max-width: 580px) {
+        width: 70px;
+        height: 70px;
+      }
     }
   }
 }
