@@ -90,7 +90,7 @@ const Sidebar = () => {
           <Link to="/recovery" onClick={() => navigate('/recovery')}>Восстановить аккаунт</Link>
         </div> :
         <>
-        {localStorage.token}
+        {/* Кнопки сайдбара */}
         </>
       }
 
