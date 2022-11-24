@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
@@ -8,13 +8,17 @@ import s from './mainrecovery.module.scss';
 const MainRecovery = ({title}: DefaultPage) => {
 
   const [email, setEmail] = useState<string>("");
-  const [phoneError, setPhoneError] = useState<{status: boolean, message: string}>({status: false, message: ""});
+  const [emailError, setEmailError] = useState<{status: boolean, message: string}>({status: false, message: ""});
 
   const sendData = () => {
     if(!email || email === "") {
-      return setPhoneError({status: true, message: "Укажите почту"});
+      return setEmailError({status: true, message: "Укажите почту"});
     }
   }
+
+  useEffect(() => {
+    setEmailError({status: false, message: ""});
+  }, [email]);
 
   return(
     <DefaultLayout title={title}>
@@ -22,9 +26,9 @@ const MainRecovery = ({title}: DefaultPage) => {
         <div className={s.recoveryForm}>
           <Logo />
           <h1>Восстановление аккаунта</h1>
-          <input type="email" placeholder="Ваша почта" className={`${phoneError.status && s.error}`} value={email} onChange={({ target }) => setEmail(target.value)} />
+          <input type="email" placeholder="Ваша почта" className={`${emailError.status && s.error}`} value={email} onChange={({ target }) => setEmail(target.value)} />
           {
-            phoneError.status && <p className={s.error}>{phoneError.message}</p>
+            emailError.status && <p className={s.error}>{emailError.message}</p>
           }      
           <button onClick={sendData}>Восстановить</button>
           <Link to={"/register"}>Регистрация</Link>
