@@ -1,5 +1,5 @@
 const config = {
-  API: `http://localhost:1001`
+  API: `http://192.168.0.8:1001`
 };
 
 export default config;

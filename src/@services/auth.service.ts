@@ -1,33 +1,26 @@
 import $api from "../@http";
-import axios, {AxiosResponse} from 'axios';
-import { AuthResponse } from "../@types/authresponse.interface";
+import axios from 'axios';
 import config from "../config";
 
 export default class AuthService {
-  static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/login', {email, password});
+  static async login(email: string, password: string) {
+    return $api.post('/auth/login', { email, password });
   }
 
-  static async registration(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/registration', {email, password});
+  static async registration(email: string, password: string) {
+    return $api.post('/auth/registration', { email, password });
   }
 
-  static async logout(): Promise<void> {
-    $api.post<AuthResponse>('/logout');
+  static async logout() {
+    $api.post('/auth/logout');
   }
 
   static async isAuth(): Promise<boolean> {
-    try {
-      const response = await axios.get(`${config.API}/auth/refresh`, {withCredentials: true});
-      if(response.data.type === "error") {
-        return false;
-      } else {
-        return true;
-      }
-    } catch(e: any) {
-      console.log(e.message);
+    const response = await axios.get(`${config.API}/auth/refresh`, { withCredentials: true });
+    if (response.data.type === "error") {
+      return false;
     }
-    
-    return false;
+    localStorage.setItem('token', response.data.data.accessToken);
+    return true;
   }
 }

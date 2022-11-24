@@ -10,22 +10,22 @@ const Sidebar = () => {
 
   const [searchText, setSearchText] = useState<string>("");
   const [searchedResult, setSearchedResult] = useState<any>({});
-  const [isAuth, setAuth] = useState<boolean>(false);
+  const [isAuth, setAuth] = useState<boolean>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.token) {
-      AuthService.isAuth().then(r => setAuth(r));
-    } else {
-      setAuth(false);
+      setAuth(true);
+      AuthService.isAuth().then((r:boolean) => {
+        setAuth(r);
+      });
     }
-  }, []);
+  }, [isAuth]);
 
   useEffect(() => {
     axios.get(`${config.API}/search/get?text=${searchText}`).then(({ data }) => {
       setSearchedResult(data.data);
-      console.log(data.data)
     });
   }, [searchText]);
 
@@ -33,7 +33,7 @@ const Sidebar = () => {
     <div className={s.sidebar}>
       <div className={s.logo}>
         <Logo />
-        <p>Voronin Helper</p>
+        <p>Helper</p>
       </div>
 
       <div className={s.search}>
@@ -82,13 +82,16 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {!isAuth &&
+      {!isAuth ?
         <div className={s.sidebarAuthPanel}>
           <p>Для использования всех возможностей сервиса Вам необходимо авторизоваться</p>
           <button className={s.join} onClick={() => navigate('/login')}>Войти</button>
           <button className={s.reg} onClick={() => navigate('/register')}>Зарегистрироваться</button>
           <Link to="/recovery" onClick={() => navigate('/recovery')}>Восстановить аккаунт</Link>
-        </div>
+        </div> :
+        <>
+        {localStorage.token}
+        </>
       }
 
     </div>
