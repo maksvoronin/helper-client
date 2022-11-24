@@ -4,7 +4,7 @@ import { DefaultPage } from "../@types/pageDefault.interface";
 const IndexPage = ({ title }: DefaultPage) => {
   return (
     <MainLayout title={title}>
-      test
+      
     </MainLayout>
   );
 }

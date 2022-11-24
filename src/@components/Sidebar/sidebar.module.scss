@@ -1,9 +1,122 @@
+@import "../../variables.scss";
+
 .sidebar {
   position: sticky;
   top: 0;
-  max-width: 300px;
-  height: 100vh;
+  max-width: 260px;
+  height: calc(100vh - 40px);
   max-height: 100%;
   width: 100%;
-  background-color: rgba(249, 249, 249, 0.9);
+  background-color: rgba(249, 249, 249, 0.8);
+  backdrop-filter: blur(70px);
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 42px;
+      height: 42px;
+    }
+
+    p {
+      font-weight: bold;
+      font-weight: 600;
+      font-size: 16px;
+      margin-left: 12px;
+    }
+  }
+
+  .search {
+    margin-top: 25px;
+    input {
+      width: calc(100% - 30px);
+      padding: 0;
+      border: 1px solid #d8d8d8;
+      height: 42px;
+      border-radius: 12px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .someResult {
+      padding: 15px;
+      background-color: white;
+      border-radius: 12px;
+      border: 1px solid #d8d8d8;
+      margin-top: 5px;
+      position: absolute;
+      width: calc(100% - 70px);
+      left: -100%;
+      transition: left .3s;
+    }
+    input:focus + .someResult, .someResult:hover {
+      left: 20px;
+    }
+    .tag {
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    a {
+      display: block;
+      color: $accentColor;
+      font-size: 14px;
+      width: 100%;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .sidebarAuthPanel {
+    p {
+      line-height: 1.46;
+    }
+
+    button {
+      cursor: pointer;
+      transition: opacity .3s;
+      &:hover {
+        opacity: .9;
+      }
+    }
+
+    .join {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      background: $accentColor;
+      border: none;
+      color: white;
+    }
+
+    .reg {
+      width: 100%;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid #d8d8d8;
+      background-color: white;
+    }
+
+    a {
+      text-decoration: none;
+      color: $accentColor;
+      text-align: center;
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
