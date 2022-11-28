@@ -165,4 +165,70 @@
       }
     }
   }
+
+  .buttons {
+    margin-top: 30px;
+    @media(max-width: $mobileWidth) {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn {
+      width: calc(100% - 30px);
+      padding: 13px 15px;
+      max-height: 42px;
+      display: flex;
+      background-color: rgba(255, 255, 255, .8);
+      align-items: center;
+      border-radius: 12px;
+      border: 1px solid #c7c7c7;
+      margin-top: 10px;
+      font-size: 13px;
+      user-select: none;
+      cursor: pointer;
+      transition: background .3s;
+      text-decoration: none;
+      color: black;
+      &:hover {
+        background-color: rgba(255, 255, 255, 1);
+      }
+      svg {
+        margin-right: 7px;
+        color: $accentColor;
+        fill: $accentColor;
+        width: 20px;
+        height: 20px;
+        @media(max-width: $mobileWidth) {
+          margin-right: 0;
+          width: 24px;
+          height: 24px;
+        }
+      }
+      span {
+        @media(max-width: $mobileWidth) {
+          display: none;
+        }
+      }
+      @media(max-width: $mobileWidth) {
+        padding: 13px;
+        width: auto;
+      }
+    }
+    .separator {
+      margin: 10px;
+      background-color: #c7c7c7;
+      width: calc(100% - 20px);
+      height: 1px;
+      @media(max-width: $mobileWidth) {
+        display: none;
+      }
+    }
+    @media(max-width: $mobileWidth) {
+      display: flex;
+      .secondaryButtons {
+        display: none;
+      }
+    }
+  }
 }

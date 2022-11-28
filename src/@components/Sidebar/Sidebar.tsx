@@ -1,7 +1,19 @@
+import {
+  mdiAccountCircleOutline,
+  mdiCommentQuestionOutline,
+  mdiCommentCheckOutline,
+  mdiCogOutline,
+  mdiCardsHeartOutline,
+  mdiDatabase,
+  mdiThumbUpOutline,
+  mdiSecurity
+} from '@mdi/js';
+import Icon from '@mdi/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../@assets/logo';
+import $api from '../../@http';
 import AuthService from '../../@services/auth.service';
 import config from '../../config';
 import s from './sidebar.module.scss';
@@ -12,12 +24,15 @@ const Sidebar = () => {
   const [searchedResult, setSearchedResult] = useState<any>({});
   const [isAuth, setAuth] = useState<boolean>();
 
+  const [user, setUser] = useState<any>();
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.token) {
-      AuthService.isAuth().then((r:boolean) => {
+      AuthService.isAuth().then((r: boolean) => {
         setAuth(r);
+        console.log(r);
       });
     }
   }, [isAuth]);
@@ -27,6 +42,12 @@ const Sidebar = () => {
       setSearchedResult(data.data);
     });
   }, [searchText]);
+
+  useEffect(() => {
+    if (isAuth) {
+      $api.get(`${config.API}/user/me`).then(({data}) => {setUser(data.data);});
+    }
+  }, [isAuth]);
 
   return (
     <div className={s.sidebar}>
@@ -88,9 +109,30 @@ const Sidebar = () => {
           <button className={s.reg} onClick={() => navigate('/register')}>Зарегистрироваться</button>
           <Link to="/recovery" onClick={() => navigate('/recovery')}>Восстановить аккаунт</Link>
         </div> :
-        <>
-        {/* Кнопки сайдбара */}
-        </>
+        <div className={s.buttons}>
+          <div className={s.secondaryButtons}>
+            <Link to={"/profile"} className={s.btn}><Icon path={mdiAccountCircleOutline} /> <span>Мой профиль</span></Link>
+          </div>
+          <div className={s.separator} />
+          <Link to={"/comment"} className={s.btn}><Icon path={mdiCommentQuestionOutline} /> <span>Добавить замечание</span></Link>
+          <Link to={"/decision"} className={s.btn}><Icon path={mdiCommentCheckOutline} /> <span>Добавить решение</span></Link>
+          <div className={s.separator} />
+          <Link to={"/liked"} className={s.btn}><Icon path={mdiThumbUpOutline} /> <span>Полезные решения</span></Link>
+          <div className={s.secondaryButtons}>
+            <Link to={"/my"} className={s.btn}><Icon path={mdiDatabase} /> <span>Мои данные</span></Link>
+          </div>
+          <Link to={"/subscribed"} className={s.btn}><Icon path={mdiCardsHeartOutline} /> <span>Отслеживаемое</span></Link>
+          <div className={s.separator} />
+          <Link to={"/settings"} className={s.btn}><Icon path={mdiCogOutline} /> <span>Настройки</span></Link>
+
+          {
+            user && user.permissions > 2 &&
+            <div className={s.secondaryButtons}>
+              <div className={s.separator} />
+              <Link to={"/admin"} className={s.btn}><Icon path={mdiSecurity} /> <span>Управление</span></Link>
+            </div>
+          }
+        </div>
       }
 
     </div>
