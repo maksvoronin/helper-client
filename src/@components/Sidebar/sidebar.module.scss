@@ -11,7 +11,16 @@
   backdrop-filter: blur(70px);
   padding: 20px;
   overflow-y: auto;
-  position: relative;
+  
+  @media(max-width: $mobileWidth) {
+    position: fixed;
+    bottom: 0;
+    top: calc(100% - 120px);
+    width: calc(100% - 40px);
+    max-height: 80px;
+    max-width: none;
+    z-index: 999;
+  }
 
   .logo {
     display: flex;
@@ -28,10 +37,15 @@
       font-size: 16px;
       margin-left: 12px;
     }
+
+    @media(max-width: $mobileWidth) {
+      display: none;
+    }
   }
 
   .search {
     margin-top: 25px;
+
     input {
       width: calc(100% - 30px);
       padding: 0;
@@ -54,14 +68,18 @@
       left: -100%;
       transition: left .3s;
     }
-    input:focus + .someResult, .someResult:hover {
+
+    input:focus+.someResult,
+    .someResult:hover {
       left: 20px;
     }
+
     .tag {
       font-weight: bold;
       font-size: 14px;
       margin-top: 10px;
     }
+
     a {
       display: block;
       color: $accentColor;
@@ -71,21 +89,30 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    @media(max-width: $mobileWidth) {
+      display: none;
     }
   }
 
   .sidebarAuthPanel {
     p {
       line-height: 1.46;
+      @media(max-width: $mobileWidth) {
+        display: none;
+      }
     }
 
     button {
       cursor: pointer;
       transition: opacity .3s;
       font-size: 13px;
+
       &:hover {
         opacity: .9;
       }
@@ -116,8 +143,25 @@
       display: block;
       margin-top: 10px;
       font-size: 14px;
+
       &:hover {
         text-decoration: underline;
+      }
+    }
+
+    @media(max-width: $mobileWidth) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .join {
+        width: 40%;
+      }
+      .reg {
+        width: 58%;
+      }
+      a {
+        width: 100%;
       }
     }
   }

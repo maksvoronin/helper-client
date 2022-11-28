@@ -16,7 +16,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (localStorage.token) {
-      setAuth(true);
       AuthService.isAuth().then((r:boolean) => {
         setAuth(r);
       });

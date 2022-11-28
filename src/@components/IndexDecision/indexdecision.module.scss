@@ -1,0 +1,29 @@
+@import "../../variables.scss";
+
+.indexDecision {
+  width: calc(100% - 40px);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(80px);
+
+  img {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid #ccc;
+    .info {
+      font-style: italic;
+      color: #555;
+      font-weight: 500;
+    }
+  }
+}
