@@ -57,7 +57,7 @@ const IndexPage = ({ title }: DefaultPage) => {
 
         <div className={`${s.decisions}`}>
           {
-            decisions && (decisions.length > 0 ? decisions.map((r: any) => <IndexDecision key={r._id} decision={r}>{r.content}</IndexDecision>) : <IndexDecision text="Решения не найдены" />)
+            selectedComment && decisions && (decisions.length > 0 ? decisions.map((r: any) => <IndexDecision key={r._id} decision={r}>{r.content}</IndexDecision>) : <IndexDecision text="Решения не найдены" />)
           }
         </div>
       </div>

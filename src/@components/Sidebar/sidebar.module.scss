@@ -226,8 +226,97 @@
     }
     @media(max-width: $mobileWidth) {
       display: flex;
+      flex-direction: row;
       .secondaryButtons {
         display: none;
+      }
+    }
+    height: auto;
+  }
+  .userInfo {
+    padding-left: 14px;
+    border-radius: 12px;
+    background-color: white;
+    margin-top: auto;
+    bottom: 40px;
+    width: calc(100% - 14px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 70px;
+    @media(max-width: $mobileWidth) {
+      display: none;
+    }
+    b {
+      font-size: 14px;
+      display: block;
+      padding-top: 14px;
+      a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    span {
+      font-size: 12px;
+      display: block;
+      padding-bottom: 14px;
+    }
+
+    .settingsBtn {
+      padding-left: 15px;
+      border-left: 1px solid #eee;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-right: 14px;
+      border-radius: 0px 12px 12px 0px;
+      cursor: pointer;
+      svg {
+        width: 24px;
+        height: 24px;
+        color: $accentColor;
+      }
+      &:hover {
+        background: #f9f9f9;
+      }
+    }
+
+    .avatar {
+      background-color: #999;
+      width: 42px;
+      height: 42px;
+      border-radius: 50px;
+      background-position: 0px 100px;
+      background-size: 100%;
+    }
+
+    .userContent {
+      display: flex;
+      align-items: center;
+      .texts {
+        margin-left: 10px;
+      }
+    }
+  }
+  display: flex;
+  flex-direction: column;
+
+  .links {
+    color: #818181;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 15px;
+    a.support {
+      display: block;
+      font-size: 13px;
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

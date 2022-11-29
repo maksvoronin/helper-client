@@ -1,12 +1,12 @@
 import {
-  mdiAccountCircleOutline,
   mdiCommentQuestionOutline,
   mdiCommentCheckOutline,
   mdiCogOutline,
   mdiCardsHeartOutline,
   mdiDatabase,
   mdiThumbUpOutline,
-  mdiSecurity
+  mdiSecurity,
+  mdiHomeOutline
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import axios from 'axios';
@@ -25,6 +25,7 @@ const Sidebar = () => {
   const [isAuth, setAuth] = useState<boolean>();
 
   const [user, setUser] = useState<any>();
+  const [counts, setCounts] = useState<{ comments: number, decisions: number }>({ comments: 0, decisions: 0 });
 
   const navigate = useNavigate();
 
@@ -45,9 +46,16 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (isAuth) {
-      $api.get(`${config.API}/user/me`).then(({data}) => {setUser(data.data);});
+      $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    if (user && isAuth) {
+      $api.get(`${config.API}/stat/user?id=${user.id}&params=count`).then(({ data }) => setCounts({ comments: data.data.countComments, decisions: data.data.countDecisions }));
+    }
+    console.log(user)
+  }, [isAuth, user]);
 
   return (
     <div className={s.sidebar}>
@@ -109,30 +117,53 @@ const Sidebar = () => {
           <button className={s.reg} onClick={() => navigate('/register')}>Зарегистрироваться</button>
           <Link to="/recovery" onClick={() => navigate('/recovery')}>Восстановить аккаунт</Link>
         </div> :
-        <div className={s.buttons}>
-          <div className={s.secondaryButtons}>
-            <Link to={"/profile"} className={s.btn}><Icon path={mdiAccountCircleOutline} /> <span>Мой профиль</span></Link>
-          </div>
-          <div className={s.separator} />
-          <Link to={"/comment"} className={s.btn}><Icon path={mdiCommentQuestionOutline} /> <span>Добавить замечание</span></Link>
-          <Link to={"/decision"} className={s.btn}><Icon path={mdiCommentCheckOutline} /> <span>Добавить решение</span></Link>
-          <div className={s.separator} />
-          <Link to={"/liked"} className={s.btn}><Icon path={mdiThumbUpOutline} /> <span>Полезные решения</span></Link>
-          <div className={s.secondaryButtons}>
-            <Link to={"/my"} className={s.btn}><Icon path={mdiDatabase} /> <span>Мои данные</span></Link>
-          </div>
-          <Link to={"/subscribed"} className={s.btn}><Icon path={mdiCardsHeartOutline} /> <span>Отслеживаемое</span></Link>
-          <div className={s.separator} />
-          <Link to={"/settings"} className={s.btn}><Icon path={mdiCogOutline} /> <span>Настройки</span></Link>
-
-          {
-            user && user.permissions > 2 &&
+        <>
+          <div className={s.buttons}>
             <div className={s.secondaryButtons}>
-              <div className={s.separator} />
-              <Link to={"/admin"} className={s.btn}><Icon path={mdiSecurity} /> <span>Управление</span></Link>
+              <Link to={"/"} className={s.btn}><Icon path={mdiHomeOutline } /> <span>Главная</span></Link>
             </div>
-          }
-        </div>
+            <div className={s.separator} />
+            <Link to={"/comment"} className={s.btn}><Icon path={mdiCommentQuestionOutline} /> <span>Добавить замечание</span></Link>
+            <Link to={"/decision"} className={s.btn}><Icon path={mdiCommentCheckOutline} /> <span>Добавить решение</span></Link>
+            <div className={s.separator} />
+            <Link to={"/liked"} className={s.btn}><Icon path={mdiThumbUpOutline} /> <span>Полезные решения</span></Link>
+            <div className={s.secondaryButtons}>
+              <Link to={"/my"} className={s.btn}><Icon path={mdiDatabase} /> <span>Мои данные</span></Link>
+            </div>
+            <Link to={"/subscribed"} className={s.btn}><Icon path={mdiCardsHeartOutline} /> <span>Отслеживаемое</span></Link>
+            <div className={s.separator} />
+            <Link to={"/settings"} className={s.btn}><Icon path={mdiCogOutline} /> <span>Настройки</span></Link>
+
+            {
+              user && user.permissions > 2 &&
+              <div className={s.secondaryButtons}>
+                <div className={s.separator} />
+                <Link to={"/admin"} className={s.btn}><Icon path={mdiSecurity} /> <span>Управление</span></Link>
+              </div>
+            }
+          </div>
+          <div className={`${s.secondaryButtons} ${s.userInfo}`}>
+            {
+              user && <>
+                <div className={s.userContent}>
+                  <div style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} className={s.avatar}></div>
+                  <div className={s.texts}>
+                    <b><Link to="/profile">{user.name} {user.surname}</Link></b>
+                    <span>{counts.decisions} реш. / {counts.comments} замеч.</span>
+                  </div>
+                </div>
+                <div className={s.settingsBtn}>
+                  <Icon path={mdiCogOutline} />
+                </div>
+              </>
+            }
+          </div>
+          <div className={`${s.links} ${s.secondaryButtons}`}>
+            <a className={`${s.support}`} href="/support">Поддержка</a>
+            <a className={s.support} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">Чат WhatsApp</a>
+            <a className={s.support} href="https://t.me/tpoksy" target={"_blank"} rel="noreferrer">Telegram</a>
+          </div>
+        </>
       }
 
     </div>
