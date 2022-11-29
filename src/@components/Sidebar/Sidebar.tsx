@@ -120,11 +120,16 @@ const Sidebar = () => {
         <>
           <div className={s.buttons}>
             <div className={s.secondaryButtons}>
-              <Link to={"/"} className={s.btn}><Icon path={mdiHomeOutline } /> <span>Главная</span></Link>
+              <Link to={"/"} className={s.btn}><Icon path={mdiHomeOutline} /> <span>Главная</span></Link>
             </div>
-            <div className={s.separator} />
-            <Link to={"/comment"} className={s.btn}><Icon path={mdiCommentQuestionOutline} /> <span>Добавить замечание</span></Link>
-            <Link to={"/decision"} className={s.btn}><Icon path={mdiCommentCheckOutline} /> <span>Добавить решение</span></Link>
+            {
+              user && user.permissions > 0 &&
+              <>
+                <div className={s.separator} />
+                <Link to={"/comment"} className={s.btn}><Icon path={mdiCommentQuestionOutline} /> <span>Добавить замечание</span></Link>
+                <Link to={"/decision"} className={s.btn}><Icon path={mdiCommentCheckOutline} /> <span>Добавить решение</span></Link>
+              </>
+            }
             <div className={s.separator} />
             <Link to={"/liked"} className={s.btn}><Icon path={mdiThumbUpOutline} /> <span>Полезные решения</span></Link>
             <div className={s.secondaryButtons}>

@@ -11,6 +11,7 @@ import MainLogin from './MainLogin/MainLogin';
 import IndexPage from './Index/Index';
 import MainRegister from './MainRegister/MainRegister';
 import MainRecovery from './MainRecovery/MainRecovery';
+import CommentPage from './Comment/CommentPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/recovery",
     element: <MainRecovery title="Восстановление аккаунта" />
+  },
+  {
+    path: "/comment",
+    element: <CommentPage title="Добавление замечания" />
   }
 ]);
 
