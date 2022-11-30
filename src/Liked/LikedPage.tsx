@@ -30,8 +30,6 @@ const LikedPage = ({ title }: DefaultPage) => {
     user && user.likedDecisions.forEach((e: any) => {
       $api.get(`${config.API}/decision/get?id=${e}`).then(({ data }) => setDecisions(prev => [...prev, data.data]));
     });
-
-    console.log(decisions);
   }, [user]);
 
   return (
