@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 import config from '../../config';
 import s from './indexdecision.module.scss';
 
-const IndexDecision = ({ children, decision, text }: any) => {
+const IndexDecision = ({ children, decision, text, userData }: any) => {
 
   const [user, setUser] = useState<any>();
 
   useEffect(() => {
-    if(decision) {
+    if(decision && !userData) {
       axios.get(`${config.API}/user/get?id=${decision.by}`).then(({ data }) => setUser(data.data));
+    } else  {
+      setUser(userData);
     }
   }, [decision]);
 

@@ -33,7 +33,6 @@ const Sidebar = () => {
     if (localStorage.token) {
       AuthService.isAuth().then((r: boolean) => {
         setAuth(r);
-        console.log(r);
       });
     }
   }, [isAuth]);
@@ -54,7 +53,6 @@ const Sidebar = () => {
     if (user && isAuth) {
       $api.get(`${config.API}/stat/user?id=${user.id}&params=count`).then(({ data }) => setCounts({ comments: data.data.countComments, decisions: data.data.countDecisions }));
     }
-    console.log(user)
   }, [isAuth, user]);
 
   return (
