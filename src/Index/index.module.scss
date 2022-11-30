@@ -58,4 +58,20 @@
       padding-bottom: 120px;
     }
   }
+
+  .sub {
+    text-align: center;
+    margin: 0;
+    margin-top: 10px;
+    font-size: 14px;
+    color: $accentColor;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.unsub {
+      color: rgb(255, 57, 57);
+    }
+  }
 }

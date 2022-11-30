@@ -15,11 +15,11 @@ const IndexDecision = ({ children, decision, text, userData, authedUser }: any) 
     } else  {
       setUser(userData);
     }
-  }, [decision]);
+  }, [decision, userData]);
 
   useEffect(() => {
     decision && authedUser && setIsLiked(authedUser.likedDecisions.indexOf(decision._id) > -1);
-  }, [authedUser]);
+  }, [authedUser, decision]);
 
   const like = (id: string) => {
     if(isLiked) {

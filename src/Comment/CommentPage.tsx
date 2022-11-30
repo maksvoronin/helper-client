@@ -6,7 +6,6 @@ import axios from "axios";
 import config from "../config";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import $api from "../@http";
-import { getPositionOfLineAndCharacter } from "typescript";
 
 const CommentPage = ({ title }: DefaultPage) => {
 

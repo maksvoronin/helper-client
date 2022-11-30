@@ -15,6 +15,7 @@ import CommentPage from './Comment/CommentPage';
 import DecisionPage from './Decision/DecisionPage';
 import LikedPage from './Liked/LikedPage';
 import MyPage from './My/MyPage';
+import SubscribedPage from './Subscribed/SubscribedPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/my",
     element: <MyPage title="Мои данные" />
+  },
+  {
+    path: "/subscribed",
+    element: <SubscribedPage title="Отслеживаемое" />
   }
 ]);
 

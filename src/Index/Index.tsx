@@ -22,18 +22,27 @@ const IndexPage = ({ title }: DefaultPage) => {
 
   const [user, setUser] = useState<any>();
 
+  const [systemSubscribed, setSystemSubscribed] = useState<boolean>();
+  const [commentSubscribed, setCommentSubscribed] = useState<boolean>();
+
   useEffect(() => {
-    axios.get(`${config.API}/system/all`).then(({data}) => setSystems(data.data));
+    axios.get(`${config.API}/system/all`).then(({ data }) => setSystems(data.data));
   }, []);
 
   useEffect(() => {
     setSelectedComment("");
-    axios.get(`${config.API}/comment/system?id=${selectedSystem}`).then(({data}) => setComments(data.data));
-  }, [selectedSystem]);
+    axios.get(`${config.API}/comment/system?id=${selectedSystem}`).then(({ data }) => setComments(data.data));
+    if (user) {
+      setSystemSubscribed(user.subscribedSystems.indexOf(selectedSystem) > -1);
+    }
+  }, [selectedSystem, user]);
 
   useEffect(() => {
-    axios.get(`${config.API}/comment/decisions?id=${selectedComment}`).then(({data}) => setDecisions(data.data));
-  }, [selectedComment]);
+    axios.get(`${config.API}/comment/decisions?id=${selectedComment}`).then(({ data }) => setDecisions(data.data));
+    if(user) {
+      setCommentSubscribed(user.subscribedComments.indexOf(selectedComment) > -1);
+    }
+  }, [selectedComment, user]);
 
   useEffect(() => {
     if (localStorage.token) {
@@ -49,6 +58,30 @@ const IndexPage = ({ title }: DefaultPage) => {
     }
   }, [isAuth]);
 
+  const unsubSystem = () => {
+    $api.post(`${config.API}/system/unsubscribe`, { id: selectedSystem }).then(() => {
+      setSystemSubscribed(false);
+    });
+  }
+
+  const subSystem = () => {
+    $api.post(`${config.API}/system/subscribe`, { id: selectedSystem }).then(() => {
+      setSystemSubscribed(true);
+    });
+  }
+
+  const unsubComment = () => {
+    $api.post(`${config.API}/comment/unsubscribe`, { id: selectedComment }).then(() => {
+      setCommentSubscribed(false);
+    });
+  }
+
+  const subComment = () => {
+    $api.post(`${config.API}/comment/subscribe`, { id: selectedComment }).then(() => {
+      setCommentSubscribed(true);
+    });
+  }
+
   return (
     <MainLayout title={title}>
 
@@ -57,20 +90,22 @@ const IndexPage = ({ title }: DefaultPage) => {
           <h1>Помощник поиска неисправностей</h1>
 
           <p>Система</p>
-          <select defaultValue={"Выберите систему"} onChange={({target}) => setSelectedSystem(target.value)}>
+          <select defaultValue={"Выберите систему"} onChange={({ target }) => setSelectedSystem(target.value)}>
             <option value="Выберите систему" disabled>Выберите систему</option>
             {
               systems.length > 0 && systems.map((r: any) => <option value={r._id} key={r._id}>{r.name}</option>)
             }
           </select>
+          {selectedSystem && (user && systemSubscribed ? <p className={`${s.sub} ${s.unsub}`} onClick={unsubSystem}>Перестать отслеживать систему</p> : <p className={s.sub} onClick={subSystem}>Отслеживать систему</p>)}
 
           <p>Замечание</p>
-          <select defaultValue={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"} onChange={({target}) => setSelectedComment(target.value)}>
+          <select defaultValue={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"} onChange={({ target }) => setSelectedComment(target.value)}>
             <option disabled value={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}>{selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}</option>
             {
               comments && comments.length > 0 && comments.map((r: any) => <option value={r._id} key={r._id}>{r.content}</option>)
             }
           </select>
+          {selectedComment && (user && commentSubscribed ? <p className={`${s.sub} ${s.unsub}`} onClick={unsubComment}>Перестать отслеживать замечание</p> : <p className={s.sub} onClick={subComment}>Отслеживать замечание</p>)}
 
           <Link to="/search">Поиск</Link>
         </div>
@@ -81,7 +116,7 @@ const IndexPage = ({ title }: DefaultPage) => {
           }
         </div>
       </div>
-      
+
     </MainLayout>
   );
 }
