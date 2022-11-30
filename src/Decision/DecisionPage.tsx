@@ -1,42 +1,46 @@
 import MainLayout from "../@layouts/main.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
-import s from './commentpage.module.scss';
+import s from './decisionpage.module.scss';
 import { useState, useEffect, createRef } from 'react';
 import axios from "axios";
 import config from "../config";
+import { Link } from "react-router-dom";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import $api from "../@http";
-import { getPositionOfLineAndCharacter } from "typescript";
 
-const CommentPage = ({ title }: DefaultPage) => {
+const DecisionPage = ({ title }: DefaultPage) => {
 
   const [systems, setSystems] = useState([]);
   const [selectedSystem, setSelectedSystem] = useState<string>("");
 
-  const [series, setSeries] = useState([]);
-  const [selectedSeries, setSelectedSeries] = useState<string>("");
+  const [comments, setComments] = useState([]);
+  const [selectedComment, setSelectedComment] = useState<string>("");
 
-  const [user, setUser] = useState<any>();
+  const [systemError, setSystemError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
+  const [commentError, setCommentError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
+  const [decisionError, setDecisionError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
 
-  const [comment, setComment] = useState<string>("");
-  const [content, setContent] = useState<string>("");
   const [fileName, setFileName] = useState<string>("");
   const fileInput: any = createRef();
+  const [content, setContent] = useState<string>("");
 
   const [uploadedFile, setUploadedFile] = useState<string>("");
 
-  const [systemError, setSystemError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
-  const [seriesError, setSeriesError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
-  const [commentError, setCommentError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
-  const [decisionError, setDecisionError] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
+  const [user, setUser] = useState<any>();
+
   const [postData, setPostData] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
   let errorExists = false;
 
   useEffect(() => {
     axios.get(`${config.API}/system/all`).then(({ data }) => setSystems(data.data));
-    axios.get(`${config.API}/series/all`).then(({ data }) => setSeries(data.data));
     $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
   }, []);
+
+  useEffect(() => {
+    if (selectedSystem) {
+      axios.get(`${config.API}/comment/system?id=${selectedSystem}`).then(({ data }) => setComments(data.data));
+    }
+  }, [selectedSystem]);
 
   useEffect(() => {
     if (fileName) {
@@ -54,45 +58,33 @@ const CommentPage = ({ title }: DefaultPage) => {
   }
 
   useEffect(() => setSystemError({ status: false, message: "" }), [selectedSystem]);
-  useEffect(() => setSeriesError({ status: false, message: "" }), [selectedSeries]);
-  useEffect(() => setCommentError({ status: false, message: "" }), [comment]);
+  useEffect(() => setCommentError({ status: false, message: "" }), [selectedComment]);
   useEffect(() => setDecisionError({ status: false, message: "" }), [content]);
 
   const sendData = () => {
     if (!selectedSystem) {
       setSystemError({ status: true, message: "Выберите систему" });
-      errorExists = true;
+      return errorExists = true;
     }
 
-    if (!selectedSeries) {
-      setSeriesError({ status: true, message: "Выберите серию" });
-      errorExists = true;
-
-    }
-
-    if (!comment) {
-      setCommentError({ status: true, message: "Напишите замечание" });
+    if (!selectedComment) {
+      setCommentError({ status: true, message: "Выберите замечание" });
       errorExists = true;
     }
 
     if (!content) {
-      setDecisionError({ status: true, message: "Напишите решение" });
+      setDecisionError({ status: true, message: "Напишите замечание" });
       errorExists = true;
     }
 
     if (!errorExists) {
       console.log(errorExists);
-      $api.post(`${config.API}/comment/create`, { system: selectedSystem, series: selectedSeries, comment }).then(({ data }) => {
+      $api.post(`${config.API}/decision/create`, { comment: selectedComment, content, file: uploadedFile }).then(({ data }) => {
         if (data.type === "error") {
           return setPostData({ status: false, message: data.data });
+        } else {
+          return setPostData({ status: true, message: "Успешно!" });
         }
-        $api.post(`${config.API}/decision/create`, { comment: data.data._id, content, file: uploadedFile }).then(({ data }) => {
-          if (data.type === "error") {
-            return setPostData({ status: false, message: data.data });
-          } else {
-            return setPostData({ status: true, message: "Успешно!" });
-          }
-        });
       });
     }
 
@@ -100,12 +92,11 @@ const CommentPage = ({ title }: DefaultPage) => {
 
   }
 
-
   return (
     <MainLayout title={title}>
-      <div className={s.commentWrapper}>
-        <div className={s.commentPage}>
-          <h1>Добавление замечания</h1>
+      <div className={s.decisionWrapper}>
+        <div className={s.decisionPage}>
+          <h1>Добавление решения</h1>
           <p className="required">Выберите систему</p>
           <select defaultValue={"Выберите систему"} onChange={({ target }) => setSelectedSystem(target.value)} className={systemError.status ? `${s.errorInput}` : ""}>
             <option value="Выберите систему" disabled>Выберите систему</option>
@@ -115,23 +106,19 @@ const CommentPage = ({ title }: DefaultPage) => {
           </select>
           <p className={s.errorText}>{systemError.message}</p>
 
-          <p className="required">Выберите серию локомотива</p>
-          <select defaultValue={"Выберите серию"} onChange={({ target }) => setSelectedSeries(target.value)} className={seriesError.status ? `${s.errorInput}` : ""}>
-            <option value="Выберите серию" disabled>Выберите серию</option>
+          <p className="required">Выберите замечание</p>
+          <select className={commentError.status ? `${s.errorInput}` : ""} defaultValue={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"} onChange={({ target }) => setSelectedComment(target.value)}>
+            <option disabled value={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}>{selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}</option>
             {
-              series.length > 0 && series.map((r: any) => <option value={r._id} key={r._id}>{r.name}</option>)
+              comments && comments.length > 0 && comments.map((r: any) => <option value={r._id} key={r}>{r.content}</option>)
             }
           </select>
-          <p className={s.errorText}>{seriesError.message}</p>
-
-          <p className="required">Напишите замечание</p>
-          <textarea placeholder="Напишите текст замечания" onChange={({ target }) => setComment(target.value)} value={comment} className={commentError.status ? `${s.errorInput}` : ""} />
           <p className={s.errorText}>{commentError.message}</p>
 
-          <p className="required">Напишите решение</p>
-          <textarea placeholder="Напишите текст решения" onChange={({ target }) => setContent(target.value)} value={content} className={decisionError.status ? `${s.errorInput}` : ""} />
-          <p className={s.errorText}>{decisionError.message}</p>
+          <Link to={"/comment"}>Добавить замечание</Link>
 
+          <textarea placeholder="Напишите решение" value={content} onChange={({ target }) => setContent(target.value)} className={decisionError.status ? `${s.errorInput}` : ""} />
+          <p className={s.errorText}>{decisionError.message}</p>
           <label className={s.file} htmlFor="file" onClick={(e) => { fileName && unlinkFile(e) }}>{fileName ? "Открепить файл" : "Прикрепить файл к решению"}</label>
           <input type={"file"} id="file" accept="image/*" onChange={({ target }) => setFileName(target.value)} ref={fileInput} />
           <button onClick={sendData}>Сохранить</button>
@@ -139,7 +126,6 @@ const CommentPage = ({ title }: DefaultPage) => {
             <p className={`${s.postData} ${postData.status ? s.successText : s.errorText}`}>{postData.message}</p>
           }
         </div>
-
         <div className={s.previewDecision}>
           <b>Решение будет выглядеть так:</b>
           {
@@ -151,4 +137,4 @@ const CommentPage = ({ title }: DefaultPage) => {
   );
 }
 
-export default CommentPage;
+export default DecisionPage;

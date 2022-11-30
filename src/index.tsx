@@ -12,6 +12,7 @@ import IndexPage from './Index/Index';
 import MainRegister from './MainRegister/MainRegister';
 import MainRecovery from './MainRecovery/MainRecovery';
 import CommentPage from './Comment/CommentPage';
+import DecisionPage from './Decision/DecisionPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/comment",
     element: <CommentPage title="Добавление замечания" />
+  },
+  {
+    path: "/decision",
+    element: <DecisionPage title="Добавление решения" />
   }
 ]);
 
