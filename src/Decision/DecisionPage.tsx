@@ -78,7 +78,6 @@ const DecisionPage = ({ title }: DefaultPage) => {
     }
 
     if (!errorExists) {
-      console.log(errorExists);
       $api.post(`${config.API}/decision/create`, { comment: selectedComment, content, file: uploadedFile }).then(({ data }) => {
         if (data.type === "error") {
           return setPostData({ status: false, message: data.data });

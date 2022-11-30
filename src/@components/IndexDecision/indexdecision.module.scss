@@ -21,10 +21,24 @@
     margin-top: 5px;
     padding-top: 5px;
     border-top: 1px solid #ccc;
+    align-items: center;
     .info {
       font-style: italic;
       color: #555;
       font-weight: 500;
+    }
+    button {
+      border-radius: 12px;
+      border: none;
+      padding: 5px 10px;
+      color: $accentColor;
+      background: $accentColor;
+      color: white;
+      cursor: pointer;
+      &.active {
+        background: transparent;
+        color: $accentColor;
+      }
     }
   }
 }

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import $api from '../../@http';
 import config from '../../config';
 import s from './indexdecision.module.scss';
 
-const IndexDecision = ({ children, decision, text, userData }: any) => {
+const IndexDecision = ({ children, decision, text, userData, authedUser }: any) => {
 
   const [user, setUser] = useState<any>();
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
   useEffect(() => {
     if(decision && !userData) {
@@ -14,6 +16,20 @@ const IndexDecision = ({ children, decision, text, userData }: any) => {
       setUser(userData);
     }
   }, [decision]);
+
+  useEffect(() => {
+    decision && authedUser && setIsLiked(authedUser.likedDecisions.indexOf(decision._id) > -1);
+  }, [authedUser]);
+
+  const like = (id: string) => {
+    if(isLiked) {
+      $api.post(`${config.API}/decision/unlike`, {id}).then(({data}) => console.log(data));
+      setIsLiked(false);
+    } else {
+      $api.post(`${config.API}/decision/like`, {id}).then(({data}) => console.log(data));
+      setIsLiked(true);
+    }
+  }
 
   if (decision && decision.visible) {
     return (
@@ -25,6 +41,9 @@ const IndexDecision = ({ children, decision, text, userData }: any) => {
         <div className={s.bottom}>
           <div className={s.info}>
             {user && `${user.name} ${user.surname}`} • {new Date(decision.created).toLocaleString()}
+          </div>
+          <div>
+            {authedUser && <button className={isLiked ? s.active : ""} onClick={() => like(decision._id)}>Полезно</button>}
           </div>
         </div>
       </div>

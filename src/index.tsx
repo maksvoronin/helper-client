@@ -13,6 +13,7 @@ import MainRegister from './MainRegister/MainRegister';
 import MainRecovery from './MainRecovery/MainRecovery';
 import CommentPage from './Comment/CommentPage';
 import DecisionPage from './Decision/DecisionPage';
+import LikedPage from './Liked/LikedPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/decision",
     element: <DecisionPage title="Добавление решения" />
+  },
+  {
+    path: "/liked",
+    element: <LikedPage title="Полезные решения" />
   }
 ]);
 

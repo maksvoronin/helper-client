@@ -37,3 +37,7 @@ p.required::after {
 select, button {
   color: #000;
 }
+
+select, input {
+  background: white;
+}
