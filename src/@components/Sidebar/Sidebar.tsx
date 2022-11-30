@@ -117,9 +117,8 @@ const Sidebar = () => {
         </div> :
         <>
           <div className={s.buttons}>
-            <div className={s.secondaryButtons}>
-              <Link to={"/"} className={s.btn}><Icon path={mdiHomeOutline} /> <span>Главная</span></Link>
-            </div>
+            <Link to={"/"} className={s.btn}><Icon path={mdiHomeOutline} /> <span>Главная</span></Link>
+
             {
               user && user.permissions > 0 &&
               <>
