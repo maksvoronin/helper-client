@@ -16,6 +16,7 @@ import DecisionPage from './Decision/DecisionPage';
 import LikedPage from './Liked/LikedPage';
 import MyPage from './My/MyPage';
 import SubscribedPage from './Subscribed/SubscribedPage';
+import SettingsPage from './Settings/SettingsPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/subscribed",
     element: <SubscribedPage title="Отслеживаемое" />
+  },
+  {
+    path: "/settings",
+    element: <SettingsPage title="Настройки" />
   }
 ]);
 

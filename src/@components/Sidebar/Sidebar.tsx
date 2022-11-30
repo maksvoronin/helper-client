@@ -154,9 +154,9 @@ const Sidebar = () => {
                     <span>{counts.decisions} реш. / {counts.comments} замеч.</span>
                   </div>
                 </div>
-                <div className={s.settingsBtn}>
+                <Link to={"/settings"} className={s.settingsBtn}>
                   <Icon path={mdiCogOutline} />
-                </div>
+                </Link>
               </>
             }
           </div>
