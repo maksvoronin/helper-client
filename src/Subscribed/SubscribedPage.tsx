@@ -15,21 +15,21 @@ const SubscribedPage = ({ title }: DefaultPage) => {
   const [decisions, setDecisions] = useState<any[]>([]);
 
   const { store } = useContext(Context);
-  const user = store.user;
 
   useEffect(() => {
-    if (user) {
+    if (store.user) {
       $api.get(`${config.API}/comment/all`).then(({ data }) => setComments(data.data));
       $api.get(`${config.API}/decision/all`).then(({ data }) => setDecisions(data.data));
-      user && user.subscribedSystems.forEach((e: any) => {
+      store.user && store.user.subscribedSystems.forEach((e: any) => {
         $api.get(`${config.API}/system/get?id=${e}`).then(({ data }) => setUserSystems(prev => [...prev, data.data]));
       });
 
-      user && user.subscribedComments.forEach((e: any) => {
+      store.user && store.user.subscribedComments.forEach((e: any) => {
         $api.get(`${config.API}/comment/get?id=${e}`).then(({ data }) => setUserComments(prev => [...prev, data.data]));
       });
     }
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const navigate = useNavigate();
   useEffect(() => {
