@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { Context } from "..";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './mainrecovery.module.scss';
 
 const MainRecovery = ({title}: DefaultPage) => {
+
+  const {store} = useContext(Context);
 
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<{status: boolean, message: string}>({status: false, message: ""});
@@ -19,6 +22,12 @@ const MainRecovery = ({title}: DefaultPage) => {
   useEffect(() => {
     setEmailError({status: false, message: ""});
   }, [email]);
+
+  if(store.isAuth) {
+    return(
+      <Navigate to="/" />
+    )
+  }
 
   return(
     <DefaultLayout title={title}>

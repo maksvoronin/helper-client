@@ -17,6 +17,7 @@ import LikedPage from './Liked/LikedPage';
 import MyPage from './My/MyPage';
 import SubscribedPage from './Subscribed/SubscribedPage';
 import SettingsPage from './Settings/SettingsPage';
+import Store from './@store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -69,10 +70,20 @@ const router = createBrowserRouter([
   }
 ]);
 
+const store = new Store();
+
+export const Context = React.createContext({
+  store
+});
+
+if(localStorage.token) {
+  store.checkAuth();
+}
+
 root.render(
-  <React.StrictMode>
+  <Context.Provider value={{store}}>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </Context.Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

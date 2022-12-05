@@ -1,39 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MainLayout from "../@layouts/main.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './mypage.module.scss';
-import { useState, useEffect } from 'react';
-import AuthService from "../@services/auth.service";
+import { useState, useEffect, useContext } from 'react';
 import $api from "../@http";
 import config from "../config";
+import { Context } from "..";
 
 const MyPage = ({ title }: DefaultPage) => {
 
   const [userComments, setUserComments] = useState<any[]>([]);
   const [userDecisions, setUserDecisions] = useState<any[]>([]);
-  const [isAuth, setAuth] = useState<boolean>();
 
-  const [user, setUser] = useState<any>();
+  
+  const {store} = useContext(Context);
+  const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.token) {
-      AuthService.isAuth().then((r: boolean) => {
-        setAuth(r);
-      });
+    if(!store.isAuth) {
+      navigate('/');
     }
-  }, [isAuth]);
-
-  useEffect(() => {
-    if (isAuth) {
-      $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
-    }
-  }, [isAuth]);
+  }, [navigate, store.isAuth]);
 
   useEffect(() => {
-    if(user) {
-      $api.get(`${config.API}/comment/user?id=${user.id}`).then(({data}) => setUserComments(data.data));
-      $api.get(`${config.API}/decision/user?id=${user.id}`).then(({data}) => setUserDecisions(data.data));
+    if(store.user) {
+      $api.get(`${config.API}/comment/user?id=${store.user.id}`).then(({data}) => setUserComments(data.data));
+      $api.get(`${config.API}/decision/user?id=${store.user.id}`).then(({data}) => setUserDecisions(data.data));
     }
-  }, [user]);
+  }, [store.user]);
+  
 
   return (
     <MainLayout title={title}>
@@ -41,6 +35,7 @@ const MyPage = ({ title }: DefaultPage) => {
         <div className={s.myPage}>
           <h1>Мои данные</h1>
           <p>То, чем Вы помогли своим коллегам</p>
+          <p>Нажмите на то, что Вы хотите изменить</p>
 
           <b>Замечания: {userComments && userComments.length}</b>
           <ul>

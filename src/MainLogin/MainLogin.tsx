@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Context } from "..";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
 import AuthService from "../@services/auth.service";
@@ -14,8 +15,8 @@ const MainLogin = ({ title }: DefaultPage) => {
   const [emailError, setEmailError] = useState({ status: false, message: "" });
   const [passwordError, setPasswordError] = useState({ status: false, message: "" });
 
-  const [isAuth, setAuth] = useState(false);
   const navigate = useNavigate();
+  const {store} = useContext(Context);
 
   useEffect(() => {
     setEmailError({ status: false, message: "" });
@@ -25,17 +26,11 @@ const MainLogin = ({ title }: DefaultPage) => {
     setPasswordError({ status: false, message: "" });
   }, [password]);
 
-  useEffect(() => {
-    if(isAuth) return;
-    AuthService.isAuth().then(r => {
-      if(r) {
-        setAuth(true);
-        navigate('/');
-      } else {
-        setAuth(false);
-      }
-    });
-  }, [isAuth, navigate]);
+  if(store.isAuth) {
+    return(
+      <Navigate to="/" />
+    )
+  }
 
   const sendData = () => {
     if (!email || email === "") {
@@ -56,7 +51,7 @@ const MainLogin = ({ title }: DefaultPage) => {
           return setPasswordError({ status: true, message: data.data });
         }
       } else {
-        localStorage.setItem('token', data.data.accessToken);
+        store.login(data.data);
         console.log(data.data);
         navigate('/');
       }

@@ -1,12 +1,13 @@
 import MainLayout from "../@layouts/main.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './decisionpage.module.scss';
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect, createRef, useContext } from 'react';
 import axios from "axios";
 import config from "../config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import $api from "../@http";
+import { Context } from "..";
 
 const DecisionPage = ({ title }: DefaultPage) => {
 
@@ -26,14 +27,21 @@ const DecisionPage = ({ title }: DefaultPage) => {
 
   const [uploadedFile, setUploadedFile] = useState<string>("");
 
-  const [user, setUser] = useState<any>();
+  const { store } = useContext(Context);
+  const user = store.user;
 
   const [postData, setPostData] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
   let errorExists = false;
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!store.isAuth) {
+      navigate('/');
+    }
+  }, [navigate, store.isAuth]);
+
   useEffect(() => {
     axios.get(`${config.API}/system/all`).then(({ data }) => setSystems(data.data));
-    $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
   }, []);
 
   useEffect(() => {

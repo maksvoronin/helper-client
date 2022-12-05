@@ -1,35 +1,21 @@
 import MainLayout from "../@layouts/main.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './subscribedpage.module.scss'
-import { useState, useEffect } from 'react';
-import AuthService from "../@services/auth.service";
+import { useState, useEffect, useContext } from 'react';
 import $api from "../@http";
 import config from "../config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "..";
 
 const SubscribedPage = ({ title }: DefaultPage) => {
 
-
   const [userSystems, setUserSystems] = useState<any[]>([]);
   const [comments, setComments] = useState<any[]>([]);
-  const [isAuth, setAuth] = useState<boolean>();
   const [userComments, setUserComments] = useState<any[]>([]);
   const [decisions, setDecisions] = useState<any[]>([]);
 
-  const [user, setUser] = useState<any>();
-  useEffect(() => {
-    if (localStorage.token) {
-      AuthService.isAuth().then((r: boolean) => {
-        setAuth(r);
-      });
-    }
-  }, [isAuth]);
-
-  useEffect(() => {
-    if (isAuth) {
-      $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); console.log(data.data) });
-    }
-  }, [isAuth]);
+  const { store } = useContext(Context);
+  const user = store.user;
 
   useEffect(() => {
     if (user) {
@@ -44,6 +30,13 @@ const SubscribedPage = ({ title }: DefaultPage) => {
       });
     }
   }, [user]);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!store.isAuth) {
+      navigate('/');
+    }
+  }, [navigate, store.isAuth]);
 
   return (
     <MainLayout title={title}>

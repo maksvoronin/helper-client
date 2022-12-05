@@ -1,5 +1,16 @@
 export interface User {
+  name: string;
+  surname: string;
   email: string;
-  isActivated: boolean;
+  permissions: number;
   id: string;
+  isActivated: boolean;
+  avatar: string;
+  likedDecisions: any[];
+  subscribedSystems: any;
+  subscribedComments: any;
+  phone: string;
+  background: string;
 }
+
+export default User;

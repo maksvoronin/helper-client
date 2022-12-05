@@ -10,11 +10,11 @@ import {
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Context } from '../..';
 import Logo from '../../@assets/logo';
 import $api from '../../@http';
-import AuthService from '../../@services/auth.service';
 import config from '../../config';
 import s from './sidebar.module.scss';
 
@@ -22,38 +22,26 @@ const Sidebar = () => {
 
   const [searchText, setSearchText] = useState<string>("");
   const [searchedResult, setSearchedResult] = useState<any>({});
-  const [isAuth, setAuth] = useState<boolean>();
 
-  const [user, setUser] = useState<any>();
   const [counts, setCounts] = useState<{ comments: number, decisions: number }>({ comments: 0, decisions: 0 });
-
+  
   const navigate = useNavigate();
+  const {store} = useContext(Context);
+  const user = store.user;
 
   useEffect(() => {
-    if (localStorage.token) {
-      AuthService.isAuth().then((r: boolean) => {
-        setAuth(r);
+    if(searchText) {
+      axios.get(`${config.API}/search/get?text=${searchText}`).then(({ data }) => {
+        setSearchedResult(data.data);
       });
     }
-  }, [isAuth]);
-
-  useEffect(() => {
-    axios.get(`${config.API}/search/get?text=${searchText}`).then(({ data }) => {
-      setSearchedResult(data.data);
-    });
   }, [searchText]);
 
   useEffect(() => {
-    if (isAuth) {
-      $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
+    if (store.isAuth && store.user) {
+      $api.get(`${config.API}/stat/user?id=${store.user.id}&params=count`).then(({ data }) => setCounts({ comments: data.data.countComments, decisions: data.data.countDecisions }));
     }
-  }, [isAuth]);
-
-  useEffect(() => {
-    if (user && isAuth) {
-      $api.get(`${config.API}/stat/user?id=${user.id}&params=count`).then(({ data }) => setCounts({ comments: data.data.countComments, decisions: data.data.countDecisions }));
-    }
-  }, [isAuth, user]);
+  }, [store.isAuth, store.user]);
 
   return (
     <div className={s.sidebar}>
@@ -108,7 +96,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {!isAuth ?
+      {!store.isAuth ?
         <div className={s.sidebarAuthPanel}>
           <p>Для использования всех возможностей сервиса Вам необходимо авторизоваться</p>
           <button className={s.join} onClick={() => navigate('/login')}>Войти</button>
@@ -148,7 +136,7 @@ const Sidebar = () => {
             {
               user && <>
                 <div className={s.userContent}>
-                  {/* <div style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} className={s.avatar}></div> */}
+                  <div style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} className={s.avatar} />
                   <div className={s.texts}>
                     <b><Link to="/profile">{user.name} {user.surname}</Link></b>
                     <span>{counts.decisions} реш. / {counts.comments} замеч.</span>

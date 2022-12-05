@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import $api from '../../@http';
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '../..';
 import config from '../../config';
 import s from './indexdecision.module.scss';
 
 const IndexDecision = ({ children, decision, text, userData, authedUser }: any) => {
 
+  const {store} = useContext(Context);
   const [user, setUser] = useState<any>();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
@@ -23,10 +24,10 @@ const IndexDecision = ({ children, decision, text, userData, authedUser }: any) 
 
   const like = (id: string) => {
     if(isLiked) {
-      $api.post(`${config.API}/decision/unlike`, {id}).then(({data}) => console.log(data));
+      store.dislikeDecision(id)
       setIsLiked(false);
     } else {
-      $api.post(`${config.API}/decision/like`, {id}).then(({data}) => console.log(data));
+      store.likeDecision(id);
       setIsLiked(true);
     }
   }

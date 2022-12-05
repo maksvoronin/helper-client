@@ -1,11 +1,13 @@
 import MainLayout from "../@layouts/main.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './commentpage.module.scss';
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect, createRef, useContext } from 'react';
 import axios from "axios";
 import config from "../config";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import $api from "../@http";
+import { Context } from "..";
+import { useNavigate } from "react-router-dom";
 
 const CommentPage = ({ title }: DefaultPage) => {
 
@@ -15,7 +17,8 @@ const CommentPage = ({ title }: DefaultPage) => {
   const [series, setSeries] = useState([]);
   const [selectedSeries, setSelectedSeries] = useState<string>("");
 
-  const [user, setUser] = useState<any>();
+  const {store} = useContext(Context);
+  const user = store.user;
 
   const [comment, setComment] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -31,10 +34,16 @@ const CommentPage = ({ title }: DefaultPage) => {
   const [postData, setPostData] = useState<{ status: boolean, message: string }>({ status: false, message: "" });
   let errorExists = false;
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!store.isAuth) {
+      navigate('/');
+    }
+  }, [navigate, store.isAuth]);
+
   useEffect(() => {
     axios.get(`${config.API}/system/all`).then(({ data }) => setSystems(data.data));
     axios.get(`${config.API}/series/all`).then(({ data }) => setSeries(data.data));
-    $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
   }, []);
 
   useEffect(() => {

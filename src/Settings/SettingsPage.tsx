@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, createRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Context } from "..";
 import $api from "../@http";
 import MainLayout from "../@layouts/main.layout";
-import AuthService from "../@services/auth.service";
+import { alert } from "../@services/alerting.service";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import config from "../config";
 import s from './settingspage.module.scss'
@@ -11,69 +13,93 @@ const SettingsPage = ({ title }: DefaultPage) => {
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
-  // const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
-  const [backgrounds, setBackgrounds] = useState<any>();
+  const inputFile: any = createRef();
 
-  const [isAuth, setAuth] = useState<boolean>();
+  const [backgrounds, setBackgrounds] = useState<any[]>([]);
+
   const [selectedBG, setSelectedBG] = useState<string>("");
+  const [fileName, setFileName] = useState<string>("");
 
-  const [user, setUser] = useState<any>();
+  const [avatar, setAvatar] = useState<string>("");
+
+  // const [oldPassword, setOldPassword] = useState<string>("");
+  // const [newPassword, setNewPassword] = useState<string>("");
+
+  const { store } = useContext(Context);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!store.isAuth) {
+      navigate('/');
+    }
+  }, [navigate, store.isAuth]);
+  
   useEffect(() => {
     $api.get(`${config.API}/background/all`).then(({ data }) => setBackgrounds(data.data));
-    if (localStorage.token) {
-      AuthService.isAuth().then((r: boolean) => {
-        setAuth(r);
-      });
-    }
-  }, [isAuth]);
+  }, []);
 
   useEffect(() => {
-    if (isAuth) {
-      $api.get(`${config.API}/user/me`).then(({ data }) => { setUser(data.data); });
+    if (store.user) {
+      setName(store.user.name);
+      setSurname(store.user.surname);
+      setPhone(store.user.phone);
+      setSelectedBG(store.user.background);
+      setEmail(store.user.email);
+      setAvatar(store.user.avatar);
     }
-  }, [isAuth]);
-
-  useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setSurname(user.surname);
-      setPhone(user.phone);
-      setSelectedBG(user.background);
-      // setEmail(user.email);
-      console.log(user);
-    }
-  }, [user]);
+  }, [store.user]);
 
   const selectBG = (e: any) => {
     setSelectedBG(e);
-    $api.post(`${config.API}/user/settings/background`, { background: e }).then(({ data }) => window.location.reload());
+    store.changeBG(e);
+    alert("default", "Настройки", "Фон успешно обновлен", 15);
   }
 
   const sendUserData = () => {
-    if (name && name !== user.name) {
-      $api.post(`${config.API}/user/settings/name`, { name });
+    if (name && name !== store.user.name) {
+      store.changeName(name);
     }
-    if (surname && surname !== user.surname) {
-      $api.post(`${config.API}/user/settings/surname`, { surname });
-    }
-
-    if (phone && phone !== user.phone) {
-      $api.post(`${config.API}/user/settings/phone`, { phone });
+    if (surname && surname !== store.user.surname) {
+      store.changeSurname(surname);
     }
 
-    alert("Изменения применены");
+    if (phone && phone !== store.user.phone) {
+      store.changePhone(phone);
+    }
+
+    alert("default", "Настройки", "Данные пользователя успешно изменены", 15);
+
   }
 
-  // const sendSecurityData = () => {
+  const sendSecurityData = () => {
+    if (email && email !== store.user.email) {
+      $api.post(`${config.API}/user/security/email`, { email }).then(({ data }) => console.log(data));
+      alert("default", "Смена почты", "Код подтверждения отправлен на почту", 15);
+    }
+  }
 
-  // }
+  useEffect(() => {
+    if (fileName) {
+      const formData = new FormData();
+      formData.append('file', inputFile.current.files[0]);
+      $api.post(`${config.API}/file/upload`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
+        console.log(data.data.file);
+        store.changeAvatar(data.data.file);
+        setAvatar(data.data.file);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fileName]);
 
   return (
     <MainLayout title={title}>
       <div className={s.settingsWrapper}>
         <div className={s.contentBlock}>
           <h1>Настройки пользователя</h1>
+          <p>Фотография</p>
+          {avatar && <label className={s.avatar} htmlFor="avatar" style={{ backgroundImage: `url(${config.API}/public/${avatar})` }} />}
+          <input type="file" id="avatar" accept="image/*" ref={inputFile} value={fileName} onChange={({ target }) => setFileName(target.value)} />
           <div className={s.row}>
             <div>
               <p>Имя</p>
@@ -105,7 +131,7 @@ const SettingsPage = ({ title }: DefaultPage) => {
           </div>
 
         </div>
-        {/* <div className={s.contentBlock}>
+        <div className={s.contentBlock}>
           <h1>Настройки безопасности</h1>
           <div className={s.row}>
             <div>
@@ -113,18 +139,19 @@ const SettingsPage = ({ title }: DefaultPage) => {
               <input placeholder="Ваша почта" value={email} onChange={({ target }) => setEmail(target.value)} />
             </div>
           </div>
-          <div className={s.row}>
+          {/* <div className={s.row}>
             <div>
               <p>Старый пароль</p>
-              <input placeholder="Старый пароль" />
+              <input placeholder="Старый пароль" value={oldPassword} onChange={({target}) => setOldPassword(target.value)} />
             </div>
             <div>
               <p>Новый пароль</p>
-              <input placeholder="Новый пароль" />
+              <input placeholder="Новый пароль" value={newPassword} onChange={({target}) => setNewPassword(target.value)} />
             </div>
-          </div>
-          <button>Сохранить</button>
-        </div> */}
+          </div> */}
+          <button onClick={sendSecurityData}>Сохранить</button>
+          <button className={s.bgRed} onClick={() => { store.logout(); window.location.reload(); }}>Выйти</button>
+        </div>
       </div>
     </MainLayout>
   );
