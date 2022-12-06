@@ -1,6 +1,6 @@
-@import '../variables.scss';
+@import "../variables.scss";
 
-.detailComment {
+.detailDecision {
   margin-top: 25px;
   padding: 20px;
   border-radius: 12px;
@@ -26,6 +26,12 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin-top: 12px;
   }
 
   .buttons {

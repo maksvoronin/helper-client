@@ -41,7 +41,7 @@ const MyPage = ({ title }: DefaultPage) => {
           <ul>
             {
               userComments ?
-              userComments.map((r: any) => <li key={r._id}><Link to={`/comment/${r._id}`}>{r.content}</Link></li>)
+              userComments.map((r: any) => <li key={r._id}><Link to={`/comment/${r._id}`}>{r.content} <i>{!r.visible && '(скрыто)'}</i></Link></li>)
               : <li><span>Вы не добавляли замечаний</span></li>
             }
           </ul>
@@ -50,7 +50,7 @@ const MyPage = ({ title }: DefaultPage) => {
           <ul>
             {
               userComments ?
-              userDecisions.map((r: any) => <li key={r._id}><Link to={`/decision/${r._id}`}>{r.content}</Link></li>)
+              userDecisions.map((r: any) => <li key={r._id}><Link to={`/decision/${r._id}`}>{r.content} <i>{!r.visible && '(скрыто)'}</i></Link></li>)
               : <li><span>Вы не добавляли решений</span></li>
             }
           </ul>

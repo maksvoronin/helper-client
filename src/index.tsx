@@ -21,6 +21,7 @@ import Store from './@store/store';
 import AdminPage from './Admin/AdminPage';
 import SeriesAdminPage from './Admin/Series.AdminPage';
 import DetailCommentPage from './DetailComment/DetailCommentPage';
+import DetailDecisionPage from './DetailDecision/DetailDecisionPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/decision",
     element: <DecisionPage title="Добавление решения" />
+  },
+  {
+    path: "/decision/:id",
+    element: <DetailDecisionPage />
   },
   {
     path: "/liked",
