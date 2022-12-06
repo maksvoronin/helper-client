@@ -108,7 +108,7 @@ const DecisionPage = ({ title }: DefaultPage) => {
           <select defaultValue={"Выберите систему"} onChange={({ target }) => setSelectedSystem(target.value)} className={systemError.status ? `${s.errorInput}` : ""}>
             <option value="Выберите систему" disabled>Выберите систему</option>
             {
-              systems.length > 0 && systems.map((r: any) => <option value={r._id} key={r._id}>{r.name}</option>)
+              systems.length > 0 && systems.map((r: any) => r.visible && <option value={r._id} key={r._id}>{r.name}</option>)
             }
           </select>
           <p className={s.errorText}>{systemError.message}</p>
@@ -117,7 +117,7 @@ const DecisionPage = ({ title }: DefaultPage) => {
           <select className={commentError.status ? `${s.errorInput}` : ""} defaultValue={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"} onChange={({ target }) => setSelectedComment(target.value)}>
             <option disabled value={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}>{selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}</option>
             {
-              comments && comments.length > 0 && comments.map((r: any) => <option value={r._id} key={r}>{r.content}</option>)
+              comments && comments.length > 0 && comments.map((r: any) => r.visible && <option value={r._id} key={r._id}>{r.content}</option>)
             }
           </select>
           <p className={s.errorText}>{commentError.message}</p>

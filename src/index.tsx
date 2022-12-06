@@ -18,6 +18,8 @@ import MyPage from './My/MyPage';
 import SubscribedPage from './Subscribed/SubscribedPage';
 import SettingsPage from './Settings/SettingsPage';
 import Store from './@store/store';
+import AdminPage from './Admin/AdminPage';
+import SeriesAdminPage from './Admin/Series.AdminPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -67,6 +69,14 @@ const router = createBrowserRouter([
   {
     path: "/settings",
     element: <SettingsPage title="Настройки" />
+  },
+  {
+    path: "/admin",
+    element: <AdminPage title="Управление" />
+  },
+  {
+    path: "/admin/series",
+    element: <SeriesAdminPage title="Добавление серии" />
   }
 ]);
 

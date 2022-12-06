@@ -82,7 +82,7 @@ const IndexPage = ({ title }: DefaultPage) => {
           <select defaultValue={"Выберите систему"} onChange={({ target }) => setSelectedSystem(target.value)}>
             <option value="Выберите систему" disabled>Выберите систему</option>
             {
-              systems.length > 0 && systems.map((r: any) => <option value={r._id} key={r._id}>{r.name}</option>)
+              systems.length > 0 && systems.map((r: any) => r.visible && <option value={r._id} key={r._id}>{r.name}</option>)
             }
           </select>
           {store.isAuth && selectedSystem && (user && systemSubscribed ? <p className={`${s.sub} ${s.unsub}`} onClick={unsubSystem}>Перестать отслеживать систему</p> : <p className={s.sub} onClick={subSystem}>Отслеживать систему</p>)}
@@ -91,7 +91,7 @@ const IndexPage = ({ title }: DefaultPage) => {
           <select defaultValue={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"} onChange={({ target }) => setSelectedComment(target.value)}>
             <option disabled value={selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}>{selectedSystem.length > 0 ? ((comments && comments.length > 0) ? "Выберите замечание" : "Замечания не найдены") : "Выберите систему"}</option>
             {
-              comments && comments.length > 0 && comments.map((r: any) => <option value={r._id} key={r._id}>{r.content}</option>)
+              comments && comments.length > 0 && comments.map((r: any) => r.visible && <option value={r._id} key={r._id}>{r.content}</option>)
             }
           </select>
           {store.isAuth && selectedComment && (user && commentSubscribed ? <p className={`${s.sub} ${s.unsub}`} onClick={unsubComment}>Перестать отслеживать замечание</p> : <p className={s.sub} onClick={subComment}>Отслеживать замечание</p>)}
@@ -101,7 +101,7 @@ const IndexPage = ({ title }: DefaultPage) => {
 
         <div className={`${s.decisions}`}>
           {
-            selectedComment && decisions && (decisions.length > 0 ? decisions.map((r: any) => <IndexDecision key={r._id} decision={r} authedUser={store.isAuth && store.user}>{r.content}</IndexDecision>) : <IndexDecision text="Решения не найдены" />)
+            selectedComment && decisions && (decisions.length > 0 ? decisions.map((r: any) => !r.visile ? <IndexDecision key={r._id} decision={r} authedUser={store.isAuth && store.user}>{r.content}</IndexDecision> : <IndexDecision key={r._id} text="Решение скрыто" />) : <IndexDecision text="Решения не найдены" />)
           }
         </div>
       </div>

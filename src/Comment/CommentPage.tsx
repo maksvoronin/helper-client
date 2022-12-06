@@ -118,7 +118,7 @@ const CommentPage = ({ title }: DefaultPage) => {
           <select defaultValue={"Выберите систему"} onChange={({ target }) => setSelectedSystem(target.value)} className={systemError.status ? `${s.errorInput}` : ""}>
             <option value="Выберите систему" disabled>Выберите систему</option>
             {
-              systems.length > 0 && systems.map((r: any) => <option value={r._id} key={r._id}>{r.name}</option>)
+              systems.length > 0 && systems.map((r: any) => r.visible && <option value={r._id} key={r._id}>{r.name}</option>)
             }
           </select>
           <p className={s.errorText}>{systemError.message}</p>
@@ -127,7 +127,7 @@ const CommentPage = ({ title }: DefaultPage) => {
           <select defaultValue={"Выберите серию"} onChange={({ target }) => setSelectedSeries(target.value)} className={seriesError.status ? `${s.errorInput}` : ""}>
             <option value="Выберите серию" disabled>Выберите серию</option>
             {
-              series.length > 0 && series.map((r: any) => <option value={r._id} key={r._id}>{r.name}</option>)
+              series.length > 0 && series.map((r: any) => r.visible && <option value={r._id} key={r._id}>{r.name}</option>)
             }
           </select>
           <p className={s.errorText}>{seriesError.message}</p>
