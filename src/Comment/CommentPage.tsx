@@ -89,7 +89,6 @@ const CommentPage = ({ title }: DefaultPage) => {
     }
 
     if (!errorExists) {
-      console.log(errorExists);
       $api.post(`${config.API}/comment/create`, { system: selectedSystem, series: selectedSeries, comment }).then(({ data }) => {
         if (data.type === "error") {
           return setPostData({ status: false, message: data.data });
@@ -98,6 +97,7 @@ const CommentPage = ({ title }: DefaultPage) => {
           if (data.type === "error") {
             return setPostData({ status: false, message: data.data });
           } else {
+            navigate(`/comment/${data.data._id}`);
             return setPostData({ status: true, message: "Успешно!" });
           }
         });

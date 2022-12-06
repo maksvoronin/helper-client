@@ -1,3 +1,4 @@
+import AlertPanel from "../@components/AlertPanel/AlertPanel";
 import { DefaultPage } from "../@types/pageDefault.interface";
 
 const DefaultLayout = ({ title, children }: DefaultPage) => {
@@ -5,6 +6,7 @@ const DefaultLayout = ({ title, children }: DefaultPage) => {
     <>
       <title>{title}</title>
       {children}
+      <AlertPanel />
     </>
   );
 }

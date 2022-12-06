@@ -34,7 +34,7 @@ const SettingsPage = ({ title }: DefaultPage) => {
       navigate('/');
     }
   }, [navigate, store.isAuth]);
-  
+
   useEffect(() => {
     $api.get(`${config.API}/background/all`).then(({ data }) => setBackgrounds(data.data));
   }, []);
@@ -78,17 +78,17 @@ const SettingsPage = ({ title }: DefaultPage) => {
       alert("default", "Смена почты", "Код подтверждения отправлен на почту", 15);
     }
 
-    if(oldPassword || newPassword) {
-      if(!oldPassword) {
+    if (oldPassword || newPassword) {
+      if (!oldPassword) {
         return alert("error", "Смена пароля", "Укажите текущий пароль", 15);
       }
 
-      if(!newPassword) {
+      if (!newPassword) {
         return alert("error", "Смена пароля", "Укажите новый пароль", 15);
       }
 
-      $api.post(`${config.API}/user/security/password`, {prev: oldPassword, password: newPassword}).then(({data}) => {
-        if(data.type === "error") {
+      $api.post(`${config.API}/user/security/password`, { prev: oldPassword, password: newPassword }).then(({ data }) => {
+        if (data.type === "error") {
           alert("error", "Смена пароля", data.message, 15);
         } else {
           alert("default", "Смена пароля", data.message, 15);
@@ -100,10 +100,20 @@ const SettingsPage = ({ title }: DefaultPage) => {
 
   useEffect(() => {
     if (fileName) {
+
+      const extname = fileName.substring(fileName.lastIndexOf('.'));
+
+      if (!config.imageExt.includes(extname)) {
+        return alert("error", "Ошибка", "Загрузите картинку (.png, .jpg, .gif, .heif и тп)", 15);
+      }
+
       const formData = new FormData();
       formData.append('file', inputFile.current.files[0]);
       $api.post(`${config.API}/file/upload`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
-        console.log(data.data.file);
+        if (data.type === "error") { 
+          return alert("error", "Ошибка", data.message, 15);
+        }
+        console.log(data);
         store.changeAvatar(data.data.file);
         setAvatar(data.data.file);
       });
@@ -161,11 +171,11 @@ const SettingsPage = ({ title }: DefaultPage) => {
           <div className={s.row}>
             <div>
               <p>Текущий пароль</p>
-              <input type="password" placeholder="Текущий пароль" value={oldPassword} onChange={({target}) => setOldPassword(target.value)} />
+              <input type="password" placeholder="Текущий пароль" value={oldPassword} onChange={({ target }) => setOldPassword(target.value)} />
             </div>
             <div>
               <p>Новый пароль</p>
-              <input type="password" placeholder="Новый пароль" value={newPassword} onChange={({target}) => setNewPassword(target.value)} />
+              <input type="password" placeholder="Новый пароль" value={newPassword} onChange={({ target }) => setNewPassword(target.value)} />
             </div>
           </div>
           <button onClick={sendSecurityData}>Сохранить</button>

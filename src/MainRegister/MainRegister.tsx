@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "..";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
+import { alert } from "../@services/alerting.service";
+import AuthService from "../@services/auth.service";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './mainregister.module.scss';
 
 const MainRegister = ({ title }: DefaultPage) => {
+
+  const {store} = useContext(Context);
 
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
@@ -67,7 +72,26 @@ const MainRegister = ({ title }: DefaultPage) => {
       setPasswordError({status: true, message: "Пароли не совпадают"});
       return setPasswordRepeatError({status: true, message: ""});
     }
+
+    AuthService.registration(name, surname, phone, email, password, road, work).then(({data}) => {
+      console.log(data);
+
+      if(data.type === "error") {
+        return alert("error", "Ошибка", data.data, 15);
+      } else if(data.type === "success") {
+        store.login(data.data);
+        return alert("default", "Успешно!", data.message, 15);
+      }
+    });
+
   }
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(store.isAuth) {
+      navigate('/');
+    }
+  }, [navigate, store.isAuth]);
 
   useEffect(() => {
     setNameError({status: false, message: ""});
@@ -115,7 +139,7 @@ const MainRegister = ({ title }: DefaultPage) => {
               }
             </div>
             <div>
-              <input type="text" placeholder="Ваша фамилия" className={`${emailError.status && s.error}`} value={surname} onChange={({ target }) => setSurname(target.value)} />
+              <input type="text" placeholder="Ваша фамилия" className={`${surnameError.status && s.error}`} value={surname} onChange={({ target }) => setSurname(target.value)} />
               {
                 surnameError.status && <p className={s.error}>{surnameError.message}</p>
               }

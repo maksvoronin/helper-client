@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "..";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
@@ -26,11 +26,11 @@ const MainLogin = ({ title }: DefaultPage) => {
     setPasswordError({ status: false, message: "" });
   }, [password]);
 
-  if(store.isAuth) {
-    return(
-      <Navigate to="/" />
-    )
-  }
+  useEffect(() => {
+    if(store.isAuth) {
+      navigate('/');
+    }
+  }, [navigate, store.isAuth]);
 
   const sendData = () => {
     if (!email || email === "") {
