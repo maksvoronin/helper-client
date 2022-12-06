@@ -24,8 +24,8 @@ const SettingsPage = ({ title }: DefaultPage) => {
 
   const [avatar, setAvatar] = useState<string>("");
 
-  // const [oldPassword, setOldPassword] = useState<string>("");
-  // const [newPassword, setNewPassword] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
 
   const { store } = useContext(Context);
   const navigate = useNavigate();
@@ -76,6 +76,25 @@ const SettingsPage = ({ title }: DefaultPage) => {
     if (email && email !== store.user.email) {
       $api.post(`${config.API}/user/security/email`, { email }).then(({ data }) => console.log(data));
       alert("default", "Смена почты", "Код подтверждения отправлен на почту", 15);
+    }
+
+    if(oldPassword || newPassword) {
+      if(!oldPassword) {
+        return alert("error", "Смена пароля", "Укажите текущий пароль", 15);
+      }
+
+      if(!newPassword) {
+        return alert("error", "Смена пароля", "Укажите новый пароль", 15);
+      }
+
+      $api.post(`${config.API}/user/security/password`, {prev: oldPassword, password: newPassword}).then(({data}) => {
+        if(data.type === "error") {
+          alert("error", "Смена пароля", data.message, 15);
+        } else {
+          alert("default", "Смена пароля", data.message, 15);
+        }
+      });
+
     }
   }
 
@@ -139,16 +158,16 @@ const SettingsPage = ({ title }: DefaultPage) => {
               <input placeholder="Ваша почта" value={email} onChange={({ target }) => setEmail(target.value)} />
             </div>
           </div>
-          {/* <div className={s.row}>
+          <div className={s.row}>
             <div>
-              <p>Старый пароль</p>
-              <input placeholder="Старый пароль" value={oldPassword} onChange={({target}) => setOldPassword(target.value)} />
+              <p>Текущий пароль</p>
+              <input type="password" placeholder="Текущий пароль" value={oldPassword} onChange={({target}) => setOldPassword(target.value)} />
             </div>
             <div>
               <p>Новый пароль</p>
-              <input placeholder="Новый пароль" value={newPassword} onChange={({target}) => setNewPassword(target.value)} />
+              <input type="password" placeholder="Новый пароль" value={newPassword} onChange={({target}) => setNewPassword(target.value)} />
             </div>
-          </div> */}
+          </div>
           <button onClick={sendSecurityData}>Сохранить</button>
           <button className={s.bgRed} onClick={() => { store.logout(); window.location.reload(); }}>Выйти</button>
         </div>
