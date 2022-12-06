@@ -20,6 +20,7 @@ import SettingsPage from './Settings/SettingsPage';
 import Store from './@store/store';
 import AdminPage from './Admin/AdminPage';
 import SeriesAdminPage from './Admin/Series.AdminPage';
+import DetailCommentPage from './DetailComment/DetailCommentPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/comment",
     element: <CommentPage title="Добавление замечания" />
+  },
+  {
+    path: "/comment/:id",
+    element: <DetailCommentPage />
   },
   {
     path: "/decision",

@@ -68,7 +68,7 @@ const Sidebar = () => {
                       searchedResult.users.length > 0 && (
                         <>
                           <div className={s.tag}>Пользователи</div>
-                          {searchedResult.users.map((e: any) => <Link key={e._id} to={`/user/${e._id}`}>{e.name} {e.surname}</Link>)}
+                          {searchedResult.users.map((e: any) => <Link key={e._id} to={`/profile/${e._id}`}>{e.name} {e.surname}</Link>)}
                         </>
                       )
                     }

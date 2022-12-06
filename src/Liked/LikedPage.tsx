@@ -15,7 +15,7 @@ const LikedPage = ({ title }: DefaultPage) => {
   const [decisions, setDecisions] = useState<any[]>([]);
 
   useEffect(() => {
-    store.user && store.user.likedDecisions.forEach((e: any) => {
+    store.user && store.user.likedDecisions && store.user.likedDecisions.forEach((e: any) => {
       $api.get(`${config.API}/decision/get?id=${e}`).then(({ data }) => setDecisions(prev => [...prev, data.data]));
       console.log(decisions)
     });
