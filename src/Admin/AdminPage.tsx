@@ -35,7 +35,7 @@ const AdminPage = ({ title }: DefaultPage) => {
           <h1>Статистика</h1>
           <ul>
             <li><Link to="/admin/users">Пользователи</Link></li>
-            <li><Link to="/admin/table">Таблицы</Link></li>
+            <li><Link to="/admin/export">Экспорт</Link></li>
           </ul>
         </div>
       </div>

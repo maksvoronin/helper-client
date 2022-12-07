@@ -25,6 +25,8 @@ import DetailDecisionPage from './DetailDecision/DetailDecisionPage';
 import ProfilePage from './Profile/ProfilePage';
 import SystemAdminPage from './Admin/System.AdminPage';
 import SystemEditAdminPage from './Admin/SystemEdit.AdminPage';
+import UsersAdminPage from './Admin/Users.AdminPage';
+import ExportAdminPage from './Admin/Export.AdminPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -102,6 +104,14 @@ const router = createBrowserRouter([
   {
     path: "/admin/edit_system",
     element: <SystemEditAdminPage title="Изменение системы" />
+  },
+  {
+    path: "/admin/users",
+    element: <UsersAdminPage title="Статистика по пользователям" />
+  },
+  {
+    path: "/admin/export",
+    element: <ExportAdminPage title="Экспорт таблиц" />
   }
 ]);
 

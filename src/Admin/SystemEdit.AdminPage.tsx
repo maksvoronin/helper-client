@@ -40,7 +40,6 @@ const SystemEditAdminPage = ({ title }: DefaultPage) => {
     }
 
     $api.put(`${config.API}/system/edit`, { id: system, name, visible: visible === 'on' ? true : false }).then(({ data }) => (data.type === 'error' ? alert('error', 'Ошибка', data.message, 15) : alert('default', 'Успешно', 'Система изменена', 15)));
-    setName('');
   };
 
   return (
