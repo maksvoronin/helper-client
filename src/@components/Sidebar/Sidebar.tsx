@@ -138,7 +138,7 @@ const Sidebar = () => {
                 <div className={s.userContent}>
                   <div style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} className={s.avatar} />
                   <div className={s.texts}>
-                    <b><Link to="/profile">{user.name} {user.surname}</Link></b>
+                    <b><Link to={`/profile/${user.id}`}>{user.name} {user.surname}</Link></b>
                     <span>{counts.decisions} реш. / {counts.comments} замеч.</span>
                   </div>
                 </div>

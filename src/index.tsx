@@ -22,6 +22,7 @@ import AdminPage from './Admin/AdminPage';
 import SeriesAdminPage from './Admin/Series.AdminPage';
 import DetailCommentPage from './DetailComment/DetailCommentPage';
 import DetailDecisionPage from './DetailDecision/DetailDecisionPage';
+import ProfilePage from './Profile/ProfilePage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/series",
     element: <SeriesAdminPage title="Добавление серии" />
+  },
+  {
+    path: "/profile/:id",
+    element: <ProfilePage />
   }
 ]);
 

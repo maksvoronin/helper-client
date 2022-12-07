@@ -11,6 +11,7 @@ export interface User {
   subscribedComments: any;
   phone: string;
   background: string;
+  created: number;
 }
 
 export default User;

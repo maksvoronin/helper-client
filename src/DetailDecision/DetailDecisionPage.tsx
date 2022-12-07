@@ -27,7 +27,7 @@ const DetailDecisionPage = () => {
         setDecision(data.data);
       }
     });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (decision) {
@@ -85,7 +85,7 @@ const DetailDecisionPage = () => {
           )}
         </p>
         <p>Замечание: {comment && <Link to={`/comment/${comment._id}`}>{comment.content}</Link>}</p>
-        {decision && decision.file && <img src={`${config.API}/public/${decision.file}`} />}
+        {decision && decision.file && <img src={`${config.API}/public/${decision.file}`} alt={decision.content} />}
         {store.isAuth && decision && store.user.id === decision.by && (
           <div className={s.buttons}>
             <button className={s.edit} onClick={editDecision}>

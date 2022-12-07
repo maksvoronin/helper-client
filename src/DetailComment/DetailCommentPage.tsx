@@ -4,7 +4,7 @@ import s from './detailcomment.module.scss';
 import { useContext, useState, useEffect } from 'react';
 import $api from "../@http";
 import config from "../config";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { alert } from "../@services/alerting.service";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import axios from "axios";
@@ -31,7 +31,7 @@ const DetailCommentPage = () => {
         setComment(data.data);
       }
     });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (comment) {
