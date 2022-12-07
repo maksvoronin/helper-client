@@ -23,6 +23,8 @@ import SeriesAdminPage from './Admin/Series.AdminPage';
 import DetailCommentPage from './DetailComment/DetailCommentPage';
 import DetailDecisionPage from './DetailDecision/DetailDecisionPage';
 import ProfilePage from './Profile/ProfilePage';
+import SystemAdminPage from './Admin/System.AdminPage';
+import SystemEditAdminPage from './Admin/SystemEdit.AdminPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -82,6 +84,10 @@ const router = createBrowserRouter([
     element: <SettingsPage title="Настройки" />
   },
   {
+    path: "/profile/:id",
+    element: <ProfilePage />
+  },
+  {
     path: "/admin",
     element: <AdminPage title="Управление" />
   },
@@ -90,8 +96,12 @@ const router = createBrowserRouter([
     element: <SeriesAdminPage title="Добавление серии" />
   },
   {
-    path: "/profile/:id",
-    element: <ProfilePage />
+    path: "/admin/system",
+    element: <SystemAdminPage title="Добавление системы" />
+  },
+  {
+    path: "/admin/edit_system",
+    element: <SystemEditAdminPage title="Изменение системы" />
   }
 ]);
 
