@@ -151,7 +151,7 @@ const SettingsPage = ({ title }: DefaultPage) => {
           <p>Выберите фон</p>
           <div className={s.backgrounds}>
             {
-              backgrounds && backgrounds.map((e: any) => <div key={e._id} className={e._id === selectedBG ? s.selected : ""} onClick={() => selectBG(e._id)}>
+              backgrounds && backgrounds.map((e: any) => e.visible !== false && <div key={e._id} className={e._id === selectedBG ? s.selected : ""} onClick={() => selectBG(e._id)}>
                 <div className={s.bgPreview} style={{ background: `${e.type === 'color' ? e.content : `url(${config.API}/public/${e.content})`}` }} />
                 <p className={s.titleBG}>{e.title}</p>
               </div>

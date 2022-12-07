@@ -28,6 +28,8 @@ const AdminPage = ({ title }: DefaultPage) => {
             <li><Link to="/admin/series">Добавить серию локомотива</Link></li>
             <li><Link to="/admin/system">Добавить систему</Link></li>
             <li><Link to="/admin/edit_system">Изменить систему</Link></li>
+            <li><Link to="/admin/background">Добавить фон</Link></li>
+            <li><Link to="/admin/delete_background">Удалить фон</Link></li>
           </ul>
         </div>
 

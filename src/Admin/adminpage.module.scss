@@ -8,6 +8,34 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
+  input[type="file"] {
+    display: none;
+  }
+
+  label.file {
+    width: 100%;
+    text-align: center;
+    display: block;
+    border-radius: 12px;
+    background: #e8f5ff00;
+    color: white;
+    font-size: 14px;
+    margin-top: 5px;
+    cursor: pointer;
+    color: $accentColor;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .uploadedBG {
+    max-width: 1024px;
+    padding: 18px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
   .adminPage {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(80px);
