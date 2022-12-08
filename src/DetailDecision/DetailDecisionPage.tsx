@@ -79,7 +79,7 @@ const DetailDecisionPage = () => {
         <p>
           Автор:{' '}
           {user && (
-            <Link to={`/profile/${user._id}`}>
+            <Link to={`/profile/${user.id}`}>
               {user.name} {user.surname}
             </Link>
           )}
