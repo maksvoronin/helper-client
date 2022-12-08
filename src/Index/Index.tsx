@@ -106,7 +106,7 @@ const IndexPage = ({ title }: DefaultPage) => {
           </select>
           {store.isAuth && selectedComment && (user && commentSubscribed ? <p className={`${s.sub} ${s.unsub}`} onClick={unsubComment}>Перестать отслеживать замечание</p> : <p className={s.sub} onClick={subComment}>Отслеживать замечание</p>)}
 
-          <Link to="/search">Поиск</Link>
+          {/* <Link to="/search">Поиск</Link> */}
         </div>
 
         <div className={`${s.decisions}`}>
