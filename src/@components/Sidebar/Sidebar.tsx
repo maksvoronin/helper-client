@@ -88,7 +88,7 @@ const Sidebar = () => {
                         </>
                       )
                     }
-                    <Link to={`/search?q=${searchText}`}>Открыть страницу поиска</Link>
+                    {/* <Link to={`/search?q=${searchText}`}>Открыть страницу поиска</Link> */}
                   </>
               }
             </>
