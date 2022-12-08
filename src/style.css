@@ -16,7 +16,7 @@ body {
 
 .maincontainer {
   display: flex;
-  background-size: 100% !important;
+  background-size: cover !important;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
