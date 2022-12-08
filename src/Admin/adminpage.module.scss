@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import '../variables.scss';
 
 .adminWrapper {
   display: flex;
@@ -8,7 +8,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
-  input[type="file"] {
+  input[type='file'] {
     display: none;
   }
 
@@ -62,7 +62,8 @@
       cursor: pointer;
     }
 
-    input, select {
+    input,
+    select {
       width: calc(100% - 30px);
       border-radius: 12px;
       border: 1px solid #d8d8d8;
@@ -78,7 +79,7 @@
       align-items: center;
       margin-top: 10px;
     }
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       width: 16px;
       height: 16px;
     }
@@ -92,7 +93,7 @@
     font-weight: bold;
     i {
       font-weight: 500;
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
@@ -140,7 +141,7 @@
     .row {
       display: grid;
       grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
-      @media(max-width: 1200px) {
+      @media (max-width: 1200px) {
         display: flex;
         flex-direction: column;
         border-bottom: 1px solid rgb(187, 187, 187);
@@ -153,5 +154,9 @@
         }
       }
     }
+  }
+
+  .noActivated {
+    background: rgba(0, 0, 0, 0.03);
   }
 }
