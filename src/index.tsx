@@ -29,6 +29,7 @@ import UsersAdminPage from './Admin/Users.AdminPage';
 import ExportAdminPage from './Admin/Export.AdminPage';
 import BackgroundAdminPage from './Admin/Background.AdminPage';
 import DeleteBackgroundAdminPage from './Admin/DeleteBackground.AdminPage';
+import ActivatePage from './Activate/ActivatePage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/delete_background",
     element: <DeleteBackgroundAdminPage title="Удаление фона" />
+  },
+  {
+    path: "/activate",
+    element: <ActivatePage title="Подтвердите свой аккаунт" />
   }
 ]);
 

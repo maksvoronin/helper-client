@@ -51,7 +51,8 @@ export default class Store {
       this.setAuth(true);
       localStorage.token = response.data.data.accessToken;
       this.setUser(response.data.data.user);
-      if (response.data.status === "error") {
+      console.log(response.data)
+      if (response.data.type === "error") {
         this.setAuth(false);
         localStorage.removeItem('token');
         this.setUser({} as User);

@@ -16,10 +16,11 @@ body {
 
 .maincontainer {
   display: flex;
-  background-size: cover;
+  background-size: 100% !important;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
+  background-position: center !important;
 }
 
 .maincontainer .maincontent {

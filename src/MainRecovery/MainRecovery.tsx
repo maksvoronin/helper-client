@@ -1,9 +1,12 @@
+import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Context } from "..";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
+import { alert } from "../@services/alerting.service";
 import { DefaultPage } from "../@types/pageDefault.interface";
+import config from "../config";
 import s from './mainrecovery.module.scss';
 
 const MainRecovery = ({title}: DefaultPage) => {
@@ -17,6 +20,13 @@ const MainRecovery = ({title}: DefaultPage) => {
     if(!email || email === "") {
       return setEmailError({status: true, message: "Укажите почту"});
     }
+    axios.post(`${config.API}/auth/recovery`, {email}).then(({data}) => {
+
+      if(data.type === "error") {
+        return alert("error", "Ошибка", data.message, 15);
+      }
+      alert("default", "Успешно", "Новый пароль отправлен на почту", 15);
+    });
   }
 
   useEffect(() => {
