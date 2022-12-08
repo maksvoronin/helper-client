@@ -149,7 +149,7 @@ const Sidebar = () => {
             }
           </div>
           <div className={`${s.links} ${s.secondaryButtons}`}>
-            <a className={`${s.support}`} href="/support">Поддержка</a>
+            {/* <a className={`${s.support}`} href="/support">Поддержка</a> */}
             <a className={s.support} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">Чат WhatsApp</a>
             <a className={s.support} href="https://t.me/tpoksy" target={"_blank"} rel="noreferrer">Telegram</a>
           </div>

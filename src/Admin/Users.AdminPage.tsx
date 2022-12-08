@@ -43,7 +43,7 @@ const UsersAdminPage = ({ title }: DefaultPage) => {
             {users &&
               users.map((e: any) => (
                 <div className={s.row} key={e._id}>
-                  <p>
+                  <p style={e && !e.isActivated && {background: 'rgba(0,0,0,0.03'}}>
                     {e.name} {e.surname}
                   </p>
                   <p>{e.road}</p>
