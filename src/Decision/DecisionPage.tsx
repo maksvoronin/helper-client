@@ -41,8 +41,8 @@ const DecisionPage = ({ title }: DefaultPage) => {
   }, [navigate, store.isAuth]);
 
   useEffect(() => {
-    axios.get(`${config.API}/system/all`).then(({ data }) => setSystems(data.data));
-  }, []);
+    setSystems(store.systems);
+  }, [store.systems]);
 
   useEffect(() => {
     if (selectedSystem) {

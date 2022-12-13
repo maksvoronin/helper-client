@@ -50,9 +50,10 @@ const SettingsPage = ({ title }: DefaultPage) => {
     }
   }, [store.user]);
 
-  const selectBG = (e: any) => {
+  const selectBG = (e: any, content: string) => {
     setSelectedBG(e);
     store.changeBG(e);
+    store.setBackground(content);
     alert("default", "Настройки", "Фон успешно обновлен", 15);
   }
 
@@ -151,7 +152,7 @@ const SettingsPage = ({ title }: DefaultPage) => {
           <p>Выберите фон</p>
           <div className={s.backgrounds}>
             {
-              backgrounds && backgrounds.map((e: any) => e.visible !== false && <div key={e._id} className={e._id === selectedBG ? s.selected : ""} onClick={() => selectBG(e._id)}>
+              backgrounds && backgrounds.map((e: any) => e.visible !== false && <div key={e._id} className={e._id === selectedBG ? s.selected : ""} onClick={() => selectBG(e._id, e.content)}>
                 <div className={s.bgPreview} style={{ background: `${e.type === 'color' ? e.content : `url(${config.API}/public/${e.content})`}` }} />
                 <p className={s.titleBG}>{e.title}</p>
               </div>

@@ -14,7 +14,6 @@ import { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../..';
 import Logo from '../../@assets/logo';
-import $api from '../../@http';
 import config from '../../config';
 import s from './sidebar.module.scss';
 
@@ -22,8 +21,6 @@ const Sidebar = () => {
 
   const [searchText, setSearchText] = useState<string>("");
   const [searchedResult, setSearchedResult] = useState<any>({});
-
-  const [counts, setCounts] = useState<{ comments: number, decisions: number }>({ comments: 0, decisions: 0 });
   
   const navigate = useNavigate();
   const {store} = useContext(Context);
@@ -36,12 +33,6 @@ const Sidebar = () => {
       });
     }
   }, [searchText]);
-
-  useEffect(() => {
-    if (store.isAuth && store.user) {
-      $api.get(`${config.API}/stat/user?id=${store.user.id}&params=count`).then(({ data }) => setCounts({ comments: data.data.countComments, decisions: data.data.countDecisions }));
-    }
-  }, [store.isAuth, store.user]);
 
   return (
     <div className={s.sidebar}>
@@ -139,7 +130,7 @@ const Sidebar = () => {
                   <div style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} className={s.avatar} />
                   <div className={s.texts}>
                     <b><Link to={`/profile/${user.id}`}>{user.name} {user.surname}</Link></b>
-                    <span>{counts.decisions} реш. / {counts.comments} замеч.</span>
+                    <span>{store.stat.decisions} реш. / {store.stat.comments} замеч.</span>
                   </div>
                 </div>
                 <Link to={"/settings"} className={s.settingsBtn}>

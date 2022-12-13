@@ -1,13 +1,17 @@
-import axios from "axios";
-import { makeAutoObservable } from "mobx";
-import AuthService from "../@services/auth.service";
-import config from "../config";
-import User from '../@types/user.interface'
-import $api from "../@http";
+import axios from 'axios';
+import { makeAutoObservable } from 'mobx';
+import AuthService from '../@services/auth.service';
+import config from '../config';
+import User from '../@types/user.interface';
+import $api from '../@http';
 
 export default class Store {
-
   user = {} as User;
+  background: string = '';
+  stat = {} as { comments: number; decisions: number };
+
+  systems = {} as any;
+  series = {} as any;
 
   isAuth: boolean = false;
   static login: any;
@@ -22,6 +26,24 @@ export default class Store {
 
   setUser(user: any) {
     this.user = user;
+    if (this.isAuth && this.user) {
+      $api.get(`${config.API}/stat/user?id=${this.user.id}&params=count`).then(({ data }) => (this.stat = { comments: data.data.countComments, decisions: data.data.countDecisions }));
+      $api.get(`${config.API}/background/get?id=${this.user.background}`).then(({ data }) => {
+        this.background = data.data.content || 'default_bg.png';
+      });
+    }
+  }
+
+  setSystems(systems: any) {
+    this.systems = systems;
+  }
+
+  setBackground(background: string) {
+    this.background = background;
+  }
+
+  setSeries(series: any) {
+    this.series = series;
   }
 
   async login(data: any) {
@@ -51,8 +73,8 @@ export default class Store {
       this.setAuth(true);
       localStorage.token = response.data.data.accessToken;
       this.setUser(response.data.data.user);
-      console.log(response.data)
-      if (response.data.type === "error") {
+      console.log(response.data);
+      if (response.data.type === 'error') {
         this.setAuth(false);
         localStorage.removeItem('token');
         this.setUser({} as User);
@@ -137,8 +159,12 @@ export default class Store {
   }
 
   async changeAvatar(avatar: string) {
-    $api.post(`${config.API}/user/settings/avatar`, {avatar});
+    $api.post(`${config.API}/user/settings/avatar`, { avatar });
     this.user.avatar = avatar;
   }
 
+  async updateColdData() {
+    $api.get(`${config.API}/system/all`).then(({ data }) => (this.systems = data.data));
+    $api.get(`${config.API}/series/all`).then(({ data }) => (this.series = data.data));
+  }
 }
