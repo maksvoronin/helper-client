@@ -12,14 +12,14 @@ const IndexDecision = ({ children, decision, text, userData, authedUser }: any) 
 
   useEffect(() => {
     if(decision && !userData) {
-      axios.get(`${config.API}/user/get?id=${decision.by}`).then(({ data }) => setUser(data.data));
+      store.isAuth && axios.get(`${config.API}/user/get?id=${decision.by}`).then(({ data }) => setUser(data.data));
     } else  {
       setUser(userData);
     }
   }, [decision, userData]);
 
   useEffect(() => {
-    decision && authedUser && setIsLiked(authedUser.likedDecisions.indexOf(decision._id) > -1);
+    store.isAuth && decision && authedUser && setIsLiked(authedUser.likedDecisions.indexOf(decision._id) > -1);
   }, [authedUser, decision]);
 
   const like = (id: string) => {
