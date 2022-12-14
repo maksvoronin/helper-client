@@ -13,6 +13,7 @@ const UsersAdminPage = ({ title }: DefaultPage) => {
   const navigate = useNavigate();
 
   const [users, setUsers] = useState<User[]>([{} as User]);
+  const [verifyUsers, setVerifyUsers] = useState<number>(0);
 
   useEffect(() => {
     if (!store.isAuth || store.user.permissions < 2) {
@@ -22,15 +23,32 @@ const UsersAdminPage = ({ title }: DefaultPage) => {
 
   useEffect(() => {
     $api.get(`${config.API}/user/all`).then(({ data }) => {
+      data.data.sort((a: any, b: any) => {
+        if (a.road.toLowerCase() < b.road.toLowerCase()) {
+          return -1;
+        }
+        if (a.road.toLowerCase() > b.road.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
       setUsers(data.data);
     });
   }, []);
+
+  useEffect(() => {
+    if (users) {
+      users.forEach((e) => e.isActivated && setVerifyUsers((prev) => (prev += 1)));
+    }
+  }, [users]);
 
   return (
     <MainLayout title={title}>
       <div className={s.adminWrapper}>
         <div className={s.contentBlock}>
-          <h1>Таблица пользователей</h1>
+          <h1>
+            Таблица пользователей ({verifyUsers} / {users.length})
+          </h1>
           <div className={s.table}>
             <div className={s.row}>
               <p>Имя, фамилия</p>
@@ -42,8 +60,8 @@ const UsersAdminPage = ({ title }: DefaultPage) => {
             </div>
             {users &&
               users.map((e: any) => (
-                <div className={s.row} key={e._id}>
-                  <p className={e && !e.isActivated && s.noActivated}>
+                <div className={s.row} key={`i${(Math.random() * 100000).toFixed(0)}`}>
+                  <p className={`${e && !e.isActivated && s.noActivated}`}>
                     {e.name} {e.surname}
                   </p>
                   <p>{e.road}</p>

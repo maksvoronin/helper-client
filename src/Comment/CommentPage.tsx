@@ -2,12 +2,12 @@ import MainLayout from "../@layouts/main.layout";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './commentpage.module.scss';
 import { useState, useEffect, createRef, useContext } from 'react';
-import axios from "axios";
 import config from "../config";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import $api from "../@http";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CommentPage = ({ title }: DefaultPage) => {
 
@@ -42,9 +42,24 @@ const CommentPage = ({ title }: DefaultPage) => {
   }, [navigate, store.isAuth]);
 
   useEffect(() => {
-    axios.get(`${config.API}/system/all`).then(({ data }) => setSystems(data.data));
-    axios.get(`${config.API}/series/all`).then(({ data }) => setSeries(data.data));
-  }, []);
+    if(!store.systems.length) {
+      axios.get(`${config.API}/system/all`).then(({ data }) => {
+        setSystems(data.data);
+        store.setSystems(data.data);
+      });
+    } else {
+      setSystems(store.systems);
+    }
+
+    if(!store.series.length) {
+      axios.get(`${config.API}/series/all`).then(({ data }) => {
+        setSeries(data.data);
+        store.setSeries(data.data);
+      });
+    } else {
+      setSeries(store.systems);
+    }
+  }, [store, store.systems, store.series]);
 
   useEffect(() => {
     if (fileName) {

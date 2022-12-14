@@ -28,8 +28,7 @@ const SubscribedPage = ({ title }: DefaultPage) => {
         $api.get(`${config.API}/comment/get?id=${e}`).then(({ data }) => setUserComments(prev => [...prev, data.data]));
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [store.user]);
 
   const navigate = useNavigate();
   useEffect(() => {
