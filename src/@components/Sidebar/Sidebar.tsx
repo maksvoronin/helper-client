@@ -79,9 +79,9 @@ const Sidebar = () => {
         </div>
         <SidebarUserInfo />
         <div className={`${s.links} ${s.secondaryButtons}`}>
-          <Link className={`${s.support}`} to="/support">
+          {/* <Link className={`${s.support}`} to="/support">
             Поддержка
-          </Link>
+          </Link> */}
           <a className={s.support} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={'_blank'} rel="noreferrer">
             Чат WhatsApp
           </a>
