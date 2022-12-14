@@ -27,6 +27,7 @@ import ExportAdminPage from './Admin/Export.AdminPage';
 import BackgroundAdminPage from './Admin/Background.AdminPage';
 import DeleteBackgroundAdminPage from './Admin/DeleteBackground.AdminPage';
 import ActivatePage from './Activate/ActivatePage';
+import SearchPage from './Search/SearchPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
     path: '/activate',
     element: <ActivatePage title="Подтвердите свой аккаунт" />,
   },
+  {
+    path: '/search',
+    element: <SearchPage title="Поиск" />
+  }
 ]);
 
 const store = new Store();

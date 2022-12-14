@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 import s from './searchpanel.module.scss';
 
-const SearchPanel = () => {
-  const [searchText, setSearchText] = useState<string>();
+const SearchPanel = ({resultClass, initialValue, fullClass}: any) => {
+  const [searchText, setSearchText] = useState<string>(initialValue || "");
   const [searchedResult, setSearchedResult] = useState<{ users: any[]; comments: any[]; decisions: any[] }>();
 
   useEffect(() => {
@@ -17,9 +17,9 @@ const SearchPanel = () => {
   }, [searchText]);
 
   return (
-    <div className={s.search}>
+    <div className={`${s.search} ${fullClass}`}>
       <input placeholder="Поиск" value={searchText} onChange={({ target }) => setSearchText(target.value)} />
-      <div className={s.someResult}>
+      <div className={`${s.someResult} ${resultClass}`}>
         {!searchText ? (
           'Введите свой запрос'
         ) : (
@@ -72,7 +72,7 @@ const SearchPanel = () => {
                         )}
                       </>
                     )}
-                    {/* <Link to={`/search?q=${searchText}`}>Открыть страницу поиска</Link> */}
+                    <Link to={`/search?q=${searchText}`}>Открыть страницу поиска</Link>
                   </>
                 )}
           </>

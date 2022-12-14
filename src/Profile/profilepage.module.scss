@@ -59,5 +59,10 @@
     p.counts {
       margin-top: 5px;
     }
+
+    @media(max-width: $mobileWidth) {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
 import IndexDecision from '../@components/IndexDecision/IndexDecision';
 import $api from '../@http';
@@ -151,7 +151,7 @@ const IndexPage = ({ title }: DefaultPage) => {
               </p>
             ))}
 
-          {/* <Link to="/search">Поиск</Link> */}
+          <Link to="/search">Поиск</Link>
         </div>
 
         <div className={`${s.decisions}`}>

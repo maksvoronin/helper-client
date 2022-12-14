@@ -27,11 +27,14 @@ export default class Store {
   setUser(user: any) {
     this.user = user;
     if (this.isAuth && this.user) {
-      $api.get(`${config.API}/stat/user?id=${this.user.id}&params=count`).then(({ data }) => (this.stat = { comments: data.data.countComments, decisions: data.data.countDecisions }));
       $api.get(`${config.API}/background/get?id=${this.user.background}`).then(({ data }) => {
         this.background = data.data.content || 'default_bg.png';
       });
     }
+  }
+
+  setStat(comments: number, decisions: number) {
+    this.stat = { comments, decisions }
   }
 
   setSystems(systems: any) {
