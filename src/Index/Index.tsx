@@ -32,9 +32,8 @@ const IndexPage = ({ title }: DefaultPage) => {
       });
     } else {
       setSystems(store.systems);
-      console.log(store.systems.length);
     }
-  }, []);
+  }, [store]);
 
   const navigate = useNavigate();
 

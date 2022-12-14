@@ -49,7 +49,6 @@ const CommentPage = ({ title }: DefaultPage) => {
       });
     } else {
       setSystems(store.systems);
-      console.log(store.systems.length);
     }
 
     if(!store.series.length) {
@@ -60,7 +59,7 @@ const CommentPage = ({ title }: DefaultPage) => {
     } else {
       setSeries(store.systems);
     }
-  }, [store.systems, store.series]);
+  }, [store, store.systems, store.series]);
 
   useEffect(() => {
     if (fileName) {
