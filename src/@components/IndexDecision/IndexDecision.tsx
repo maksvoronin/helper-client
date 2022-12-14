@@ -44,7 +44,7 @@ const IndexDecision = ({ children, decision, text, userData, authedUser }: any) 
             {user && `${user.name} ${user.surname}`} • {new Date(decision.created).toLocaleString()}
           </div>
           <div>
-            {authedUser && <button className={isLiked ? s.active : ""} onClick={() => like(decision._id)}>Полезно</button>}
+            {store.isAuth && authedUser && <button className={isLiked ? s.active : ""} onClick={() => like(decision._id)}>Полезно</button>}
           </div>
         </div>
       </div>
