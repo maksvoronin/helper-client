@@ -19,7 +19,7 @@ const MainLayout = ({ title, children }: DefaultPage) => {
       <title>{title}</title>
       <div className={"maincontainer"} style={{
         background:
-          `${store.isAuth && store.background ? `url(${config.API}/public/${store.background})`
+          `${store.isAuth && backgroundImage ? `url(${config.API}/public/${backgroundImage})`
             : `url(${config.API}/public/default_bg.png)`}`
       }}>
         <Sidebar />

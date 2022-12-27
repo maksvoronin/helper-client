@@ -25,7 +25,7 @@ const SystemEditAdminPage = ({ title }: DefaultPage) => {
     if (!store.isAuth || store.user.permissions < 2) {
       navigate('/');
     }
-  }, [store.isAuth, store.user]);
+  }, [store.isAuth, store.user, navigate]);
 
   useEffect(() => {
     $api.get(`${config.API}/system/get?id=${system}`).then(({ data }) => {

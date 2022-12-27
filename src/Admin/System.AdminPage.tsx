@@ -17,7 +17,7 @@ const SystemAdminPage = ({ title }: DefaultPage) => {
     if (!store.isAuth || store.user.permissions < 2) {
       navigate('/');
     }
-  }, [store.isAuth, store.user]);
+  }, [store.isAuth, store.user, navigate]);
 
   const sendData = () => {
     if(!name) {
