@@ -57,7 +57,7 @@ const CommentPage = ({ title }: DefaultPage) => {
         store.setSeries(data.data);
       });
     } else {
-      setSeries(store.systems);
+      setSeries(store.series);
     }
   }, [store, store.systems, store.series]);
 

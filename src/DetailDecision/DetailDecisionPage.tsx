@@ -61,14 +61,16 @@ const DetailDecisionPage = () => {
 
   const editDecision = () => {
     const newText = prompt('Укажите новый текст решения', decision.content);
-    $api.put(`${config.API}/decision/edit`, { id, content: newText }).then(({ data }) => {
-      if (data.type === 'error') {
-        return alert('error', 'Ошибка', data.message, 15);
-      } else {
-        setDecision({ ...decision, content: newText });
-        return alert('default', 'Успешно', 'Решение обновлено', 15);
-      }
-    });
+    if(newText) {
+      $api.put(`${config.API}/decision/edit`, { id, content: newText }).then(({ data }) => {
+        if (data.type === 'error') {
+          return alert('error', 'Ошибка', data.message, 15);
+        } else {
+          setDecision({ ...decision, content: newText });
+          return alert('default', 'Успешно', 'Решение обновлено', 15);
+        }
+      });
+    }
   };
 
   return (
