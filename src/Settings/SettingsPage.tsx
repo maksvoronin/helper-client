@@ -1,31 +1,30 @@
-import { useEffect, useState, useContext, createRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { Context } from "..";
-import $api from "../@http";
-import MainLayout from "../@layouts/main.layout";
-import { alert } from "../@services/alerting.service";
-import { DefaultPage } from "../@types/pageDefault.interface";
-import config from "../config";
-import s from './settingspage.module.scss'
+import { useEffect, useState, useContext, createRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '..';
+import $api from '../@http';
+import MainLayout from '../@layouts/main.layout';
+import { alert } from '../@services/alerting.service';
+import { DefaultPage } from '../@types/pageDefault.interface';
+import config from '../config';
+import s from './settingspage.module.scss';
 
 const SettingsPage = ({ title }: DefaultPage) => {
-
-  const [name, setName] = useState<string>("");
-  const [surname, setSurname] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>('');
+  const [surname, setSurname] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const inputFile: any = createRef();
 
   const [backgrounds, setBackgrounds] = useState<any[]>([]);
 
-  const [selectedBG, setSelectedBG] = useState<string>("");
-  const [fileName, setFileName] = useState<string>("");
+  const [selectedBG, setSelectedBG] = useState<string>('');
+  const [fileName, setFileName] = useState<string>('');
 
-  const [avatar, setAvatar] = useState<string>("");
+  const [avatar, setAvatar] = useState<string>('');
 
-  const [oldPassword, setOldPassword] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
 
   const { store } = useContext(Context);
   const navigate = useNavigate();
@@ -54,8 +53,8 @@ const SettingsPage = ({ title }: DefaultPage) => {
     setSelectedBG(e);
     store.changeBG(e);
     store.setBackground(content);
-    alert("default", "Настройки", "Фон успешно обновлен", 15);
-  }
+    alert('default', 'Настройки', 'Фон успешно обновлен', 15);
+  };
 
   const sendUserData = () => {
     if (name && name !== store.user.name) {
@@ -69,50 +68,47 @@ const SettingsPage = ({ title }: DefaultPage) => {
       store.changePhone(phone);
     }
 
-    alert("default", "Настройки", "Данные пользователя успешно изменены", 15);
-
-  }
+    alert('default', 'Настройки', 'Данные пользователя успешно изменены', 15);
+  };
 
   const sendSecurityData = () => {
     if (email && email !== store.user.email) {
       $api.post(`${config.API}/user/security/email`, { email }).then(({ data }) => console.log(data));
-      alert("default", "Смена почты", "Код подтверждения отправлен на почту", 15);
+      alert('default', 'Смена почты', 'Код подтверждения отправлен на почту', 15);
     }
 
     if (oldPassword || newPassword) {
       if (!oldPassword) {
-        return alert("error", "Смена пароля", "Укажите текущий пароль", 15);
+        return alert('error', 'Смена пароля', 'Укажите текущий пароль', 15);
       }
 
       if (!newPassword) {
-        return alert("error", "Смена пароля", "Укажите новый пароль", 15);
+        return alert('error', 'Смена пароля', 'Укажите новый пароль', 15);
       }
 
       $api.post(`${config.API}/user/security/password`, { prev: oldPassword, password: newPassword }).then(({ data }) => {
-        if (data.type === "error") {
-          alert("error", "Смена пароля", data.message, 15);
+        if (data.type === 'error') {
+          alert('error', 'Смена пароля', data.message, 15);
         } else {
-          alert("default", "Смена пароля", data.message, 15);
+          alert('default', 'Смена пароля', data.message, 15);
         }
       });
-
     }
-  }
+  };
 
   useEffect(() => {
     if (fileName) {
-
       const extname = fileName.substring(fileName.lastIndexOf('.'));
 
       if (!config.imageExt.includes(extname)) {
-        return alert("error", "Ошибка", "Загрузите картинку (.png, .jpg, .gif, .heif и тп)", 15);
+        return alert('error', 'Ошибка', 'Загрузите картинку (.png, .jpg, .gif, .heif и тп)', 15);
       }
 
       const formData = new FormData();
       formData.append('file', inputFile.current.files[0]);
-      $api.post(`${config.API}/file/upload`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
-        if (data.type === "error") { 
-          return alert("error", "Ошибка", data.message, 15);
+      $api.post(`${config.API}/file/upload`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => {
+        if (data.type === 'error') {
+          return alert('error', 'Ошибка', data.message, 15);
         }
         console.log(data);
         store.changeAvatar(data.data.file);
@@ -127,39 +123,47 @@ const SettingsPage = ({ title }: DefaultPage) => {
       <div className={s.settingsWrapper}>
         <div className={s.contentBlock}>
           <h1>Настройки пользователя</h1>
-          <p>Фотография</p>
-          {avatar && <label className={s.avatar} htmlFor="avatar" style={{ backgroundImage: `url(${config.API}/public/${avatar})` }} />}
-          <input type="file" id="avatar" accept="image/*" ref={inputFile} value={fileName} onChange={({ target }) => setFileName(target.value)} />
-          <div className={s.row}>
+          <div className={s.userSettings}>
             <div>
-              <p>Имя</p>
-              <input placeholder={"Ваше имя"} value={name} onChange={({ target }) => setName(target.value)} />
+              <p>Фотография</p>
+              {avatar && <label className={s.avatar} htmlFor="avatar" style={{ backgroundImage: `url(${config.API}/public/${avatar})` }} />}
+              <input type="file" id="avatar" accept="image/*" ref={inputFile} value={fileName} onChange={({ target }) => setFileName(target.value)} />
             </div>
             <div>
-              <p>Фамилия</p>
-              <input placeholder={"Ваша фамилия"} value={surname} onChange={({ target }) => setSurname(target.value)} />
+              <div className={s.row}>
+                <div>
+                  <p>Имя</p>
+                  <input placeholder={'Ваше имя'} value={name} onChange={({ target }) => setName(target.value)} />
+                </div>
+                <div>
+                  <p>Фамилия</p>
+                  <input placeholder={'Ваша фамилия'} value={surname} onChange={({ target }) => setSurname(target.value)} />
+                </div>
+              </div>
+              <div>
+                <p>Телефон</p>
+                <input placeholder={'Ваш телефон'} value={phone} onChange={({ target }) => setPhone(target.value)} />
+              </div>
+              <button onClick={sendUserData}>Сохранить</button>
             </div>
           </div>
-          <div>
-            <p>Телефон</p>
-            <input placeholder={"Ваш телефон"} value={phone} onChange={({ target }) => setPhone(target.value)} />
-          </div>
-          <button onClick={sendUserData}>Сохранить</button>
         </div>
 
         <div className={s.contentBlock}>
           <h1>Настройки сайта</h1>
           <p>Выберите фон</p>
           <div className={s.backgrounds}>
-            {
-              backgrounds && backgrounds.map((e: any) => e.visible !== false && <div key={e._id} className={e._id === selectedBG ? s.selected : ""} onClick={() => selectBG(e._id, e.content)}>
-                <div className={s.bgPreview} style={{ background: `${e.type === 'color' ? e.content : `url(${config.API}/public/${e.content})`}` }} />
-                <p className={s.titleBG}>{e.title}</p>
-              </div>
-              )
-            }
+            {backgrounds &&
+              backgrounds.map(
+                (e: any) =>
+                  e.visible !== false && (
+                    <div key={e._id} className={e._id === selectedBG ? s.selected : ''} onClick={() => selectBG(e._id, e.content)}>
+                      <div className={s.bgPreview} style={{ background: `${e.type === 'color' ? e.content : `url(${config.API}/public/${e.content})`}` }} />
+                      <p className={s.titleBG}>{e.title}</p>
+                    </div>
+                  ),
+              )}
           </div>
-
         </div>
         <div className={s.contentBlock}>
           <h1>Настройки безопасности</h1>
@@ -180,11 +184,19 @@ const SettingsPage = ({ title }: DefaultPage) => {
             </div>
           </div>
           <button onClick={sendSecurityData}>Сохранить</button>
-          <button className={s.bgRed} onClick={() => { store.logout(); window.location.reload(); }}>Выйти</button>
+          <button
+            className={s.bgRed}
+            onClick={() => {
+              store.logout();
+              window.location.reload();
+            }}
+          >
+            Выйти
+          </button>
         </div>
       </div>
     </MainLayout>
   );
-}
+};
 
 export default SettingsPage;

@@ -125,6 +125,7 @@
 
   .buttons {
     margin-top: 30px;
+    margin-bottom: 30px;
     @media (max-width: $mobileWidth) {
       margin-top: 0;
       display: flex;
