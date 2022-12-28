@@ -42,7 +42,7 @@ const SeriesAdminPage = ({ title }: DefaultPage) => {
           <p>Название серии</p>
           <input type="text" placeholder="Название серии локомотива" value={seriesName} onChange={({target}) => setSeriesName(target.value)} />
           <button onClick={sendData}>Сохранить</button>
-          <p style={{textAlign: 'center', marginBottom: 8}}>Существующие системы:</p>
+          <p style={{textAlign: 'center', marginBottom: 8}}>Существующие серии:</p>
           {
             series && series.map(e => <div key={e._id} className={s.series}>{e.name} {!e.visible && <i>скрыто</i>}</div>)
           }

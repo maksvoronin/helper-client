@@ -85,7 +85,7 @@ const Sidebar = () => {
           <a className={s.support} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={'_blank'} rel="noreferrer">
             Чат WhatsApp
           </a>
-          <a className={s.support} href="https://t.me/tpoksy" target={'_blank'} rel="noreferrer">
+          <a className={s.support} href="https://t.me/voroninme" target={'_blank'} rel="noreferrer">
             Telegram
           </a>
         </div>

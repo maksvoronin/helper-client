@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 import s from './searchpanel.module.scss';
 
-const SearchPanel = ({resultClass, initialValue, fullClass}: any) => {
-  const [searchText, setSearchText] = useState<string>(initialValue || "");
+const SearchPanel = ({ resultClass, initialValue, fullClass }: any) => {
+  const [searchText, setSearchText] = useState<string>(initialValue || '');
   const [searchedResult, setSearchedResult] = useState<{ users: any[]; comments: any[]; decisions: any[] }>();
 
   useEffect(() => {
-    if(searchText) {
+    if (searchText) {
       axios.get(`${config.API}/search/get?text=${searchText}`).then(({ data }) => {
         setSearchedResult(data.data);
       });

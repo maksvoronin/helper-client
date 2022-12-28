@@ -25,7 +25,7 @@ const IndexPage = ({ title }: DefaultPage) => {
   const [commentSubscribed, setCommentSubscribed] = useState<boolean>();
 
   useEffect(() => {
-    if(!store.systems.length) {
+    if (!store.systems.length) {
       axios.get(`${config.API}/system/all`).then(({ data }) => {
         setSystems(data.data);
         store.setSystems(data.data);
@@ -56,11 +56,13 @@ const IndexPage = ({ title }: DefaultPage) => {
   }, [selectedSystem, store.user, store.isAuth]);
 
   useEffect(() => {
-    if (selectedComment) {
+    if (selectedComment && selectedComment !== 'Выберите замечание') {
       axios.get(`${config.API}/comment/decisions?id=${selectedComment}`).then(({ data }) => setDecisions(data.data));
       if (store.isAuth && store.user) {
         setCommentSubscribed(store.user.subscribedComments.indexOf(selectedComment) > -1);
       }
+    } else if (selectedComment === 'Выберите замечание') {
+      setDecisions([]);
     }
   }, [selectedComment, store.user, store.isAuth]);
 
@@ -125,7 +127,7 @@ const IndexPage = ({ title }: DefaultPage) => {
             defaultValue={selectedSystem.length > 0 ? (comments && comments.length > 0 ? 'Выберите замечание' : 'Замечания не найдены') : 'Выберите систему'}
             onChange={({ target }) => setSelectedComment(target.value)}
           >
-            <option disabled value={selectedSystem.length > 0 ? (comments && comments.length > 0 ? 'Выберите замечание' : 'Замечания не найдены') : 'Выберите систему'}>
+            <option value={selectedSystem.length > 0 ? (comments && comments.length > 0 ? 'Выберите замечание' : 'Замечания не найдены') : 'Выберите систему'}>
               {selectedSystem.length > 0 ? (comments && comments.length > 0 ? 'Выберите замечание' : 'Замечания не найдены') : 'Выберите систему'}
             </option>
             {comments &&
