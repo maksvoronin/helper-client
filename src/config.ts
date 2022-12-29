@@ -1,5 +1,5 @@
 const config = {
-  API: `https://api-helper.voronin.xyz`,
+  API: `https://helper.voronin.xyz/api`,
   imageExt: ['.bmp', '.gif', '.ico', '.png', '.jpg', '.jpeg', '.webp', '.heif', '.jp2', '.svg']
 };
 
