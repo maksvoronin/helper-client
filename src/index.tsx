@@ -28,6 +28,7 @@ import BackgroundAdminPage from './Admin/Background.AdminPage';
 import DeleteBackgroundAdminPage from './Admin/DeleteBackground.AdminPage';
 import ActivatePage from './Activate/ActivatePage';
 import SearchPage from './Search/SearchPage';
+import SupportPage from './Support/SupportPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -127,6 +128,10 @@ const router = createBrowserRouter([
   {
     path: '/search',
     element: <SearchPage title="Поиск" />
+  },
+  {
+    path: '/support',
+    element: <SupportPage title="Поддержка" />
   }
 ]);
 
