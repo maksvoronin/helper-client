@@ -37,7 +37,7 @@ const IndexDecision = ({ children, decision, text, userData, authedUser }: any) 
       <div className={s.indexDecision}>
         {children}
         {
-          decision.file && <img src={`${config.API}/public/${decision.file}`} alt="Дополнение к решению" onClick={() => window.open(`${config.API}/public/${decision.file}`)} />
+          decision.file && <img src={`${config.fileHost}/${decision.file}`} alt="Дополнение к решению" onClick={() => window.open(`${config.fileHost}/${decision.file}`)} />
         }
         <div className={s.bottom}>
           <div className={s.info}>
