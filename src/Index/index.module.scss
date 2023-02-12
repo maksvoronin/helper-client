@@ -1,9 +1,10 @@
-@import '../variables.scss';
+@import "../variables.scss";
 
 .indexWrapper {
   height: calc(100% - 40px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -13,7 +14,7 @@
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 12px;
     backdrop-filter: blur(50px);
-    width: calc(100% - 40px);
+
     h1 {
       font-size: 24px;
       color: #333;
@@ -36,7 +37,7 @@
     }
 
     a {
-      @media (min-width: $mobileWidth) {
+      @media(min-width: $mobileWidth) {
         display: none;
       }
       text-align: center;
@@ -53,7 +54,7 @@
   .decisions {
     width: 100%;
     margin-top: 25px;
-    @media (max-width: $mobileWidth) {
+    @media(max-width: $mobileWidth) {
       padding-bottom: 120px;
     }
   }
