@@ -17,7 +17,7 @@ const BackgroundAdminPage = ({ title }: DefaultPage) => {
     }
   }, [store.isAuth, navigate, store.user.permissions]);
 
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>('');
   const [fileName, setFileName] = useState<string>('');
   const [uploadedFile, setUploadedFile] = useState<string>('');
   const fileInput: any = createRef();
@@ -26,7 +26,9 @@ const BackgroundAdminPage = ({ title }: DefaultPage) => {
     if (fileName) {
       const formData = new FormData();
       formData.append('file', fileInput.current.files[0]);
-      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.file));
+      formData.append('project', 'helper');
+      formData.append('comment', 'User background');
+      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.path));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
@@ -38,17 +40,17 @@ const BackgroundAdminPage = ({ title }: DefaultPage) => {
   };
 
   const sendData = () => {
-    if(!name) {
-      return alert("error", "Ошибка", "Укажите название фона", 15);
+    if (!name) {
+      return alert('error', 'Ошибка', 'Укажите название фона', 15);
     }
-    if(!uploadedFile) {
-      return alert("error", "Ошибка", "Прикрепите фон", 15);
+    if (!uploadedFile) {
+      return alert('error', 'Ошибка', 'Прикрепите фон', 15);
     }
 
-    $api.post(`${config.API}/background/create`, {title: name, type: "image", content: uploadedFile}).then(({data}) => {
-      alert("default", "Успешно", "Фон успешно добавлен", 15);
+    $api.post(`${config.API}/background/create`, { title: name, type: 'image', content: uploadedFile }).then(({ data }) => {
+      alert('default', 'Успешно', 'Фон успешно добавлен', 15);
     });
-  }
+  };
 
   return (
     <MainLayout title={title}>
@@ -56,7 +58,7 @@ const BackgroundAdminPage = ({ title }: DefaultPage) => {
         <div className={s.adminPage}>
           <h1 className={s.title}>Добавление фона</h1>
           <p>Название фона</p>
-          <input placeholder="Название фона" value={name} onChange={({target}) => setName(target.value)} />
+          <input placeholder="Название фона" value={name} onChange={({ target }) => setName(target.value)} />
           <label
             className={s.file}
             htmlFor="file"

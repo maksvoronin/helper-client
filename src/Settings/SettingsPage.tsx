@@ -106,6 +106,8 @@ const SettingsPage = ({ title }: DefaultPage) => {
 
       const formData = new FormData();
       formData.append('file', inputFile.current.files[0]);
+      formData.append('project', 'helper');
+      formData.append('comment', 'Settings page');
       $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => {
         if (data.type === 'error') {
           return alert('error', 'Ошибка', data.message, 15);

@@ -64,8 +64,9 @@ const CommentPage = ({ title }: DefaultPage) => {
   useEffect(() => {
     if (fileName) {
       const formData = new FormData();
-      formData.append('file', fileInput.current.files[0]);
-      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
+      formData.append('project', 'helper');
+      formData.append('comment', 'Comment');
+      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.path));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
