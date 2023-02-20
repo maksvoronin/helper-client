@@ -12,7 +12,7 @@ const IndexDecision = ({ children, decision, text, userData, authedUser }: any) 
 
   useEffect(() => {
     if(decision && !userData) {
-      store.isAuth && axios.get(`${config.API}/user/get?id=${decision.by}`).then(({ data }) => setUser(data.data));
+      axios.get(`${config.API}/user/get?id=${decision.by}`).then(({ data }) => setUser(data.data));
     } else  {
       setUser(userData);
     }

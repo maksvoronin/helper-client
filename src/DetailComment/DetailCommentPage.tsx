@@ -84,7 +84,7 @@ const DetailCommentPage = () => {
         <h1>{comment && comment.content}</h1>
         <p>Система: {system && system.name}</p>
         <p>Серия: {series && series.name}</p>
-        <p>Количество решений: {comment && comment.decisions.length}</p>
+        <p>Количество решений: {decisions && decisions.length}</p>
         <p>
           Автор:{' '}
           <Link to={`/profile/${user && user.id}`}>
