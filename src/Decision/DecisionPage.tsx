@@ -52,6 +52,7 @@ const DecisionPage = ({ title }: DefaultPage) => {
   useEffect(() => {
     if (fileName) {
       const formData = new FormData();
+      formData.append('file', fileInput.current.files[0]);
       formData.append('project', 'helper');
       formData.append('comment', 'decision');
       $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.file));
