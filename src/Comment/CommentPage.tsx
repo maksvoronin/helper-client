@@ -66,7 +66,7 @@ const CommentPage = ({ title }: DefaultPage) => {
       const formData = new FormData();
       formData.append('project', 'helper');
       formData.append('comment', 'Comment');
-      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.path));
+      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.file));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);

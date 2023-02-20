@@ -28,7 +28,7 @@ const BackgroundAdminPage = ({ title }: DefaultPage) => {
       formData.append('file', fileInput.current.files[0]);
       formData.append('project', 'helper');
       formData.append('comment', 'User background');
-      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.path));
+      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => setUploadedFile(data.data.file));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
