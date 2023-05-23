@@ -22,7 +22,7 @@ const ActivatePage = ({ title }: DefaultPage) => {
   }, [navigate, store, store.isAuth, store.user.email]);
 
   const sendData = () => {
-    $api.post(`${config.API}/user/security/email`, { email }).then(({ data }) => {
+    $api.post(`${config.API}/user/security/email`, { email }).then(({ data }: any) => {
       if (data.type === 'error') {
         return alert('error', 'Укажите почту', data.data, 15);
       } 
