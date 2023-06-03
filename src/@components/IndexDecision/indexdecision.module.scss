@@ -42,4 +42,43 @@
       }
     }
   }
+
+  h1 {
+    font-size: 18px;
+    font-weight: 400;
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+    padding-top: 10px;
+    margin-bottom: 0;
+    span {
+      font-style: italic;
+      opacity: 0.3;
+    }
+  }
+  p {
+    margin-top: 2px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  .commentContainer {
+    display: flex;
+    gap: 10px;
+    input {
+      height: 42px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: calc(100% - 30px);
+      padding-left: 15px;
+    }
+    button {
+      border-radius: 8px;
+      border: none;
+      padding-left: 15px;
+      padding-right: 15px;
+      background-color: rgb(49, 145, 255);
+      color: white;
+      font-weight: 500;
+    }
+  }
 }

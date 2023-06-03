@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Context } from '..';
 import IndexDecision from '../@components/IndexDecision/IndexDecision';
 import $api from '../@http';
@@ -8,8 +8,9 @@ import MainLayout from '../@layouts/main.layout';
 import { DefaultPage } from '../@types/pageDefault.interface';
 import config from '../config';
 import s from './index.module.scss';
+import { observer } from 'mobx-react';
 
-const IndexPage = ({ title }: DefaultPage) => {
+const IndexPage = observer(({ title }: DefaultPage) => {
   const [systems, setSystems] = useState<any>([]);
   const [selectedSystem, setSelectedSystem] = useState<string>('');
 
@@ -35,7 +36,7 @@ const IndexPage = ({ title }: DefaultPage) => {
     }
   }, [store]);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (store.isAuth) {
@@ -176,6 +177,6 @@ const IndexPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default IndexPage;

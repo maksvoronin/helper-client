@@ -47,7 +47,7 @@ const SubscribedPage = ({ title }: DefaultPage) => {
         <div className={s.contentBlock}>
           <h1>Системы</h1>
           {
-            userSystems && userSystems.map((e: any) =>
+            userSystems.length > 0 && userSystems.map((e: any) =>
               <div key={e._id}>
                 <b>{e.name}</b>
                 <ul>
@@ -61,7 +61,7 @@ const SubscribedPage = ({ title }: DefaultPage) => {
         <div className={s.contentBlock}>
           <h1>Замечания</h1>
           {
-            userComments && userComments.map((e: any) =>
+            userComments.length > 0 && userComments.map((e: any) =>
               <div key={e._id}>
                 <b>{e.content}</b>
                 <ul>
