@@ -21,10 +21,10 @@ const DecisionPage = observer(({ title }: DefaultPage) => {
   const [commentError, setCommentError] = useState<{ status: boolean; message: string }>({ status: false, message: '' });
   const [decisionError, setDecisionError] = useState<{ status: boolean; message: string }>({ status: false, message: '' });
 
+  const [content, setContent] = useState<string>('');
+  
   const [fileName, setFileName] = useState<string>('');
   const fileInput: any = createRef();
-  const [content, setContent] = useState<string>('');
-
   const [uploadedFile, setUploadedFile] = useState<string>('');
 
   const { store } = useContext(Context);
