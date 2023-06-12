@@ -7,8 +7,9 @@ import { alert } from '../@services/alerting.service';
 import { DefaultPage } from '../@types/pageDefault.interface';
 import config from '../config';
 import s from './adminpage.module.scss';
+import { observer } from 'mobx-react';
 
-const ExportAdminPage = ({ title }: DefaultPage) => {
+const ExportAdminPage = observer(({ title }: DefaultPage) => {
 
   const {store} = useContext(Context);
   const navigate = useNavigate();
@@ -42,6 +43,6 @@ const ExportAdminPage = ({ title }: DefaultPage) => {
       </div>
     </div>
   </MainLayout>;
-};
+});
 
 export default ExportAdminPage;

@@ -8,8 +8,9 @@ import { Link, useParams } from 'react-router-dom';
 import { alert } from '../@services/alerting.service';
 import IndexDecision from '../@components/IndexDecision/IndexDecision';
 import axios from 'axios';
+import { observer } from 'mobx-react';
 
-const DetailCommentPage = () => {
+const DetailCommentPage = observer(() => {
   const { id } = useParams();
 
   const { store } = useContext(Context);
@@ -124,6 +125,6 @@ const DetailCommentPage = () => {
       )}
     </MainLayout>
   );
-};
+});
 
 export default DetailCommentPage;

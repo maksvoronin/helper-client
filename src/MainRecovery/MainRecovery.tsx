@@ -8,8 +8,9 @@ import { alert } from "../@services/alerting.service";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import config from "../config";
 import s from './mainrecovery.module.scss';
+import { observer } from "mobx-react";
 
-const MainRecovery = ({title}: DefaultPage) => {
+const MainRecovery = observer(({title}: DefaultPage) => {
 
   const {store} = useContext(Context);
 
@@ -56,6 +57,6 @@ const MainRecovery = ({title}: DefaultPage) => {
       </div>
     </DefaultLayout>
   );
-}
+});
 
 export default MainRecovery;

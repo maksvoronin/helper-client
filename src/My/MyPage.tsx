@@ -6,8 +6,9 @@ import { useState, useEffect, useContext } from 'react';
 import $api from "../@http";
 import config from "../config";
 import { Context } from "..";
+import { observer } from "mobx-react";
 
-const MyPage = ({ title }: DefaultPage) => {
+const MyPage = observer(({ title }: DefaultPage) => {
 
   const [userComments, setUserComments] = useState<any[]>([]);
   const [userDecisions, setUserDecisions] = useState<any[]>([]);
@@ -58,6 +59,6 @@ const MyPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-}
+});
 
 export default MyPage;

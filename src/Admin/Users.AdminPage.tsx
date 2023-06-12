@@ -7,8 +7,9 @@ import { DefaultPage } from '../@types/pageDefault.interface';
 import User from '../@types/user.interface';
 import config from '../config';
 import s from './adminpage.module.scss';
+import { observer } from 'mobx-react';
 
-const UsersAdminPage = ({ title }: DefaultPage) => {
+const UsersAdminPage = observer(({ title }: DefaultPage) => {
   const { store } = useContext(Context);
   const navigate = useNavigate();
 
@@ -76,6 +77,6 @@ const UsersAdminPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default UsersAdminPage;

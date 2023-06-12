@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import Logo from "../@assets/logo";
-import DefaultLayout from "../@layouts/default.layout";
-import { DefaultPage } from "../@types/pageDefault.interface";
-import s from './welcome.module.scss'
+import { useNavigate } from 'react-router-dom';
+import Logo from '../@assets/logo';
+import DefaultLayout from '../@layouts/default.layout';
+import { DefaultPage } from '../@types/pageDefault.interface';
+import s from './welcome.module.scss';
+import { observer } from 'mobx-react';
 
-const WelcomePage = ({ title }: DefaultPage) => {
-
+const WelcomePage = observer(({ title }: DefaultPage) => {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,6 @@ const WelcomePage = ({ title }: DefaultPage) => {
       </div>
     </DefaultLayout>
   );
-
-}
+});
 
 export default WelcomePage;

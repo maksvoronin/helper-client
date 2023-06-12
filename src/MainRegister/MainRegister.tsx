@@ -7,8 +7,9 @@ import { alert } from "../@services/alerting.service";
 import AuthService from "../@services/auth.service";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './mainregister.module.scss';
+import { observer } from "mobx-react";
 
-const MainRegister = ({ title }: DefaultPage) => {
+const MainRegister = observer(({ title }: DefaultPage) => {
 
   const {store} = useContext(Context);
 
@@ -204,6 +205,6 @@ const MainRegister = ({ title }: DefaultPage) => {
     </DefaultLayout>
   );
 
-}
+});
 
 export default MainRegister;

@@ -3,10 +3,11 @@ import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './searchpage.module.scss';
 import SearchPanel from "../@components/SearchPanel/SearchPanel";
 import { useSearchParams } from "react-router-dom";
+import { observer } from "mobx-react";
 
-const SearchPage = ({title}: DefaultPage) => {
+const SearchPage = observer(({title}: DefaultPage) => {
 
-  const [params, ] = useSearchParams();
+  const [params] = useSearchParams();
   return(
     <MainLayout title={title}>
       <div className={s.searchWrapper}>
@@ -15,6 +16,6 @@ const SearchPage = ({title}: DefaultPage) => {
       </div>
     </MainLayout>
   );
-}
+});
 
 export default SearchPage;

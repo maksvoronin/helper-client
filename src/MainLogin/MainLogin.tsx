@@ -6,8 +6,9 @@ import DefaultLayout from "../@layouts/default.layout";
 import AuthService from "../@services/auth.service";
 import { DefaultPage } from "../@types/pageDefault.interface";
 import s from './mainlogin.module.scss';
+import { observer } from "mobx-react";
 
-const MainLogin = ({ title }: DefaultPage) => {
+const MainLogin = observer(({ title }: DefaultPage) => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -79,6 +80,6 @@ const MainLogin = ({ title }: DefaultPage) => {
       </div>
     </DefaultLayout>
   );
-}
+});
 
 export default MainLogin;

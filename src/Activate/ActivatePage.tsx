@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import $api from '../@http';
 import config from '../config';
 import { alert } from '../@services/alerting.service';
+import { observer } from 'mobx-react';
 
-const ActivatePage = ({ title }: DefaultPage) => {
+const ActivatePage = observer(({ title }: DefaultPage) => {
   const [email, setEmail] = useState<string>('');
   const { store } = useContext(Context);
   const navigate = useNavigate();
@@ -48,6 +49,6 @@ const ActivatePage = ({ title }: DefaultPage) => {
       </div>
     </DefaultLayout>
   );
-};
+});
 
 export default ActivatePage;

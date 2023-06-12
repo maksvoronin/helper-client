@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 import $api from "../@http";
 import config from "../config";
 import { alert } from "../@services/alerting.service";
+import { observer } from "mobx-react";
 
-const SeriesAdminPage = ({ title }: DefaultPage) => {
+const SeriesAdminPage = observer(({ title }: DefaultPage) => {
 
   const [series, setSeries] = useState<any[]>([]);
   const [seriesName, setSeriesName] = useState<string>("");
@@ -50,6 +51,6 @@ const SeriesAdminPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-}
+});
 
 export default SeriesAdminPage;

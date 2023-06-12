@@ -7,8 +7,9 @@ import $api from "../@http";
 import IndexDecision from "../@components/IndexDecision/IndexDecision";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react";
 
-const LikedPage = ({ title }: DefaultPage) => {
+const LikedPage = observer(({ title }: DefaultPage) => {
 
   const { store } = useContext(Context);
 
@@ -41,6 +42,6 @@ const LikedPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-}
+});
 
 export default LikedPage;

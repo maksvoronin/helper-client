@@ -7,8 +7,9 @@ import { alert } from '../@services/alerting.service';
 import { DefaultPage } from '../@types/pageDefault.interface';
 import config from '../config';
 import s from './settingspage.module.scss';
+import { observer } from 'mobx-react';
 
-const SettingsPage = ({ title }: DefaultPage) => {
+const SettingsPage = observer(({ title }: DefaultPage) => {
   const [name, setName] = useState<string>('');
   const [surname, setSurname] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -199,6 +200,6 @@ const SettingsPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default SettingsPage;

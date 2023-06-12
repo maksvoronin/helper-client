@@ -8,8 +8,9 @@ import { Link, useParams } from 'react-router-dom';
 import s from './detaildecision.module.scss';
 import { Context } from '..';
 import $api from '../@http';
+import { observer } from 'mobx-react';
 
-const DetailDecisionPage = () => {
+const DetailDecisionPage = observer(() => {
   const { store } = useContext(Context);
 
   const { id } = useParams();
@@ -101,6 +102,6 @@ const DetailDecisionPage = () => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default DetailDecisionPage;

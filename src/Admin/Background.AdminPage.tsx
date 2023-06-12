@@ -7,8 +7,9 @@ import { alert } from '../@services/alerting.service';
 import { DefaultPage } from '../@types/pageDefault.interface';
 import config from '../config';
 import s from './adminpage.module.scss';
+import { observer } from 'mobx-react';
 
-const BackgroundAdminPage = ({ title }: DefaultPage) => {
+const BackgroundAdminPage = observer(({ title }: DefaultPage) => {
   const { store } = useContext(Context);
   const navigate = useNavigate();
   useEffect(() => {
@@ -76,6 +77,6 @@ const BackgroundAdminPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default BackgroundAdminPage;

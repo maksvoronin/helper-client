@@ -8,8 +8,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import IndexDecision from '../@components/IndexDecision/IndexDecision';
 import $api from '../@http';
 import { Context } from '..';
+import { observer } from 'mobx-react';
 
-const DecisionPage = ({ title }: DefaultPage) => {
+const DecisionPage = observer(({ title }: DefaultPage) => {
   const [systems, setSystems] = useState([]);
   const [selectedSystem, setSelectedSystem] = useState<string>('');
 
@@ -172,6 +173,6 @@ const DecisionPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default DecisionPage;

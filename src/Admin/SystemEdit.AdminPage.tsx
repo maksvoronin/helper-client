@@ -7,8 +7,9 @@ import s from './adminpage.module.scss';
 import { alert } from '../@services/alerting.service';
 import $api from '../@http';
 import config from '../config';
+import { observer } from 'mobx-react';
 
-const SystemEditAdminPage = ({ title }: DefaultPage) => {
+const SystemEditAdminPage = observer(({ title }: DefaultPage) => {
   const { store } = useContext(Context);
   const navigate = useNavigate();
 
@@ -68,6 +69,6 @@ const SystemEditAdminPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default SystemEditAdminPage;

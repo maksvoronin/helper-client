@@ -8,8 +8,9 @@ import { alert } from '../@services/alerting.service';
 import User from '../@types/user.interface';
 import config from '../config';
 import s from './profilepage.module.scss';
+import { observer } from 'mobx-react';
 
-const ProfilePage = () => {
+const ProfilePage = observer(() => {
   const { id } = useParams();
   const { store } = useContext(Context);
   const [user, setUser] = useState<User>({} as User);
@@ -69,6 +70,6 @@ const ProfilePage = () => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default ProfilePage;

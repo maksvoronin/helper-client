@@ -7,8 +7,9 @@ import { alert } from '../@services/alerting.service';
 import { DefaultPage } from '../@types/pageDefault.interface';
 import config from '../config';
 import s from './adminpage.module.scss';
+import { observer } from 'mobx-react';
 
-const DeleteBackgroundAdminPage = ({ title }: DefaultPage) => {
+const DeleteBackgroundAdminPage = observer(({ title }: DefaultPage) => {
   const { store } = useContext(Context);
   const navigate = useNavigate();
   useEffect(() => {
@@ -53,6 +54,6 @@ const DeleteBackgroundAdminPage = ({ title }: DefaultPage) => {
       </div>
     </MainLayout>
   );
-};
+});
 
 export default DeleteBackgroundAdminPage;
