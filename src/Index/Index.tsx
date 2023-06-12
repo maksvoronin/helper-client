@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '..';
 import IndexDecision from '../@components/IndexDecision/IndexDecision';
 import $api from '../@http';
@@ -36,15 +36,15 @@ const IndexPage = observer(({ title }: DefaultPage) => {
     }
   }, [store]);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (store.isAuth) {
-  //     if (!store.user.isActivated) {
-  //       navigate('/activate');
-  //     }
-  //   }
-  // }, [store.user, store.isAuth, store.user.isActivated, navigate]);
+  useEffect(() => {
+    if (store.isAuth) {
+      if (!store.user.isActivated) {
+        navigate('/activate');
+      }
+    }
+  }, [store.user, store.isAuth, store.user.isActivated, navigate]);
 
   useEffect(() => {
     if (selectedSystem) {
