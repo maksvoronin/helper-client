@@ -64,21 +64,24 @@
   .commentContainer {
     display: flex;
     gap: 10px;
+    align-items: center;
+    margin-top: 10px;
     input {
-      height: 42px;
+      height: 28px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      width: calc(100% - 30px);
-      padding-left: 15px;
+      width: calc(100% - 24px);
+      padding-left: 12px;
     }
     button {
       border-radius: 8px;
       border: none;
       padding-left: 15px;
       padding-right: 15px;
-      background-color: rgb(49, 145, 255);
+      background-color: $accentColor;
       color: white;
       font-weight: 500;
+      height: 32px;
     }
   }
 }

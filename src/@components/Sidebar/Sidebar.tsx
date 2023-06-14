@@ -62,7 +62,7 @@ const Sidebar = () => {
           <SidebarButton icon={mdiThumbUpOutline} link={'/liked'} permission={0}>
             Полезные решения
           </SidebarButton>
-          <SidebarButton icon={mdiDatabase} link={'/my'} permission={0} secondary={true}>
+          <SidebarButton icon={mdiDatabase} link={'/my'} permission={0} secondary={false}>
             Мои данные
           </SidebarButton>
           <SidebarButton icon={mdiCardsHeartOutline} link={'/subscribed'} permission={0}>

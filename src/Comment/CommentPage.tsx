@@ -113,10 +113,10 @@ const CommentPage = observer(({ title }: DefaultPage) => {
           if (data.type === 'error') {
             return setPostData({ status: false, message: data.data });
           } else {
-            navigate(`/comment/${data.data._id}`);
             return setPostData({ status: true, message: 'Успешно!' });
           }
         });
+        navigate(`/comment/${data.data._id}`);
       });
     }
 

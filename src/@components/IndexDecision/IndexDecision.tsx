@@ -7,14 +7,15 @@ import { observer } from 'mobx-react';
 import $api from '../../@http';
 import { alert } from '../../@services/alerting.service';
 
-
 const IndexDecision = observer(({ children, decision, text, userData, authedUser }: any) => {
   const { store } = useContext(Context);
   const [user, setUser] = useState<any>();
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [comments, setComments] = useState<any[]>([]);
 
   useEffect(() => {
     if (decision && !userData) {
+      setComments(decision.comments);
       store.isAuth && axios.get(`${config.API}/user/get?id=${decision.by}`).then(({ data }) => setUser(data.data));
     } else {
       setUser(userData);
@@ -35,14 +36,15 @@ const IndexDecision = observer(({ children, decision, text, userData, authedUser
     }
   };
 
-  const [commentary, setCommentary] = useState("");
+  const [commentary, setCommentary] = useState('');
   const sendCommentary = () => {
-    $api.put(`${config.API}/decision/commentary`, {id: decision._id, text: commentary}).then(({data}) => {
-      if(data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
-      alert("default", "Успешно", "Комментарий опубликован", 15);
-      window.location.reload();
+    $api.put(`${config.API}/decision/commentary`, { id: decision._id, text: commentary }).then(({ data }) => {
+      if (data.type === 'error') return alert('error', 'Произошла ошибка', data.message, 15);
+      alert('default', 'Успешно', 'Комментарий опубликован', 15);
+      setComments((prev) => [...prev, { ...data.data.commentary }]);
+      setCommentary("");
     });
-  }
+  };
 
   if (decision && decision.visible) {
     return (
@@ -62,14 +64,19 @@ const IndexDecision = observer(({ children, decision, text, userData, authedUser
           </div>
         </div>
         <div>
-          <h1>Комментарии <span>({decision.comments && decision.comments.length})</span></h1>
-          {
-            decision.comments && decision.comments.map((e: any) => {
-              return <p key={e._id}>{e.user.name} {e.user.surname}: {e.text}</p>
-            })
-          }
+          <h1>
+            Комментарии <span>({comments && comments.length})</span>
+          </h1>
+          {comments &&
+            comments.map((e: any) => {
+              return (
+                <p key={e._id}>
+                  {e.user.name} {e.user.surname}: {e.text}
+                </p>
+              );
+            })}
           <div className={s.commentContainer}>
-            <input placeholder="Оставьте комментарий" value={commentary} onChange={({target}) => setCommentary(target.value)} />
+            <input placeholder="Оставьте комментарий" value={commentary} onChange={({ target }) => setCommentary(target.value)} />
             <button onClick={sendCommentary}>Отправить</button>
           </div>
         </div>

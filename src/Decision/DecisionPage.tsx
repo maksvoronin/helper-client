@@ -22,7 +22,7 @@ const DecisionPage = observer(({ title }: DefaultPage) => {
   const [decisionError, setDecisionError] = useState<{ status: boolean; message: string }>({ status: false, message: '' });
 
   const [content, setContent] = useState<string>('');
-  
+
   const [fileName, setFileName] = useState<string>('');
   const fileInput: any = createRef();
   const [uploadedFile, setUploadedFile] = useState<string>('');
@@ -92,6 +92,10 @@ const DecisionPage = observer(({ title }: DefaultPage) => {
         if (data.type === 'error') {
           return setPostData({ status: false, message: data.data });
         } else {
+          setSelectedSystem('');
+          setSelectedComment('');
+          setContent('');
+          setUploadedFile('');
           return setPostData({ status: true, message: 'Успешно!' });
         }
       });
