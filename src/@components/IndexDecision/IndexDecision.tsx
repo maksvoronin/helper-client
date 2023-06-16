@@ -6,6 +6,8 @@ import s from './indexdecision.module.scss';
 import { observer } from 'mobx-react';
 import $api from '../../@http';
 import { alert } from '../../@services/alerting.service';
+import Icon from '@mdi/react';
+import { mdiTrashCanOutline } from '@mdi/js';
 
 const IndexDecision = observer(({ children, decision, text, userData, authedUser }: any) => {
   const { store } = useContext(Context);
@@ -38,13 +40,22 @@ const IndexDecision = observer(({ children, decision, text, userData, authedUser
 
   const [commentary, setCommentary] = useState('');
   const sendCommentary = () => {
+    if(commentary.trim() === "") return alert("error", "Ошибка", "Заполните форму", 15);
     $api.put(`${config.API}/decision/commentary`, { id: decision._id, text: commentary }).then(({ data }) => {
       if (data.type === 'error') return alert('error', 'Произошла ошибка', data.message, 15);
       alert('default', 'Успешно', 'Комментарий опубликован', 15);
       setComments((prev) => [...prev, { ...data.data.commentary }]);
-      setCommentary("");
+      setCommentary('');
     });
   };
+
+  const deleteCommentary = (id: string) => {
+    $api.put(`${config.API}/decision/uncommentary`, {id}).then(({data}) => {
+      if (data.type === 'error') return alert('error', 'Произошла ошибка', data.data, 15);
+      setComments((prev) => prev.filter(e => e._id !== id));
+      alert('default', 'Успешно', 'Комментарий удалён', 15);
+    })
+  }
 
   if (decision && decision.visible) {
     return (
@@ -70,9 +81,12 @@ const IndexDecision = observer(({ children, decision, text, userData, authedUser
           {comments &&
             comments.map((e: any) => {
               return (
-                <p key={e._id}>
-                  {e.user.name} {e.user.surname}: {e.text}
-                </p>
+                <div className={s.comment}>
+                  <p key={e._id}>
+                    {e.user.name} {e.user.surname}: {e.text}
+                  </p>
+                  <button onClick={() => deleteCommentary(e._id)}><Icon path={mdiTrashCanOutline} size={"16px"}/></button>
+                </div>
               );
             })}
           <div className={s.commentContainer}>

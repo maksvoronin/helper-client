@@ -84,4 +84,33 @@
       height: 32px;
     }
   }
+  .comment {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    p {
+      width: 100%;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+    button {
+      opacity: 0;
+      transition: opacity 0.2s, color 0.2s;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #686868;
+      &:hover {
+        color: black;
+      }
+    }
+    &:hover {
+      button {
+        opacity: 1;
+      }
+    }
+  }
 }
