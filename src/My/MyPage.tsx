@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import MainLayout from "../@layouts/main.layout";
-import { DefaultPage } from "../@types/pageDefault.interface";
+import { DefaultPage } from "../@types/pageprops.interface";
 import s from './mypage.module.scss';
 import { useState, useEffect, useContext } from 'react';
 import $api from "../@http";

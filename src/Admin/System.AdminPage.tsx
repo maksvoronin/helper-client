@@ -1,4 +1,4 @@
-import { DefaultPage } from '../@types/pageDefault.interface';
+import { DefaultPage } from '../@types/pageprops.interface';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '..';
 import { useNavigate } from 'react-router-dom';

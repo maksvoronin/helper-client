@@ -1,5 +1,5 @@
 import MainLayout from '../@layouts/main.layout';
-import { DefaultPage } from '../@types/pageDefault.interface';
+import { DefaultPage } from '../@types/pageprops.interface';
 import s from './subscribedpage.module.scss';
 import { useState, useEffect, useContext } from 'react';
 import $api from '../@http';

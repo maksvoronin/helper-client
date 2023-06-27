@@ -1,7 +1,7 @@
 import { Context } from '..';
 import Logo from '../@assets/logo';
 import DefaultLayout from '../@layouts/default.layout';
-import { DefaultPage } from '../@types/pageDefault.interface';
+import { DefaultPage } from '../@types/pageprops.interface';
 import s from './activatepage.module.scss';
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

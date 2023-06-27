@@ -1,5 +1,5 @@
 import MainLayout from '../@layouts/main.layout';
-import { DefaultPage } from '../@types/pageDefault.interface';
+import { DefaultPage } from '../@types/pageprops.interface';
 import s from './decisionpage.module.scss';
 import { useState, useEffect, createRef, useContext } from 'react';
 import axios from 'axios';

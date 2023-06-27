@@ -1,5 +1,5 @@
 import MainLayout from "../@layouts/main.layout";
-import { DefaultPage } from "../@types/pageDefault.interface";
+import { DefaultPage } from "../@types/pageprops.interface";
 import s from './likedpage.module.scss';
 import { useState, useEffect, useContext } from 'react';
 import config from "../config";

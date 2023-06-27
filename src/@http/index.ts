@@ -1,11 +1,9 @@
 import axios from 'axios';
 import config from '../config';
 
-export const API_URL = config.API;
-
 const $api = axios.create({
   withCredentials: true,
-  baseURL: API_URL
+  baseURL: config.API
 })
 
 $api.interceptors.request.use((config) => {
@@ -20,7 +18,7 @@ $api.interceptors.response.use((config) => {
   if (error.response.data.status === "error" && error.config && !error.config._isRetry) {
     originalRequest._isRetry = true;
     try {
-      const response = await axios.get(`${API_URL}/auth/refresh`, { withCredentials: true });
+      const response = await axios.get(`${config.API}/auth/refresh`, { withCredentials: true });
       localStorage.setItem('token', response.data.accessToken);
       return $api.request(originalRequest);
     } catch (e) {

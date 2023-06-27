@@ -5,7 +5,7 @@ import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
 import { alert } from "../@services/alerting.service";
 import AuthService from "../@services/auth.service";
-import { DefaultPage } from "../@types/pageDefault.interface";
+import { DefaultPage } from "../@types/pageprops.interface";
 import s from './mainregister.module.scss';
 import { observer } from "mobx-react";
 

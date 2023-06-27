@@ -1,4 +1,4 @@
-export interface User {
+export default interface User {
   name: string;
   surname: string;
   email: string;
@@ -13,5 +13,3 @@ export interface User {
   background: string;
   created: number;
 }
-
-export default User;

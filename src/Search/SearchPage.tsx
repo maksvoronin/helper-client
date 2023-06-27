@@ -1,5 +1,5 @@
 import MainLayout from "../@layouts/main.layout"
-import { DefaultPage } from "../@types/pageDefault.interface";
+import { DefaultPage } from "../@types/pageprops.interface";
 import s from './searchpage.module.scss';
 import SearchPanel from "../@components/SearchPanel/SearchPanel";
 import { useSearchParams } from "react-router-dom";

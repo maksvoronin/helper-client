@@ -1,7 +1,7 @@
 import { Context } from "..";
 import {useEffect, useState, useContext} from 'react';
 import MainLayout from "../@layouts/main.layout"
-import { DefaultPage } from "../@types/pageDefault.interface"
+import { DefaultPage } from "../@types/pageprops.interface"
 
 import s from './adminpage.module.scss';
 import { useNavigate } from "react-router-dom";

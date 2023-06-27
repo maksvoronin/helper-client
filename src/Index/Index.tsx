@@ -5,7 +5,6 @@ import { Context } from '..';
 import IndexDecision from '../@components/IndexDecision/IndexDecision';
 import $api from '../@http';
 import MainLayout from '../@layouts/main.layout';
-import { DefaultPage } from '../@types/pageDefault.interface';
 import config from '../config';
 import s from './index.module.scss';
 import { observer } from 'mobx-react';

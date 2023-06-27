@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Logo from '../@assets/logo';
 import DefaultLayout from '../@layouts/default.layout';
-import { DefaultPage } from '../@types/pageDefault.interface';
+import { DefaultPage } from '../@types/pageprops.interface';
 import s from './welcome.module.scss';
 import { observer } from 'mobx-react';
 

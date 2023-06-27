@@ -1,5 +1,5 @@
 import AlertPanel from "../@components/AlertPanel/AlertPanel";
-import { DefaultPage } from "../@types/pageDefault.interface";
+import { DefaultPage } from "../@types/pageprops.interface";
 
 const DefaultLayout = ({ title, children }: DefaultPage) => {
   return (

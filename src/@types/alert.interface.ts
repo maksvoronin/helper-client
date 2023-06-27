@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 
-export interface IAlert {
+export default interface IAlert {
   id?: number,
   type: "default" | "error",
   title: string,

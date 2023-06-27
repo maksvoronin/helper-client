@@ -4,7 +4,7 @@ import { Context } from "..";
 import Logo from "../@assets/logo";
 import DefaultLayout from "../@layouts/default.layout";
 import AuthService from "../@services/auth.service";
-import { DefaultPage } from "../@types/pageDefault.interface";
+import { DefaultPage } from "../@types/pageprops.interface";
 import s from './mainlogin.module.scss';
 import { observer } from "mobx-react";
 

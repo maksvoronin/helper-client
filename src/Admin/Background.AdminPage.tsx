@@ -4,7 +4,7 @@ import { Context } from '..';
 import $api from '../@http';
 import MainLayout from '../@layouts/main.layout';
 import { alert } from '../@services/alerting.service';
-import { DefaultPage } from '../@types/pageDefault.interface';
+import { DefaultPage } from '../@types/pageprops.interface';
 import config from '../config';
 import s from './adminpage.module.scss';
 import { observer } from 'mobx-react';
