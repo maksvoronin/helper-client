@@ -139,10 +139,6 @@ export const Context = React.createContext({
 });
 
 try {
-  if (localStorage.token) {
-    store.checkAuth();
-  }
-
   if (dev_mode) {
     console.log("Running in dev mode");
   }

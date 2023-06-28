@@ -30,9 +30,11 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
 
   useEffect(() => {
     if (!localStorage.token) return;
-    $api.get<Response<User>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
+    $api.get<Response<{accessToken: string, refreshToken: string, user: User}>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
       if (data.type === "error") return;
-      setUser(data.data!);
+      setUser(data.data!.user);
+      localStorage.token = data.data!.accessToken;
+
     });
   }, [setUser]);
 

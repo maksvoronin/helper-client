@@ -1,15 +1,14 @@
-import { useEffect, useState, useContext, createRef } from 'react';
+import { useEffect, useState, useContext, createRef, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '..';
 import $api from '../@http';
 import MainLayout from '../@layouts/main.layout';
 import { alert } from '../@services/alerting.service';
-import { DefaultPage } from '../@types/pageprops.interface';
 import config from '../config';
 import s from './settingspage.module.scss';
 import { observer } from 'mobx-react';
 
-const SettingsPage = observer(({ title }: DefaultPage) => {
+const SettingsPage: FC<{title: string}> = observer(({ title }) => {
   const [name, setName] = useState<string>('');
   const [surname, setSurname] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -28,12 +27,12 @@ const SettingsPage = observer(({ title }: DefaultPage) => {
   const [newPassword, setNewPassword] = useState<string>('');
 
   const { store } = useContext(Context);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!store.isAuth) {
-      navigate('/');
-    }
-  }, [navigate, store.isAuth]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!store.isAuth) {
+  //     navigate('/');
+  //   }
+  // }, [navigate, store.isAuth]);
 
   useEffect(() => {
     $api.get(`${config.API}/background/all`).then(({ data }) => setBackgrounds(data.data));

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { PageProps } from "../@types";
 import { MainLayout } from "../@layouts";
 
