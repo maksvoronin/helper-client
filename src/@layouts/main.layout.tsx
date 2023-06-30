@@ -17,11 +17,12 @@ const MainGrid = styled.div`
 `;
 
 const MainContent = styled.div`
-  margin-left: 25px;
   width: 100%;
-  margin-right: 25px;
-  min-height: 89vh;
+  margin: 20px;
   margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {

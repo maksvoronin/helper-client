@@ -1,9 +1,10 @@
 export default interface User {
+  _id: string;
+  id: string;
   name: string;
   surname: string;
   email: string;
   permissions: number;
-  id: string;
   isActivated: boolean;
   avatar: string;
   likedDecisions: any[];

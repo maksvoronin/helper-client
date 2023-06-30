@@ -27,9 +27,8 @@ import ExportAdminPage from "./Admin/Export.AdminPage";
 import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
-import SearchPage from "./Search/SearchPage";
 import { dev_mode } from "./config";
-import { Index } from "./@pages";
+import { Index, Search } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -128,7 +127,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/search",
-    element: <SearchPage title="Поиск" />,
+    element: <Search title="Поиск" />,
   },
 ]);
 

@@ -58,9 +58,27 @@ const LogoText = styled.div`
   margin-left: 12px;
 `;
 
-const Sidebar: FC = observer(() => {
+const SidebarLinks = styled.div`
+  color: #818181;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  a.support {
+    display: block;
+    font-size: 13px;
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  @media (max-width: $mobileWidth) {
+    display: none;
+  }
+`;
 
-  const {user} = useAuthStoreContext();
+const Sidebar: FC = observer(() => {
+  const { user } = useAuthStoreContext();
 
   return (
     <SidebarContainer>
@@ -69,9 +87,15 @@ const Sidebar: FC = observer(() => {
         <LogoText>Helper</LogoText>
       </LogoContainer>
       <SearchPanel />
-      {
-        !user.name ? <SidebarAuthPanel /> : <SidebarController />
-      }
+      {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
+      <SidebarLinks>
+        <a className={"support"} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">
+          Чат WhatsApp
+        </a>
+        <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
+          Чат Telegram
+        </a>
+      </SidebarLinks>
     </SidebarContainer>
   );
 });

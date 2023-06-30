@@ -6,6 +6,7 @@
   --blockBoxShadow: 0px 4px 15px rgb(231, 231, 231);
   --mobileWidth: 580px;
   --accentColor: #4978FF;
+  --primaryText: rgb(31, 35, 40);
 }
 
 *, button, input, textarea {
