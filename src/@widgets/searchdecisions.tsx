@@ -4,6 +4,7 @@ import { Container, ContainerTitle, Select } from "../@shared";
 import { styled } from "styled-components";
 import { Comment, Decision, OptionValue, Response, System } from "../@types";
 import $api from "../@http";
+import { DecisionBlock } from "../@components";
 
 const Text = styled.p`
   margin-bottom: 5px;
@@ -26,7 +27,7 @@ const SearchDecisions: FC = observer(() => {
 
   useEffect(() => {
     if (selectedSystem) {
-      $api.get<Response<Comment[]>>(`/comment/system?id=${selectedSystem && selectedSystem._id}`).then(({ data }) => {
+      $api.get<Response<Comment[]>>(`/comment/system?id=${selectedSystem._id}`).then(({ data }) => {
         setComments(data.data!);
       });
     }
@@ -50,7 +51,7 @@ const SearchDecisions: FC = observer(() => {
         <Select defaultValue={{ value: 0, text: "Выберите замечание" }} values={comments?.map((e) => ({ text: e.content, value: e } as OptionValue<Comment>))} onChange={(e) => setSelectedComment(e.value as Comment)} />
       </Container>
       {
-        JSON.stringify(decisions)
+        decisions && decisions.map(e => <DecisionBlock key={e._id} decision={e} />)
       }
     </>
   );
