@@ -9,9 +9,14 @@ const DecisionText = styled.p`
   padding: 0;
 `;
 
+const UserInfo = styled.div`
+
+`;
+
 const DecisionBlock: FC<{decision: Decision}> = observer(({decision}) => {
   return <Container>
     <DecisionText>{decision.content}</DecisionText>
+    <UserInfo></UserInfo>
   </Container>
 });
 

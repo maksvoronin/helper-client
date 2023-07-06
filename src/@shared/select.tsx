@@ -67,11 +67,26 @@ const Option = styled.div`
 
 export const Select: FC<{ defaultValue?: OptionValue; values?: OptionValue[]; onChange?: (arg0: OptionValue) => any }> = observer(({ defaultValue, onChange, values }) => {
   const [visible, setVisible] = useState<boolean>(false);
-  const [selected, setSelected] = useState<OptionValue>(defaultValue || {text: "Выберите", value: "undefined"} as OptionValue);
+  const [selected, setSelected] = useState<OptionValue>(defaultValue || ({ text: "Выберите", value: "undefined" } as OptionValue));
   return (
     <SelectContainer onClick={() => setVisible((prev) => !prev)}>
       <SelectedOption>{selected.text}</SelectedOption>
-      {visible && <Options>{values && values.map(e => <Option key={Math.random() * 100} onClick={() => {onChange && onChange(e);setSelected(e)}}>{e.text}</Option>)}</Options>}
+      {visible && (
+        <Options>
+          {values &&
+            values.map((e) => (
+              <Option
+                key={Math.random() * 100}
+                onClick={() => {
+                  onChange && onChange(e);
+                  setSelected(e);
+                }}
+              >
+                {e.text}
+              </Option>
+            ))}
+        </Options>
+      )}
     </SelectContainer>
   );
 });
