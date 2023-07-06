@@ -6,10 +6,8 @@ import Store from "./@store/store";
 import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
 import MainLogin from "./MainLogin/MainLogin";
-// import IndexPage from "./Index/Index";
 import MainRegister from "./MainRegister/MainRegister";
 import MainRecovery from "./MainRecovery/MainRecovery";
-import CommentPage from "./Comment/CommentPage";
 import DecisionPage from "./Decision/DecisionPage";
 import LikedPage from "./Liked/LikedPage";
 import MyPage from "./My/MyPage";
@@ -28,7 +26,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Index, Search } from "./@pages";
+import { Comment, Index, Search } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -55,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/comment",
-    element: <CommentPage title="Добавление замечания" />,
+    element: <Comment title="Добавление замечания" />,
   },
   {
     path: "/comment/:id",

@@ -14,23 +14,23 @@ const SidebarButtons = styled.div`
 `;
 
 const SidebarButton = styled(Link)`
-  width: calc(100% - 30px);
-  padding: 13px 15px;
-  max-height: 42px;
+  width: calc(100% - 20px);
+  padding: 8px 10px;
+  max-height: 32px;
   display: flex;
-  background-color: rgba(255, 255, 255, 0.8);
+  background: transparent;
   align-items: center;
-  border-radius: 12px;
-  border: 1px solid #c7c7c7;
-  margin-top: 10px;
+  border-radius: 8px;
   font-size: 13px;
   user-select: none;
   cursor: pointer;
-  transition: background 0.3s;
   text-decoration: none;
   color: black;
   &:hover {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(100, 100, 100, 0.1);
+  }
+  &:active {
+    transform: scale(0.98);
   }
   svg {
     margin-right: 7px;
@@ -63,16 +63,6 @@ const SidebarButton = styled(Link)`
   }
 `;
 
-const SidebarSeparator = styled.div`
-  margin: 10px;
-  background-color: #c7c7c7;
-  width: calc(100% - 20px);
-  height: 1px;
-  @media (max-width: var(--mobileWidth)) {
-    display: none;
-  }
-`;
-
 const SidebarController: FC = observer(() => {
   const { user } = useAuthStoreContext();
 
@@ -83,7 +73,6 @@ const SidebarController: FC = observer(() => {
           <Icon path={mdiHomeOutline} size={"20px"} />
           <span>Главная</span>
         </SidebarButton>
-        <SidebarSeparator />
         <SidebarButton to={"/comment"}>
           <Icon path={mdiCommentQuestionOutline} size={"20px"} />
           <span>Добавить замечание</span>
@@ -92,7 +81,6 @@ const SidebarController: FC = observer(() => {
           <Icon path={mdiCommentCheckOutline} size={"20px"} />
           <span>Добавить решение</span>
         </SidebarButton>
-        <SidebarSeparator />
         <SidebarButton to={"/liked"}>
           <Icon path={mdiThumbUpOutline} size={"20px"} />
           <span>Полезные решения</span>
@@ -105,14 +93,12 @@ const SidebarController: FC = observer(() => {
           <Icon path={mdiCardsHeartOutline} size={"20px"} />
           <span>Отслеживаемое</span>
         </SidebarButton>
-        <SidebarSeparator />
         <SidebarButton to={"/settings"}>
           <Icon path={mdiCogOutline} size={"20px"} />
           <span>Настройки</span>
         </SidebarButton>
         {user.permissions > 2 && (
           <>
-            <SidebarSeparator />
             <SidebarButton to={"/admin"}>
               <Icon path={mdiSecurity} size={"20px"} />
               <span>Управление</span>

@@ -1,14 +1,14 @@
 import { styled } from "styled-components";
 
 const Input = styled.input`
-  width: calc(100% - 30px);
+  width: calc(100% - 20px);
   padding: 0;
-  border: 1px solid #d8d8d8;
-  min-height: 42px;
-  max-height: 42px;
-  border-radius: 12px;
-  padding-left: 15px;
-  padding-right: 15px;
+  border: 1px solid #c7c7c7;
+  min-height: 32px;
+  max-height: 32px;
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 13px;
 `;
 

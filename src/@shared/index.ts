@@ -6,3 +6,4 @@ export { default as ContainerTitle } from "./containertitle";
 export { default as ContainerSubTitle } from "./containersubtitle";
 export { Select } from "./select";
 export { default as StyledSelect } from "./styledselect";
+export { default as Textarea } from "./textarea";

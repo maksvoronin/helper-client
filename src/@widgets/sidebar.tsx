@@ -18,7 +18,7 @@ const SidebarContainer = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   padding-top: 25px;
 
   @media (max-width: $mobileWidth) {
