@@ -92,8 +92,6 @@ const DecisionPage = observer(({ title }: DefaultPage) => {
         if (data.type === 'error') {
           return setPostData({ status: false, message: data.data });
         } else {
-          setSelectedSystem('');
-          setSelectedComment('');
           setContent('');
           setUploadedFile('');
           return setPostData({ status: true, message: 'Успешно!' });
