@@ -1,4 +1,4 @@
-import config from "../config";
+import config, { dev_mode } from "../config";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { PageProps, Response, User } from "../@types";
@@ -25,17 +25,24 @@ const MainContent = styled.div`
   gap: 20px;
 `;
 
+const DevMark = styled.span`
+  position: fixed;
+  right: 5px;
+  top: 5px;
+  opacity: 0.4;
+  font-weight: 500;
+`;
+
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, setUser } = useAuthStoreContext();
   const [backgroundImage, setBackgroundImage] = useState<string>("");
 
   useEffect(() => {
     if (!localStorage.token) return;
-    $api.get<Response<{accessToken: string, refreshToken: string, user: User}>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
+    $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
       if (data.type === "error") return;
       setUser(data.data!.user);
       localStorage.token = data.data!.accessToken;
-
     });
   }, [setUser]);
 
@@ -53,6 +60,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       >
         <Sidebar />
         <MainContent>{children}</MainContent>
+        {dev_mode && <DevMark>{config.dev_title}</DevMark>}
       </MainGrid>
       <AlertPanel />
     </>

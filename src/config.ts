@@ -1,6 +1,7 @@
 export const dev_mode = true;
 
 const config = {
+  dev_title: "Beta v1.3 (Comment Page)",
   API: dev_mode ? `http://localhost:1000/api` : `https://helper.voronin.xyz/api`,
   fileHost: dev_mode ? `http://localhost:1000/api/public` : `https://helper.voronin.xyz/api/public`,
   fileUpload: dev_mode ? `http://localhost:1000/api/file/upload` : `https://helper.voronin.xyz/api/file/upload`,
