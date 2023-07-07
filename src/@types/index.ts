@@ -11,3 +11,4 @@ export { default as Decision } from "./decision.interface";
 export { default as Commentary } from "./commentary.interface";
 export { default as SearchResult } from "./searchresult.interface";
 export { default as OptionValue } from "./optionvalue.interface";
+export { default as FormStatus } from "./formstatus.interface";

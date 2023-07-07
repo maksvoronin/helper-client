@@ -1,7 +1,8 @@
 import { User } from ".";
 
 export default interface Series {
-  name: { type: String; required: true };
+  _id: string;
+  name: string;
   by: User;
   link: string;
   visible: boolean;

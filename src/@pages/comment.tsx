@@ -1,11 +1,13 @@
 import { observer } from "mobx-react";
 import { FC, createRef, useEffect, useState } from "react";
-import { PageProps } from "../@types";
+import { FormStatus, PageProps, Response, Series, System } from "../@types";
 import { MainLayout } from "../@layouts";
 import { Button, Container, ContainerTitle, StyledSelect, Textarea } from "../@shared";
 import { styled } from "styled-components";
 import config from "../config";
 import $api from "../@http";
+import { useNavigate } from "react-router-dom";
+import { ResultField } from "../@components";
 
 const Text = styled.p`
   margin-bottom: 5px;
@@ -34,10 +36,23 @@ const InputFile = styled.input`
 `;
 
 const Comment: FC<PageProps> = observer(({ title }) => {
+  const [systems, setSystems] = useState<System[]>([]);
+  const [selectedSystem, setSelectedSystem] = useState<string>("");
+
+  const [series, setSeries] = useState<Series[]>([]);
+  const [selectedSeries, setSelectedSeries] = useState<string>("");
+
+  const [comment, setComment] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
   const [fileName, setFileName] = useState<string>("");
   const fileInput: any = createRef();
 
   const [uploadedFile, setUploadedFile] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  const [postData, setPostData] = useState<FormStatus>({} as FormStatus);
 
   useEffect(() => {
     if (fileName) {
@@ -50,10 +65,35 @@ const Comment: FC<PageProps> = observer(({ title }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
 
+  useEffect(() => {
+    $api.get<Response<System[]>>(`/system/all`).then(({ data }) => {
+      setSystems(data.data!);
+    });
+    $api.get<Response<Series[]>>(`/series/all`).then(({ data }) => {
+      setSeries(data.data!);
+    });
+  }, []);
+
   const unlinkFile = (e: any) => {
     e.preventDefault();
     setFileName("");
     setUploadedFile("");
+  };
+
+  const sendData = () => {
+    $api.post(`${config.API}/comment/create`, { system: selectedSystem, series: selectedSeries, comment }).then(({ data }) => {
+      if (data.type === "error") {
+        return setPostData({ status: false, message: data.data });
+      }
+      $api.post(`${config.API}/decision/create`, { comment: data.data._id, content, file: uploadedFile }).then(({ data }) => {
+        if (data.type === "error") {
+          return setPostData({ status: false, message: data.data });
+        } else {
+          return setPostData({ status: true, message: "Успешно!" });
+        }
+      });
+      navigate(`/comment/${data.data._id}`);
+    });
   };
 
   return (
@@ -61,17 +101,31 @@ const Comment: FC<PageProps> = observer(({ title }) => {
       <Container>
         <ContainerTitle>Добавление замечания</ContainerTitle>
         <Text>Выберите систему</Text>
-        <StyledSelect>
-          <option>Выберите систему</option>
+        <StyledSelect onChange={({ target }: any) => setSelectedSystem(target.value)} defaultValue={0}>
+          <option value={0} disabled>
+            Выберите систему
+          </option>
+          {systems?.map((e) => (
+            <option value={e._id} key={e._id}>
+              {e.name}
+            </option>
+          ))}
         </StyledSelect>
         <Text>Выберите серию локомотива</Text>
-        <StyledSelect>
-          <option>Выберите серию локомотива</option>
+        <StyledSelect onChange={({ target }: any) => setSelectedSeries(target.value)} defaultValue={0}>
+          <option value={0} disabled>
+            Выберите серию
+          </option>
+          {series?.map((e) => (
+            <option value={e._id} key={e._id}>
+              {e.name}
+            </option>
+          ))}
         </StyledSelect>
         <Text>Напишите замечание</Text>
-        <Textarea placeholder="Текст замечания" />
+        <Textarea placeholder="Текст замечания" value={comment} onChange={({ target }: any) => setComment(target.value)} />
         <Text>Напишите решение</Text>
-        <Textarea placeholder="Текст решения" />
+        <Textarea placeholder="Текст решения" value={content} onChange={({ target }: any) => setContent(target.value)} />
         <FileLabel
           htmlFor="file"
           onClick={(e: any) => {
@@ -81,7 +135,8 @@ const Comment: FC<PageProps> = observer(({ title }) => {
           {fileName ? `Открепить файл ${uploadedFile}` : "Прикрепить файл к решению"}
         </FileLabel>
         <InputFile type={"file"} id="file" onChange={({ target }: any) => setFileName(target.value)} ref={fileInput} />
-        <Button>Сохранить</Button>
+        <Button onClick={sendData}>Сохранить</Button>
+        <ResultField status={postData.status} message={postData.message} />
       </Container>
     </MainLayout>
   );
