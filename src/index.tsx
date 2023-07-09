@@ -26,7 +26,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Index, Search } from "./@pages";
+import { Comment, Decision, Index, Search } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/decision",
-    element: <DecisionPage title="Добавление решения" />,
+    element: <Decision title="Добавление решения" />,
   },
   {
     path: "/decision/:id",
