@@ -12,3 +12,4 @@ export { default as Commentary } from "./commentary.interface";
 export { default as SearchResult } from "./searchresult.interface";
 export { default as OptionValue } from "./optionvalue.interface";
 export { default as FormStatus } from "./formstatus.interface";
+export { default as Background } from "./background.interface";

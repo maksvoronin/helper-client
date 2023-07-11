@@ -25,7 +25,8 @@ const CommentInput = styled.div`
     width: 100%;
   }
   button {
-    width: 12%;
+    width: 50%;
+    max-width: 100px;
   }
 `;
 

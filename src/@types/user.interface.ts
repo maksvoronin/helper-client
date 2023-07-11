@@ -1,3 +1,8 @@
+import Background from "./background.interface";
+import Comment from "./comment.interface";
+import Decision from "./decision.interface";
+import System from "./system.interface";
+
 export default interface User {
   _id: string;
   id: string;
@@ -7,10 +12,10 @@ export default interface User {
   permissions: number;
   isActivated: boolean;
   avatar: string;
-  likedDecisions: any[];
-  subscribedSystems: any;
-  subscribedComments: any;
+  likedDecisions: Decision[];
+  subscribedSystems: System[];
+  subscribedComments: Comment[];
   phone: string;
-  background: string;
+  background: Background;
   created: number;
 }

@@ -26,11 +26,11 @@ export default class Store {
 
   setUser(user: any) {
     this.user = user;
-    if (this.isAuth && this.user) {
-      $api.get(`${config.API}/background/get?id=${this.user.background}`).then(({ data }) => {
-        this.background = data.data.content || 'default_bg.png';
-      });
-    }
+    // if (this.isAuth && this.user) {
+    //   $api.get(`${config.API}/background/get?id=${this.user.background}`).then(({ data }) => {
+    //     this.background = data.data.content || 'default_bg.png';
+    //   });
+    // }
   }
 
   setStat(comments: number, decisions: number) {

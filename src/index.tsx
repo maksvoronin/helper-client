@@ -8,7 +8,6 @@ import WelcomePage from "./Welcome/Welcome";
 import MainLogin from "./MainLogin/MainLogin";
 import MainRegister from "./MainRegister/MainRegister";
 import MainRecovery from "./MainRecovery/MainRecovery";
-import DecisionPage from "./Decision/DecisionPage";
 import LikedPage from "./Liked/LikedPage";
 import MyPage from "./My/MyPage";
 import SubscribedPage from "./Subscribed/SubscribedPage";

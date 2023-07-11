@@ -7,7 +7,11 @@ import { styled } from "styled-components";
 import { useAuthStoreContext } from "../@store";
 import SidebarUserInfo from "./SidebarUserInfo";
 
-const SidebarContainer = styled.div``;
+const SidebarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const SidebarButtons = styled.div`
   width: 100%;

@@ -8,6 +8,7 @@ import { DecisionBlock } from "../@components";
 import Icon from "@mdi/react";
 import { mdiHeartOutline, mdiShareOutline } from "@mdi/js";
 import { useNavigate } from "react-router-dom";
+import { useAuthStoreContext } from "../@store";
 
 const Text = styled.p`
   margin-bottom: 5px;
@@ -37,9 +38,14 @@ const ControlButton = styled.button`
 const ControlRow = styled.div`
   display: flex;
   margin-top: 14px;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;
 
 const SearchDecisions: FC = observer(() => {
+  const { user } = useAuthStoreContext();
+
   const [systems, setSystems] = useState<System[]>([]);
   const [selectedSystem, setSelectedSystem] = useState<string>();
 
@@ -100,26 +106,28 @@ const SearchDecisions: FC = observer(() => {
           ))}
         </StyledSelect>
         {/* <Select defaultValue={{ value: 0, text: "Выберите замечание" }} values={comments?.map((e) => ({ text: e.content, value: e } as OptionValue<Comment>))} onChange={(e) => setSelectedComment(e.value as Comment)} /> */}
-        <ControlRow>
-          {selectedSystem && (
-            <ControlButton>
-              <Icon path={mdiHeartOutline} size={"18px"} />
-              Отслеживать систему
-            </ControlButton>
-          )}
-          {selectedComment && (
-            <ControlButton>
-              <Icon path={mdiHeartOutline} size={"18px"} />
-              Отслеживать замечание
-            </ControlButton>
-          )}
-          {selectedComment && (
-            <ControlButton onClick={() => navigate(`/comment/${selectedComment}`)}>
-              <Icon path={mdiShareOutline} size={"18px"} />
-              Страница замечания
-            </ControlButton>
-          )}
-        </ControlRow>
+        {user.name && (
+          <ControlRow>
+            {selectedSystem && (
+              <ControlButton>
+                <Icon path={mdiHeartOutline} size={"18px"} />
+                Отслеживать систему
+              </ControlButton>
+            )}
+            {selectedComment && (
+              <ControlButton>
+                <Icon path={mdiHeartOutline} size={"18px"} />
+                Отслеживать замечание
+              </ControlButton>
+            )}
+            {selectedComment && (
+              <ControlButton onClick={() => navigate(`/comment/${selectedComment}`)}>
+                <Icon path={mdiShareOutline} size={"18px"} />
+                Страница замечания
+              </ControlButton>
+            )}
+          </ControlRow>
+        )}
       </Container>
       {decisions.length > 0 && decisions.map((e) => <DecisionBlock key={e._id} decision={e} />)}
     </>

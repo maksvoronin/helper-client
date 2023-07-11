@@ -20,7 +20,8 @@ const UserContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   min-height: 70px;
-  @media (max-width: $mobileWidth) {
+  border: 1px solid #eee;
+  @media (max-width: var(--mobileWidth)) {
     display: none;
   }
 
@@ -91,6 +92,7 @@ const SidebarUserInfo: FC = observer(() => {
   useEffect(() => {
     if (!comments || !decisions) {
       $api.get<Response<Stat>>(`/stat/user?id=${user.id}&params=count`).then(({ data }) => {
+        console.log(user);
         console.log(data);
         if(data.type === "error") return;
         setDecisions(data.data!.countDecisions);

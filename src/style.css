@@ -4,9 +4,17 @@
   --pageBackground: #f9f9f9;
   --defaultFont: -apple-system, BlinkMacSystemFont, 'Inter', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --blockBoxShadow: 0px 4px 15px rgb(231, 231, 231);
-  --mobileWidth: 580px;
+  --mobileWidth: 1000px;
   --accentColor: #4978FF;
   --primaryText: rgb(31, 35, 40);
+  --containerBackground: rgba(249, 249, 249, 0.8);
+
+}
+
+@media(max-width: 1000px) {
+  :root {
+    --containerBackground: rgba(249, 249, 249, 1);
+  }
 }
 
 *, button, input, textarea {

@@ -1,15 +1,26 @@
 import { observer } from "mobx-react";
-import { FC } from "react";
-import { styled } from "styled-components";
+import { FC, useEffect, useState } from "react";
+import { keyframes, styled } from "styled-components";
 import { Logo } from "../@assets";
 import { useAuthStoreContext } from "../@store";
 import { SearchPanel, SidebarAuthPanel, SidebarController } from "../@components";
+import { Link } from "react-router-dom";
+import config from "../config";
+
+const fadeSidebarMobile = keyframes`
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0%;
+  }
+`;
 
 const SidebarContainer = styled.div`
   position: sticky;
   top: 0;
   max-width: 260px;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 45px);
   max-height: 100%;
   width: 100%;
   background-color: rgba(249, 249, 249, 0.8);
@@ -20,20 +31,41 @@ const SidebarContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   padding-top: 25px;
-
-  @media (max-width: $mobileWidth) {
+  z-index: 999;
+  @media (max-width: 1000px) {
     position: fixed;
-    top: calc(100% - 36px - 40px);
-    bottom: 0px;
-    left: 0px;
-    width: calc(100% - 40px);
-    max-height: 36px;
+    left: -100%;
+    animation: ${fadeSidebarMobile} 0.2s ease-in forwards alternate;
+    background: white;
     max-width: none;
-    z-index: 999;
-    border-radius: 0px;
-    align-items: center;
-    flex-direction: row;
-    gap: 8px;
+    width: calc(100vw - 40px);
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+  }
+`;
+
+const SidebarWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  height: 60px;
+  background: white;
+  width: calc(100% - 30px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  @media (min-width: 1000px) {
+    display: none;
+  }
+`;
+
+const SidebarMobileControl = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  @media (min-width: 1000px) {
+    display: none;
   }
 `;
 
@@ -46,7 +78,7 @@ const LogoContainer = styled.div`
     height: 42px;
   }
 
-  @media (max-width: $mobileWidth) {
+  @media (max-width: 1000px) {
     display: none;
   }
 `;
@@ -72,31 +104,128 @@ const SidebarLinks = styled.div`
       text-decoration: underline;
     }
   }
-  @media (max-width: $mobileWidth) {
-    display: none;
+`;
+
+const OpenSidebar = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #c7c7c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  margin-right: 15px;
+  span {
+    width: 12px;
+    height: 2px;
+    background: black;
   }
+`;
+
+const SidebarLogin = styled(Link)`
+  font-size: 15px;
+  border: 1px solid #c7c7c7;
+  padding: 6px 12px;
+  color: white;
+  border-radius: 8px;
+  color: #444;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: auto;
+`;
+
+const MobileLogoContainer = styled(LogoContainer)`
+  display: none;
+  @media (max-width: 1000px) {
+    display: flex;
+  }
+`;
+
+const UserMobile = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: auto;
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 32px;
+    border: 1px solid #c7c7c7;
+  }
+`;
+
+const UserMobileText = styled.p`
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  margin-left: 12px;
+  color: var(--accentColor);
 `;
 
 const Sidebar: FC = observer(() => {
   const { user } = useAuthStoreContext();
 
+  const [mobileSidebar, setMobileSidebar] = useState<boolean>(false);
+  const [mobileWidth, setMobileWidth] = useState<boolean>(window.innerWidth < 1000);
+
+  useEffect(() => {
+    const handleResize = (event: any) => {
+      setMobileWidth(event.target.innerWidth < 1000);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <SidebarContainer>
-      <LogoContainer>
-        <Logo />
-        <LogoText>Helper</LogoText>
-      </LogoContainer>
-      <SearchPanel />
-      {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
-      <SidebarLinks>
-        <a className={"support"} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">
-          Чат WhatsApp
-        </a>
-        <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
-          Чат Telegram
-        </a>
-      </SidebarLinks>
-    </SidebarContainer>
+    <>
+      <SidebarWrapper>
+        {mobileWidth && (
+          <SidebarMobileControl>
+            <OpenSidebar onClick={() => setMobileSidebar((prev) => !prev)}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </OpenSidebar>
+            <MobileLogoContainer>
+              <Logo />
+            </MobileLogoContainer>
+            {!user.id ? (
+              <SidebarLogin to={"/login"}>Войти</SidebarLogin>
+            ) : (
+              <UserMobile to={`/profile/${user.id}`}>
+                <img src={`${config.fileHost}/${user.avatar}`} alt="User Avatar" />
+                <UserMobileText>
+                  <span>{user.name}</span>
+                  <span>{user.surname}</span>
+                </UserMobileText>
+              </UserMobile>
+            )}
+          </SidebarMobileControl>
+        )}
+      </SidebarWrapper>
+      {(mobileSidebar || !mobileWidth) && (
+        <SidebarContainer>
+          <LogoContainer>
+            <Logo />
+            <LogoText>Helper</LogoText>
+          </LogoContainer>
+          <SearchPanel />
+          {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
+          <SidebarLinks>
+            <a className={"support"} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">
+              Чат WhatsApp
+            </a>
+            <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
+              Чат Telegram
+            </a>
+          </SidebarLinks>
+        </SidebarContainer>
+      )}
+    </>
   );
 });
 

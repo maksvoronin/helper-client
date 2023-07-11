@@ -7,6 +7,7 @@ import Icon from "@mdi/react";
 import { mdiHeartOutline } from "@mdi/js";
 import { Commentaries } from "../@widgets";
 import config from "../config";
+import { Link } from "react-router-dom";
 
 const DecisionText = styled.p`
   margin: 0;
@@ -29,6 +30,16 @@ const UserInfo = styled.div`
   p {
     margin: 0;
     padding: 0;
+    a {
+      text-decoration: none;
+      color: var(--accentColor);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    @media(max-width: 1000px) {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -93,7 +104,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
       )}
       <UserInfo>
         <p>
-          {decision.by.name} {decision.by.surname} • {new Date(decision.created).toLocaleString("ru")}
+          <Link to={`/profile/${decision.by._id}`}>{decision.by.name} {decision.by.surname}</Link> • {new Date(decision.created).toLocaleString("ru")}
         </p>
         <LikeButton>
           <Icon path={mdiHeartOutline} size={"16px"} />
