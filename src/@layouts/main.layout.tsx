@@ -16,9 +16,8 @@ const MainGrid = styled.div`
   position: relative;
   background-position: center !important;
   min-height: 100vh;
-  @media(max-width: 1000px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
-
   }
 `;
 
@@ -29,7 +28,7 @@ const MainContent = styled.div`
   flex-direction: column;
   gap: 20px;
   height: 100%;
-  @media(max-width: 1000px) {
+  @media (max-width: 1000px) {
     margin: 10px;
     width: calc(100% - 20px);
     margin-top: 80px;
@@ -49,14 +48,12 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   const [backgroundImage, setBackgroundImage] = useState<Background>();
 
   useEffect(() => {
-    if(!user.name) {
-      if (!localStorage.token) return console.log("Token not found");
-      $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
-        if (data.type === "error") return console.log(data);
-        setUser(data.data!.user);
-        localStorage.token = data.data!.accessToken;
-      });
-    } 
+    if (!localStorage.token) return console.log("Token not found");
+    $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
+      if (data.type === "error") return console.log(data);
+      setUser(data.data!.user);
+      localStorage.token = data.data!.accessToken;
+    });
   }, [user.name, setUser]);
 
   useEffect(() => {

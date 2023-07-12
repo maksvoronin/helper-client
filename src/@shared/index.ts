@@ -7,3 +7,6 @@ export { default as ContainerSubTitle } from "./containersubtitle";
 export { Select } from "./select";
 export { default as StyledSelect } from "./styledselect";
 export { default as Textarea } from "./textarea";
+export { default as FormText } from "./formtext";
+export { default as FileLabel } from "./filelabel";
+export { default as InputFile } from "./inputfile";
