@@ -6,3 +6,6 @@ export { default as SearchPagePanel } from "./SearchPagePanel";
 export { default as DecisionBlock } from "./DecisionBlock";
 export { default as CommentaryBlock } from "./CommentaryBlock";
 export { default as ResultField } from "./ResultField";
+export { default as SystemSelect } from "./SystemSelect";
+export { default as CommentSelect } from "./CommentSelect";
+export { default as SeriesSelect } from "./SeriesSelect";

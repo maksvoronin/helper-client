@@ -124,6 +124,23 @@ const OpenSidebar = styled.div`
   }
 `;
 
+const CloseSidebar = styled(OpenSidebar)`
+  position: relative;
+  span {
+    position: absolute;
+    width: 16px;
+    &:first-child {
+      transform: rotate(45deg);
+    }
+    &:last-child {
+      transform: rotate(-45deg);
+    }
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+`;
+
 const SidebarLogin = styled(Link)`
   font-size: 15px;
   border: 1px solid #c7c7c7;
@@ -185,13 +202,24 @@ const Sidebar: FC = observer(() => {
       <SidebarWrapper>
         {mobileWidth && (
           <SidebarMobileControl>
-            <OpenSidebar onClick={() => setMobileSidebar((prev) => !prev)}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </OpenSidebar>
+            {mobileSidebar ? (
+              <CloseSidebar onClick={() => setMobileSidebar(false)}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </CloseSidebar>
+            ) : (
+              <OpenSidebar onClick={() => setMobileSidebar(true)}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </OpenSidebar>
+            )}
+
             <MobileLogoContainer>
-              <Logo />
+              <Link to={"/"} style={{height: 42}}>
+                <Logo />
+              </Link>
             </MobileLogoContainer>
             {!user.id ? (
               <SidebarLogin to={"/login"}>Войти</SidebarLogin>

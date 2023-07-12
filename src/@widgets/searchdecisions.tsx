@@ -1,10 +1,10 @@
 import { observer } from "mobx-react";
 import { FC, useEffect, useState } from "react";
-import { Container, ContainerTitle, StyledSelect } from "../@shared";
+import { Container, ContainerTitle } from "../@shared";
 import { styled } from "styled-components";
-import { Comment, Decision, Response, System } from "../@types";
+import { Comment, Decision, Response } from "../@types";
 import $api from "../@http";
-import { DecisionBlock } from "../@components";
+import { CommentSelect, DecisionBlock, SystemSelect } from "../@components";
 import Icon from "@mdi/react";
 import { mdiHeartOutline, mdiShareOutline } from "@mdi/js";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +46,6 @@ const ControlRow = styled.div`
 const SearchDecisions: FC = observer(() => {
   const { user } = useAuthStoreContext();
 
-  const [systems, setSystems] = useState<System[]>([]);
   const [selectedSystem, setSelectedSystem] = useState<string>();
 
   const [comments, setComments] = useState<Comment[]>([]);
@@ -55,12 +54,6 @@ const SearchDecisions: FC = observer(() => {
   const [decisions, setDecisions] = useState<Decision[]>([]);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    $api.get<Response<System[]>>(`/system/all`).then(({ data }) => {
-      setSystems(data.data!);
-    });
-  }, []);
 
   useEffect(() => {
     if (selectedSystem) {
@@ -83,29 +76,9 @@ const SearchDecisions: FC = observer(() => {
       <Container>
         <ContainerTitle>Помощник поиска неисправностей</ContainerTitle>
         <Text>Система</Text>
-        <StyledSelect defaultValue={0} onChange={({ target }: any) => setSelectedSystem(target.value)}>
-          <option value={0} disabled>
-            Выберите систему
-          </option>
-          {systems?.map((e) => (
-            <option value={e._id} key={e._id}>
-              {e.name}
-            </option>
-          ))}
-        </StyledSelect>
-        {/* <Select defaultValue={{ value: 0, text: "Выберите систему" }} values={systems?.map((e) => ({ text: e.name, value: e } as OptionValue<System>))} onChange={(e) => setSelectedSystem(e.value as System)} /> */}
+        <SystemSelect onChange={(e: string) => setSelectedSystem(e)} />
         <Text>Замечание</Text>
-        <StyledSelect defaultValue={0} onChange={({ target }: any) => setSelectedComment(target.value)}>
-          <option value={0} disabled>
-            Выберите замечание
-          </option>
-          {comments?.map((e) => (
-            <option value={e._id} key={e._id}>
-              {e.content}
-            </option>
-          ))}
-        </StyledSelect>
-        {/* <Select defaultValue={{ value: 0, text: "Выберите замечание" }} values={comments?.map((e) => ({ text: e.content, value: e } as OptionValue<Comment>))} onChange={(e) => setSelectedComment(e.value as Comment)} /> */}
+        <CommentSelect comments={comments} onChange={(e: string) => setSelectedComment(e)} />
         {user.name && (
           <ControlRow>
             {selectedSystem && (

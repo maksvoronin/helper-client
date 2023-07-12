@@ -1,13 +1,13 @@
 import { observer } from "mobx-react";
 import { FC, createRef, useEffect, useState } from "react";
-import { FormStatus, PageProps, Response, Series, System } from "../@types";
+import { FormStatus, PageProps } from "../@types";
 import { MainLayout } from "../@layouts";
-import { Button, Container, ContainerTitle, StyledSelect, Textarea } from "../@shared";
+import { Button, Container, ContainerTitle, Textarea } from "../@shared";
 import { styled } from "styled-components";
 import config from "../config";
 import $api from "../@http";
 import { useNavigate } from "react-router-dom";
-import { ResultField } from "../@components";
+import { ResultField, SeriesSelect, SystemSelect } from "../@components";
 
 const Text = styled.p`
   margin-bottom: 5px;
@@ -36,10 +36,8 @@ const InputFile = styled.input`
 `;
 
 const Comment: FC<PageProps> = observer(({ title }) => {
-  const [systems, setSystems] = useState<System[]>([]);
   const [selectedSystem, setSelectedSystem] = useState<string>("");
 
-  const [series, setSeries] = useState<Series[]>([]);
   const [selectedSeries, setSelectedSeries] = useState<string>("");
 
   const [comment, setComment] = useState<string>("");
@@ -64,15 +62,6 @@ const Comment: FC<PageProps> = observer(({ title }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
-
-  useEffect(() => {
-    $api.get<Response<System[]>>(`/system/all`).then(({ data }) => {
-      setSystems(data.data!);
-    });
-    $api.get<Response<Series[]>>(`/series/all`).then(({ data }) => {
-      setSeries(data.data!);
-    });
-  }, []);
 
   const unlinkFile = (e: any) => {
     e.preventDefault();
@@ -101,27 +90,9 @@ const Comment: FC<PageProps> = observer(({ title }) => {
       <Container>
         <ContainerTitle>Добавление замечания</ContainerTitle>
         <Text>Выберите систему</Text>
-        <StyledSelect onChange={({ target }: any) => setSelectedSystem(target.value)} defaultValue={0}>
-          <option value={0} disabled>
-            Выберите систему
-          </option>
-          {systems?.map((e) => (
-            <option value={e._id} key={e._id}>
-              {e.name}
-            </option>
-          ))}
-        </StyledSelect>
+        <SystemSelect onChange={(e: string) => setSelectedSystem(e)} />
         <Text>Выберите серию локомотива</Text>
-        <StyledSelect onChange={({ target }: any) => setSelectedSeries(target.value)} defaultValue={0}>
-          <option value={0} disabled>
-            Выберите серию
-          </option>
-          {series?.map((e) => (
-            <option value={e._id} key={e._id}>
-              {e.name}
-            </option>
-          ))}
-        </StyledSelect>
+        <SeriesSelect onChange={(e: string) => setSelectedSeries(e)} />
         <Text>Напишите замечание</Text>
         <Textarea placeholder="Текст замечания" value={comment} onChange={({ target }: any) => setComment(target.value)} />
         <Text>Напишите решение</Text>

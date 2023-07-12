@@ -13,3 +13,4 @@ export { default as SearchResult } from "./searchresult.interface";
 export { default as OptionValue } from "./optionvalue.interface";
 export { default as FormStatus } from "./formstatus.interface";
 export { default as Background } from "./background.interface";
+export { default as SelectData } from "./selectdata.interface";

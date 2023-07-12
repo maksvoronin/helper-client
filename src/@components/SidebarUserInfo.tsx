@@ -92,8 +92,6 @@ const SidebarUserInfo: FC = observer(() => {
   useEffect(() => {
     if (!comments || !decisions) {
       $api.get<Response<Stat>>(`/stat/user?id=${user.id}&params=count`).then(({ data }) => {
-        console.log(user);
-        console.log(data);
         if(data.type === "error") return;
         setDecisions(data.data!.countDecisions);
         setComments(data.data!.countComments);

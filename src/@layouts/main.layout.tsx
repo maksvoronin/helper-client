@@ -49,13 +49,15 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   const [backgroundImage, setBackgroundImage] = useState<Background>();
 
   useEffect(() => {
-    if (!localStorage.token) return console.log("Token not found");
-    $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
-      if (data.type === "error") return console.log(data);
-      setUser(data.data!.user);
-      localStorage.token = data.data!.accessToken;
-    });
-  }, [setUser]);
+    if(!user.name) {
+      if (!localStorage.token) return console.log("Token not found");
+      $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
+        if (data.type === "error") return console.log(data);
+        setUser(data.data!.user);
+        localStorage.token = data.data!.accessToken;
+      });
+    } 
+  }, [user.name, setUser]);
 
   useEffect(() => {
     setBackgroundImage(user.background);
