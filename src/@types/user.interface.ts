@@ -15,6 +15,9 @@ export default interface User {
   likedDecisions: Decision[];
   subscribedSystems: System[];
   subscribedComments: Comment[];
+  createdSystems: System[];
+  createdComments: Comment[];
+  createdDecisions: Decision[];
   phone: string;
   background: Background;
   created: number;

@@ -64,7 +64,7 @@ const Login: FC<PageProps> = observer(({ title }) => {
     if(user._id) {
       return navigate("/");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const sendData = () => {
     if (!email || email === "") {

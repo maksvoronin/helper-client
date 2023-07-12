@@ -5,11 +5,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Store from "./@store/store";
 import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
-import MainLogin from "./MainLogin/MainLogin";
 import MainRegister from "./MainRegister/MainRegister";
 import MainRecovery from "./MainRecovery/MainRecovery";
-import LikedPage from "./Liked/LikedPage";
-import MyPage from "./My/MyPage";
 import SubscribedPage from "./Subscribed/SubscribedPage";
 import SettingsPage from "./Settings/SettingsPage";
 import AdminPage from "./Admin/AdminPage";
@@ -25,7 +22,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Decision, Index, Liked, Login, Search } from "./@pages";
+import { Comment, Decision, Index, Liked, Login, My, Search } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -72,7 +69,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/my",
-    element: <MyPage title="Мои данные" />,
+    element: <My title="Мои данные" />,
   },
   {
     path: "/subscribed",

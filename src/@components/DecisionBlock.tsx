@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Container } from "../@shared";
 import { Decision, Response } from "../@types";
 import { styled } from "styled-components";

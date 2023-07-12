@@ -10,3 +10,4 @@ export { default as Textarea } from "./textarea";
 export { default as FormText } from "./formtext";
 export { default as FileLabel } from "./filelabel";
 export { default as InputFile } from "./inputfile";
+export { default as ContainerText } from "./containertext";
