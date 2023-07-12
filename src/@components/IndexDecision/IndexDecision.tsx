@@ -85,7 +85,7 @@ const IndexDecision = observer(({ children, decision, text, userData, authedUser
                   <p key={e._id}>
                     {e.user.name} {e.user.surname}: {e.text}
                   </p>
-                  {(store.user.permissions >= 5 || store.user.id === e.user) && (
+                  {(store.user.permissions >= 5 || store.user._id === e.user) && (
                     <button onClick={() => deleteCommentary(e._id)}>
                       <Icon path={mdiTrashCanOutline} size={'16px'} />
                     </button>

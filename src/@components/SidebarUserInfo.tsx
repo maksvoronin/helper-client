@@ -91,7 +91,7 @@ const SidebarUserInfo: FC = observer(() => {
 
   useEffect(() => {
     if (!comments || !decisions) {
-      $api.get<Response<Stat>>(`/stat/user?id=${user.id}&params=count`).then(({ data }) => {
+      $api.get<Response<Stat>>(`/stat/user?id=${user._id}&params=count`).then(({ data }) => {
         if(data.type === "error") return;
         setDecisions(data.data!.countDecisions);
         setComments(data.data!.countComments);
@@ -109,7 +109,7 @@ const SidebarUserInfo: FC = observer(() => {
           <UserContent>
             <UserAvatar style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} />
             <UserTexts>
-              <UserLink to={`/profile/${user.id}`}>
+              <UserLink to={`/profile/${user._id}`}>
                 {user.name} {user.surname}
               </UserLink>
               <UserStat>

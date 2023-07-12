@@ -1,13 +1,16 @@
 import { observer } from "mobx-react";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Container } from "../@shared";
-import { Decision } from "../@types";
+import { Decision, Response } from "../@types";
 import { styled } from "styled-components";
 import Icon from "@mdi/react";
-import { mdiHeartOutline } from "@mdi/js";
+import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 import { Commentaries } from "../@widgets";
 import config from "../config";
 import { Link } from "react-router-dom";
+import { useAuthStoreContext } from "../@store";
+import $api from "../@http";
+import { alert } from "../@services/alerting.service";
 
 const DecisionText = styled.p`
   margin: 0;
@@ -37,7 +40,7 @@ const UserInfo = styled.div`
         text-decoration: underline;
       }
     }
-    @media(max-width: 1000px) {
+    @media (max-width: 1000px) {
       font-size: 14px;
     }
   }
@@ -87,7 +90,27 @@ const extname = (filename: string): string => {
 };
 
 const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
-  useEffect(() => {}, []);
+  const { user, setUser } = useAuthStoreContext();
+  const [isLiked, setIsLiked] = useState<boolean>(user.likedDecisions.includes(decision));
+  const newUser = user;
+  const like = () => {
+    $api.post<Response>(`/decision/like`, { id: decision._id }).then(({ data }) => {
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
+      newUser.likedDecisions.push(decision);
+      setUser(newUser);
+      setIsLiked(true);
+    });
+  };
+
+  const dislike = () => {
+    $api.post<Response>(`/decision/unlike`, { id: decision._id }).then(({ data }) => {
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
+      newUser.likedDecisions.splice(user.likedDecisions.indexOf(decision), 1);
+      setUser(newUser);
+      setIsLiked(false);
+    });
+  };
+
   return (
     <Container>
       <DecisionText>{decision.content}</DecisionText>
@@ -98,19 +121,30 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
           ) : config.videoExt.includes(extname(decision.file)) ? (
             <AttachmentVideo src={`${config.fileHost}/${decision.file}`} controls />
           ) : (
-            <AttachmentLink href={`${config.fileHost}/${decision.file}`} target="_blank">Прикрепленный файл</AttachmentLink>
+            <AttachmentLink href={`${config.fileHost}/${decision.file}`} target="_blank">
+              Прикрепленный файл
+            </AttachmentLink>
           )}
         </DecisionAttachement>
       )}
       <UserInfo>
         <p>
-          <Link to={`/profile/${decision.by._id}`}>{decision.by.name} {decision.by.surname}</Link> • {new Date(decision.created).toLocaleString("ru")}
+          <Link to={`/profile/${decision.by._id}`}>
+            {decision.by.name} {decision.by.surname}
+          </Link>{" "}
+          • {new Date(decision.created).toLocaleString("ru")}
         </p>
-        <LikeButton>
-          <Icon path={mdiHeartOutline} size={"16px"} />
-        </LikeButton>
+        {isLiked ? (
+          <LikeButton onClick={dislike}>
+            <Icon path={mdiHeart} size={"16px"} />
+          </LikeButton>
+        ) : (
+          <LikeButton onClick={like}>
+            <Icon path={mdiHeartOutline} size={"16px"} />
+          </LikeButton>
+        )}
       </UserInfo>
-      <Commentaries type="decision" comments={decision.comments} />
+      <Commentaries type="decision" postId={decision._id} comments={decision.comments} />
     </Container>
   );
 });

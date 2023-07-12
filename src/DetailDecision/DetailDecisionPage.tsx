@@ -103,14 +103,14 @@ const DetailDecisionPage = observer(() => {
         <p>
           Автор:{' '}
           {user && (
-            <Link to={`/profile/${user.id}`}>
+            <Link to={`/profile/${user._id}`}>
               {user.name} {user.surname}
             </Link>
           )}
         </p>
         <p>Замечание: {comment && <Link to={`/comment/${comment._id}`}>{comment.content}</Link>}</p>
         {decision && decision.file && <img src={`${config.fileHost}/${decision.file}`} alt={decision.content} />}
-        {store.isAuth && decision && store.user.id === decision.by && (
+        {store.isAuth && decision && store.user._id === decision.by && (
           <>
             <label
               className={s.file}

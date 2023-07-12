@@ -24,8 +24,8 @@ const MyPage = observer(({ title }: DefaultPage) => {
 
   useEffect(() => {
     if(store.user) {
-      $api.get(`${config.API}/comment/user?id=${store.user.id}`).then(({data}) => setUserComments(data.data));
-      $api.get(`${config.API}/decision/user?id=${store.user.id}`).then(({data}) => setUserDecisions(data.data));
+      $api.get(`${config.API}/comment/user?id=${store.user._id}`).then(({data}) => setUserComments(data.data));
+      $api.get(`${config.API}/decision/user?id=${store.user._id}`).then(({data}) => setUserDecisions(data.data));
     }
   }, [store.user]);
   

@@ -1,7 +1,8 @@
+import { FC, PropsWithChildren } from "react";
 import AlertPanel from "../@components/AlertPanel/AlertPanel";
-import { DefaultPage } from "../@types/pageprops.interface";
+import { PageProps } from "../@types";
 
-const DefaultLayout = ({ title, children }: DefaultPage) => {
+const DefaultLayout: FC<PropsWithChildren<PageProps>> = ({ title, children }) => {
   return (
     <>
       <title>{title}</title>

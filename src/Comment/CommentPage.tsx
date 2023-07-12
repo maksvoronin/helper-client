@@ -187,7 +187,7 @@ const CommentPage = observer(({ title }: DefaultPage) => {
         <div className={s.previewDecision}>
           <b>Решение будет выглядеть так:</b>
           {user && (
-            <IndexDecision decision={{ by: user.id, visible: true, created: Date.now(), file: uploadedFile }} userData={user}>
+            <IndexDecision decision={{ by: user._id, visible: true, created: Date.now(), file: uploadedFile }} userData={user}>
               {content}
             </IndexDecision>
           )}

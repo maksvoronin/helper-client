@@ -88,7 +88,7 @@ const DetailCommentPage = observer(() => {
         <p>Количество решений: {comment && comment.decisions.length}</p>
         <p>
           Автор:{' '}
-          <Link to={`/profile/${user && user.id}`}>
+          <Link to={`/profile/${user && user._id}`}>
             {user && user.name} {user && user.surname}
           </Link>
         </p>
@@ -96,7 +96,7 @@ const DetailCommentPage = observer(() => {
         <div className={s.buttons}>
           {store.isAuth ? (
             <>
-              {comment && store.user.id === comment.by && (
+              {comment && store.user._id === comment.by && (
                 <>
                   <button className={s.edit} onClick={editComment}>
                     Редактировать

@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Commentary } from "../@types";
 import { observer } from "mobx-react";
 import { styled } from "styled-components";
 import config from "../config";
 import { Link } from "react-router-dom";
+import $api from "../@http";
+import { alert } from "../@services/alerting.service";
 
 const Comment = styled.div`
   display: flex;
@@ -41,7 +43,7 @@ const UserTitle = styled(Link)`
   }
 `;
 
-const EditButton = styled.p`
+const EditButton = styled.div`
   margin: 0;
   padding: 0;
   font-size: 12px;
@@ -58,20 +60,43 @@ const DeleteButton = styled(EditButton)`
   }
 `;
 
+const DeletedCommentary = styled.div`
+  font-style: italic;
+  font-weight: 500;
+  opacity: 0.3;
+
+`;
+
 const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
+  const [deletedCommentary, setDeletedCommentary] = useState<boolean>(false);
+
+  const deleteCommentary = () => {
+    $api.put(`/decision/uncommentary`, { id: comment._id }).then(({ data }) => {
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.data, 15);
+      setDeletedCommentary(true);
+      alert("default", "Успешно", "Комментарий удалён", 15);
+    });
+  };
+
   return (
     <Comment>
-      <Avatar src={`${config.fileHost}/${comment.user.avatar}`} alt={"User avatar"} />
-      <CommentBody>
-        <UserTitle to={`/profile/${comment.user._id}`}>
-          {comment.user.name} {comment.user.surname}
-        </UserTitle>
-        <CommentText>{comment.text}</CommentText>
-        <CommentControl>
-          <EditButton>Изменить</EditButton>
-          <DeleteButton>Удалить</DeleteButton>
-        </CommentControl>
-      </CommentBody>
+      {deletedCommentary ? (
+        <DeletedCommentary>Комментарий был удалён</DeletedCommentary>
+      ) : (
+        <>
+          <Avatar src={`${config.fileHost}/${comment.user.avatar}`} alt={"User avatar"} />
+          <CommentBody>
+            <UserTitle to={`/profile/${comment.user._id}`}>
+              {comment.user.name} {comment.user.surname}
+            </UserTitle>
+            <CommentText>{comment.text}</CommentText>
+            <CommentControl>
+              <EditButton>Изменить</EditButton>
+              <DeleteButton onClick={deleteCommentary}>Удалить</DeleteButton>
+            </CommentControl>
+          </CommentBody>
+        </>
+      )}
     </Comment>
   );
 });

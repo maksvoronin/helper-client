@@ -25,7 +25,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Decision, Index, Search } from "./@pages";
+import { Comment, Decision, Index, Liked, Login, Search } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <MainLogin title="Вход" />,
+    element: <Login title="Вход" />,
   },
   {
     path: "/register",
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/liked",
-    element: <LikedPage title="Полезные решения" />,
+    element: <Liked title="Полезные решения" />,
   },
   {
     path: "/my",

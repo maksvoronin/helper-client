@@ -221,10 +221,10 @@ const Sidebar: FC = observer(() => {
                 <Logo />
               </Link>
             </MobileLogoContainer>
-            {!user.id ? (
+            {!user._id ? (
               <SidebarLogin to={"/login"}>Войти</SidebarLogin>
             ) : (
-              <UserMobile to={`/profile/${user.id}`}>
+              <UserMobile to={`/profile/${user._id}`}>
                 <img src={`${config.fileHost}/${user.avatar}`} alt="User Avatar" />
                 <UserMobileText>
                   <span>{user.name}</span>
