@@ -22,7 +22,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Decision, Index, Liked, Login, My, Search } from "./@pages";
+import { Comment, Decision, Index, Liked, Login, My, Search, Subscribed } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/subscribed",
-    element: <SubscribedPage title="Отслеживаемое" />,
+    element: <Subscribed title="Отслеживаемое" />,
   },
   {
     path: "/settings",
