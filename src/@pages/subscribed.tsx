@@ -28,7 +28,7 @@ const Subscribed: FC<PageProps> = observer(({ title }) => {
           <Ul>
             {user.subscribedSystems.map((e) => (
               <Li key={e._id}>
-                <Link to={`/system/${e.link}`}>{e.name}</Link>
+                <Link to={`/system/${e._id}`}>{e.name}</Link>
               </Li>
             ))}
           </Ul>
@@ -43,7 +43,7 @@ const Subscribed: FC<PageProps> = observer(({ title }) => {
               <Ul>
                 {e.decisions.map((e) => (
                   <Li key={e._id}>
-                    <Link to={`/decision/${e.link}`}>{e.content}</Link>
+                    <Link to={`/decision/${e._id}`}>{e.content}</Link>
                   </Li>
                 ))}
               </Ul>

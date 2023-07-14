@@ -20,8 +20,8 @@ const My: FC<PageProps> = observer(({ title }) => {
           <ContainerSubTitle>Системы: {user.createdSystems.length}</ContainerSubTitle>
           <Ul>
             {user.createdSystems.map((e) => (
-              <Li>
-                <Link to={`/system/${e._id}`} key={e._id}>
+              <Li key={e._id}>
+                <Link to={`/system/${e._id}`}>
                   {e.name}
                 </Link>
               </Li>
@@ -34,8 +34,8 @@ const My: FC<PageProps> = observer(({ title }) => {
           <ContainerSubTitle>Замечания: {user.createdComments.length}</ContainerSubTitle>
           <Ul>
             {user.createdComments.map((e) => (
-              <Li>
-                <Link to={`/comment/${e._id}`} key={e._id}>
+              <Li key={e._id}>
+                <Link to={`/comment/${e._id}`}>
                   {e.content}
                 </Link>
               </Li>
@@ -48,8 +48,8 @@ const My: FC<PageProps> = observer(({ title }) => {
           <ContainerSubTitle>Замечания: {user.createdDecisions.length}</ContainerSubTitle>
           <Ul>
             {user.createdDecisions.map((e) => (
-              <Li>
-                <Link to={`/decision/${e._id}`} key={e._id}>
+              <Li key={e._id}>
+                <Link to={`/decision/${e._id}`}>
                   {e.content}
                 </Link>
               </Li>

@@ -6,3 +6,4 @@ export { default as Liked } from "./liked";
 export { default as Login } from "./login";
 export { default as My } from "./my";
 export { default as Subscribed } from "./subscribed";
+export { default as System } from "./system";
