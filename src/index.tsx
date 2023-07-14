@@ -7,7 +7,6 @@ import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
 import MainRegister from "./MainRegister/MainRegister";
 import MainRecovery from "./MainRecovery/MainRecovery";
-import SettingsPage from "./Settings/SettingsPage";
 import AdminPage from "./Admin/AdminPage";
 import SeriesAdminPage from "./Admin/Series.AdminPage";
 import DetailCommentPage from "./DetailComment/DetailCommentPage";
@@ -21,7 +20,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Decision, Index, Liked, Login, My, Search, Subscribed, System } from "./@pages";
+import { Comment, Decision, Index, Liked, Login, My, Search, Settings, Subscribed, System } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -84,7 +83,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <SettingsPage title="Настройки" />,
+    element: <Settings title="Настройки" />,
   },
   {
     path: "/profile/:id",
