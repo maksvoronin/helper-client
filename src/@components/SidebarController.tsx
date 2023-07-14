@@ -93,9 +93,9 @@ const SidebarController: FC = observer(() => {
           <Icon path={mdiDatabase} size={"20px"} />
           <span>Мои данные</span>
         </SidebarButton>
-        <SidebarButton to={"/subscribed"}>
+        <SidebarButton to={"/favorite"}>
           <Icon path={mdiCardsHeartOutline} size={"20px"} />
-          <span>Отслеживаемое</span>
+          <span>Избранное</span>
         </SidebarButton>
         <SidebarButton to={"/settings"}>
           <Icon path={mdiCogOutline} size={"20px"} />

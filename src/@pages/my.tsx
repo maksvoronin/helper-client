@@ -2,19 +2,9 @@ import { observer } from "mobx-react";
 import { PageProps } from "../@types";
 import { MainLayout } from "../@layouts";
 import { FC } from "react";
-import { Container, ContainerSubTitle, ContainerText, ContainerTitle } from "../@shared";
+import { Container, ContainerSubTitle, ContainerText, ContainerTitle, Li, Ul } from "../@shared";
 import { useAuthStoreContext } from "../@store";
 import { Link } from "../@shared";
-import { styled } from "styled-components";
-
-const Ul = styled.ul`
-  margin: 0;
-  padding: 0;
-  padding-left: 20px;
-  list-style: square;
-`;
-
-const Li = styled.li``;
 
 const My: FC<PageProps> = observer(({ title }) => {
   const { user } = useAuthStoreContext();

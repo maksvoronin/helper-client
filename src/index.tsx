@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Store from "./@store/store";
 import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
 import MainRegister from "./MainRegister/MainRegister";
 import MainRecovery from "./MainRecovery/MainRecovery";
-import SubscribedPage from "./Subscribed/SubscribedPage";
 import SettingsPage from "./Settings/SettingsPage";
 import AdminPage from "./Admin/AdminPage";
 import SeriesAdminPage from "./Admin/Series.AdminPage";
@@ -72,8 +71,12 @@ const router = createBrowserRouter([
     element: <My title="Мои данные" />,
   },
   {
-    path: "/subscribed",
+    path: "/favorite",
     element: <Subscribed title="Отслеживаемое" />,
+  },
+  {
+    path: "/subscribed",
+    element: <Navigate to={"/favorite"} />,
   },
   {
     path: "/settings",

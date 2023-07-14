@@ -81,8 +81,8 @@ const IndexDecision = observer(({ children, decision, text, userData, authedUser
           {comments &&
             comments.map((e: any) => {
               return (
-                <div className={s.comment}>
-                  <p key={e._id}>
+                <div className={s.comment} key={e._id}>
+                  <p>
                     {e.user.name} {e.user.surname}: {e.text}
                   </p>
                   {(store.user.permissions >= 5 || store.user._id === e.user) && (

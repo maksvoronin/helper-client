@@ -5,11 +5,11 @@ import { Response, System } from "../@types";
 import $api from "../@http";
 import { useSystemStoreContext } from "../@store";
 
-const SystemSelect: FC<{ onChange: Function }> = observer(({ onChange }) => {
+const SystemSelect: FC<{ onChange: Function; fullInfo?: Function }> = observer(({ onChange, fullInfo }) => {
   const { systems, setSystems } = useSystemStoreContext();
 
   useEffect(() => {
-    if(systems.length < 1) {
+    if (systems.length < 1) {
       $api.get<Response<System[]>>(`/system/all`).then(({ data }) => {
         setSystems(data.data!);
       });
@@ -17,7 +17,13 @@ const SystemSelect: FC<{ onChange: Function }> = observer(({ onChange }) => {
   }, [systems.length, setSystems]);
 
   return (
-    <StyledSelect defaultValue={0} onChange={({ target }: any) => onChange(target.value)}>
+    <StyledSelect
+      defaultValue={0}
+      onChange={({ target }: any) => {
+        onChange(target.value);
+        fullInfo && fullInfo(systems.find((e) => e._id === target.value));
+      }}
+    >
       <option value={0} disabled>
         Выберите систему
       </option>
