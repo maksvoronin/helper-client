@@ -62,7 +62,7 @@ const CreateDecision: FC = () => {
     <>
       <FormText>Выберите систему</FormText>
       <SystemSelect onChange={(e: string) => setSelectedSystem(e)} />
-      <FormText>Выберите решение</FormText>
+      <FormText>Выберите замечание</FormText>
       <CommentSelect comments={comments} onChange={(e: string) => setSelectedComment(e)} />
       <FormText>Напишите решение</FormText>
       <Textarea placeholder="Текст решения" value={content} onChange={({ target }: any) => setContent(target.value)} />

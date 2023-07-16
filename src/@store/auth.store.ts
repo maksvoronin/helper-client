@@ -2,14 +2,21 @@ import { createContext, useContext } from "react";
 import { User } from "../@types";
 import { action, makeObservable, observable } from "mobx";
 
-class AuthStore { 
+class AuthStore {
   user: User = {} as User;
+  isAuth: boolean = false;
 
   constructor() {
     makeObservable(this, {
       user: observable,
-      setUser: action.bound
+      isAuth: observable,
+      setUser: action.bound,
+      setAuth: action.bound,
     });
+  }
+
+  setAuth(b: boolean) {
+    this.isAuth = b;
   }
 
   setUser(user: User) {

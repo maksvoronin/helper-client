@@ -20,7 +20,7 @@ const UserContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   min-height: 70px;
-  border: 1px solid #eee;
+  border: 1px solid #c7c7c7;
   @media (max-width: var(--mobileWidth)) {
     display: none;
   }
@@ -36,7 +36,7 @@ const UserContent = styled.div`
 `;
 
 const UserAvatar = styled.div`
-  background-color: #999;
+  background-color: #c7c7c7;
   width: 42px;
   height: 42px;
   border-radius: 50px;
@@ -68,7 +68,7 @@ const UserStat = styled.span`
 
 const SettingsButton = styled(Link)`
   padding-left: 15px;
-  border-left: 1px solid #eee;
+  border-left: 1px solid #c7c7c7;
   height: 100%;
   display: flex;
   align-items: center;

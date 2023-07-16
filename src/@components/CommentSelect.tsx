@@ -13,7 +13,7 @@ const CommentSelect: FC<{ comments: Comment[]; onChange: Function; fullInfo?: Fu
       }}
     >
       <option value={0} disabled>
-        Выберите систему
+        Выберите замечание
       </option>
       {comments?.map((e) => (
         <option value={e._id} key={e._id}>

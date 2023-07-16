@@ -66,18 +66,18 @@ const SearchDecisions: FC = observer(() => {
       $api.get<Response<Comment[]>>(`/comment/system?id=${selectedSystem}`).then(({ data }) => {
         setComments(data.data!);
       });
-      user.subscribedSystems.find((e) => e._id === selectedSystem) ? setSystemLiked(true) : setSystemLiked(false);
+      user._id && user.subscribedSystems.find((e) => e._id === selectedSystem) ? setSystemLiked(true) : setSystemLiked(false);
     }
-  }, [selectedSystem, user.subscribedSystems]);
+  }, [selectedSystem, user.subscribedSystems, user._id]);
 
   useEffect(() => {
     if (selectedComment) {
       $api.get<Response<Decision[]>>(`/comment/decisions?id=${selectedComment}`).then(({ data }) => {
         setDecisions(data.data!);
       });
-      user.subscribedComments.find((e) => e._id === selectedComment) ? setCommentLiked(true) : setCommentLiked(false);
+      user._id && user.subscribedComments.find((e) => e._id === selectedComment) ? setCommentLiked(true) : setCommentLiked(false);
     }
-  }, [selectedComment, user.subscribedComments]);
+  }, [selectedComment, user.subscribedComments, user._id]);
 
   const subSystem = () => {
     $api.post<Response<User>>("/system/subscribe", { id: selectedSystem }).then(({ data }) => {
@@ -92,7 +92,10 @@ const SearchDecisions: FC = observer(() => {
     $api.post<Response<User>>("/system/unsubscribe", { id: selectedSystem }).then(({ data }) => {
       if (!data.data) return alert("error", "Ошибка", data.message, 15);
       setSystemLiked(false);
-      newUser.subscribedSystems.splice(newUser.subscribedSystems.findIndex((e) => e === selectedFullSystem), 1);
+      newUser.subscribedSystems.splice(
+        newUser.subscribedSystems.findIndex((e) => e === selectedFullSystem),
+        1,
+      );
       setUser(newUser);
     });
   };
@@ -110,7 +113,10 @@ const SearchDecisions: FC = observer(() => {
     $api.post<Response<User>>("/comment/unsubscribe", { id: selectedComment }).then(({ data }) => {
       if (!data.data) return alert("error", "Ошибка", data.message, 15);
       setCommentLiked(false);
-      newUser.subscribedComments.splice(newUser.subscribedComments.findIndex((e) => e === selectedFullComment), 1);
+      newUser.subscribedComments.splice(
+        newUser.subscribedComments.findIndex((e) => e === selectedFullComment),
+        1,
+      );
       setUser(newUser);
     });
   };

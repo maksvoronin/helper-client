@@ -6,6 +6,7 @@ import { CommentaryBlock } from "../@components";
 import { Button, Input } from "../@shared";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
+import { useAuthStoreContext } from "../@store";
 
 const CommentariesBlock = styled.div`
   display: flex;
@@ -32,29 +33,30 @@ const CommentInput = styled.div`
   }
 `;
 
-const Commentaries: FC<{ type: "decision"; postId: string, comments: Commentary[] }> = observer(({ type, postId, comments }) => {
-
+const Commentaries: FC<{ type: "decision"; postId: string; comments: Commentary[] }> = observer(({ type, postId, comments }) => {
+  const { user } = useAuthStoreContext();
   const [currentComments, setCurrentComments] = useState<Commentary[]>(comments);
   const [comment, setComment] = useState<string>("");
 
   const sendData = () => {
-    if (comment.trim() === '') return alert('error', 'Ошибка', 'Заполните форму', 15);
+    if (comment.trim() === "") return alert("error", "Ошибка", "Заполните форму", 15);
     $api.put(`/${type}/commentary`, { id: postId, text: comment }).then(({ data }) => {
-      if (data.type === 'error') return alert('error', 'Произошла ошибка', data.message, 15);
-      alert('default', 'Успешно', 'Комментарий опубликован', 15);
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
+      alert("default", "Успешно", "Комментарий опубликован", 15);
       setCurrentComments((prev) => [...prev, { ...data.data.commentary }]);
-      setComment('');
+      setComment("");
     });
-  }
-
+  };
   return (
     <CommentariesBlock>
-      <CommentBlockTitle>{currentComments.length === 0 ? `Будьте первым, кто оставит комментарий!` : `Комментарии: ${currentComments.length}`}</CommentBlockTitle>
+      <CommentBlockTitle>{currentComments.length === 0 ? `Здесь нет комментариев` : `Комментарии: ${currentComments.length}`}</CommentBlockTitle>
       {currentComments && currentComments.map((e) => <CommentaryBlock key={e._id} comment={e} />)}
-      <CommentInput>
-        <Input placeholder="Введите текст" onChange={({target}: any) => setComment(target.value)} value={comment} />
-        <Button onClick={sendData}>Отправить</Button>
-      </CommentInput>
+      {user._id && (
+        <CommentInput>
+          <Input placeholder="Введите текст" onChange={({ target }: any) => setComment(target.value)} value={comment} />
+          <Button onClick={sendData}>Отправить</Button>
+        </CommentInput>
+      )}
     </CommentariesBlock>
   );
 });

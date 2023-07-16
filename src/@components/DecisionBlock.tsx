@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Container } from "../@shared";
 import { Decision, Response } from "../@types";
 import { styled } from "styled-components";
@@ -91,8 +91,13 @@ const extname = (filename: string): string => {
 
 const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
   const { user, setUser } = useAuthStoreContext();
-  const [isLiked, setIsLiked] = useState<boolean>(user.likedDecisions.includes(decision));
+  const [isLiked, setIsLiked] = useState<boolean>(false);
   const newUser = user;
+
+  useEffect(() => {
+    user.likedDecisions && user.likedDecisions.length > 0 && setIsLiked(user.likedDecisions.includes(decision));
+  }, [user, decision]);
+
   const like = () => {
     $api.post<Response>(`/decision/like`, { id: decision._id }).then(({ data }) => {
       if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
@@ -134,7 +139,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
           </Link>{" "}
           • {new Date(decision.created).toLocaleString("ru")}
         </p>
-        {isLiked ? (
+        {user._id ? isLiked ? (
           <LikeButton onClick={dislike}>
             <Icon path={mdiHeart} size={"16px"} />
           </LikeButton>
@@ -142,7 +147,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
           <LikeButton onClick={like}>
             <Icon path={mdiHeartOutline} size={"16px"} />
           </LikeButton>
-        )}
+        ) : <></>}
       </UserInfo>
       <Commentaries type="decision" postId={decision._id} comments={decision.comments} />
     </Container>

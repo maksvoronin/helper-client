@@ -44,18 +44,21 @@ const DevMark = styled.span`
 `;
 
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
-  const { user, setUser } = useAuthStoreContext();
+  const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
   const [backgroundImage, setBackgroundImage] = useState<Background>();
 
   useEffect(() => {
-
     if (!localStorage.token) return console.log("Token not found");
-    $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`${config.API}/auth/refresh`, { withCredentials: true }).then(({ data }) => {
-      if (data.type === "error") return console.log(data);
-      setUser(data.data!.user);
-      localStorage.token = data.data!.accessToken;
-    });
-  }, [user.name, setUser]);
+    if (!isAuth) {
+      console.log(isAuth);
+      $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`/auth/refresh`, { withCredentials: true }).then(({ data }) => {
+        if (data.type === "error") return console.log(data);
+        setUser(data.data!.user);
+        setAuth(true);
+        localStorage.token = data.data!.accessToken;
+      });
+    }
+  }, [user.name, setUser, isAuth, setAuth]);
 
   useEffect(() => {
     setBackgroundImage(user.background);
