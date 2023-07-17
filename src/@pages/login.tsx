@@ -75,7 +75,7 @@ const Login: FC<PageProps> = observer(({ title }) => {
     }
     $api.post<Response<{ accessToken: string; refreshToken: string; user: User }>>(`/auth/login`, { email, password }).then(({ data }) => {
       if (data.type === "error") {
-        return setFormError({ status: false, message: "Произошла ошибка: " + data.message });
+        return setFormError({ status: false, message: "Произошла ошибка: " + data.data });
       }
       setUser(data.data!.user);
       localStorage.token = data.data?.accessToken;

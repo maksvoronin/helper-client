@@ -48,6 +48,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   const [backgroundImage, setBackgroundImage] = useState<Background>();
 
   useEffect(() => {
+    console.log(isAuth)
     if (!localStorage.token) return console.log("Token not found");
     if (!isAuth) {
       console.log(isAuth);

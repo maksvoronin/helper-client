@@ -95,11 +95,11 @@ const LogoutButton = styled(Button)`
 const Settings: FC<PageProps> = observer(({ title }) => {
   const { user, setUser } = useAuthStoreContext();
 
-  const [name, setName] = useState<string>(user.name);
-  const [surname, setSurname] = useState<string>(user.surname);
-  const [phone, setPhone] = useState<string>(user.phone);
+  const [name, setName] = useState<string>("");
+  const [surname, setSurname] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
 
-  const [email, setEmail] = useState<string>(user.email);
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordNew, setPasswordNew] = useState<string>("");
 
@@ -107,6 +107,15 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const [selectedBackground, setSelectedBackground] = useState<Background>();
 
   const newUser = user;
+
+  useEffect(() => {
+    if (user._id) {
+      setName(user.name);
+      setSurname(user.surname);
+      setPhone(user.phone);
+      setEmail(user.email);
+    }
+  }, [user.name, user.surname, user.phone, user.email, user._id]);
 
   useEffect(() => {
     $api.get<Response<Background[]>>("/background/all").then(({ data }) => {
@@ -125,11 +134,63 @@ const Settings: FC<PageProps> = observer(({ title }) => {
     }
   }, [selectedBackground, newUser, setUser]);
 
-  const sendUserData = () => {};
+  const sendUserData = () => {
+    if (user.name !== name) {
+      $api.post<Response<string>>(`/user/settings/name`, { name }).then(({ data }) => {
+        alert("default", "Успешно", data.data!, 15);
+        newUser.name = name;
+        setUser(newUser);
+      });
+    }
+    if (user.surname !== surname) {
+      $api.post<Response<string>>(`/user/settings/surname`, { surname }).then(({ data }) => {
+        alert("default", "Успешно", data.data!, 15);
+        newUser.surname = surname;
+        setUser(newUser);
+      });
+    }
 
-  const sendUserSecurity = () => {};
+    if (phone && phone !== user.phone) {
+      $api.post(`/user/settings/phone`, { phone }).then(({ data }) => {
+        alert("default", "Успешно", data.data!, 15);
+        newUser.phone = phone;
+        setUser(newUser);
+      });
+    }
+  };
 
-  const userLogout = () => {};
+  const sendUserSecurity = () => {
+    if (email && email !== user.email) {
+      $api.post<Response<string>>(`/user/security/email`, { email }).then(({data}) => {
+        alert("default", "Смена почты", data.data!, 15);
+        newUser.email = email;
+        setUser(newUser);
+      });
+    }
+    if (password || passwordNew) {
+      if (!password) {
+        return alert("error", "Смена пароля", "Укажите текущий пароль", 15);
+      }
+
+      if (!passwordNew) {
+        return alert("error", "Смена пароля", "Укажите новый пароль", 15);
+      }
+
+      $api.post<Response<string>>(`${config.API}/user/security/password`, { prev: password, password: passwordNew }).then(({ data }) => {
+        if (data.type === "error") {
+          alert("error", "Смена пароля", data.data!, 15);
+        } else {
+          alert("default", "Смена пароля", data.data!, 15);
+        }
+      });
+    }
+  };
+
+  const userLogout = () => {
+    localStorage.removeItem("token");
+    $api.post('/auth/logout');
+    window.location.href = "/";
+  };
 
   return (
     <MainLayout title={title}>
@@ -189,11 +250,11 @@ const Settings: FC<PageProps> = observer(({ title }) => {
           <RowUserInfo>
             <ColumnUserInput>
               <p>Пароль</p>
-              <Input placeholder="Пароль" onChange={({ target }: any) => setPassword(target.value)} value={password} />
+              <Input type={"password"} placeholder="Пароль" onChange={({ target }: any) => setPassword(target.value)} value={password} />
             </ColumnUserInput>
             <ColumnUserInput>
               <p>Новый пароль</p>
-              <Input placeholder="Новый пароль" onChange={({ target }: any) => setPasswordNew(target.value)} value={passwordNew} />
+              <Input type={"password"} placeholder="Новый пароль" onChange={({ target }: any) => setPasswordNew(target.value)} value={passwordNew} />
             </ColumnUserInput>
           </RowUserInfo>
           <ColumnUserInfo>

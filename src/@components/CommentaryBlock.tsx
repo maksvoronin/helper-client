@@ -6,6 +6,7 @@ import config from "../config";
 import { Link } from "react-router-dom";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
+import { useAuthStoreContext } from "../@store";
 
 const Comment = styled.div`
   display: flex;
@@ -64,10 +65,10 @@ const DeletedCommentary = styled.div`
   font-style: italic;
   font-weight: 500;
   opacity: 0.3;
-
 `;
 
 const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
+  const { user } = useAuthStoreContext();
   const [deletedCommentary, setDeletedCommentary] = useState<boolean>(false);
 
   const deleteCommentary = () => {
@@ -90,10 +91,12 @@ const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
               {comment.user.name} {comment.user.surname}
             </UserTitle>
             <CommentText>{comment.text}</CommentText>
-            <CommentControl>
-              <EditButton>Изменить</EditButton>
-              <DeleteButton onClick={deleteCommentary}>Удалить</DeleteButton>
-            </CommentControl>
+            {(user._id === comment.user._id || user.permissions > 4) && (
+              <CommentControl>
+                <EditButton>Изменить</EditButton>
+                <DeleteButton onClick={deleteCommentary}>Удалить</DeleteButton>
+              </CommentControl>
+            )}
           </CommentBody>
         </>
       )}
