@@ -90,7 +90,7 @@ const SidebarUserInfo: FC = observer(() => {
   const [decisionsPage, setDecisionsPage] = useState<number>(0);
 
   useEffect(() => {
-    if (!comments || !decisions) {
+    if ((!comments || !decisions) && user._id) {
       $api.get<Response<Stat>>(`/stat/user?id=${user._id}&params=count`).then(({ data }) => {
         if(data.type === "error") return;
         setDecisions(data.data!.countDecisions);

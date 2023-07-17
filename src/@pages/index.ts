@@ -8,3 +8,4 @@ export { default as My } from "./my";
 export { default as Subscribed } from "./subscribed";
 export { default as System } from "./system";
 export { default as Settings } from "./settings";
+export { default as Register } from "./register";

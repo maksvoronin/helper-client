@@ -20,7 +20,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Decision, Index, Liked, Login, My, Search, Settings, Subscribed, System } from "./@pages";
+import { Comment, Decision, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <MainRegister title="Регистрация" />,
+    element: <Register title="Регистрация" />,
   },
   {
     path: "/recovery",
