@@ -9,3 +9,4 @@ export { default as Subscribed } from "./subscribed";
 export { default as System } from "./system";
 export { default as Settings } from "./settings";
 export { default as Register } from "./register";
+export { Admin, CreateSeries } from "./admin";

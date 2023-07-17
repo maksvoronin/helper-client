@@ -1,8 +1,8 @@
 import { observer } from "mobx-react";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { Button, Link } from "../@shared";
+import { Button, Link as LinkStyled } from "../@shared";
 import { mdiHomeOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 
@@ -39,7 +39,7 @@ const ButtonRegister = styled(Button)`
   }
 `;
 
-const RecoveryLink = styled(Link)`
+const RecoveryLink = styled(LinkStyled)`
   display: block;
   text-align: center;
 `;
@@ -68,29 +68,6 @@ const SidebarButton = styled(Link)`
     color: var(--accentColor);
     width: 20px;
     height: 20px;
-    @media (max-width: var(--mobileWidth)) {
-      margin-right: 0;
-      width: 26px;
-      height: 26px;
-    }
-  }
-  span {
-    @media (max-width: var(--mobileWidth)) {
-      display: none;
-    }
-  }
-  @media (max-width: var(--mobileWidth)) {
-    padding: 5px;
-    width: auto;
-    background-color: transparent;
-    border: none;
-    margin-top: 0;
-  }
-
-  @media (max-width: var(--mobileWidth)) {
-    &.secondary {
-      display: none;
-    }
   }
 `;
 
@@ -100,9 +77,9 @@ const SidebarAuthPanel: FC = observer(() => {
   return (
     <SidebarAuthPanelContainer>
       <SidebarButton to={"/"}>
-          <Icon path={mdiHomeOutline} size={"20px"} />
-          <span>Главная</span>
-        </SidebarButton>
+        <Icon path={mdiHomeOutline} size={"20px"} />
+        <span>Главная</span>
+      </SidebarButton>
       <InfoText>Для использования всех возможностей сервиса Вам необходимо авторизоваться</InfoText>
       <Button onClick={() => navigate("/login")}>Войти</Button>
       <ButtonRegister onClick={() => navigate("/register")}>Зарегистрироваться</ButtonRegister>

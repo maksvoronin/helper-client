@@ -222,7 +222,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
       <Container>
         <ContainerTitle>Настройки сайта</ContainerTitle>
         <Backgrounds>
-          {backgrounds.map((e) =>
+          {backgrounds && backgrounds.map((e) =>
             selectedBackground?.content === e.content ? (
               <ActiveBackgroundBlock key={e._id}>
                 <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />

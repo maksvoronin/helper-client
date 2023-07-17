@@ -217,7 +217,7 @@ const Sidebar: FC = observer(() => {
             )}
 
             <MobileLogoContainer>
-              <Link to={"/"} style={{height: 42}}>
+              <Link to={"/"} style={{ height: 42 }}>
                 <Logo />
               </Link>
             </MobileLogoContainer>

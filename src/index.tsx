@@ -20,7 +20,7 @@ import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Comment, Decision, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
+import { Admin, Comment, CreateSeries, Decision, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -91,18 +91,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminPage title="Управление" />,
+    element: <Admin title="Управление" />,
   },
   {
-    path: "/admin/series",
-    element: <SeriesAdminPage title="Добавление серии" />,
+    path: "/admin/series/create",
+    element: <CreateSeries title="Добавление серии" />,
   },
   {
-    path: "/admin/system",
+    path: "/admin/system/create",
     element: <SystemAdminPage title="Добавление системы" />,
   },
   {
-    path: "/admin/edit_system",
+    path: "/admin/system/edit",
     element: <SystemEditAdminPage title="Изменение системы" />,
   },
   {
@@ -114,11 +114,11 @@ const router = createBrowserRouter([
     element: <ExportAdminPage title="Экспорт таблиц" />,
   },
   {
-    path: "/admin/background",
+    path: "/admin/background/create",
     element: <BackgroundAdminPage title="Добавление фона" />,
   },
   {
-    path: "/admin/delete_background",
+    path: "/admin/background/delete",
     element: <DeleteBackgroundAdminPage title="Удаление фона" />,
   },
   {
