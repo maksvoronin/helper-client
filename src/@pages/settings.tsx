@@ -161,7 +161,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
   const sendUserSecurity = () => {
     if (email && email !== user.email) {
-      $api.post<Response<string>>(`/user/security/email`, { email }).then(({data}) => {
+      $api.post<Response<string>>(`/user/security/email`, { email }).then(({ data }) => {
         alert("default", "Смена почты", data.data!, 15);
         newUser.email = email;
         setUser(newUser);
@@ -188,7 +188,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
   const userLogout = () => {
     localStorage.removeItem("token");
-    $api.post('/auth/logout');
+    $api.post("/auth/logout");
     window.location.href = "/";
   };
 
@@ -222,19 +222,24 @@ const Settings: FC<PageProps> = observer(({ title }) => {
       <Container>
         <ContainerTitle>Настройки сайта</ContainerTitle>
         <Backgrounds>
-          {backgrounds && backgrounds.map((e) =>
-            selectedBackground?.content === e.content ? (
-              <ActiveBackgroundBlock key={e._id}>
-                <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />
-                <p>{e.title}</p>
-              </ActiveBackgroundBlock>
-            ) : (
-              <BackgroundBlock onClick={() => setSelectedBackground(e)} key={e._id}>
-                <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />
-                <p>{e.title}</p>
-              </BackgroundBlock>
-            ),
-          )}
+          {backgrounds &&
+            backgrounds.map((e) =>
+              e.visible ? (
+                selectedBackground?.content === e.content ? (
+                  <ActiveBackgroundBlock key={e._id}>
+                    <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />
+                    <p>{e.title}</p>
+                  </ActiveBackgroundBlock>
+                ) : (
+                  <BackgroundBlock onClick={() => setSelectedBackground(e)} key={e._id}>
+                    <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />
+                    <p>{e.title}</p>
+                  </BackgroundBlock>
+                )
+              ) : (
+                <></>
+              ),
+            )}
         </Backgrounds>
       </Container>
 
