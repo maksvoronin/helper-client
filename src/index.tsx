@@ -11,11 +11,9 @@ import DetailDecisionPage from "./DetailDecision/DetailDecisionPage";
 import ProfilePage from "./Profile/ProfilePage";
 import UsersAdminPage from "./Admin/Users.AdminPage";
 import ExportAdminPage from "./Admin/Export.AdminPage";
-import BackgroundAdminPage from "./Admin/Background.AdminPage";
-import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Admin, Comment, CreateSeries, CreateSystem, Decision, EditSystem, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
+import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, EditSystem, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -24,10 +22,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Index title="Помощник поиска неисправностей" />,
   },
-  {
-    path: "/welcome",
-    element: <WelcomePage title="Добро пожаловать!" />,
-  },
+  // {
+  //   path: "/welcome",
+  //   element: <WelcomePage title="Добро пожаловать!" />,
+  // },
   {
     path: "/login",
     element: <Login title="Вход" />,
@@ -36,26 +34,26 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register title="Регистрация" />,
   },
-  {
-    path: "/recovery",
-    element: <MainRecovery title="Восстановление аккаунта" />,
-  },
+  // {
+  //   path: "/recovery",
+  //   element: <MainRecovery title="Восстановление аккаунта" />,
+  // },
   {
     path: "/comment",
     element: <Comment title="Добавление замечания" />,
   },
-  {
-    path: "/comment/:id",
-    element: <DetailCommentPage />,
-  },
+  // {
+  //   path: "/comment/:id",
+  //   element: <DetailCommentPage />,
+  // },
   {
     path: "/decision",
     element: <Decision title="Добавление решения" />,
   },
-  {
-    path: "/decision/:id",
-    element: <DetailDecisionPage />,
-  },
+  // {
+  //   path: "/decision/:id",
+  //   element: <DetailDecisionPage />,
+  // },
   {
     path: "/system/:id",
     element: <System title={"Информация по системе"} />,
@@ -80,10 +78,10 @@ const router = createBrowserRouter([
     path: "/settings",
     element: <Settings title="Настройки" />,
   },
-  {
-    path: "/profile/:id",
-    element: <ProfilePage />,
-  },
+  // {
+  //   path: "/profile/:id",
+  //   element: <ProfilePage />,
+  // },
   {
     path: "/admin",
     element: <Admin title="Управление" />,
@@ -100,26 +98,26 @@ const router = createBrowserRouter([
     path: "/admin/system/edit",
     element: <EditSystem title="Изменение системы" />,
   },
-  {
-    path: "/admin/users",
-    element: <UsersAdminPage title="Статистика по пользователям" />,
-  },
-  {
-    path: "/admin/export",
-    element: <ExportAdminPage title="Экспорт таблиц" />,
-  },
+  // {
+  //   path: "/admin/users",
+  //   element: <UsersAdminPage title="Статистика по пользователям" />,
+  // },
+  // {
+  //   path: "/admin/export",
+  //   element: <ExportAdminPage title="Экспорт таблиц" />,
+  // },
   {
     path: "/admin/background/create",
-    element: <BackgroundAdminPage title="Добавление фона" />,
+    element: <CreateBackground title="Добавление фона" />,
   },
   {
     path: "/admin/background/delete",
-    element: <DeleteBackgroundAdminPage title="Удаление фона" />,
+    element: <DeleteBackground title="Удаление фона" />,
   },
-  {
-    path: "/activate",
-    element: <ActivatePage title="Подтвердите свой аккаунт" />,
-  },
+  // {
+  //   path: "/activate",
+  //   element: <ActivatePage title="Подтвердите свой аккаунт" />,
+  // },
   {
     path: "/search",
     element: <Search title="Поиск" />,
