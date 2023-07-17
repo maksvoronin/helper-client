@@ -5,22 +5,17 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import Store from "./@store/store";
 import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
-import MainRegister from "./MainRegister/MainRegister";
 import MainRecovery from "./MainRecovery/MainRecovery";
-import AdminPage from "./Admin/AdminPage";
-import SeriesAdminPage from "./Admin/Series.AdminPage";
 import DetailCommentPage from "./DetailComment/DetailCommentPage";
 import DetailDecisionPage from "./DetailDecision/DetailDecisionPage";
 import ProfilePage from "./Profile/ProfilePage";
-import SystemAdminPage from "./Admin/System.AdminPage";
-import SystemEditAdminPage from "./Admin/SystemEdit.AdminPage";
 import UsersAdminPage from "./Admin/Users.AdminPage";
 import ExportAdminPage from "./Admin/Export.AdminPage";
 import BackgroundAdminPage from "./Admin/Background.AdminPage";
 import DeleteBackgroundAdminPage from "./Admin/DeleteBackground.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Admin, Comment, CreateSeries, Decision, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
+import { Admin, Comment, CreateSeries, CreateSystem, Decision, EditSystem, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -99,11 +94,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/system/create",
-    element: <SystemAdminPage title="Добавление системы" />,
+    element: <CreateSystem title="Добавление системы" />,
   },
   {
     path: "/admin/system/edit",
-    element: <SystemEditAdminPage title="Изменение системы" />,
+    element: <EditSystem title="Изменение системы" />,
   },
   {
     path: "/admin/users",

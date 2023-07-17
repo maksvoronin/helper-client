@@ -76,7 +76,7 @@ const Register: FC<PageProps> = observer(({ title }) => {
     if(user._id) {
       navigate("/");
     }
-  }, [user._id]);
+  }, [user._id, navigate]);
 
   const sendData = () => {
     if (!name.trim()) return setError({ status: false, message: "Укажите имя" });

@@ -2,16 +2,9 @@ import { observer } from "mobx-react";
 import { FC, useEffect, useState } from "react";
 import { PageProps, Response, Series } from "../../@types";
 import { MainLayout } from "../../@layouts";
-import { Button, Container, ContainerTitle, FormText, Input, Li, Ul } from "../../@shared";
-import { styled } from "styled-components";
+import { AdminContainer, Button, ContainerTitle, FormText, Input, Li, Ul } from "../../@shared";
 import $api from "../../@http";
 import { alert } from "../../@services/alerting.service";
-
-const SeriesContainer = styled(Container)`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
 
 const CreateSeries: FC<PageProps> = observer(({ title }) => {
   const [series, setSeries] = useState<string>("");
@@ -37,7 +30,7 @@ const CreateSeries: FC<PageProps> = observer(({ title }) => {
 
   return (
     <MainLayout title={title}>
-      <SeriesContainer>
+      <AdminContainer>
         <ContainerTitle>Создание серии</ContainerTitle>
         <Input placeholder="Название серии" value={series} onChange={({ target }: any) => setSeries(target.value)} />
         <Button onClick={sendData}>Сохранить</Button>
@@ -47,7 +40,7 @@ const CreateSeries: FC<PageProps> = observer(({ title }) => {
             allSeries.map(e => <Li key={e._id}>{e.name}</Li>)
           }
         </Ul>
-      </SeriesContainer>
+      </AdminContainer>
     </MainLayout>
   );
 });

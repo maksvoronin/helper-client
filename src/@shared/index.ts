@@ -13,3 +13,4 @@ export { default as InputFile } from "./inputfile";
 export { default as ContainerText } from "./containertext";
 export { default as Ul } from "./ul";
 export { default as Li } from "./li";
+export { default as AdminContainer } from "./admincontainer";
