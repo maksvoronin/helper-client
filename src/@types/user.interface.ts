@@ -21,4 +21,6 @@ export default interface User {
   phone: string;
   background: Background;
   created: number;
+  road: string;
+  work: string;
 }

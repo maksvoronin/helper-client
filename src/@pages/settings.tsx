@@ -237,7 +237,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
                   </BackgroundBlock>
                 )
               ) : (
-                <></>
+                <div key={e._id}></div>
               ),
             )}
         </Backgrounds>

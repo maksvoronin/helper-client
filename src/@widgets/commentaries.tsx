@@ -50,7 +50,7 @@ const Commentaries: FC<{ type: "decision"; postId: string; comments: Commentary[
   return (
     <CommentariesBlock>
       <CommentBlockTitle>{currentComments.length === 0 ? `Здесь нет комментариев` : `Комментарии: ${currentComments.length}`}</CommentBlockTitle>
-      {currentComments && currentComments.map((e) => <CommentaryBlock key={e._id} comment={e} />)}
+      {currentComments && currentComments.map((e) => <CommentaryBlock key={`i${Math.random() * 100}`} comment={e} />)}
       {user._id && (
         <CommentInput>
           <Input placeholder="Введите текст" onChange={({ target }: any) => setComment(target.value)} value={comment} />

@@ -13,7 +13,7 @@ import UsersAdminPage from "./Admin/Users.AdminPage";
 import ExportAdminPage from "./Admin/Export.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, EditSystem, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System } from "./@pages";
+import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, EditSystem, Export, Index, Liked, Login, My, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -98,14 +98,14 @@ const router = createBrowserRouter([
     path: "/admin/system/edit",
     element: <EditSystem title="Изменение системы" />,
   },
-  // {
-  //   path: "/admin/users",
-  //   element: <UsersAdminPage title="Статистика по пользователям" />,
-  // },
-  // {
-  //   path: "/admin/export",
-  //   element: <ExportAdminPage title="Экспорт таблиц" />,
-  // },
+  {
+    path: "/admin/users",
+    element: <Users title="Статистика по пользователям" />,
+  },
+  {
+    path: "/admin/export",
+    element: <Export title="Экспорт таблиц" />,
+  },
   {
     path: "/admin/background/create",
     element: <CreateBackground title="Добавление фона" />,
