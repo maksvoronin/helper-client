@@ -91,7 +91,7 @@ const Profile: FC<PageProps> = observer(({ title }) => {
             {comments &&
               comments.map((e: Comment) => (
                 <Li key={e._id}>
-                  <Link to={`/comment/${e.link}`}>{e.content}</Link>
+                  <Link to={`/comment/${e._id}`}>{e.content}</Link>
                 </Li>
               ))}
           </Ul>

@@ -13,7 +13,7 @@ import UsersAdminPage from "./Admin/Users.AdminPage";
 import ExportAdminPage from "./Admin/Export.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, EditSystem, Export, Index, Liked, Login, My, Profile, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
+import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, EditSystem, Export, Index, Liked, Login, My, Profile, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -42,18 +42,18 @@ const router = createBrowserRouter([
     path: "/comment",
     element: <Comment title="Добавление замечания" />,
   },
-  // {
-  //   path: "/comment/:id",
-  //   element: <DetailCommentPage />,
-  // },
+  {
+    path: "/comment/:id",
+    element: <DetailComment title="Замечание" />,
+  },
   {
     path: "/decision",
     element: <Decision title="Добавление решения" />,
   },
-  // {
-  //   path: "/decision/:id",
-  //   element: <DetailDecisionPage />,
-  // },
+  {
+    path: "/decision/:id",
+    element: <DetailDecisionPage />,
+  },
   {
     path: "/system/:id",
     element: <System title={"Информация по системе"} />,
