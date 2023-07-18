@@ -27,8 +27,7 @@ const DetailComment: FC<PageProps> = observer(({ title }) => {
         <ContainerText>Серия: {comment.series && comment.series.name}</ContainerText>
         <ContainerText>Количество решений: {comment.decisions && comment.decisions.length}</ContainerText>
         <ContainerText>
-          Автор:
-          <Link to={`/profile/${comment.by._id}`}>
+          Автор: <Link to={`/profile/${comment.by._id}`}>
             {comment.by && comment.by.name} {comment.by && comment.by.surname}
           </Link>
         </ContainerText>

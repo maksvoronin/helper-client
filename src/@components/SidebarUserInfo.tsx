@@ -93,14 +93,14 @@ const SidebarUserInfo: FC = observer(() => {
     if ((!comments || !decisions) && user._id) {
       $api.get<Response<Stat>>(`/stat/user?id=${user._id}&params=count`).then(({ data }) => {
         if(data.type === "error") return;
-        setDecisions(data.data!.countDecisions);
-        setComments(data.data!.countComments);
+        setDecisionsPage(data.data!.countDecisions);
+        setCommentsPage(data.data!.countComments);
       });
     } else {
       setCommentsPage(comments);
       setDecisionsPage(decisions);
     }
-  }, [comments, decisions, user, setDecisions, setComments]);
+  }, [comments, decisions, user, setCommentsPage, setDecisionsPage]);
 
   return (
     <UserContainer>
