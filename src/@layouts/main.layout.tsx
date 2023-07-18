@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { Background, PageProps, Response, User } from "../@types";
 import $api from "../@http";
 import styled from "styled-components";
-import { AlertPanel, Sidebar } from "../@widgets";
+import { AlertPanel, Popup, Sidebar } from "../@widgets";
 import { useAuthStoreContext } from "../@store";
 
 const MainGrid = styled.div`
@@ -77,6 +77,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
         <MainContent>{children}</MainContent>
         {dev_mode && <DevMark>{config.dev_title}</DevMark>}
       </MainGrid>
+      <Popup />
       <AlertPanel />
     </>
   );
