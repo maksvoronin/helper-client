@@ -1,7 +1,16 @@
 import { observer } from "mobx-react";
 import { FC } from "react";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import { usePopupStoreContext } from "../@store";
+
+const fade = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const PopupWrapper = styled.div`
   position: fixed;
@@ -15,6 +24,7 @@ const PopupWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: ${fade} 0.3s alternate;
 `;
 
 const PopupContainer = styled.div`
