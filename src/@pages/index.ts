@@ -12,3 +12,4 @@ export { default as Register } from "./register";
 export { Admin, CreateSeries, CreateSystem, EditSystem, CreateBackground, DeleteBackground, Users, Export } from "./admin";
 export { default as Profile } from "./profile";
 export { default as DetailComment } from "./detailComment";
+export { default as DetailDecision } from "./detailDecision";

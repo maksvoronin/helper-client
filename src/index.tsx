@@ -13,7 +13,7 @@ import UsersAdminPage from "./Admin/Users.AdminPage";
 import ExportAdminPage from "./Admin/Export.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, EditSystem, Export, Index, Liked, Login, My, Profile, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
+import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, DetailDecision, EditSystem, Export, Index, Liked, Login, My, Profile, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/decision/:id",
-    element: <DetailDecisionPage />,
+    element: <DetailDecision title="Решение" />,
   },
   {
     path: "/system/:id",

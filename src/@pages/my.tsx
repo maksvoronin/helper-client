@@ -45,7 +45,7 @@ const My: FC<PageProps> = observer(({ title }) => {
       )}
       {user.createdDecisions && user.createdDecisions.length > 0 && (
         <Container>
-          <ContainerSubTitle>Замечания: {user.createdDecisions.length}</ContainerSubTitle>
+          <ContainerSubTitle>Решения: {user.createdDecisions.length}</ContainerSubTitle>
           <Ul>
             {user.createdDecisions.map((e) => (
               <Li key={e._id}>

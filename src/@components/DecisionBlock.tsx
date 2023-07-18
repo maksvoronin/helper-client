@@ -95,7 +95,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
   const newUser = user;
 
   useEffect(() => {
-    user.likedDecisions && user.likedDecisions.length > 0 && setIsLiked(user.likedDecisions.includes(decision));
+    // if (user.likedDecisions) user.likedDecisions.length > 0 && setIsLiked(user.likedDecisions.includes(decision));
   }, [user, decision]);
 
   const like = () => {
@@ -134,20 +134,24 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
       )}
       <UserInfo>
         <p>
-          <Link to={`/profile/${decision.by._id}`}>
-            {decision.by.name} {decision.by.surname}
-          </Link>{" "}
+          <Link to={`/profile/${decision.by && decision.by._id}`}>
+            {decision.by && decision.by.name} {decision.by && decision.by.surname}
+          </Link>
           • {new Date(decision.created).toLocaleString("ru")}
         </p>
-        {user._id ? isLiked ? (
-          <LikeButton onClick={dislike}>
-            <Icon path={mdiHeart} size={"16px"} />
-          </LikeButton>
+        {user._id ? (
+          isLiked ? (
+            <LikeButton onClick={dislike}>
+              <Icon path={mdiHeart} size={"16px"} />
+            </LikeButton>
+          ) : (
+            <LikeButton onClick={like}>
+              <Icon path={mdiHeartOutline} size={"16px"} />
+            </LikeButton>
+          )
         ) : (
-          <LikeButton onClick={like}>
-            <Icon path={mdiHeartOutline} size={"16px"} />
-          </LikeButton>
-        ) : <></>}
+          <></>
+        )}
       </UserInfo>
       <Commentaries type="decision" postId={decision._id} comments={decision.comments} />
     </Container>
