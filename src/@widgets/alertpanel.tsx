@@ -11,10 +11,11 @@ const Alerts = styled.div`
   right: 10px;
   width: 320px;
   cursor: default;
-  z-index: 99;
+  z-index: 999999;
 
   @media (max-width: 480px) {
     width: calc(100% - 20px);
+    top: 30px;
   }
 `;
 
