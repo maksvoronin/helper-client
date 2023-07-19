@@ -5,8 +5,9 @@ import config from "../config";
 import $api from "../@http";
 import { useNavigate } from "react-router-dom";
 import { FormStatus } from "../@types";
+import { observer } from "mobx-react";
 
-const CreateComment: FC = () => {
+const CreateComment: FC = observer(() => {
   const [selectedSystem, setSelectedSystem] = useState<string>("");
 
   const [selectedSeries, setSelectedSeries] = useState<string>("");
@@ -79,6 +80,6 @@ const CreateComment: FC = () => {
       <ResultField status={postData.status} message={postData.message} />
     </>
   );
-};
+});
 
 export default CreateComment;

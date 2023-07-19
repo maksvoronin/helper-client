@@ -1,13 +1,14 @@
 import { FC, PropsWithChildren, useEffect } from "react";
-import AlertPanel from "../@components/AlertPanel/AlertPanel";
 import { PageProps, Response, User } from "../@types";
 import { useAuthStoreContext } from "../@store";
 import $api from "../@http";
+import { AlertPanel } from "../@widgets";
+import { observer } from "mobx-react";
 
-const DefaultLayout: FC<PropsWithChildren<PageProps>> = ({ title, children }) => {
+const DefaultLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
   useEffect(() => {
-    console.log(isAuth)
+    console.log(isAuth);
     if (!localStorage.token) return console.log("Token not found");
     if (!isAuth) {
       console.log(isAuth);
@@ -19,7 +20,7 @@ const DefaultLayout: FC<PropsWithChildren<PageProps>> = ({ title, children }) =>
       });
     }
   }, [user.name, setUser, isAuth, setAuth]);
-  
+
   return (
     <>
       <title>{title}</title>
@@ -27,6 +28,6 @@ const DefaultLayout: FC<PropsWithChildren<PageProps>> = ({ title, children }) =>
       <AlertPanel />
     </>
   );
-}
+});
 
 export default DefaultLayout;

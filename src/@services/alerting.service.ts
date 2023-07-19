@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { IAlert } from '../@types/alert.interface';
+import { IAlert } from '../@types';
 
 const alertsSubject = new Subject<IAlert>();
 const closedAlertsSubject = new Subject<number>();

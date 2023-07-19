@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { close } from "../@services";
 import { IAlert } from "../@types";
 import { keyframes, styled } from "styled-components";
+import { observer } from "mobx-react";
 
 const init = keyframes`
   from {
@@ -93,7 +94,11 @@ const AMessage = styled.p`
   word-wrap: wrap;
 `;
 
-const Alert: React.FC<IAlert> = ({ id, type, title, message, time, onClick }) => {
+const AlertBlockError = styled(AlertBlock)`
+  background: rgba(255, 63, 63, 0.5);
+`;
+
+const Alert: React.FC<IAlert> = observer(({ id, type, title, message, time, onClick }) => {
   useEffect(() => {
     if (time && id) {
       const timer = setTimeout(() => {
@@ -107,21 +112,32 @@ const Alert: React.FC<IAlert> = ({ id, type, title, message, time, onClick }) =>
   }, [id, time]);
 
   if (id) {
-    return (
+    return type === "default" ? (
       <AlertBlock onClick={onClick} id={`alert${id}`}>
         <CloseBtn onClick={() => close(id)}>&times;</CloseBtn>
         <ATitle>{title}</ATitle>
         <AMessage>{message}</AMessage>
       </AlertBlock>
+    ) : (
+      <AlertBlockError onClick={onClick} id={`alert${id}`}>
+        <CloseBtn onClick={() => close(id)}>&times;</CloseBtn>
+        <ATitle>{title}</ATitle>
+        <AMessage>{message}</AMessage>
+      </AlertBlockError>
     );
   } else {
-    return (
+    return type === "default" ? (
       <AlertBlock onClick={onClick}>
         <ATitle>{title}</ATitle>
         <AMessage>{message}</AMessage>
       </AlertBlock>
+    ) : (
+      <AlertBlockError onClick={onClick}>
+        <ATitle>{title}</ATitle>
+        <AMessage>{message}</AMessage>
+      </AlertBlockError>
     );
   }
-};
+});
 
 export default Alert;

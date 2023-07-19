@@ -4,8 +4,9 @@ import { CommentSelect, ResultField, SystemSelect } from "../@components";
 import { Comment, FormStatus, Response } from "../@types";
 import $api from "../@http";
 import config from "../config";
+import { observer } from "mobx-react";
 
-const CreateDecision: FC = () => {
+const CreateDecision: FC = observer(() => {
   const [selectedSystem, setSelectedSystem] = useState<string>("");
 
   const [comments, setComments] = useState<Comment[]>([]);
@@ -79,6 +80,6 @@ const CreateDecision: FC = () => {
       <ResultField status={postData.status} message={postData.message} />
     </>
   );
-};
+});
 
 export default CreateDecision;

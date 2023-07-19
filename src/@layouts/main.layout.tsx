@@ -51,7 +51,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.token) return console.log("Token not found");
+    if (!localStorage.token) return;
     if (!isAuth) {
       $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`/auth/refresh`, { withCredentials: true }).then(({ data }) => {
         if (data.type === "error") return console.log(data);
@@ -60,10 +60,10 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
         localStorage.token = data.data!.accessToken;
       });
     }
-    if(!user.isActivated && isAuth) {
+    if (!user.isActivated && isAuth) {
       navigate("/activate");
     }
-  }, [user.name, setUser, isAuth, setAuth]);
+  }, [user.name, setUser, isAuth, setAuth, navigate, user.isActivated]);
 
   useEffect(() => {
     setBackgroundImage(user.background);
