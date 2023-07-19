@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Activate, Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, DetailDecision, EditSystem, Export, Index, Liked, Login, My, Profile, Recovery, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
+import { Activate, Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, DetailDecision, EditSystem, Export, Index, Liked, Login, My, Profile, Recovery, Register, Search, Settings, Subscribed, System, Users, Welcome } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -16,10 +16,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Index title="Помощник поиска неисправностей" />,
   },
-  // {
-  //   path: "/welcome",
-  //   element: <WelcomePage title="Добро пожаловать!" />,
-  // },
+  {
+    path: "/welcome",
+    element: <Welcome title="Добро пожаловать!" />,
+  },
   {
     path: "/login",
     element: <Login title="Вход" />,
