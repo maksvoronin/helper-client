@@ -25,6 +25,9 @@ const PopupWrapper = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${fade} 0.3s alternate;
+  @media(max-width: 500px) {
+    background: rgba(255, 255, 255, 0.8);
+  }
 `;
 
 const PopupContainer = styled.div`
