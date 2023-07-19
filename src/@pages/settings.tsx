@@ -125,7 +125,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   }, [user]);
 
   useEffect(() => {
-    if (selectedBackground) {
+    if (selectedBackground && selectedBackground._id !== newUser.background._id) {
       $api.post<Response<string>>(`/user/settings/background`, { background: selectedBackground._id }).then(({ data }) => {
         alert("default", data.message, data.data!, 15);
         newUser.background = selectedBackground;

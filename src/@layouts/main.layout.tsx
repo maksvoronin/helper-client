@@ -1,4 +1,5 @@
 import "../style.css";
+import defaultBG from "../@assets/default.jpg";
 import config, { dev_mode } from "../config";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { observer } from "mobx-react";
@@ -7,6 +8,7 @@ import $api from "../@http";
 import styled from "styled-components";
 import { AlertPanel, Popup, Sidebar } from "../@widgets";
 import { useAuthStoreContext } from "../@store";
+import { useNavigate } from "react-router-dom";
 
 const MainGrid = styled.div`
   display: flex;
@@ -46,18 +48,20 @@ const DevMark = styled.span`
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
   const [backgroundImage, setBackgroundImage] = useState<Background>();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isAuth)
     if (!localStorage.token) return console.log("Token not found");
     if (!isAuth) {
-      console.log(isAuth);
       $api.get<Response<{ accessToken: string; refreshToken: string; user: User }>>(`/auth/refresh`, { withCredentials: true }).then(({ data }) => {
         if (data.type === "error") return console.log(data);
         setUser(data.data!.user);
         setAuth(true);
         localStorage.token = data.data!.accessToken;
       });
+    }
+    if(!user.isActivated && isAuth) {
+      navigate("/activate");
     }
   }, [user.name, setUser, isAuth, setAuth]);
 
@@ -70,7 +74,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       <title>{title}</title>
       <MainGrid
         style={{
-          background: `${backgroundImage ? `url(${config.API}/public/${backgroundImage.content})` : `url(${config.API}/public/default_bg.jpeg)`}`,
+          background: `${backgroundImage ? `url(${config.API}/public/${backgroundImage.content})` : `url(${defaultBG})`}`,
         }}
       >
         <Sidebar />
