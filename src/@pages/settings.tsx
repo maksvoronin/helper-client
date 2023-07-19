@@ -178,9 +178,9 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
       $api.post<Response<string>>(`${config.API}/user/security/password`, { prev: password, password: passwordNew }).then(({ data }) => {
         if (data.type === "error") {
-          alert("error", "Смена пароля", data.data!, 15);
+          alert("error", "Смена пароля", data.message!, 15);
         } else {
-          alert("default", "Смена пароля", data.data!, 15);
+          alert("default", "Смена пароля", data.message!, 15);
         }
       });
     }

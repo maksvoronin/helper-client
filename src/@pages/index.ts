@@ -13,3 +13,5 @@ export { Admin, CreateSeries, CreateSystem, EditSystem, CreateBackground, Delete
 export { default as Profile } from "./profile";
 export { default as DetailComment } from "./detailComment";
 export { default as DetailDecision } from "./detailDecision";
+export { default as Recovery } from "./recovery";
+export { default as Activate } from "./activate";

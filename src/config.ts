@@ -1,7 +1,7 @@
 export const dev_mode = true;
 
 const config = {
-  dev_title: "Beta v1.6.1 (Alert Module)",
+  dev_title: "Beta v1.6.2 (Recovery Password)",
   API: dev_mode ? `http://192.168.0.117:1000/api` : `https://helper.voronin.xyz/api`,
   fileHost: dev_mode ? `http://192.168.0.117:1000/api/public` : `https://helper.voronin.xyz/api/public`,
   fileUpload: dev_mode ? `http://192.168.0.117:1000/api/file/upload` : `https://helper.voronin.xyz/api/file/upload`,

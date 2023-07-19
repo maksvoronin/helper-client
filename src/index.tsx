@@ -5,15 +5,9 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import Store from "./@store/store";
 import reportWebVitals from "./reportWebVitals";
 import WelcomePage from "./Welcome/Welcome";
-import MainRecovery from "./MainRecovery/MainRecovery";
-import DetailCommentPage from "./DetailComment/DetailCommentPage";
-import DetailDecisionPage from "./DetailDecision/DetailDecisionPage";
-import ProfilePage from "./Profile/ProfilePage";
-import UsersAdminPage from "./Admin/Users.AdminPage";
-import ExportAdminPage from "./Admin/Export.AdminPage";
 import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, DetailDecision, EditSystem, Export, Index, Liked, Login, My, Profile, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
+import { Activate, Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, DetailDecision, EditSystem, Export, Index, Liked, Login, My, Profile, Recovery, Register, Search, Settings, Subscribed, System, Users } from "./@pages";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -34,10 +28,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register title="Регистрация" />,
   },
-  // {
-  //   path: "/recovery",
-  //   element: <MainRecovery title="Восстановление аккаунта" />,
-  // },
+  {
+    path: "/recovery",
+    element: <Recovery title="Восстановление аккаунта" />,
+  },
   {
     path: "/comment",
     element: <Comment title="Добавление замечания" />,
@@ -114,10 +108,10 @@ const router = createBrowserRouter([
     path: "/admin/background/delete",
     element: <DeleteBackground title="Удаление фона" />,
   },
-  // {
-  //   path: "/activate",
-  //   element: <ActivatePage title="Подтвердите свой аккаунт" />,
-  // },
+  {
+    path: "/activate",
+    element: <Activate title="Подтвердите свой аккаунт" />,
+  },
   {
     path: "/search",
     element: <Search title="Поиск" />,
