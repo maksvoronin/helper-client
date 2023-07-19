@@ -10,6 +10,16 @@ const Table = styled.table`
   background: var(--containerBackground);
   border-radius: 12px;
   padding: 20px;
+
+  tr {
+    @media(max-width: 500px) {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #c7c7c7;
+      gap: 2px;
+      margin-bottom: 5px;
+    }
+  }
 `;
 
 const Users: FC<PageProps> = observer(({ title }) => {

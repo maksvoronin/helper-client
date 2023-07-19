@@ -182,7 +182,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
       {newDecision.file && (
         <DecisionAttachement>
           {config.imageExt.includes(extname(newDecision.file)) ? (
-            <AttachmentImage src={`${config.fileHost}/${newDecision.file}`} />
+            <AttachmentImage src={`${config.fileHost}/${newDecision.file}`} onClick={() => window.open(`${config.fileHost}/${newDecision.file}`)} />
           ) : config.videoExt.includes(extname(newDecision.file)) ? (
             <AttachmentVideo src={`${config.fileHost}/${newDecision.file}`} controls />
           ) : (
@@ -213,7 +213,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
               </LikeButton>
             )
           ) : (
-            <>t</>
+            <></>
           )}
           {user._id ? (
             isLiked ? (

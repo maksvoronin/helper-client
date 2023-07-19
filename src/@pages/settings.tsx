@@ -46,12 +46,21 @@ const RowUserInfo = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
 `;
 
 const ColumnUserInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const ColumnUserInput = styled.div`
@@ -59,6 +68,9 @@ const ColumnUserInput = styled.div`
   flex-direction: column;
   > * {
     margin: 0;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `;
 

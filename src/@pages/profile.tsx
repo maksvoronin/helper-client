@@ -13,15 +13,22 @@ import { DecisionBlock } from "../@components";
 const UserGrid = styled.div`
   display: flex;
   align-items: center;
+
+  @media(max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
 `;
 
-const Avatar = styled.img`
+const Avatar = styled.div`
   width: 128px;
   height: 128px;
   background-color: #999;
   border-radius: 500px;
-  background-position: 0px 80%;
-  background-size: 100%;
+  background-position: center;
+  background-size: cover;
   display: block;
   position: relative;
   margin-right: 20px;
