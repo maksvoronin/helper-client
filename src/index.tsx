@@ -21,6 +21,7 @@ import {
   Login,
   My,
   Profile,
+  Rating,
   Recovery,
   Register,
   Search,
@@ -139,6 +140,10 @@ const router = createBrowserRouter([
     path: "/search",
     element: <Search title="Поиск" />,
   },
+  {
+    path: "/rating",
+    element: <Rating title="Рейтинг" />
+  }
 ]);
 
 try {

@@ -1,4 +1,4 @@
-import { mdiCardsHeartOutline, mdiCogOutline, mdiCommentCheckOutline, mdiCommentQuestionOutline, mdiDatabase, mdiHomeOutline, mdiSecurity, mdiThumbUpOutline } from "@mdi/js";
+import { mdiCardsHeartOutline, mdiCogOutline, mdiCommentCheckOutline, mdiCommentQuestionOutline, mdiDatabase, mdiHomeOutline, mdiPodiumGold, mdiSecurity, mdiThumbUpOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { observer } from "mobx-react";
 import { FC } from "react";
@@ -100,6 +100,10 @@ const SidebarController: FC = observer(() => {
         <SidebarButton to={"/settings"}>
           <Icon path={mdiCogOutline} size={"20px"} />
           <span>Настройки</span>
+        </SidebarButton>
+        <SidebarButton to={"/rating"}>
+          <Icon path={mdiPodiumGold} size={"20px"} />
+          <span>Рейтинг</span>
         </SidebarButton>
         {user.permissions > 2 && (
           <>

@@ -23,4 +23,5 @@ export default interface User {
   created: number;
   road: string;
   work: string;
+  rating: number;
 }

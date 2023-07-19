@@ -16,3 +16,4 @@ export { default as DetailDecision } from "./detailDecision";
 export { default as Recovery } from "./recovery";
 export { default as Activate } from "./activate";
 export { default as Welcome } from "./welcome";
+export { default as Rating } from "./rating";

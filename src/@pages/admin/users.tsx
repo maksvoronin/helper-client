@@ -10,6 +10,7 @@ const Table = styled.table`
   background: var(--containerBackground);
   border-radius: 12px;
   padding: 20px;
+  backdrop-filter: blur(50px);
 
   tr {
     @media(max-width: 500px) {
