@@ -70,7 +70,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       <title>{title}</title>
       <MainGrid
         style={{
-          background: `${backgroundImage ? `url(${config.API}/public/${backgroundImage.content})` : `url(${config.API}/public/default_bg.png)`}`,
+          background: `${backgroundImage ? `url(${config.API}/public/${backgroundImage.content})` : `url(${config.API}/public/default_bg.jpeg)`}`,
         }}
       >
         <Sidebar />

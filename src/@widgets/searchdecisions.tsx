@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import { FC, useEffect, useState } from "react";
-import { Container, ContainerTitle } from "../@shared";
+import { Container, ContainerText, ContainerTitle } from "../@shared";
 import { styled } from "styled-components";
 import { Comment, Decision, Response, System, User } from "../@types";
 import $api from "../@http";
@@ -181,7 +181,17 @@ const SearchDecisions: FC = observer(() => {
           </ControlRow>
         )}
       </Container>
-      {decisions.length > 0 && decisions.map((e) => <DecisionBlock key={e._id} decision={e} />)}
+      {selectedComment ? (
+        decisions.length > 0 ? (
+          decisions.map((e) => <DecisionBlock key={e._id} decision={e} />)
+        ) : (
+          <Container>
+            <ContainerText style={{ margin: 0 }}>Решений для этой системы ещё нет</ContainerText>
+          </Container>
+        )
+      ) : (
+        <></>
+      )}
     </>
   );
 });
