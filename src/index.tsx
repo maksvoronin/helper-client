@@ -2,12 +2,36 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
-import Store from "./@store/store";
 import reportWebVitals from "./reportWebVitals";
-import WelcomePage from "./Welcome/Welcome";
-import ActivatePage from "./Activate/ActivatePage";
 import { dev_mode } from "./config";
-import { Activate, Admin, Comment, CreateBackground, CreateSeries, CreateSystem, Decision, DeleteBackground, DetailComment, DetailDecision, EditSystem, Export, Index, Liked, Login, My, Profile, Recovery, Register, Search, Settings, Subscribed, System, Users, Welcome } from "./@pages";
+import {
+  Activate,
+  Admin,
+  Comment,
+  CreateBackground,
+  CreateSeries,
+  CreateSystem,
+  Decision,
+  DeleteBackground,
+  DetailComment,
+  DetailDecision,
+  EditSystem,
+  Export,
+  Index,
+  Liked,
+  Login,
+  My,
+  Profile,
+  Recovery,
+  Register,
+  Search,
+  Settings,
+  Subscribed,
+  System,
+  Users,
+  Welcome,
+} from "./@pages";
+import { authStore, AuthStoreContext } from "./@store";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -118,12 +142,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-const store = new Store();
-
-export const Context = React.createContext({
-  store,
-});
-
 try {
   if (dev_mode) {
     console.log("Running in dev mode");
@@ -133,9 +151,9 @@ try {
 }
 
 root.render(
-  <Context.Provider value={{ store }}>
+  <AuthStoreContext.Provider value={authStore}>
     <RouterProvider router={router} />
-  </Context.Provider>,
+  </AuthStoreContext.Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

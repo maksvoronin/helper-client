@@ -24,6 +24,6 @@ class AuthStore {
   }
 }
 
-const authStore = new AuthStore();
+export const authStore = new AuthStore();
 export const AuthStoreContext = createContext(authStore);
 export const useAuthStoreContext = () => useContext(AuthStoreContext);
