@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { MainLayout } from "../@layouts";
 import $api from "../@http";
 import { DecisionBlock } from "../@components";
+import { Container, ContainerSubTitle, ContainerText, FormText } from "../@shared";
 
 const DetailDecision: FC<PageProps> = observer(({title}) => {
 
@@ -22,6 +23,9 @@ const DetailDecision: FC<PageProps> = observer(({title}) => {
   if(!decision) return <></>;
 
   return <MainLayout title={title}>
+    <Container>
+      <ContainerSubTitle>Замечание: {decision.comment.content}</ContainerSubTitle>
+    </Container>
     {decision && decision._id && <DecisionBlock decision={decision}  /> }
   </MainLayout>
 
