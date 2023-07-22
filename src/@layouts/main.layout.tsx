@@ -84,18 +84,20 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   }, [user, user.background]);
 
   useEffect(() => {
-    const yaDiv = document.createElement("div");
-    yaDiv.setAttribute("id", "yandex_rtb_R-A-2536124-1");
-    const yaScript = document.createElement("script");
-    yaScript.setAttribute("type", "text/javascript");
-    yaScript.innerHTML = `window.yaContextCb.push(()=>{
-      Ya.Context.AdvManager.render({
-        "blockId": "R-A-2536124-1",
-        "renderTo": "yandex_rtb_R-A-2536124-1"
-      })
-    })`;
-    document.getElementById("reklama")?.append(yaDiv);
-    document.head.appendChild(yaScript);
+    if (!dev_mode) {
+      const yaDiv = document.createElement("div");
+      yaDiv.setAttribute("id", "yandex_rtb_R-A-2536124-1");
+      const yaScript = document.createElement("script");
+      yaScript.setAttribute("type", "text/javascript");
+      yaScript.innerHTML = `window.yaContextCb.push(()=>{
+        Ya.Context.AdvManager.render({
+          "blockId": "R-A-2536124-1",
+          "renderTo": "yandex_rtb_R-A-2536124-1"
+        })
+      })`;
+      document.getElementById("ads")?.append(yaDiv);
+      document.head.appendChild(yaScript);
+    }
   }, []);
 
   return (
@@ -108,7 +110,9 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       >
         <Sidebar />
         <MainContent>{children}</MainContent>
-        <Ads id="reklama"></Ads>
+        {
+          !dev_mode && <Ads id="ads"></Ads>
+        }
         {dev_mode && <DevMark>{config.dev_title}</DevMark>}
       </MainGrid>
       <Popup />

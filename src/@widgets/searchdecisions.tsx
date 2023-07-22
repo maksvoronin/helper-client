@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
-import { FC, useEffect, useState } from "react";
-import { Container, ContainerText, ContainerTitle } from "../@shared";
+import { FC, createRef, useEffect, useState } from "react";
+import { Button, Container, ContainerText, ContainerTitle, FileLabel, InputFile, Textarea } from "../@shared";
 import { styled } from "styled-components";
 import { Comment, Decision, Response, System, User } from "../@types";
 import $api from "../@http";
@@ -8,8 +8,9 @@ import { CommentSelect, DecisionBlock, SystemSelect } from "../@components";
 import Icon from "@mdi/react";
 import { mdiHeart, mdiHeartOutline, mdiShareOutline } from "@mdi/js";
 import { useNavigate } from "react-router-dom";
-import { useAuthStoreContext } from "../@store";
+import { useAuthStoreContext, usePopupStoreContext } from "../@store";
 import { alert } from "../@services/alerting.service";
+import config from "../config";
 
 const Text = styled.p`
   margin-bottom: 5px;
@@ -44,8 +45,60 @@ const ControlRow = styled.div`
   }
 `;
 
+const CreateDecisionPopup: FC<{selectedComment: string}> = observer(({selectedComment}) => {
+  const navigate = useNavigate();
+  const { setVisible } = usePopupStoreContext();
+  const [text, setText] = useState<string>("");
+  const [fileName, setFileName] = useState<string>("");
+  const fileInput: any = createRef();
+
+  const [uploadedFile, setUploadedFile] = useState<string>("");
+
+  useEffect(() => {
+    if (fileName) {
+      const formData = new FormData();
+      formData.append("file", fileInput.current.files[0]);
+      formData.append("project", "helper");
+      formData.append("comment", "Comment");
+      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fileName]);
+
+  const unlinkFile = (e?: any) => {
+    setFileName("");
+    setUploadedFile("");
+    e && e.preventDefault();
+  };
+
+  const sendData = () => {
+    $api.post<Response<Decision>>("/decision/create", { comment: selectedComment, content: text, file: uploadedFile }).then(({ data }) => {
+      if (data.type === "error" || typeof data.data === "string") return alert("error", "Ошибка", String(data.data!), 15);
+      alert("default", "Успешно", "Решение создано", 15);
+      setVisible(false);
+      navigate(`/decision/${data.data?._id}`);
+    });
+  };
+  return (
+    <>
+      <Textarea placeholder="Текст решения" onChange={({target}: any) => setText(target.value)} value={text} />
+      <FileLabel
+        htmlFor="file"
+        onClick={(e: any) => {
+          fileName && unlinkFile(e);
+        }}
+      >
+        {fileName ? `Открепить файл ${uploadedFile}` : "Прикрепить другой файл к решению"}
+      </FileLabel>
+      <InputFile type={"file"} id="file" onChange={({ target }: any) => setFileName(target.value)} ref={fileInput} />
+      <Button onClick={sendData}>Создать</Button>
+    </>
+  );
+});
+
 const SearchDecisions: FC = observer(() => {
-  const { user, setUser } = useAuthStoreContext();
+  const { user, setUser, isAuth } = useAuthStoreContext();
+  const { setVisible, setTitle, setContent } = usePopupStoreContext();
 
   const [selectedSystem, setSelectedSystem] = useState<string>();
   const [selectedFullSystem, setSelectedFullSystem] = useState<System>({} as System);
@@ -60,6 +113,12 @@ const SearchDecisions: FC = observer(() => {
 
   const navigate = useNavigate();
   const newUser = user;
+
+  const popupCreateDecision = () => {
+    setVisible(true);
+    setTitle("Добавление решения");
+    setContent(<CreateDecisionPopup selectedComment={selectedComment!} />);
+  };
 
   useEffect(() => {
     if (selectedSystem) {
@@ -191,6 +250,11 @@ const SearchDecisions: FC = observer(() => {
         )
       ) : (
         <></>
+      )}
+      {selectedComment && isAuth && (
+        <Container>
+          <Button onClick={popupCreateDecision}>Добавить решение</Button>
+        </Container>
       )}
     </>
   );
