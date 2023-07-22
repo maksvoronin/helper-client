@@ -55,7 +55,7 @@ const Ads = styled.div`
 
   @media (max-width: 1000px) {
     margin: 10px;
-    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
   }
 `;
 

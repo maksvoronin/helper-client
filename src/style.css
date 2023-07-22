@@ -43,3 +43,9 @@ select, button {
 select, input {
   background: white;
 }
+
+@media(min-width: 1000px) {
+  #R-A-2536124-2 {
+    display: none;
+  }
+}
