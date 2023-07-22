@@ -24,7 +24,7 @@ const DetailDecision: FC<PageProps> = observer(({title}) => {
 
   return <MainLayout title={title}>
     <Container>
-      <ContainerSubTitle>Замечание: {decision.comment.content}</ContainerSubTitle>
+      <ContainerSubTitle>Замечание: {decision && decision.comment && decision.comment.content}</ContainerSubTitle>
     </Container>
     {decision && decision._id && <DecisionBlock decision={decision}  /> }
   </MainLayout>
