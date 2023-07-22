@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { MainLayout } from "../@layouts";
 import $api from "../@http";
 import { DecisionBlock } from "../@components";
-import { Container, ContainerSubTitle, ContainerText, FormText } from "../@shared";
+import { Container, ContainerSubTitle } from "../@shared";
 
 const DetailDecision: FC<PageProps> = observer(({title}) => {
 

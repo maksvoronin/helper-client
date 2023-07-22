@@ -97,6 +97,15 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       })`;
       document.getElementById("ads")?.append(yaDiv);
       document.head.appendChild(yaScript);
+      const mobileScript = document.createElement("script");
+      mobileScript.setAttribute("type", "text/javascript");
+      mobileScript.innerHTML = `window.yaContextCb.push(()=>{
+        Ya.Context.AdvManager.render({
+          "blockId": "R-A-2536124-2",
+          "type": "floorAd"
+        })
+      })`;
+      document.body.appendChild(mobileScript);
     }
   }, []);
 
