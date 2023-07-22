@@ -45,6 +45,20 @@ const DevMark = styled.span`
   font-weight: 500;
 `;
 
+const Ads = styled.div`
+  max-width: 280px;
+  background: var(--containerBackground);
+  border-radius: 12px;
+  margin: 20px;
+  margin-left: 0;
+  backdrop-filter: blur(20px);
+
+  @media (max-width: 1000px) {
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+`;
+
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
   const [backgroundImage, setBackgroundImage] = useState<Background>();
@@ -69,6 +83,21 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
     setBackgroundImage(user.background);
   }, [user, user.background]);
 
+  useEffect(() => {
+    const yaDiv = document.createElement("div");
+    yaDiv.setAttribute("id", "yandex_rtb_R-A-2536124-1");
+    const yaScript = document.createElement("script");
+    yaScript.setAttribute("type", "text/javascript");
+    yaScript.innerHTML = `window.yaContextCb.push(()=>{
+      Ya.Context.AdvManager.render({
+        "blockId": "R-A-2536124-1",
+        "renderTo": "yandex_rtb_R-A-2536124-1"
+      })
+    })`;
+    document.getElementById("reklama")?.append(yaDiv);
+    document.head.appendChild(yaScript);
+  }, []);
+
   return (
     <>
       <title>{title}</title>
@@ -79,6 +108,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       >
         <Sidebar />
         <MainContent>{children}</MainContent>
+        <Ads id="reklama"></Ads>
         {dev_mode && <DevMark>{config.dev_title}</DevMark>}
       </MainGrid>
       <Popup />
