@@ -1,4 +1,4 @@
-export const dev_mode = false;
+export const dev_mode = true;
 
 const config = {
   dev_title: "Release v2.0.1 (Rating Page)",
