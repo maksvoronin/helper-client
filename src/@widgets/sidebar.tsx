@@ -244,9 +244,6 @@ const Sidebar: FC = observer(() => {
           <SearchPanel />
           {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
           <SidebarLinks>
-            <Link className={"support"} to="/developers">
-              Разработчикам
-            </Link>
             {/* <Link className={"support"} to="/developers">
               Разработчикам
             </Link> */}
