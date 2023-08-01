@@ -5,7 +5,7 @@ import { Response, System } from "../@types";
 import $api from "../@http";
 import { useSystemStoreContext } from "../@store";
 
-const SystemSelect: FC<{ onChange: Function; fullInfo?: Function; journals?: boolean }> = observer(({ onChange, fullInfo, journals }) => {
+const SystemSelect: FC<{ onChange: (e: string) => void; fullInfo?: Function; journals?: boolean }> = observer(({ onChange, fullInfo, journals }) => {
   const { systems, setSystems } = useSystemStoreContext();
 
   useEffect(() => {
