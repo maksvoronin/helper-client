@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { useAuthStoreContext } from "../@store";
 import SidebarUserInfo from "./SidebarUserInfo";
+import ListButton from "./ListButton";
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -92,12 +93,6 @@ const SidebarListButton = styled.div`
   }
 `;
 
-const ListButton = styled.div``;
-
-const Buttons = styled.div`
-  margin-left: 27px;
-`;
-
 const SidebarController: FC = observer(() => {
   const { user } = useAuthStoreContext();
 
@@ -118,17 +113,8 @@ const SidebarController: FC = observer(() => {
           <Icon path={mdiCommentCheckOutline} size={"20px"} />
           <span>Добавить решение</span>
         </SidebarButton>
-        <ListButton>
-          <SidebarListButton onClick={() => setJournalsOpenned((prev) => !prev)}>
-            <Icon path={mdiBookAlertOutline} size={"20px"} />
-            <span>Журналы</span>
-            <Icon path={mdiChevronRight} size={"20px"} className={`arrow ${journalsOpenned && "openned"}`} />
-          </SidebarListButton>
-          {journalsOpenned && (
-            <Buttons>
-              <SidebarButton to={""}>Журнал замечаний локомотива</SidebarButton>
-            </Buttons>
-          )}
+        <ListButton btnText="Журналы" btnIcon={mdiBookAlertOutline}>
+          <SidebarButton to={"/journals/comments"}>Журнал замечаний локомотива</SidebarButton>
         </ListButton>
         <SidebarButton to={"/liked"}>
           <Icon path={mdiThumbUpOutline} size={"20px"} />
