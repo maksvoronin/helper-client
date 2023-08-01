@@ -244,9 +244,9 @@ const Sidebar: FC = observer(() => {
           <SearchPanel />
           {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
           <SidebarLinks>
-            {/* <Link className={"support"} to="/developers">
-              Разработчикам
-            </Link> */}
+            <a className={"support"} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">
+              Чат WhatsApp
+            </a>
             <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
               Чат Telegram
             </a>

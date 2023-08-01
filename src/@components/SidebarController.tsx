@@ -1,7 +1,6 @@
 import {
   mdiBookAlertOutline,
   mdiCardsHeartOutline,
-  mdiChevronRight,
   mdiCogOutline,
   mdiCommentCheckOutline,
   mdiCommentQuestionOutline,
@@ -13,11 +12,12 @@ import {
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { observer } from "mobx-react";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { useAuthStoreContext } from "../@store";
 import SidebarUserInfo from "./SidebarUserInfo";
+import ListButton from "./ListButton";
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -56,53 +56,8 @@ const SidebarButton = styled(Link)`
   }
 `;
 
-const SidebarListButton = styled.div`
-  width: calc(100% - 20px);
-  padding: 8px 10px;
-  max-height: 32px;
-  display: flex;
-  background: transparent;
-  align-items: center;
-  border-radius: 8px;
-  font-size: 13px;
-  user-select: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
-  &:hover {
-    background-color: rgba(100, 100, 100, 0.1);
-  }
-  &:active {
-    transform: scale(1);
-  }
-  svg {
-    margin-right: 7px;
-    color: var(--accentColor);
-    width: 20px;
-    height: 20px;
-  }
-  svg.arrow {
-    color: #838383;
-    margin-left: auto;
-    margin-right: 0;
-    transition: transform 0.2s;
-    &.openned {
-      transform: rotate(90deg);
-    }
-  }
-`;
-
-const ListButton = styled.div``;
-
-const Buttons = styled.div`
-  margin-left: 27px;
-`;
-
 const SidebarController: FC = observer(() => {
   const { user } = useAuthStoreContext();
-
-  const [journalsOpenned, setJournalsOpenned] = useState<boolean>(false);
-
   return (
     <SidebarContainer>
       <SidebarButtons>
@@ -118,17 +73,8 @@ const SidebarController: FC = observer(() => {
           <Icon path={mdiCommentCheckOutline} size={"20px"} />
           <span>Добавить решение</span>
         </SidebarButton>
-        <ListButton>
-          <SidebarListButton onClick={() => setJournalsOpenned((prev) => !prev)}>
-            <Icon path={mdiBookAlertOutline} size={"20px"} />
-            <span>Журналы</span>
-            <Icon path={mdiChevronRight} size={"20px"} className={`arrow ${journalsOpenned && "openned"}`} />
-          </SidebarListButton>
-          {journalsOpenned && (
-            <Buttons>
-              <SidebarButton to={"/journals/comments"}>Журнал замечаний локомотива</SidebarButton>
-            </Buttons>
-          )}
+        <ListButton btnText="Журналы" btnIcon={mdiBookAlertOutline}>
+          <SidebarButton to={"/journals/comments"}>Журнал замечаний локомотива</SidebarButton>
         </ListButton>
         <SidebarButton to={"/liked"}>
           <Icon path={mdiThumbUpOutline} size={"20px"} />

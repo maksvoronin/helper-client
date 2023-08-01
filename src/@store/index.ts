@@ -4,4 +4,5 @@ export { useSearchStoreContext, SearchStoreContext } from "./search.store";
 export { useSystemStoreContext, SystemStoreContext } from "./system.store";
 export { useSeriesStoreContext, SeriesStoreContext } from "./series.store";
 export { usePopupStoreContext, PopupStoreContext } from "./popup.store";
+export { useDevSidebarStoreContext, DevSidebarStoreContext } from "./dev_sidebar.store";
 export { useRoadStoreContext, RoadStoreContext } from "./road.store";

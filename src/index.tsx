@@ -14,6 +14,7 @@ import {
   DeleteBackground,
   DetailComment,
   DetailDecision,
+  Developers,
   EditSystem,
   Export,
   Index,
@@ -33,6 +34,7 @@ import {
   Welcome,
 } from "./@pages";
 import { authStore, AuthStoreContext } from "./@store";
+import { DocsCreateApp } from "./@pages/developers";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -143,7 +145,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/rating",
-    element: <Rating title="Рейтинг" />
+    element: <Rating title="Рейтинг" />,
+  },
+  {
+    path: "/developers",
+    element: <Developers title="Разработчикам" />,
+  },
+  {
+    path: "/developers/docs/createapp",
+    element: <DocsCreateApp title={"Документация / Создание приложения"} />
   },
   {
     path: "/journals/comments",
