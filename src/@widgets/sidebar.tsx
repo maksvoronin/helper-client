@@ -247,6 +247,9 @@ const Sidebar: FC = observer(() => {
             <Link className={"support"} to="/developers">
               Разработчикам
             </Link>
+            {/* <Link className={"support"} to="/developers">
+              Разработчикам
+            </Link> */}
             <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
               Чат Telegram
             </a>

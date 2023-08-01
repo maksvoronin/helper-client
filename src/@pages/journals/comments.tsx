@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { PageProps } from "../../@types";
 import { observer } from "mobx-react";
 import { MainLayout } from "../../@layouts";
@@ -6,14 +6,20 @@ import { Button, Container, ContainerTitle, FormText, Input, StyledSelect, Texta
 import { SeriesSelect, SystemSelect } from "../../@components";
 
 const JournalComments: FC<PageProps> = observer(({ title }) => {
+
+  const [startTime, setStartTime] = useState<string>(new Date().toLocaleTimeString());
+  const [finishTime, setFinishTime] = useState<string>(new Date().toLocaleTimeString());
+
   return (
     <MainLayout title={title}>
       <Container>
         <ContainerTitle>Журнал замечаний локомотива</ContainerTitle>
         <FormText>Начало работ</FormText>
-        <Input type={"time"} value={new Date().toLocaleTimeString()} />
+        <Input type={"time"} value={startTime} onChange={({target}: any) => setStartTime(target.value)} />
         <FormText>Окончание работ</FormText>
-        <Input type={"time"} value={new Date().toLocaleTimeString()} />
+        <Input type={"time"} value={finishTime} onChange={({target}: any) => setFinishTime(target.value)} />
+        <FormText>Дорога</FormText>
+        <StyledSelect></StyledSelect>
         <FormText>ПТОЛ</FormText>
         <StyledSelect></StyledSelect>
         <FormText>Приписка</FormText>
