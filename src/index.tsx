@@ -14,6 +14,7 @@ import {
   DeleteBackground,
   DetailComment,
   DetailDecision,
+  Developers,
   EditSystem,
   Export,
   Index,
@@ -142,8 +143,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/rating",
-    element: <Rating title="Рейтинг" />
-  }
+    element: <Rating title="Рейтинг" />,
+  },
+  {
+    path: "/developers",
+    element: <Developers title="Разработчикам" />,
+  },
 ]);
 
 try {
