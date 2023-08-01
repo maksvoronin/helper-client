@@ -17,6 +17,7 @@ import {
   EditSystem,
   Export,
   Index,
+  JournalComments,
   Liked,
   Login,
   My,
@@ -143,6 +144,10 @@ const router = createBrowserRouter([
   {
     path: "/rating",
     element: <Rating title="Рейтинг" />
+  },
+  {
+    path: "/journals/comments",
+    element: <JournalComments title="Журнал замечаний локомотива" />
   }
 ]);
 

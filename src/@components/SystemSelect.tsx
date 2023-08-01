@@ -5,7 +5,7 @@ import { Response, System } from "../@types";
 import $api from "../@http";
 import { useSystemStoreContext } from "../@store";
 
-const SystemSelect: FC<{ onChange: Function; fullInfo?: Function }> = observer(({ onChange, fullInfo }) => {
+const SystemSelect: FC<{ onChange: Function; fullInfo?: Function; journals?: boolean }> = observer(({ onChange, fullInfo, journals }) => {
   const { systems, setSystems } = useSystemStoreContext();
 
   useEffect(() => {
@@ -27,11 +27,19 @@ const SystemSelect: FC<{ onChange: Function; fullInfo?: Function }> = observer((
       <option value={0} disabled>
         Выберите систему
       </option>
-      {systems?.map((e) => (
-        <option value={e._id} key={e._id}>
-          {e.name}
-        </option>
-      ))}
+      {systems?.map((e) =>
+        journals ? (
+          e.usingJournals && (
+            <option value={e._id} key={e._id}>
+              {e.name}
+            </option>
+          )
+        ) : (
+          <option value={e._id} key={e._id}>
+            {e.name}
+          </option>
+        ),
+      )}
     </StyledSelect>
   );
 });

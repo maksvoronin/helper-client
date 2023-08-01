@@ -126,7 +126,7 @@ const SidebarController: FC = observer(() => {
           </SidebarListButton>
           {journalsOpenned && (
             <Buttons>
-              <SidebarButton to={""}>Журнал замечаний локомотива</SidebarButton>
+              <SidebarButton to={"/journals/comments"}>Журнал замечаний локомотива</SidebarButton>
             </Buttons>
           )}
         </ListButton>
