@@ -39,7 +39,7 @@ const SidebarContainer = styled.div`
     background: white;
     max-width: none;
     width: calc(100vw - 40px);
-    height: calc(100vh - 60px);
+    height: calc(100vh - 105px);
     margin-top: 60px;
   }
 `;
@@ -244,9 +244,9 @@ const Sidebar: FC = observer(() => {
           <SearchPanel />
           {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
           <SidebarLinks>
-            <a className={"support"} href="https://chat.whatsapp.com/LVS4gxkE85HDwCHAA77AJ3" target={"_blank"} rel="noreferrer">
-              Чат WhatsApp
-            </a>
+            {/* <Link className={"support"} to="/developers">
+              Разработчикам
+            </Link> */}
             <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
               Чат Telegram
             </a>
