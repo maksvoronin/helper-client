@@ -18,6 +18,7 @@ import {
   EditSystem,
   Export,
   Index,
+  JournalComments,
   Liked,
   Login,
   My,
@@ -153,6 +154,10 @@ const router = createBrowserRouter([
   {
     path: "/developers/docs/createapp",
     element: <DocsCreateApp title={"Документация / Создание приложения"} />
+  },
+  {
+    path: "/journals/comments",
+    element: <JournalComments title="Журнал замечаний локомотива" />
   }
 ]);
 

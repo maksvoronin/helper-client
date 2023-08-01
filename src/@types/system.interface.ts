@@ -7,5 +7,6 @@ export default interface System {
   link: string,
   visible: boolean,
   created: number,
+  usingJournals: boolean,
   events: {}
 }

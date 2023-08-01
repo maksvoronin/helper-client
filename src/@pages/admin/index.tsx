@@ -29,6 +29,36 @@ const Admin: FC<PageProps> = observer(({ title }) => {
       </Container>
 
       <Container>
+        <ContainerTitle>Журналы</ContainerTitle>
+        <Ul>
+          <Li>
+            <Link to={"/admin/journals/ptol"}>Добавить ПТОЛ</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/postscript"}>Добавить приписку</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/lokomotivenumber"}>Добавить номер локомотива</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/section"}>Добавить секцию</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/move"}>Добавить действие (что сделали)</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/blok"}>Добавить БЛОК</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/snyatnumber"}>Добавить номер снятия</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/postnumber"}>Добавить номер снятия</Link>
+          </Li>
+        </Ul>
+      </Container>
+
+      <Container>
         <ContainerTitle>Статистика</ContainerTitle>
         <Ul>
           <Li>

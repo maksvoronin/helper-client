@@ -1,7 +1,6 @@
 import {
   mdiBookAlertOutline,
   mdiCardsHeartOutline,
-  mdiChevronRight,
   mdiCogOutline,
   mdiCommentCheckOutline,
   mdiCommentQuestionOutline,
@@ -13,7 +12,7 @@ import {
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { observer } from "mobx-react";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { useAuthStoreContext } from "../@store";
@@ -57,47 +56,8 @@ const SidebarButton = styled(Link)`
   }
 `;
 
-const SidebarListButton = styled.div`
-  width: calc(100% - 20px);
-  padding: 8px 10px;
-  max-height: 32px;
-  display: flex;
-  background: transparent;
-  align-items: center;
-  border-radius: 8px;
-  font-size: 13px;
-  user-select: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
-  &:hover {
-    background-color: rgba(100, 100, 100, 0.1);
-  }
-  &:active {
-    transform: scale(1);
-  }
-  svg {
-    margin-right: 7px;
-    color: var(--accentColor);
-    width: 20px;
-    height: 20px;
-  }
-  svg.arrow {
-    color: #838383;
-    margin-left: auto;
-    margin-right: 0;
-    transition: transform 0.2s;
-    &.openned {
-      transform: rotate(90deg);
-    }
-  }
-`;
-
 const SidebarController: FC = observer(() => {
   const { user } = useAuthStoreContext();
-
-  const [journalsOpenned, setJournalsOpenned] = useState<boolean>(false);
-
   return (
     <SidebarContainer>
       <SidebarButtons>
