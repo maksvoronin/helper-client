@@ -3,7 +3,7 @@ import { PageProps } from "../../@types";
 import { observer } from "mobx-react";
 import { MainLayout } from "../../@layouts";
 import { Button, Container, ContainerTitle, FormText, Input, StyledSelect, Textarea } from "../../@shared";
-import { BlokSelect, JournalMoveSelect, LokomotiveNumber, PostScriptSelect, PtolSelect, RoadSelect, SectionSelect, SeriesSelect, SystemSelect, UserSelect } from "../../@components";
+import { BlokSelect, JournalMoveSelect, LokomotiveNumber, PostScriptSelect, PostnumberSelect, PtolSelect, RoadSelect, SectionSelect, SeriesSelect, SystemSelect, UserSelect } from "../../@components";
 
 const JournalComments: FC<PageProps> = observer(({ title }) => {
   const [startTime, setStartTime] = useState<string>(new Date().toLocaleTimeString());
@@ -23,6 +23,7 @@ const JournalComments: FC<PageProps> = observer(({ title }) => {
   const [timeRepair, setTimeRepair] = useState<string>("");
   const [notePTOL, setNotePTOL] = useState<string>("");
   const [selectedUser, setSelectedUser] = useState<string>("");
+  const [selectedPostNumber, setSelectedPostNumber] = useState<string>("");
 
   return (
     <MainLayout title={title}>
@@ -59,7 +60,7 @@ const JournalComments: FC<PageProps> = observer(({ title }) => {
         <FormText>Срок ремонта снятого</FormText>
         <Input type={"time"} value={timeRepair} onChange={({target}: any) => setTimeRepair(target.value)} />
         <FormText>Пост №</FormText>
-        <StyledSelect></StyledSelect>
+        <PostnumberSelect onChange={(e) => setSelectedPostNumber(e)} />
         <FormText>Примечание ПТОЛ</FormText>
         <Textarea placeholder="Примечание ПТОЛ" value={notePTOL} onChange={({target}: any) => setNotePTOL(target.value)} />
         <FormText>ФИО</FormText>
