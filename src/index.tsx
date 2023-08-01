@@ -33,6 +33,7 @@ import {
   Welcome,
 } from "./@pages";
 import { authStore, AuthStoreContext } from "./@store";
+import { DocsCreateApp } from "./@pages/developers";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -149,6 +150,10 @@ const router = createBrowserRouter([
     path: "/developers",
     element: <Developers title="Разработчикам" />,
   },
+  {
+    path: "/developers/docs/createapp",
+    element: <DocsCreateApp title={"Документация / Создание приложения"} />
+  }
 ]);
 
 try {

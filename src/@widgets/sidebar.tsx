@@ -39,7 +39,7 @@ const SidebarContainer = styled.div`
     background: white;
     max-width: none;
     width: calc(100vw - 40px);
-    height: calc(100vh - 60px);
+    height: calc(100vh - 105px);
     margin-top: 60px;
   }
 `;
