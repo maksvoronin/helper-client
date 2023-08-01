@@ -3,14 +3,12 @@ import { PageProps } from "../../@types";
 import { observer } from "mobx-react";
 import { MainLayout } from "../../@layouts";
 import { Button, Container, ContainerTitle, FormText, Input, StyledSelect, Textarea } from "../../@shared";
-import { SeriesSelect, SystemSelect, RoadSelect } from "../../@components";
+import { SeriesSelect, SystemSelect } from "../../@components";
 
 const JournalComments: FC<PageProps> = observer(({ title }) => {
 
   const [startTime, setStartTime] = useState<string>(new Date().toLocaleTimeString());
   const [finishTime, setFinishTime] = useState<string>(new Date().toLocaleTimeString());
-
-  const [selectedRoad, setSelectedRoad] = useState<string>("");
 
   return (
     <MainLayout title={title}>
@@ -21,13 +19,13 @@ const JournalComments: FC<PageProps> = observer(({ title }) => {
         <FormText>Окончание работ</FormText>
         <Input type={"time"} value={finishTime} onChange={({target}: any) => setFinishTime(target.value)} />
         <FormText>Дорога</FormText>
-        <RoadSelect onChange={(e) => setSelectedRoad(e)} />
+        <StyledSelect></StyledSelect>
         <FormText>ПТОЛ</FormText>
         <StyledSelect></StyledSelect>
         <FormText>Приписка</FormText>
         <StyledSelect></StyledSelect>
         <FormText>Серия</FormText>
-        <SeriesSelect onChange={() => {}} />
+        <SeriesSelect onChange={() => {}}></SeriesSelect>
         <FormText>Номер локомотива</FormText>
         <StyledSelect></StyledSelect>
         <FormText>Секция</FormText>
