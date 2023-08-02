@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { JournalMove, LokomotiveNumber } from "../@types";
+import { JournalMove } from "../@types";
 import { action, makeObservable, observable } from "mobx";
 
 class JournalmoveStore { 

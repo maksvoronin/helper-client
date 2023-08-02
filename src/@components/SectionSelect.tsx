@@ -14,7 +14,7 @@ const SectionSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChang
         setSections(data.data!);
       });
     }
-  }, [sections]);
+  }, [sections, setSections]);
 
   return (
     <StyledSelect

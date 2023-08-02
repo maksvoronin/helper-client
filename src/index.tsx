@@ -7,7 +7,16 @@ import {
   Activate,
   Admin,
   Comment,
+  CommentsCheck,
   CreateBackground,
+  CreateBlok,
+  CreateJournalMove,
+  CreateLokomotiveNumber,
+  CreatePostNumber,
+  CreatePostscript,
+  CreatePtol,
+  CreateRoad,
+  CreateSection,
   CreateSeries,
   CreateSystem,
   Decision,
@@ -158,6 +167,43 @@ const router = createBrowserRouter([
   {
     path: "/journals/comments",
     element: <JournalComments title="Журнал замечаний локомотива" />
+  },
+  {
+    path: "/admin/journals/ptol/create",
+    element: <CreatePtol title="Добавление ПТОЛа" />
+  },
+  {
+    path: "/admin/journals/postscript/create",
+    element: <CreatePostscript title="Добавление приписки" />
+  },
+  {
+    path: "/admin/journals/lokomotivenumber/create",
+    element: <CreateLokomotiveNumber title="Добавление номера локомотива" />
+  },
+  {
+    path: "/admin/journals/section/create",
+    element: <CreateSection title="Добавление секции" />
+  },
+  {
+    path: "/admin/journals/move/create",
+    element: <CreateJournalMove title="Добавление действия" />
+  },
+  {
+    path: "/admin/journals/blok/create",
+    element: <CreateBlok title="Добавление БЛОКа" />
+  },
+  {
+    path: "/admin/journals/postnumber/create",
+    element: <CreatePostNumber title="Добавление № поста" />
+  },
+  {
+    path: "/admin/road/create",
+    element: <CreateRoad title="Создание дороги" />
+  }
+  ,
+  {
+    path: "/admin/journal/comments",
+    element: <CommentsCheck title="Журнал замечаний локомотива" />
   }
 ]);
 

@@ -35,28 +35,25 @@ const Admin: FC<PageProps> = observer(({ title }) => {
         <ContainerTitle>Журналы</ContainerTitle>
         <Ul>
           <Li>
-            <Link to={"/admin/journals/ptol"}>Добавить ПТОЛ</Link>
+            <Link to={"/admin/journals/ptol/create"}>Добавить ПТОЛ</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/postscript"}>Добавить приписку</Link>
+            <Link to={"/admin/journals/postscript/create"}>Добавить приписку</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/lokomotivenumber"}>Добавить номер локомотива</Link>
+            <Link to={"/admin/journals/lokomotivenumber/create"}>Добавить номер локомотива</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/section"}>Добавить секцию</Link>
+            <Link to={"/admin/journals/section/create"}>Добавить секцию</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/move"}>Добавить действие (что сделали)</Link>
+            <Link to={"/admin/journals/move/create"}>Добавить действие (что сделали)</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/blok"}>Добавить БЛОК</Link>
+            <Link to={"/admin/journals/blok/create"}>Добавить БЛОК</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/snyatnumber"}>Добавить номер снятия</Link>
-          </Li>
-          <Li>
-            <Link to={"/admin/journals/postnumber"}>Добавить номер снятия</Link>
+            <Link to={"/admin/journals/postnumber/create"}>Добавить номер поста</Link>
           </Li>
         </Ul>
       </Container>

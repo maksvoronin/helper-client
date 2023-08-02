@@ -9,7 +9,7 @@ export { default as Subscribed } from "./subscribed";
 export { default as System } from "./system";
 export { default as Settings } from "./settings";
 export { default as Register } from "./register";
-export { Admin, CreateSeries, CreateSystem, EditSystem, CreateBackground, DeleteBackground, Users, Export } from "./admin";
+export { Admin, CreateSeries, CreateSystem, EditSystem, CreateBackground, DeleteBackground, Users, Export, CreatePtol, CreatePostscript, CreateLokomotiveNumber, CreateSection, CreateJournalMove, CreateBlok, CreatePostNumber, CreateRoad, CommentsCheck } from "./admin";
 export { default as Profile } from "./profile";
 export { default as DetailComment } from "./detailComment";
 export { default as DetailDecision } from "./detailDecision";
@@ -17,6 +17,5 @@ export { default as Recovery } from "./recovery";
 export { default as Activate } from "./activate";
 export { default as Welcome } from "./welcome";
 export { default as Rating } from "./rating";
-
 export { JournalComments } from "./journals";
 export { Developers } from "./developers";

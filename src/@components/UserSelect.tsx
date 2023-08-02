@@ -3,7 +3,7 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, User } from "../@types";
-import { useAuthStoreContext, useSectionStoreContext, useUserStore } from "../@store";
+import { useAuthStoreContext, useUserStore } from "../@store";
 
 const UserSelect: FC<{ onChange: (e: string) => void; defaultAuthed?: boolean }> = observer(({ onChange, defaultAuthed }) => {
   const { users, setUsers } = useUserStore();

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { Blok, PostNumber } from "../@types";
+import { PostNumber } from "../@types";
 import { action, makeObservable, observable } from "mobx";
 
 class PostnumberS { 

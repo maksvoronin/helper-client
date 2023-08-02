@@ -22,3 +22,4 @@ export { default as Section } from "./section.interface";
 export { default as JournalMove } from "./journalmove.interface";
 export { default as Blok } from "./blok.interface";
 export { default as PostNumber } from "./postnumber.interface";
+export { default as CommentsJournal } from "./commentsjournal.interface";
