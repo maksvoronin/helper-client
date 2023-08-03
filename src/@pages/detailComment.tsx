@@ -11,24 +11,7 @@ import { alert } from "../@services/alerting.service";
 import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { styled } from "styled-components";
-
-const EditComment: FC<{comment: Comment, setComment: any}> = observer(({comment, setComment}) => {
-  const [text, setText] = useState<string>(comment.content);
-  const { setVisible } = usePopupStoreContext();
-
-  const sendData = () => {
-    $api.put<Response<Comment>>("/comment/edit", {id: comment._id, comment: text}).then(({data}) => {
-      if(data.type === "error") return alert("error", "Ошибка", String(data.data!), 15);
-      setComment(data.data!);
-      setVisible(false);
-    })
-  }
-
-  return <>
-    <Input value={text} onChange={({target}: any) => setText(target.value)} />
-    <Button onClick={sendData}>Сохранить</Button>
-  </>;
-});
+import { EditCommentPopup } from "../@popups";
 
 const ControlButton = styled.button`
   height: 40px;
@@ -64,8 +47,13 @@ const DetailComment: FC<PageProps> = observer(({ title }) => {
     $api.get<Response<Comment>>(`/comment/get?id=${id}`).then(({ data }) => {
       setComment(data.data!);
     });
-    user._id && user.subscribedComments.find((e) => e._id === id) ? setCommentLiked(true) : setCommentLiked(false);
   }, [id]);
+
+  useEffect(() => {
+    if(user && user.subscribedComments && comment) {
+      user.subscribedComments.find((e) => e._id === comment._id) ? setCommentLiked(true) : setCommentLiked(false);
+    }
+  }, [user, comment]);
 
   if (!comment) return <></>;
   const newUser = user;
@@ -108,7 +96,7 @@ const DetailComment: FC<PageProps> = observer(({ title }) => {
         {(user._id === comment.by._id || user.permissions > 4) && <Button style={{ marginTop: 10 }} onClick={() => {
           setVisible(true);
           setTitle("Изменение замечания");
-          setContent(<EditComment comment={comment} setComment={setComment} />)
+          setContent(<EditCommentPopup comment={comment} setComment={setComment} />)
         }}>Изменить замечание</Button>}
         {
           commentLiked ? (
