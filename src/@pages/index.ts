@@ -5,7 +5,7 @@ export { default as Decision } from "./decision";
 export { default as Liked } from "./liked";
 export { default as Login } from "./login";
 export { default as My } from "./my";
-export { default as Subscribed } from "./subscribed";
+export { default as Subscribed } from "./favorite";
 export { default as System } from "./system";
 export { default as Settings } from "./settings";
 export { default as Register } from "./register";

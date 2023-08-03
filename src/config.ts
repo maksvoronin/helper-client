@@ -1,7 +1,7 @@
-export const dev_mode = false;
+export const dev_mode = true;
 
 const config = {
-  dev_title: "Release v2.1.2 (Small Fixs in selects)",
+  dev_title: "Journals v2.1.3 (Link on favorite comments)",
   API: dev_mode ? `http://192.168.0.110:1000/api` : `https://helper.voronin.xyz/api`,
   fileHost: dev_mode ? `http://192.168.0.110:1000/api/public` : `https://helper.voronin.xyz/api/public`,
   fileUpload: dev_mode ? `http://192.168.0.110:1000/api/file/upload` : `https://helper.voronin.xyz/api/file/upload`,

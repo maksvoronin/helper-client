@@ -10,7 +10,7 @@ const H3 = styled.h3`
   margin-top: 10px;
   margin-bottom: 5px;
   font-size: 18px;
-  color: var(--primaryText, #333);
+  color: #444444;
 `;
 
 const Subscribed: FC<PageProps> = observer(({ title }) => {
@@ -39,7 +39,9 @@ const Subscribed: FC<PageProps> = observer(({ title }) => {
           <ContainerSubTitle>Замечания: {user.subscribedComments.length}</ContainerSubTitle>
           {user.subscribedComments.map((e) => (
             <div key={e._id}>
-              <H3>{e.content}</H3>
+              <Link to={`/comment/${e._id}`}>
+                <H3>{e.content}</H3>
+              </Link>
               <Ul>
                 {e.decisions.map((e) => (
                   <Li key={e._id}>
