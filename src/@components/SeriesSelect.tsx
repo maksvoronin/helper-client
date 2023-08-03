@@ -5,7 +5,7 @@ import { Response, Series } from "../@types";
 import $api from "../@http";
 import { useSeriesStoreContext } from "../@store";
 
-const SeriesSelect: FC<{ onChange: Function }> = observer(({ onChange }) => {
+const SeriesSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
   const { series, setSeries } = useSeriesStoreContext();
 
   useEffect(() => {

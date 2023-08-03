@@ -2,7 +2,7 @@ import { FC } from "react";
 import { observer } from "mobx-react";
 import { PageProps } from "../../@types";
 import { MainLayout } from "../../@layouts";
-import { Container, ContainerTitle, Li, Ul, Link } from "../../@shared";
+import { Container, ContainerTitle, Li, Ul, Link, FormText } from "../../@shared";
 
 const Admin: FC<PageProps> = observer(({ title }) => {
   return (
@@ -55,6 +55,10 @@ const Admin: FC<PageProps> = observer(({ title }) => {
           <Li>
             <Link to={"/admin/journals/postnumber/create"}>Добавить номер поста</Link>
           </Li>
+        </Ul>
+        <FormText>Просмотр журналов</FormText>
+        <Ul>
+          <Li><Link to={"/admin/journal/comments"}>Журнал замечаний локомотивов</Link></Li>
         </Ul>
       </Container>
 

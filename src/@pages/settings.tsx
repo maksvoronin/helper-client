@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { Background, PageProps, Response } from "../@types";
 import { MainLayout } from "../@layouts";
-import { FC, useEffect, useState } from "react";
+import { FC, createRef, useEffect, useState } from "react";
 import { Button, Container, ContainerTitle, Input, InputFile } from "../@shared";
 import { styled } from "styled-components";
 import { useAuthStoreContext } from "../@store";
@@ -118,6 +118,10 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const [backgrounds, setBackgrounds] = useState<Background[]>([]);
   const [selectedBackground, setSelectedBackground] = useState<Background>();
 
+  const [avatar, setAvatar] = useState<string>('');
+  const inputFile: any = createRef();
+  const [fileName, setFileName] = useState<string>('');
+
   const newUser = user;
 
   useEffect(() => {
@@ -146,6 +150,29 @@ const Settings: FC<PageProps> = observer(({ title }) => {
     }
   }, [selectedBackground, newUser, setUser]);
 
+  useEffect(() => {
+    if (fileName) {
+      const extname = fileName.substring(fileName.lastIndexOf('.'));
+
+      if (!config.imageExt.includes(extname)) {
+        return alert('error', 'Ошибка', 'Загрузите картинку (.png, .jpg, .gif, .heif и тп)', 15);
+      }
+
+      const formData = new FormData();
+      formData.append('file', inputFile.current.files[0]);
+      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => {
+        if (data.type === 'error') {
+          return alert('error', 'Ошибка', data.message, 15);
+        }
+        console.log(data);
+        newUser.avatar = data.data.file;
+        setUser(newUser);
+        setAvatar(data.data.file);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fileName]);
+
   const sendUserData = () => {
     if (user.name !== name) {
       $api.post<Response<string>>(`/user/settings/name`, { name }).then(({ data }) => {
@@ -163,12 +190,16 @@ const Settings: FC<PageProps> = observer(({ title }) => {
     }
 
     if (phone && phone !== user.phone) {
-      $api.post(`/user/settings/phone`, { phone }).then(({ data }) => {
+      $api.post<Response<string>>(`/user/settings/phone`, { phone }).then(({ data }) => {
         alert("default", "Успешно", data.data!, 15);
         newUser.phone = phone;
         setUser(newUser);
       });
     }
+
+    $api.post<Response<string>>(`/user/settings/avatar`, { avatar }).then(({data}) => {
+      alert("default", "Успешно", data.data!, 15);
+    })
   };
 
   const sendUserSecurity = () => {
@@ -210,7 +241,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
         <ContainerTitle style={{ marginBottom: 20 }}>Аккаунт</ContainerTitle>
         <RowUserInfo>
           <Avatar htmlFor="avatar" style={{ backgroundImage: `url(${config.fileHost}/${user.avatar})` }} />
-          <InputFile type="file" id="avatar" accept="image/*" />
+          <InputFile type="file" id="avatar" accept="image/*" value={fileName} onChange={({ target }: any) => setFileName(target.value)} ref={inputFile} />
           <ColumnUserInfo>
             <RowUserInfo>
               <ColumnUserInput>
