@@ -66,7 +66,6 @@ const JournalComments: FC<PageProps> = observer(({ title }) => {
       setNumberMark("");
       setNotePTOL("");
       setSelectedPostNumber("");
-
     });
   };
 

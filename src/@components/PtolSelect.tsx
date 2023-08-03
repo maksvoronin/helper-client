@@ -9,7 +9,7 @@ const PtolSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
   const { ptols, setPtols } = usePtolStoreContext();
 
   useEffect(() => {
-    if (ptols.length < 1) {
+    if (ptols && ptols.length < 1) {
       $api.get<Response<Ptol[]>>(`/ptol/all`).then(({ data }) => {
         setPtols(data.data!);
       });

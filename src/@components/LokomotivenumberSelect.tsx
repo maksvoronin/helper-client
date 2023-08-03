@@ -9,7 +9,7 @@ const LokomotivenumberSelect: FC<{ onChange: (e: string) => void }> = observer((
   const { lokomotivenumbers, setLokomotiveNumbers } = useLokomotiveNumberStoreContext();
 
   useEffect(() => {
-    if (lokomotivenumbers.length < 1) {
+    if (lokomotivenumbers && lokomotivenumbers.length < 1) {
       $api.get<Response<LokomotiveNumber[]>>(`/lokomotivenumber/all`).then(({ data }) => {
         setLokomotiveNumbers(data.data!);
       });

@@ -9,7 +9,7 @@ const SectionSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChang
   const { sections, setSections } = useSectionStoreContext();
 
   useEffect(() => {
-    if (sections.length < 1) {
+    if (sections && sections.length < 1) {
       $api.get<Response<Section[]>>(`/section/all`).then(({ data }) => {
         setSections(data.data!);
       });

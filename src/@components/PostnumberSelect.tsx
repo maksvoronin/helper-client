@@ -9,7 +9,7 @@ const PostnumberSelect: FC<{ onChange: (e: string) => void }> = observer(({ onCh
   const { postnumber, setPostNumber } = usePostNumberStore();
 
   useEffect(() => {
-    if (postnumber.length < 1) {
+    if (postnumber && postnumber.length < 1) {
       $api.get<Response<PostNumber[]>>(`/postnumber/all`).then(({ data }) => {
         setPostNumber(data.data!);
       });

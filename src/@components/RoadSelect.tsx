@@ -9,7 +9,7 @@ const RoadSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
   const { roads, setRoads } = useRoadStoreContext();
 
   useEffect(() => {
-    if (roads.length < 1) {
+    if (roads && roads.length < 1) {
       $api.get<Response<Road[]>>(`/road/all`).then(({ data }) => {
         setRoads(data.data!);
       });

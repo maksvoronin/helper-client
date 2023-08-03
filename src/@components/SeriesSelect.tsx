@@ -9,7 +9,7 @@ const SeriesSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange
   const { series, setSeries } = useSeriesStoreContext();
 
   useEffect(() => {
-    if(series.length < 1) {
+    if(series && series.length < 1) {
       $api.get<Response<Series[]>>(`/series/all`).then(({ data }) => {
         setSeries(data.data!);
       });

@@ -9,7 +9,7 @@ const BlokSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
   const { blok, setBlok } = useBlokStore();
 
   useEffect(() => {
-    if (blok.length < 1) {
+    if (blok && blok.length < 1) {
       $api.get<Response<Blok[]>>(`/blok/all`).then(({ data }) => {
         setBlok(data.data!);
       });

@@ -9,7 +9,7 @@ const PostScriptSelect: FC<{ onChange: (e: string) => void }> = observer(({ onCh
   const { postscripts, setPostScripts } = usePostScriptStoreContext();
 
   useEffect(() => {
-    if (postscripts.length < 1) {
+    if (postscripts && postscripts.length < 1) {
       $api.get<Response<PostScript[]>>(`/postscript/all`).then(({ data }) => {
         setPostScripts(data.data!);
       });

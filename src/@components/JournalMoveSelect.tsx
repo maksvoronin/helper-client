@@ -9,7 +9,7 @@ const JournalMoveSelect: FC<{ onChange: (e: string) => void }> = observer(({ onC
   const { journalmove, setJournalMove } = useJournalMoveStore();
 
   useEffect(() => {
-    if (journalmove.length < 1) {
+    if (journalmove && journalmove.length < 1) {
       $api.get<Response<JournalMove[]>>(`/journalmove/all`).then(({ data }) => {
         setJournalMove(data.data!);
       });

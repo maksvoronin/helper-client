@@ -10,7 +10,7 @@ const UserSelect: FC<{ onChange: (e: string) => void; defaultAuthed?: boolean }>
   const { user } = useAuthStoreContext();
 
   useEffect(() => {
-    if (users.length < 1) {
+    if (users && users.length < 1) {
       $api.get<Response<User[]>>(`/user/all`).then(({ data }) => {
         setUsers(data.data!);
       });

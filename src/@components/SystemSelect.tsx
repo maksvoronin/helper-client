@@ -9,7 +9,7 @@ const SystemSelect: FC<{ onChange: (e: string) => void; fullInfo?: Function; jou
   const { systems, setSystems } = useSystemStoreContext();
 
   useEffect(() => {
-    if (systems.length < 1) {
+    if (systems && systems.length < 1) {
       $api.get<Response<System[]>>(`/system/all`).then(({ data }) => {
         setSystems(data.data!);
       });
