@@ -46,8 +46,10 @@ const Users: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     $api.get<Response<User[]>>("/user/all").then(({ data }) => {
-      setUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
-      setFilterUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
+      if (data.data) {
+        setUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
+        setFilterUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
+      }
     });
   }, []);
 
@@ -61,7 +63,7 @@ const Users: FC<PageProps> = observer(({ title }) => {
     } else {
       setFilterUsers(users);
     }
-  }, [filterRoad]);
+  }, [filterRoad, users]);
 
   return (
     <MainLayout title={title}>
