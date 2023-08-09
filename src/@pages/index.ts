@@ -9,7 +9,7 @@ export { default as Subscribed } from "./favorite";
 export { default as System } from "./system";
 export { default as Settings } from "./settings";
 export { default as Register } from "./register";
-export { Admin, CreateSeries, CreateSystem, EditSystem, CreateBackground, DeleteBackground, Users, Export, CreatePtol, CreatePostscript, CreateLokomotiveNumber, CreateSection, CreateJournalMove, CreateBlok, CreatePostNumber, CreateRoad, CommentsCheck } from "./admin";
+export { Admin, CreateSeries, CreateSystem, EditSystem, CreateBackground, DeleteBackground, Users, Export, CreatePtol, CreatePostscript, CreateLokomotiveNumber, CreateSection, CreateJournalMove, CreateBlok, CreatePostNumber, CreateRoad, EditRoad , CommentsCheck } from "./admin";
 export { default as Profile } from "./profile";
 export { default as DetailComment } from "./detailComment";
 export { default as DetailDecision } from "./detailDecision";

@@ -14,7 +14,7 @@ const RoadSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
         setRoads(data.data!);
       });
     }
-  }, [roads]);
+  }, [roads, setRoads]);
 
   return (
     <StyledSelect

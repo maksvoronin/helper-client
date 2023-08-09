@@ -24,6 +24,7 @@ import {
   DetailComment,
   DetailDecision,
   Developers,
+  EditRoad,
   EditSystem,
   Export,
   Index,
@@ -204,6 +205,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/journal/comments",
     element: <CommentsCheck title="Журнал замечаний локомотива" />
+  },
+  {
+    path: "/admin/road/edit",
+    element: <EditRoad title="Изменение дороги" />
   }
 ]);
 

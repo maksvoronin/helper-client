@@ -17,6 +17,9 @@ const Admin: FC<PageProps> = observer(({ title }) => {
             <Link to={"/admin/road/create"}>Добавить дорогу</Link>
           </Li>
           <Li>
+            <Link to={"/admin/road/edit"}>Изменить дорогу</Link>
+          </Li>
+          <Li>
             <Link to={"/admin/system/create"}>Добавить систему</Link>
           </Li>
           <Li>

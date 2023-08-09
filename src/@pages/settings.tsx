@@ -8,6 +8,7 @@ import { useAuthStoreContext } from "../@store";
 import config from "../config";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
+import { RoadSelect } from "../@components";
 
 const Avatar = styled.label`
   width: 200px;
@@ -66,6 +67,7 @@ const ColumnUserInfo = styled.div`
 const ColumnUserInput = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 3px;
   > * {
     margin: 0;
   }
@@ -118,9 +120,11 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const [backgrounds, setBackgrounds] = useState<Background[]>([]);
   const [selectedBackground, setSelectedBackground] = useState<Background>();
 
-  const [avatar, setAvatar] = useState<string>('');
+  const [avatar, setAvatar] = useState<string>("");
   const inputFile: any = createRef();
-  const [fileName, setFileName] = useState<string>('');
+  const [fileName, setFileName] = useState<string>("");
+
+  const [selectedRoad, setSelectedRoad] = useState<string>("");
 
   const newUser = user;
 
@@ -152,17 +156,17 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     if (fileName) {
-      const extname = fileName.substring(fileName.lastIndexOf('.'));
+      const extname = fileName.substring(fileName.lastIndexOf("."));
 
       if (!config.imageExt.includes(extname)) {
-        return alert('error', 'Ошибка', 'Загрузите картинку (.png, .jpg, .gif, .heif и тп)', 15);
+        return alert("error", "Ошибка", "Загрузите картинку (.png, .jpg, .gif, .heif и тп)", 15);
       }
 
       const formData = new FormData();
-      formData.append('file', inputFile.current.files[0]);
-      $api.post(`${config.fileUpload}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(({ data }) => {
-        if (data.type === 'error') {
-          return alert('error', 'Ошибка', data.message, 15);
+      formData.append("file", inputFile.current.files[0]);
+      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
+        if (data.type === "error") {
+          return alert("error", "Ошибка", data.message, 15);
         }
         console.log(data);
         newUser.avatar = data.data.file;
@@ -197,9 +201,19 @@ const Settings: FC<PageProps> = observer(({ title }) => {
       });
     }
 
-    $api.post<Response<string>>(`/user/settings/avatar`, { avatar }).then(({data}) => {
+    $api.post<Response<string>>(`/user/settings/avatar`, { avatar }).then(({ data }) => {
       alert("default", "Успешно", data.data!, 15);
-    })
+    });
+  };
+
+  const sendWorkData = () => {
+    if (selectedRoad) {
+      $api.post<Response<string>>(`/user/settings/road`, { road: selectedRoad }).then(({ data }) => {
+        alert("default", "Смена дороги", data.data!, 15);
+        newUser.road = selectedRoad;
+        setUser(newUser);
+      });
+    }
   };
 
   const sendUserSecurity = () => {
@@ -260,6 +274,21 @@ const Settings: FC<PageProps> = observer(({ title }) => {
             <Button onClick={sendUserData}>Сохранить</Button>
           </ColumnUserInfo>
         </RowUserInfo>
+      </Container>
+
+      <Container>
+        <ContainerTitle>Служебные настройки</ContainerTitle>
+        <ColumnUserInfo>
+          <ColumnUserInput>
+            <p>Дорога</p>
+            <RoadSelect onChange={(e) => setSelectedRoad(e)} />
+          </ColumnUserInput>
+          <ColumnUserInput>
+            <p>Предприятие</p>
+            {/* <WorkSelect onChange={(e) => setSelectedRoad(e)} /> */}
+          </ColumnUserInput>
+          <Button onClick={sendWorkData}>Сохранить</Button>
+        </ColumnUserInfo>
       </Container>
 
       <Container>
