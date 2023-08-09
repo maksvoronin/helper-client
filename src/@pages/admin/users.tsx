@@ -56,7 +56,7 @@ const Users: FC<PageProps> = observer(({ title }) => {
   }, [users]);
 
   useEffect(() => {
-    if (filterRoad) {
+    if (filterRoad && String(filterRoad) !== "0") {
       setFilterUsers(users.filter((e) => e.road._id === filterRoad));
     } else {
       setFilterUsers(users);
