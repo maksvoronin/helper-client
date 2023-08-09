@@ -14,7 +14,7 @@ const PostnumberSelect: FC<{ onChange: (e: string) => void }> = observer(({ onCh
         setPostNumber(data.data!);
       });
     }
-  }, [postnumber]);
+  }, [postnumber, setPostNumber]);
 
   return (
     <StyledSelect
@@ -24,7 +24,7 @@ const PostnumberSelect: FC<{ onChange: (e: string) => void }> = observer(({ onCh
       }}
     >
       <option value={0} disabled>
-        Выберите номер поста
+        Выберите какой номер поставили
       </option>
       {postnumber &&
         postnumber.map((e) => (

@@ -14,7 +14,7 @@ const LokomotivenumberSelect: FC<{ onChange: (e: string) => void }> = observer((
         setLokomotiveNumbers(data.data!);
       });
     }
-  }, [lokomotivenumbers]);
+  }, [lokomotivenumbers, setLokomotiveNumbers]);
 
   return (
     <StyledSelect

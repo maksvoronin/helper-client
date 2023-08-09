@@ -14,7 +14,7 @@ const PtolSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
         setPtols(data.data!);
       });
     }
-  }, [ptols]);
+  }, [ptols, setPtols]);
 
   return (
     <StyledSelect

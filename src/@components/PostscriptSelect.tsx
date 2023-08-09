@@ -14,7 +14,7 @@ const PostScriptSelect: FC<{ onChange: (e: string) => void }> = observer(({ onCh
         setPostScripts(data.data!);
       });
     }
-  }, [postscripts]);
+  }, [postscripts, setPostScripts]);
 
   return (
     <StyledSelect

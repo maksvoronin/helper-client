@@ -14,7 +14,7 @@ const SeriesSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange
         setSeries(data.data!);
       });
     }
-  }, [series.length, setSeries]);
+  }, [series.length, setSeries, series]);
   return (
     <StyledSelect defaultValue={0} onChange={({ target }: any) => onChange(target.value)}>
       <option value={0} disabled>

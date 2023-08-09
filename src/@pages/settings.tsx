@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { Background, PageProps, Response } from "../@types";
+import { Background, PageProps, Response, User } from "../@types";
 import { MainLayout } from "../@layouts";
 import { FC, createRef, useEffect, useState } from "react";
 import { Button, Container, ContainerTitle, Input, InputFile } from "../@shared";
@@ -134,8 +134,9 @@ const Settings: FC<PageProps> = observer(({ title }) => {
       setSurname(user.surname);
       setPhone(user.phone);
       setEmail(user.email);
+      setSelectedRoad(user.road && user.road._id);
     }
-  }, [user.name, user.surname, user.phone, user.email, user._id]);
+  }, [user.name, user.surname, user.phone, user.email, user._id, user.road]);
 
   useEffect(() => {
     $api.get<Response<Background[]>>("/background/all").then(({ data }) => {
@@ -145,14 +146,14 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   }, [user]);
 
   useEffect(() => {
-    if (selectedBackground && selectedBackground._id !== newUser.background._id) {
+    if (selectedBackground && selectedBackground._id !== user.background._id) {
       $api.post<Response<string>>(`/user/settings/background`, { background: selectedBackground._id }).then(({ data }) => {
         alert("default", data.message, data.data!, 15);
         newUser.background = selectedBackground;
         setUser(newUser);
       });
     }
-  }, [selectedBackground, newUser, setUser]);
+  });
 
   useEffect(() => {
     if (fileName) {
@@ -208,9 +209,9 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
   const sendWorkData = () => {
     if (selectedRoad) {
-      $api.post<Response<string>>(`/user/settings/road`, { road: selectedRoad }).then(({ data }) => {
-        alert("default", "Смена дороги", data.data!, 15);
-        newUser.road = selectedRoad;
+      $api.post<Response<User>>(`/user/settings/road`, { road: selectedRoad }).then(({ data }) => {
+        alert("default", "Смена дороги", data.message!, 15);
+        const newUser = data.data!;
         setUser(newUser);
       });
     }
@@ -281,12 +282,12 @@ const Settings: FC<PageProps> = observer(({ title }) => {
         <ColumnUserInfo>
           <ColumnUserInput>
             <p>Дорога</p>
-            <RoadSelect onChange={(e) => setSelectedRoad(e)} />
+            <RoadSelect onChange={(e) => setSelectedRoad(e)} value={selectedRoad} />
           </ColumnUserInput>
-          <ColumnUserInput>
+          {/* <ColumnUserInput>
             <p>Предприятие</p>
-            {/* <WorkSelect onChange={(e) => setSelectedRoad(e)} /> */}
-          </ColumnUserInput>
+            <WorkSelect onChange={(e) => setSelectedRoad(e)} />
+          </ColumnUserInput> */}
           <Button onClick={sendWorkData}>Сохранить</Button>
         </ColumnUserInfo>
       </Container>

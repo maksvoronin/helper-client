@@ -14,7 +14,7 @@ const JournalMoveSelect: FC<{ onChange: (e: string) => void }> = observer(({ onC
         setJournalMove(data.data!);
       });
     }
-  }, [journalmove]);
+  }, [journalmove, setJournalMove]);
 
   return (
     <StyledSelect

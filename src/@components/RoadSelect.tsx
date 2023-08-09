@@ -5,7 +5,7 @@ import $api from "../@http";
 import { Response, Road } from "../@types";
 import { useRoadStoreContext } from "../@store";
 
-const RoadSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
+const RoadSelect: FC<{ onChange: (e: string) => void, value?: string }> = observer(({ onChange, value }) => {
   const { roads, setRoads } = useRoadStoreContext();
 
   useEffect(() => {
@@ -16,9 +16,30 @@ const RoadSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
     }
   }, [roads, setRoads]);
 
+  if(value) {
+    return (
+      <StyledSelect
+        value={value}
+        onChange={({ target }: any) => {
+          onChange(target.value);
+        }}
+      >
+        <option value={0} disabled>
+          Выберите дорогу
+        </option>
+        {roads &&
+          roads.map((e) => (
+            <option value={e._id} key={e._id}>
+              {e.name}
+            </option>
+          ))}
+      </StyledSelect>
+    );
+  }
+
   return (
     <StyledSelect
-      defaultValue={0}
+      defaultValue={value ? undefined : 0}
       onChange={({ target }: any) => {
         onChange(target.value);
       }}

@@ -14,7 +14,7 @@ const BlokSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }
         setBlok(data.data!);
       });
     }
-  }, [blok]);
+  }, [blok, setBlok]);
 
   return (
     <StyledSelect

@@ -14,7 +14,7 @@ const SystemSelect: FC<{ onChange: (e: string) => void; fullInfo?: Function; jou
         setSystems(data.data!);
       });
     }
-  }, [systems.length, setSystems]);
+  }, [systems.length, setSystems, systems]);
 
   return (
     <StyledSelect

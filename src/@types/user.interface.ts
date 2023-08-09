@@ -1,6 +1,7 @@
 import Background from "./background.interface";
 import Comment from "./comment.interface";
 import Decision from "./decision.interface";
+import Road from "./road.interface";
 import System from "./system.interface";
 
 export default interface User {
@@ -21,7 +22,7 @@ export default interface User {
   phone: string;
   background: Background;
   created: number;
-  road: string;
+  road: Road;
   work: string;
   rating: number;
 }
