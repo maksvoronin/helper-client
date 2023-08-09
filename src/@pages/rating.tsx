@@ -54,7 +54,7 @@ const Rating: FC<PageProps> = observer(({title}) => {
           return <tr key={e._id}>
             <td>{++i}</td>
             <td>{e.name} {e.surname}</td>
-            <td>{e.road}</td>
+            <td>{e.road.name}</td>
             <td>{e.work}</td>
             <td>{e.createdComments.length}</td>
             <td>{e.createdDecisions.length}</td>

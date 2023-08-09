@@ -20,7 +20,7 @@ const PostNumberCreate: FC<PageProps> = observer(({title}) => {
 
   return <MainLayout title={title}>
     <Container style={{gap: 20, display: "flex", flexDirection: "column"}}>
-      <ContainerTitle>Добавление номера поста</ContainerTitle>
+      <ContainerTitle>Добавление номера поставленного</ContainerTitle>
       <Input placeholder="Укажите номер поста" value={name} onChange={({target}: any) => setName(target.value)} />
       <Button onClick={sendData}>Сохранить</Button>
     </Container>

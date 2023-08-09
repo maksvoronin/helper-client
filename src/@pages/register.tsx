@@ -4,8 +4,8 @@ import { DefaultLayout } from "../@layouts";
 import { FC, useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { Logo } from "../@assets";
-import { Button, Input, Link, StyledSelect } from "../@shared";
-import { ResultField } from "../@components";
+import { Button, Input, Link } from "../@shared";
+import { ResultField, RoadSelect } from "../@components";
 import $api from "../@http";
 import { useAuthStoreContext } from "../@store";
 import { useNavigate } from "react-router-dom";
@@ -113,27 +113,7 @@ const Register: FC<PageProps> = observer(({ title }) => {
             <Input type={"password"} placeholder="Пароль" value={password} onChange={({ target }: any) => setPassword(target.value)} />
             <Input type={"password"} placeholder="Повтор пароля" value={repeatPassword} onChange={({ target }: any) => setRepeatPassword(target.value)} />
           </Row>
-          <StyledSelect defaultValue={0} value={road} onChange={({ target }: any) => setRoad(target.value)}>
-            <option value={0} disabled>
-              Выберите дорогу
-            </option>
-            <option value="Восточно-Сибирская железная дорога">Восточно-Сибирская железная дорога</option>
-            <option value="Горьковская железная дорога">Горьковская железная дорога</option>
-            <option value="Дальневосточная железная дорога">Дальневосточная железная дорога</option>
-            <option value="Забайкальская железная дорога">Забайкальская железная дорога</option>
-            <option value="Западно-Сибирская железная дорога">Западно-Сибирская железная дорога</option>
-            <option value="Калининградская железная дорога">Калининградская железная дорога</option>
-            <option value="Куйбышевская железная дорога">Куйбышевская железная дорога</option>
-            <option value="Московская железная дорога">Московская железная дорога</option>
-            <option value="Октябрьская железная дорога">Октябрьская железная дорога</option>
-            <option value="Приволжская железная дорога">Приволжская железная дорога</option>
-            <option value="Сахалинская железная дорога">Сахалинская железная дорога</option>
-            <option value="Свердловская железная дорога">Свердловская железная дорога</option>
-            <option value="Северная железная дорога">Северная железная дорога</option>
-            <option value="Северо-Кавказская железная дорога">Северо-Кавказская железная дорога</option>
-            <option value="Юго-Восточная железная дорога">Юго-Восточная железная дорога</option>
-            <option value="Южно-Уральская железная дорога">Южно-Уральская железная дорога</option>
-          </StyledSelect>
+          <RoadSelect onChange={(e) => setRoad(e)} />
           <Input placeholder="Предприятие" value={work} onChange={({ target }: any) => setWork(target.value)} />
           <Button onClick={sendData}>Зарегистрироваться</Button>
           <ResultField status={error.status} message={error.message} />

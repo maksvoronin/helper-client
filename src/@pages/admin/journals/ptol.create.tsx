@@ -5,14 +5,16 @@ import { MainLayout } from "../../../@layouts";
 import { Button, Container, ContainerTitle, Input } from "../../../@shared";
 import { alert } from "../../../@services/alerting.service";
 import $api from "../../../@http";
+import { RoadSelect } from "../../../@components";
 
 const PtolCreate: FC<PageProps> = observer(({title}) => {
 
   const [name, setName] = useState<string>("");
+  const [road, setRoad] = useState<string>("");
 
   const sendData = () => {
     if(!name) return alert("error", "Заполните форму", "Укажите название", 15);
-    $api.post<Response<Ptol>>("/ptol/create", {title: name}).then(({data}) => {
+    $api.post<Response<Ptol>>("/ptol/create", {title: name, road}).then(({data}) => {
       alert("default", "Успешно", "ПТОЛ добавлен", 15);
       setName("");
     })
@@ -21,6 +23,7 @@ const PtolCreate: FC<PageProps> = observer(({title}) => {
   return <MainLayout title={title}>
     <Container style={{gap: 20, display: "flex", flexDirection: "column"}}>
       <ContainerTitle>Добавление ПТОЛа</ContainerTitle>
+      <RoadSelect onChange={(e) => setRoad(e)} />
       <Input placeholder="Укажите название" value={name} onChange={({target}: any) => setName(target.value)} />
       <Button onClick={sendData}>Сохранить</Button>
     </Container>
