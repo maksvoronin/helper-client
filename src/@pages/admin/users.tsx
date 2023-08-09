@@ -93,7 +93,7 @@ const Users: FC<PageProps> = observer(({ title }) => {
               <td>
                 {e.name} {e.surname}
               </td>
-              <td>{e.road.name}</td>
+              <td>{e.road && e.road.name}</td>
               <td>{e.work}</td>
               <td>{e.phone}</td>
               <td>{e.createdComments.length}</td>
