@@ -47,8 +47,8 @@ const Users: FC<PageProps> = observer(({ title }) => {
   useEffect(() => {
     $api.get<Response<User[]>>("/user/all").then(({ data }) => {
       if (data.data) {
-        setUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
-        setFilterUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
+        setUsers(data.data!.sort((a, b) => ((a.road && a.road.name) < (b.road && b.road.name) ? -1 : 1)));
+        setFilterUsers(data.data!.sort((a, b) => ((a.road && a.road.name) < (b.road && b.road.name) ? -1 : 1)));
       }
     });
   }, []);
@@ -59,7 +59,7 @@ const Users: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     if (filterRoad && String(filterRoad) !== "0") {
-      setFilterUsers(users.filter((e) => e.road._id === filterRoad));
+      setFilterUsers(users.filter((e) => e.road && e.road._id === filterRoad));
     } else {
       setFilterUsers(users);
     }
