@@ -195,7 +195,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/journals/postnumber/create",
-    element: <CreatePostNumber title="Добавление № поста" />
+    element: <CreatePostNumber title="Добавление № поставленного" />
   },
   {
     path: "/admin/road/create",

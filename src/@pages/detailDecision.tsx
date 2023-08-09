@@ -57,7 +57,6 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     if(user && user.subscribedComments && comment) {
-      console.log(comment._id)
       user.subscribedComments.find((e) => e._id === comment._id) ? setCommentLiked(true) : setCommentLiked(false);
     }
   }, [user, comment]);

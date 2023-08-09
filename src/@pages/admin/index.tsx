@@ -56,7 +56,7 @@ const Admin: FC<PageProps> = observer(({ title }) => {
             <Link to={"/admin/journals/blok/create"}>Добавить БЛОК</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/postnumber/create"}>Добавить номер поста</Link>
+            <Link to={"/admin/journals/postnumber/create"}>Добавить номер поставленного</Link>
           </Li>
         </Ul>
         <FormText>Просмотр журналов</FormText>
