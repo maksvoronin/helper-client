@@ -61,7 +61,7 @@ const Users: FC<PageProps> = observer(({ title }) => {
     } else {
       setFilterUsers(users);
     }
-  }, [filterRoad]);
+  }, [filterRoad, setFilterRoad, users]);
 
   return (
     <MainLayout title={title}>
