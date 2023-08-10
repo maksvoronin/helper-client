@@ -46,8 +46,10 @@ const Users: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     $api.get<Response<User[]>>("/user/all").then(({ data }) => {
-      setUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
-      setFilterUsers(data.data!.sort((a, b) => (a.road.name < b.road.name ? -1 : 1)));
+      if (data.data) {
+        setUsers(data.data!.sort((a, b) => ((a.road && a.road.name) < (b.road && b.road.name) ? -1 : 1)));
+        setFilterUsers(data.data!.sort((a, b) => ((a.road && a.road.name) < (b.road && b.road.name) ? -1 : 1)));
+      }
     });
   }, []);
 
@@ -56,8 +58,8 @@ const Users: FC<PageProps> = observer(({ title }) => {
   }, [users]);
 
   useEffect(() => {
-    if (filterRoad) {
-      setFilterUsers(users.filter((e) => e.road._id === filterRoad));
+    if (filterRoad && String(filterRoad) !== "0") {
+      setFilterUsers(users.filter((e) => e.road && e.road._id === filterRoad));
     } else {
       setFilterUsers(users);
     }
@@ -91,7 +93,7 @@ const Users: FC<PageProps> = observer(({ title }) => {
               <td>
                 {e.name} {e.surname}
               </td>
-              <td>{e.road.name}</td>
+              <td>{e.road && e.road.name}</td>
               <td>{e.work}</td>
               <td>{e.phone}</td>
               <td>{e.createdComments.length}</td>
