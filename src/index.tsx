@@ -26,6 +26,7 @@ import {
   Developers,
   EditRoad,
   EditSystem,
+  EditPtol,
   Export,
   Index,
   JournalComments,
@@ -172,6 +173,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/journals/ptol/create",
     element: <CreatePtol title="Добавление ПТОЛа" />
+  },
+  {
+    path: "/admin/journals/ptol/edit",
+    element: <EditPtol title="Изменение ПТОЛа" />
   },
   {
     path: "/admin/journals/postscript/create",

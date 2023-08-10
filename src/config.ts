@@ -1,4 +1,4 @@
-export const dev_mode = false;
+export const dev_mode = true;
 
 const config = {
   dev_title: "Journals v2.1.8 (Users filter)",

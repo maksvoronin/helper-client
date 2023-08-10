@@ -6,3 +6,5 @@ export { default as CreateJournalMove } from "./journalmove.create";
 export { default as CreateBlok } from "./blok.create";
 export { default as CreatePostNumber } from "./postnumber.create";
 export { default as CommentsCheck } from "./comments.check";
+
+export { default as EditPtol } from "./ptol.edit";

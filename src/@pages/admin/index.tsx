@@ -20,6 +20,12 @@ const Admin: FC<PageProps> = observer(({ title }) => {
             <Link to={"/admin/road/edit"}>Изменить дорогу</Link>
           </Li>
           <Li>
+            <Link to={"/admin/journals/ptol/create"}>Добавить ПТОЛ</Link>
+          </Li>
+          <Li>
+            <Link to={"/admin/journals/ptol/edit"}>Изменить ПТОЛ</Link>
+          </Li>
+          <Li>
             <Link to={"/admin/system/create"}>Добавить систему</Link>
           </Li>
           <Li>
@@ -37,9 +43,6 @@ const Admin: FC<PageProps> = observer(({ title }) => {
       <Container>
         <ContainerTitle>Журналы</ContainerTitle>
         <Ul>
-          <Li>
-            <Link to={"/admin/journals/ptol/create"}>Добавить ПТОЛ</Link>
-          </Li>
           <Li>
             <Link to={"/admin/journals/postscript/create"}>Добавить приписку</Link>
           </Li>
