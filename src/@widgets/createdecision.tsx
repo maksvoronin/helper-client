@@ -5,8 +5,10 @@ import { Comment, FormStatus, Response } from "../@types";
 import $api from "../@http";
 import config from "../config";
 import { observer } from "mobx-react";
+import { useLoaderStore } from "../@store";
 
 const CreateDecision: FC = observer(() => {
+  const { setLoaded } = useLoaderStore();
   const [selectedSystem, setSelectedSystem] = useState<string>("");
 
   const [comments, setComments] = useState<Comment[]>([]);
@@ -19,16 +21,19 @@ const CreateDecision: FC = observer(() => {
 
   const [uploadedFile, setUploadedFile] = useState<string>("");
 
-
   const [postData, setPostData] = useState<FormStatus>({} as FormStatus);
 
   useEffect(() => {
     if (fileName) {
+      setLoaded(true);
       const formData = new FormData();
       formData.append("file", fileInput.current.files[0]);
       formData.append("project", "helper");
       formData.append("comment", "Comment");
-      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
+      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
+        setLoaded(false);
+        setUploadedFile(data.data.file);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);

@@ -13,9 +13,9 @@ const RoadCreate: FC<PageProps> = observer(({title}) => {
   const [name, setName] = useState<string>("");
 
   const sendData = () => {
-    if(!name) return alert("error", "Заполните форму", "Укажите название", 15);
+    if(!name) return alert("error", "Заполните форму", "Укажите название", 1.5);
     $api.post<Response<JournalMove>>("/road/create", {title: name}).then(() => {
-      alert("default", "Успешно", "Дорога добавлена", 15);
+      alert("default", "Успешно", "Дорога добавлена", 1.5);
       setName("");
     })
   }
@@ -39,7 +39,7 @@ export const RoadEdit: FC<PageProps> = observer(({title}) => {
   const sendData = () => {
     if(selectedRoad && name) {
       $api.put<Response<{road: Road, roads: Road[]}>>("/road/edit", {id: selectedRoad, title: name}).then(({data}) => {
-        alert("default", "Успешно", data.message!, 15);
+        alert("default", "Успешно", data.message!, 1.5);
         setName("");
         setRoads(data.data!.roads);
       })

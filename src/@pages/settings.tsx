@@ -4,7 +4,7 @@ import { MainLayout } from "../@layouts";
 import { FC, createRef, useEffect, useState } from "react";
 import { Button, Container, ContainerTitle, Input, InputFile } from "../@shared";
 import { styled } from "styled-components";
-import { useAuthStoreContext } from "../@store";
+import { useAuthStoreContext, useLoaderStore } from "../@store";
 import config from "../config";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
@@ -108,6 +108,7 @@ const LogoutButton = styled(Button)`
 
 const Settings: FC<PageProps> = observer(({ title }) => {
   const { user, setUser } = useAuthStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
@@ -148,7 +149,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   useEffect(() => {
     if (selectedBackground && selectedBackground._id !== user.background._id) {
       $api.post<Response<string>>(`/user/settings/background`, { background: selectedBackground._id }).then(({ data }) => {
-        alert("default", data.message, data.data!, 15);
+        alert("default", data.message, data.data!, 1.5);
         newUser.background = selectedBackground;
         setUser(newUser);
       });
@@ -160,19 +161,21 @@ const Settings: FC<PageProps> = observer(({ title }) => {
       const extname = fileName.substring(fileName.lastIndexOf("."));
 
       if (!config.imageExt.includes(extname)) {
-        return alert("error", "Ошибка", "Загрузите картинку (.png, .jpg, .gif, .heif и тп)", 15);
+        return alert("error", "Ошибка", "Загрузите картинку (.png, .jpg, .gif, .heif и тп)", 1.5);
       }
 
       const formData = new FormData();
       formData.append("file", inputFile.current.files[0]);
+      setLoaded(true);
       $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
         if (data.type === "error") {
-          return alert("error", "Ошибка", data.message, 15);
+          return alert("error", "Ошибка", data.message, 1.5);
         }
         console.log(data);
         newUser.avatar = data.data.file;
         setUser(newUser);
         setAvatar(data.data.file);
+        setLoaded(false);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -181,14 +184,14 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const sendUserData = () => {
     if (user.name !== name) {
       $api.post<Response<string>>(`/user/settings/name`, { name }).then(({ data }) => {
-        alert("default", "Успешно", data.data!, 15);
+        alert("default", "Успешно", data.data!, 1.5);
         newUser.name = name;
         setUser(newUser);
       });
     }
     if (user.surname !== surname) {
       $api.post<Response<string>>(`/user/settings/surname`, { surname }).then(({ data }) => {
-        alert("default", "Успешно", data.data!, 15);
+        alert("default", "Успешно", data.data!, 1.5);
         newUser.surname = surname;
         setUser(newUser);
       });
@@ -196,21 +199,21 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
     if (phone && phone !== user.phone) {
       $api.post<Response<string>>(`/user/settings/phone`, { phone }).then(({ data }) => {
-        alert("default", "Успешно", data.data!, 15);
+        alert("default", "Успешно", data.data!, 1.5);
         newUser.phone = phone;
         setUser(newUser);
       });
     }
 
     $api.post<Response<string>>(`/user/settings/avatar`, { avatar }).then(({ data }) => {
-      alert("default", "Успешно", data.data!, 15);
+      alert("default", "Успешно", data.data!, 1.5);
     });
   };
 
   const sendWorkData = () => {
     if (selectedRoad) {
       $api.post<Response<User>>(`/user/settings/road`, { road: selectedRoad }).then(({ data }) => {
-        alert("default", "Смена дороги", data.message!, 15);
+        alert("default", "Смена дороги", data.message!, 1.5);
         const newUser = data.data!;
         setUser(newUser);
       });
@@ -220,25 +223,25 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const sendUserSecurity = () => {
     if (email && email !== user.email) {
       $api.post<Response<string>>(`/user/security/email`, { email }).then(({ data }) => {
-        alert("default", "Смена почты", data.data!, 15);
+        alert("default", "Смена почты", data.data!, 1.5);
         newUser.email = email;
         setUser(newUser);
       });
     }
     if (password || passwordNew) {
       if (!password) {
-        return alert("error", "Смена пароля", "Укажите текущий пароль", 15);
+        return alert("error", "Смена пароля", "Укажите текущий пароль", 1.5);
       }
 
       if (!passwordNew) {
-        return alert("error", "Смена пароля", "Укажите новый пароль", 15);
+        return alert("error", "Смена пароля", "Укажите новый пароль", 1.5);
       }
 
       $api.post<Response<string>>(`${config.API}/user/security/password`, { prev: password, password: passwordNew }).then(({ data }) => {
         if (data.type === "error") {
-          alert("error", "Смена пароля", data.message!, 15);
+          alert("error", "Смена пароля", data.message!, 1.5);
         } else {
-          alert("default", "Смена пароля", data.message!, 15);
+          alert("default", "Смена пароля", data.message!, 1.5);
         }
       });
     }

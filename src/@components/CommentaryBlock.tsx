@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Commentary, Response } from "../@types";
+import { Commentary } from "../@types";
 import { observer } from "mobx-react";
 import { styled } from "styled-components";
 import config from "../config";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
 import { useAuthStoreContext, usePopupStoreContext } from "../@store";
-import { Button, Input } from "../@shared";
+import { EditCommentaryPopup } from "../@popups";
 
 const Comment = styled.div`
   display: flex;
@@ -68,27 +68,6 @@ const DeletedCommentary = styled.div`
   opacity: 0.3;
 `;
 
-const CommentaryEditForm: FC<{comment: Commentary, setComment: any}> = observer(({comment, setComment}) => {
-  const [input, setInput] = useState<string>(comment.text || "");
-  const { setVisible } = usePopupStoreContext();
-  const editCommentary = () => {
-    if (!input) {
-      alert("error", "Заполните форму", "Укажите текст комментария", 15);
-    }
-    $api.put<Response<Commentary>>("/commentary/edit", { id: comment._id, text: input }).then(({ data }) => {
-      alert("default", "Успешно", "Комментарий изменен", 15);
-      setComment(data.data!);
-      setVisible(false);
-    });
-  };
-  return (
-    <>
-      <Input placeholder="Комментарий" value={input} onChange={({ target }: any) => setInput(target.value)} />
-      <Button onClick={editCommentary}>Изменить</Button>
-    </>
-  );
-});
-
 const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
   const { user } = useAuthStoreContext();
   const [commentary, setCommentary] = useState<Commentary>(comment);
@@ -97,9 +76,9 @@ const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
 
   const deleteCommentary = () => {
     $api.put(`/decision/uncommentary`, { id: commentary._id }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Произошла ошибка", data.data, 15);
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.data, 1.5);
       setDeletedCommentary(true);
-      alert("default", "Успешно", "Комментарий удалён", 15);
+      alert("default", "Успешно", "Комментарий удалён", 1.5);
     });
   };
 
@@ -121,7 +100,7 @@ const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
                   onClick={() => {
                     setVisible(true);
                     setTitle("Изменение комментария");
-                    setContent(<CommentaryEditForm comment={commentary} setComment={setCommentary} />);
+                    setContent(<EditCommentaryPopup comment={commentary} setComment={setCommentary} />);
                   }}
                 >
                   Изменить

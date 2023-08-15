@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { AlertPanel, Popup, Sidebar } from "../@widgets";
 import { useAuthStoreContext } from "../@store";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../@components";
 
 const MainGrid = styled.div`
   display: flex;
@@ -117,6 +118,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
           background: `${backgroundImage ? `url(${config.API}/public/${backgroundImage.content})` : `url(${defaultBG})`}`,
         }}
       >
+        <Loader />
         <Sidebar />
         <MainContent>{children}</MainContent>
         {

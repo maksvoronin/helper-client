@@ -11,9 +11,9 @@ const PostscriptCreate: FC<PageProps> = observer(({title}) => {
   const [name, setName] = useState<string>("");
 
   const sendData = () => {
-    if(!name) return alert("error", "Заполните форму", "Укажите название", 15);
+    if(!name) return alert("error", "Заполните форму", "Укажите название", 1.5);
     $api.post<Response<PostScript>>("/postscript/create", {title: name}).then(() => {
-      alert("default", "Успешно", "Приписка добавлена", 15);
+      alert("default", "Успешно", "Приписка добавлена", 1.5);
       setName("");
     })
   }

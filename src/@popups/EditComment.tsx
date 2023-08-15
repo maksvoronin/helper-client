@@ -12,7 +12,7 @@ const EditComment: FC<{comment: Comment, setComment: any}> = observer(({comment,
 
   const sendData = () => {
     $api.put<Response<Comment>>("/comment/edit", {id: comment._id, comment: text}).then(({data}) => {
-      if(data.type === "error") return alert("error", "Ошибка", String(data.data!), 15);
+      if(data.type === "error") return alert("error", "Ошибка", String(data.data!), 1.5);
       setComment(data.data!);
       setVisible(false);
     })

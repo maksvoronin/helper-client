@@ -13,9 +13,9 @@ const PtolCreate: FC<PageProps> = observer(({title}) => {
   const [road, setRoad] = useState<string>("");
 
   const sendData = () => {
-    if(!name) return alert("error", "Заполните форму", "Укажите название", 15);
+    if(!name) return alert("error", "Заполните форму", "Укажите название", 1.5);
     $api.post<Response<Ptol>>("/ptol/create", {title: name, road}).then(({data}) => {
-      alert("default", "Успешно", "ПТОЛ добавлен", 15);
+      alert("default", "Успешно", "ПТОЛ добавлен", 1.5);
       setName("");
     })
   }

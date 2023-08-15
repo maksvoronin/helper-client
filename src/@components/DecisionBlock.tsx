@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
-import { FC, createRef, useEffect, useState } from "react";
-import { Button, Container, FileLabel, Input, InputFile } from "../@shared";
+import { FC, useEffect, useState } from "react";
+import { Container } from "../@shared";
 import { Decision, Response } from "../@types";
 import { styled } from "styled-components";
 import Icon from "@mdi/react";
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useAuthStoreContext, usePopupStoreContext } from "../@store";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
+import { EditDecisionPopup } from "../@popups";
 
 const DecisionText = styled.p`
   margin: 0;
@@ -96,57 +97,6 @@ const extname = (filename: string): string => {
   return `.${filename.split(".").pop()}` || "";
 };
 
-const EditDecision: FC<{ decision: Decision, setDecision: any }> = observer(({ decision, setDecision }) => {
-  const { setVisible } = usePopupStoreContext();
-  const [text, setText] = useState<string>(decision.content);
-  const [fileName, setFileName] = useState<string>("");
-  const fileInput: any = createRef();
-
-  const [uploadedFile, setUploadedFile] = useState<string>("");
-
-  useEffect(() => {
-    if (fileName) {
-      const formData = new FormData();
-      formData.append("file", fileInput.current.files[0]);
-      formData.append("project", "helper");
-      formData.append("comment", "Comment");
-      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fileName]);
-
-  const unlinkFile = (e?: any) => {
-    setFileName("");
-    setUploadedFile("");
-    e && e.preventDefault();
-  };
-
-  const sendData = () => {
-    $api.put<Response<Decision>>("/decision/edit", {id: decision._id, content: text, file: uploadedFile}).then(({data}) => {
-      if(data.type === "error" || typeof data.data === "string") return alert("error", "Ошибка", String(data.data!), 15);
-      alert("default", "Успешно", "Решение изменено", 15);
-      setDecision(data.data);
-      setVisible(false);
-    })
-  }
-
-  return (
-    <>
-      <Input placeholder="Текст решения" value={text} onChange={({ target }: any) => setText(target.value)} />
-      <FileLabel
-        htmlFor="file"
-        onClick={(e: any) => {
-          fileName && unlinkFile(e);
-        }}
-      >
-        {fileName ? `Открепить файл ${uploadedFile}` : "Прикрепить другой файл к решению"}
-      </FileLabel>
-      <InputFile type={"file"} id="file" onChange={({ target }: any) => setFileName(target.value)} ref={fileInput} />
-      <Button onClick={sendData}>Сохранить</Button>
-    </>
-  );
-});
-
 const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
   const { user, setUser } = useAuthStoreContext();
   const { setTitle, setVisible, setContent } = usePopupStoreContext();
@@ -160,7 +110,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
 
   const like = () => {
     $api.post<Response>(`/decision/like`, { id: decision._id }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 1.5);
       newUser.likedDecisions.push(decision);
       setUser(newUser);
       setIsLiked(true);
@@ -169,7 +119,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
 
   const dislike = () => {
     $api.post<Response>(`/decision/unlike`, { id: decision._id }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 1.5);
       newUser.likedDecisions.splice(user.likedDecisions.indexOf(decision), 1);
       setUser(newUser);
       setIsLiked(false);
@@ -206,7 +156,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
                 onClick={() => {
                   setTitle("Изменение решения");
                   setVisible(true);
-                  setContent(<EditDecision decision={newDecision} setDecision={setNewDecision} />);
+                  setContent(<EditDecisionPopup decision={newDecision} setDecision={setNewDecision} />);
                 }}
               >
                 <Icon path={mdiPencil} size="16px" />

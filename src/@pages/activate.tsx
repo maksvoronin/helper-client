@@ -67,7 +67,7 @@ const Activate: FC<PageProps> = observer(({ title }) => {
   const sendData = () => {
     $api.post(`/user/security/email`, { email }).then(({ data }: any) => {
       if (data.type === 'error') {
-        return alert('error', 'Укажите почту', data.data, 15);
+        return alert('error', 'Укажите почту', data.data, 1.5);
       } 
       alert("default", "Успешно", "Письмо отправлено, почта изменена", 15)
     });

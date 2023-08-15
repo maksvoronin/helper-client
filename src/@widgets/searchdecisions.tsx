@@ -8,7 +8,7 @@ import { CommentSelect, DecisionBlock, SystemSelect } from "../@components";
 import Icon from "@mdi/react";
 import { mdiHeart, mdiHeartOutline, mdiShareOutline } from "@mdi/js";
 import { useNavigate } from "react-router-dom";
-import { useAuthStoreContext, usePopupStoreContext } from "../@store";
+import { useAuthStoreContext, useLoaderStore, usePopupStoreContext } from "../@store";
 import { alert } from "../@services/alerting.service";
 import config from "../config";
 
@@ -45,9 +45,10 @@ const ControlRow = styled.div`
   }
 `;
 
-const CreateDecisionPopup: FC<{selectedComment: string}> = observer(({selectedComment}) => {
+const CreateDecisionPopup: FC<{ selectedComment: string }> = observer(({ selectedComment }) => {
   const navigate = useNavigate();
   const { setVisible } = usePopupStoreContext();
+  const { setLoaded } = useLoaderStore();
   const [text, setText] = useState<string>("");
   const [fileName, setFileName] = useState<string>("");
   const fileInput: any = createRef();
@@ -56,11 +57,15 @@ const CreateDecisionPopup: FC<{selectedComment: string}> = observer(({selectedCo
 
   useEffect(() => {
     if (fileName) {
+      setLoaded(true);
       const formData = new FormData();
       formData.append("file", fileInput.current.files[0]);
       formData.append("project", "helper");
       formData.append("comment", "Comment");
-      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
+      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
+        setUploadedFile(data.data.file);
+        setLoaded(false);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
@@ -73,15 +78,15 @@ const CreateDecisionPopup: FC<{selectedComment: string}> = observer(({selectedCo
 
   const sendData = () => {
     $api.post<Response<Decision>>("/decision/create", { comment: selectedComment, content: text, file: uploadedFile }).then(({ data }) => {
-      if (data.type === "error" || typeof data.data === "string") return alert("error", "Ошибка", String(data.data!), 15);
-      alert("default", "Успешно", "Решение создано", 15);
+      if (data.type === "error" || typeof data.data === "string") return alert("error", "Ошибка", String(data.data!), 1.5);
+      alert("default", "Успешно", "Решение создано", 1.5);
       setVisible(false);
       navigate(`/decision/${data.data?._id}`);
     });
   };
   return (
     <>
-      <Textarea placeholder="Текст решения" onChange={({target}: any) => setText(target.value)} value={text} />
+      <Textarea placeholder="Текст решения" onChange={({ target }: any) => setText(target.value)} value={text} />
       <FileLabel
         htmlFor="file"
         onClick={(e: any) => {
@@ -99,6 +104,7 @@ const CreateDecisionPopup: FC<{selectedComment: string}> = observer(({selectedCo
 const SearchDecisions: FC = observer(() => {
   const { user, setUser, isAuth } = useAuthStoreContext();
   const { setVisible, setTitle, setContent } = usePopupStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   const [selectedSystem, setSelectedSystem] = useState<string>();
   const [selectedFullSystem, setSelectedFullSystem] = useState<System>({} as System);
@@ -122,61 +128,73 @@ const SearchDecisions: FC = observer(() => {
 
   useEffect(() => {
     if (selectedSystem) {
+      setLoaded(true);
       $api.get<Response<Comment[]>>(`/comment/system?id=${selectedSystem}`).then(({ data }) => {
         setComments(data.data!);
+        setLoaded(false);
       });
       user._id && user.subscribedSystems.find((e) => e._id === selectedSystem) ? setSystemLiked(true) : setSystemLiked(false);
     }
-  }, [selectedSystem, user.subscribedSystems, user._id]);
+  }, [selectedSystem, user.subscribedSystems, user._id, setLoaded]);
 
   useEffect(() => {
     if (selectedComment) {
+      setLoaded(true);
       $api.get<Response<Decision[]>>(`/comment/decisions?id=${selectedComment}`).then(({ data }) => {
         setDecisions(data.data!);
+        setLoaded(false);
       });
       user._id && user.subscribedComments.find((e) => e._id === selectedComment) ? setCommentLiked(true) : setCommentLiked(false);
     }
-  }, [selectedComment, user.subscribedComments, user._id]);
+  }, [selectedComment, user.subscribedComments, user._id, setLoaded]);
 
   const subSystem = () => {
+    setLoaded(true);
     $api.post<Response<User>>("/system/subscribe", { id: selectedSystem }).then(({ data }) => {
-      if (!data.data) return alert("error", "Ошибка", data.message, 15);
+      if (!data.data) return alert("error", "Ошибка", data.message, 1.5);
       setSystemLiked(true);
       newUser.subscribedSystems.push(selectedFullSystem);
       setUser(newUser);
+      setLoaded(false);
     });
   };
 
   const unSubSystem = () => {
+    setLoaded(true);
     $api.post<Response<User>>("/system/unsubscribe", { id: selectedSystem }).then(({ data }) => {
-      if (!data.data) return alert("error", "Ошибка", data.message, 15);
+      if (!data.data) return alert("error", "Ошибка", data.message, 1.5);
       setSystemLiked(false);
       newUser.subscribedSystems.splice(
         newUser.subscribedSystems.findIndex((e) => e === selectedFullSystem),
         1,
       );
       setUser(newUser);
+      setLoaded(false);
     });
   };
 
   const subComment = () => {
+    setLoaded(true);
     $api.post<Response<User>>("/comment/subscribe", { id: selectedComment }).then(({ data }) => {
-      if (!data.data) return alert("error", "Ошибка", data.message, 15);
+      if (!data.data) return alert("error", "Ошибка", data.message, 1.5);
       setCommentLiked(true);
       newUser.subscribedComments.push(selectedFullComment);
       setUser(newUser);
+      setLoaded(false);
     });
   };
 
   const unSubComment = () => {
+    setLoaded(true);
     $api.post<Response<User>>("/comment/unsubscribe", { id: selectedComment }).then(({ data }) => {
-      if (!data.data) return alert("error", "Ошибка", data.message, 15);
+      if (!data.data) return alert("error", "Ошибка", data.message, 1.5);
       setCommentLiked(false);
       newUser.subscribedComments.splice(
         newUser.subscribedComments.findIndex((e) => e === selectedFullComment),
         1,
       );
       setUser(newUser);
+      setLoaded(false);
     });
   };
 

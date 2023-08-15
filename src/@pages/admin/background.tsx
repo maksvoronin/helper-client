@@ -6,20 +6,26 @@ import { AdminContainer, Button, ContainerText, ContainerTitle, FileLabel, Input
 import $api from "../../@http";
 import config from "../../config";
 import { alert } from "../../@services/alerting.service";
+import { useLoaderStore } from "../../@store";
 
 const CreateBackground: FC<PageProps> = observer(({ title }) => {
   const [name, setName] = useState<string>("");
   const [fileName, setFileName] = useState<string>("");
   const [uploadedFile, setUploadedFile] = useState<string>("");
   const fileInput: any = createRef();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
     if (fileName) {
+      setLoaded(true);
       const formData = new FormData();
       formData.append("file", fileInput.current.files[0]);
       formData.append("project", "helper");
       formData.append("comment", "Comment");
-      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
+      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
+        setUploadedFile(data.data.file);
+        setLoaded(false);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);
@@ -32,8 +38,8 @@ const CreateBackground: FC<PageProps> = observer(({ title }) => {
 
   const sendData = () => {
     $api.post<Response<string>>("/background/create", { title: name, type: "image", content: uploadedFile }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Ошибка", data.data!, 15);
-      alert("default", "Успешно", "Фон добавлен!", 15);
+      if (data.type === "error") return alert("error", "Ошибка", data.data!, 1.5);
+      alert("default", "Успешно", "Фон добавлен!", 1.5);
     });
   };
 
@@ -69,8 +75,8 @@ export const DeleteBackground: FC<PageProps> = observer(({ title }) => {
 
   const sendData = () => {
     $api.post(`/background/edit`, { id: selectedBackground, visible: false }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Ошибка", data.message, 15);
-      alert("default", "Успешно", "Вы успешно скрыли фон", 15);
+      if (data.type === "error") return alert("error", "Ошибка", data.message, 1.5);
+      alert("default", "Успешно", "Вы успешно скрыли фон", 1.5);
     });
   };
 
@@ -84,7 +90,9 @@ export const DeleteBackground: FC<PageProps> = observer(({ title }) => {
             Выберите фон
           </option>
           {backgrounds.map((e) => (
-            <option key={e._id} value={e._id}>{e.title} {!e.visible && <i>(скрыт)</i>}</option>
+            <option key={e._id} value={e._id}>
+              {e.title} {!e.visible && <i>(скрыт)</i>}
+            </option>
           ))}
         </StyledSelect>
         <Button onClick={sendData}>Удалить</Button>

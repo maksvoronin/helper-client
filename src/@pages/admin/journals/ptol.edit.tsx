@@ -15,9 +15,9 @@ const PtolEdit: FC<PageProps> = observer(({ title }) => {
   const [selectedPtol , setSelectedPtol] = useState<Ptol>();
 
   const sendData = () => {
-    if (!name) return alert("error", "Заполните форму", "Укажите название", 15);
+    if (!name) return alert("error", "Заполните форму", "Укажите название", 1.5);
     $api.put<Response<Ptol>>("/ptol/edit", { id: ptol, title: name, road }).then(({ data }) => {
-      alert("default", "Успешно", data.message, 15);
+      alert("default", "Успешно", data.message, 1.5);
       setPtol("");
       setRoad("");
       setSelectedPtol(undefined);

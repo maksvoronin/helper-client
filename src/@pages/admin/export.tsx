@@ -11,14 +11,14 @@ const Export: FC<PageProps> = observer(({ title }) => {
   const exportToday = () => {
     $api.get(`stat/export?params=mini`).then(({data}) => {
       console.log(data);
-      alert("default", "Успешно", "Экспорт за день отправлен на почту", 15);
+      alert("default", "Успешно", "Экспорт за день отправлен на почту", 1.5);
     });
   }
 
   const exportFull = () => {
     $api.get(`/stat/export`).then(({data}) => {
       console.log(data);
-      alert("default", "Успешно", "Полный экспорт отправлен на почту", 15);
+      alert("default", "Успешно", "Полный экспорт отправлен на почту", 1.5);
     });
   }
 

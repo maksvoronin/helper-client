@@ -61,9 +61,9 @@ const Recovery: FC<PageProps> = observer(({ title }) => {
     }
     $api.post(`/auth/recovery`, { email }).then(({ data }) => {
       if (data.type === "error") {
-        return alert("error", "Ошибка", data.message, 15);
+        return alert("error", "Ошибка", data.message, 1.5);
       }
-      alert("default", "Успешно", "Новый пароль отправлен на почту", 15);
+      alert("default", "Успешно", "Новый пароль отправлен на почту", 1.5);
     });
   };
 

@@ -6,9 +6,11 @@ import $api from "../@http";
 import { useNavigate } from "react-router-dom";
 import { FormStatus } from "../@types";
 import { observer } from "mobx-react";
+import { useLoaderStore } from "../@store";
 
 const CreateComment: FC = observer(() => {
   const [selectedSystem, setSelectedSystem] = useState<string>("");
+  const { setLoaded } = useLoaderStore();
 
   const [selectedSeries, setSelectedSeries] = useState<string>("");
 
@@ -26,11 +28,15 @@ const CreateComment: FC = observer(() => {
 
   useEffect(() => {
     if (fileName) {
+      setLoaded(true);
       const formData = new FormData();
       formData.append("file", fileInput.current.files[0]);
       formData.append("project", "helper");
       formData.append("comment", "Comment");
-      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => setUploadedFile(data.data.file));
+      $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
+        setUploadedFile(data.data.file);
+        setLoaded(false);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileName]);

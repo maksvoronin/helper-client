@@ -32,41 +32,43 @@ const JournalComments: FC<PageProps> = observer(({ title }) => {
   const [selectedPostNumber, setSelectedPostNumber] = useState<string>("");
 
   const sendData = () => {
-    $api.post<Response>(`/commentsjournal/create`, {
-      start: startTime,
-      finish: finishTime,
-      road: selectedRoad,
-      ptol: selectedPtol,
-      postscript: selectedPostScript,
-      series: selectedSeries,
-      lokomotivenumber: selectedLokomotive,
-      section: selectedSection,
-      replacement: replacementInJournal,
-      move: selectedMove,
-      system: selectedSystem,
-      blok: selectedBlok,
-      numbermark: numberMark,
-      numberwithdraw: numberWithDraw,
-      time: timeRepair,
-      postnumber: selectedPostNumber,
-      noteptol: notePTOL,
-      user: selectedUser,
-    }).then(({data}) => {
-      if(data.type === "error") return alert("error", "Ошибка", data.message, 15);
-      alert("default", "Успешно", "Запись добавлена", 15);
-      setSelectedPostScript("");
-      setSelectedSeries("");
-      setSelectedLokomotive("");
-      setSelectedSection("");
-      setReplacementInJournal("");
-      setSelectedMove("");
-      setSelectedSystem("");
-      setSelectedBlok("");
-      setNumberWithDraw("");
-      setNumberMark("");
-      setNotePTOL("");
-      setSelectedPostNumber("");
-    });
+    $api
+      .post<Response>(`/commentsjournal/create`, {
+        start: startTime,
+        finish: finishTime,
+        road: selectedRoad,
+        ptol: selectedPtol,
+        postscript: selectedPostScript,
+        series: selectedSeries,
+        lokomotivenumber: selectedLokomotive,
+        section: selectedSection,
+        replacement: replacementInJournal,
+        move: selectedMove,
+        system: selectedSystem,
+        blok: selectedBlok,
+        numbermark: numberMark,
+        numberwithdraw: numberWithDraw,
+        time: timeRepair,
+        postnumber: selectedPostNumber,
+        noteptol: notePTOL,
+        user: selectedUser,
+      })
+      .then(({ data }) => {
+        if (data.type === "error") return alert("error", "Ошибка", data.message, 1.5);
+        alert("default", "Успешно", "Запись добавлена", 1.5);
+        setSelectedPostScript("");
+        setSelectedSeries("");
+        setSelectedLokomotive("");
+        setSelectedSection("");
+        setReplacementInJournal("");
+        setSelectedMove("");
+        setSelectedSystem("");
+        setSelectedBlok("");
+        setNumberWithDraw("");
+        setNumberMark("");
+        setNotePTOL("");
+        setSelectedPostNumber("");
+      });
   };
 
   return (
@@ -109,7 +111,9 @@ const JournalComments: FC<PageProps> = observer(({ title }) => {
         <Textarea placeholder="Примечание ПТОЛ" value={notePTOL} onChange={({ target }: any) => setNotePTOL(target.value)} />
         <FormText>ФИО</FormText>
         <UserSelect onChange={(e) => setSelectedUser(e)} defaultAuthed />
-        <Button style={{ marginTop: 20 }} onClick={sendData}>Сохранить</Button>
+        <Button style={{ marginTop: 20 }} onClick={sendData}>
+          Сохранить
+        </Button>
       </Container>
     </MainLayout>
   );

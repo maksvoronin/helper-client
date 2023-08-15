@@ -11,7 +11,7 @@ const CreateSystem: FC<PageProps> = observer(({ title }) => {
   const [system, setSystem] = useState<string>("");
 
   const sendData = () => {
-    if (!system.trim()) return alert("error", "Ошибка", "Укажите название системы", 15);
+    if (!system.trim()) return alert("error", "Ошибка", "Укажите название системы", 1.5);
     $api.post<Response<string>>("/system/create", { name: system }).then(({ data }) => (data.type === "error" ? alert("error", "Ошибка", data.data!, 15) : alert("default", "Успешно", "Система добавлена", 15)));
     setSystem("");
   };
@@ -42,8 +42,8 @@ export const EditSystem: FC<PageProps> = observer(({ title }) => {
   const sendData = () => {
     if (selectedSystem) {
       $api.put<Response<System | string>>("/system/edit", { id: selectedSystem, name }).then(({ data }) => {
-        if ((data.type === "error" && typeof data.data === "string") || !data.data) return alert("error", "Ошибка", data.data!, 15);
-        alert("default", "Успешно!", "Система изменена", 15);
+        if ((data.type === "error" && typeof data.data === "string") || !data.data) return alert("error", "Ошибка", data.data!, 1.5);
+        alert("default", "Успешно!", "Система изменена", 1.5);
       });
     }
   };

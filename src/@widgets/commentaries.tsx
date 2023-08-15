@@ -39,10 +39,10 @@ const Commentaries: FC<{ type: "decision"; postId: string; comments: Commentary[
   const [comment, setComment] = useState<string>("");
 
   const sendData = () => {
-    if (comment.trim() === "") return alert("error", "Ошибка", "Заполните форму", 15);
+    if (comment.trim() === "") return alert("error", "Ошибка", "Заполните форму", 1.5);
     $api.put(`/${type}/commentary`, { id: postId, text: comment }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 15);
-      alert("default", "Успешно", "Комментарий опубликован", 15);
+      if (data.type === "error") return alert("error", "Произошла ошибка", data.message, 1.5);
+      alert("default", "Успешно", "Комментарий опубликован", 1.5);
       setCurrentComments((prev) => [...prev, { ...data.data.commentary }]);
       setComment("");
     });

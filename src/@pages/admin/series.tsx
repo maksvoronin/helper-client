@@ -13,18 +13,18 @@ const CreateSeries: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     $api.get<Response<Series[]>>("/series/all").then(({data}) => {
-      if(data.type === "error" || !data.data) return alert("error", "Ошибка данных", "Ошибка получения данных о сериях",  15);
+      if(data.type === "error" || !data.data) return alert("error", "Ошибка данных", "Ошибка получения данных о сериях",  1.5);
       setAllSeries(data.data);
     });
   }, []);
 
   const sendData = () => {
     if(!series.trim()) {
-      return alert("error", "Заполните форму", "Укажите название серии", 15);
+      return alert("error", "Заполните форму", "Укажите название серии", 1.5);
     }
     $api.post<Response<string>>("/series/create", {name: series}).then(({data}) => {
       setSeries("");
-      alert("default", "Успешно", "Вы добавили серию", 15);
+      alert("default", "Успешно", "Вы добавили серию", 1.5);
     })
   }
 

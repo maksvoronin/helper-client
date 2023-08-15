@@ -5,7 +5,7 @@ import { Comment, Decision, Response, SearchResult, User } from "../@types";
 import $api from "../@http";
 import { styled } from "styled-components";
 import { Link as DefaultLink } from "react-router-dom";
-import { useSearchStoreContext } from "../@store";
+import { useLoaderStore, useSearchStoreContext } from "../@store";
 
 const SearchResultBlock = styled.div`
   padding: 15px;
@@ -50,6 +50,7 @@ const Search = styled.div`
 const SearchPanel: FC<{ initialValue?: string }> = observer(({ initialValue }) => {
   const [searchResult, setSearchResult] = useState<SearchResult>();
   const { searchText, setSearchText } = useSearchStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
     if (initialValue) setSearchText(initialValue);
@@ -57,11 +58,13 @@ const SearchPanel: FC<{ initialValue?: string }> = observer(({ initialValue }) =
 
   useEffect(() => {
     if (searchText.trim()) {
+      setLoaded(true);
       $api.get<Response<SearchResult>>(`/search/get?text=${searchText}`).then(({ data }) => {
         setSearchResult(data.data);
+        setLoaded(false);
       });
     }
-  }, [searchText]);
+  }, [searchText, setLoaded]);
 
   return (
     <Search>

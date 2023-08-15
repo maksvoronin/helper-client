@@ -62,7 +62,7 @@ const Profile: FC<PageProps> = observer(({ title }) => {
   useEffect(() => {
     $api.get(`/user/get?id=${id}&params=created,permissions,createdDecisions,createdComments`).then(({ data }) => {
       if (data.type === "error") {
-        return alert("error", "Ошибка", data.message, 15);
+        return alert("error", "Ошибка", data.message, 1.5);
       }
       setUser(data.data);
     });

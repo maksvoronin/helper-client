@@ -65,7 +65,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
 
   const subComment = () => {
     $api.post<Response<User>>("/comment/subscribe", { id: decision.comment._id }).then(({ data }) => {
-      if (!data.data) return alert("error", "Ошибка", data.message, 15);
+      if (!data.data) return alert("error", "Ошибка", data.message, 1.5);
       setCommentLiked(true);
       newUser.subscribedComments.push(comment);
       setUser(newUser);
@@ -74,7 +74,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
 
   const unSubComment = () => {
     $api.post<Response<User>>("/comment/unsubscribe", { id: decision.comment._id }).then(({ data }) => {
-      if (!data.data) return alert("error", "Ошибка", data.message, 15);
+      if (!data.data) return alert("error", "Ошибка", data.message, 1.5);
       setCommentLiked(false);
       newUser.subscribedComments.splice(
         newUser.subscribedComments.findIndex((e) => e === comment),

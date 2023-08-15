@@ -11,9 +11,9 @@ const BlokCreate: FC<PageProps> = observer(({title}) => {
   const [name, setName] = useState<string>("");
 
   const sendData = () => {
-    if(!name) return alert("error", "Заполните форму", "Укажите название", 15);
+    if(!name) return alert("error", "Заполните форму", "Укажите название", 1.5);
     $api.post<Response<JournalMove>>("/blok/create", {title: name}).then(() => {
-      alert("default", "Успешно", "БЛОК добавлен", 15);
+      alert("default", "Успешно", "БЛОК добавлен", 1.5);
       setName("");
     })
   }

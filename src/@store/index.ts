@@ -14,3 +14,4 @@ export { useJournalMoveStore, JournalMoveStore } from "./journalmove.store";
 export { useBlokStore, BlokStore } from "./blok.store";
 export { useUserStore, UserStore } from "./user.store";
 export { usePostNumberStore, PostNumberStore } from "./postnumber.store";
+export { useLoaderStore, LoaderStore } from "./loader.store";

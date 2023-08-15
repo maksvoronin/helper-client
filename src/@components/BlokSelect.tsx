@@ -3,18 +3,21 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, Blok } from "../@types";
-import { useBlokStore } from "../@store";
+import { useBlokStore, useLoaderStore } from "../@store";
 
 const BlokSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
   const { blok, setBlok } = useBlokStore();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
     if (blok && blok.length < 1) {
+      setLoaded(true);
       $api.get<Response<Blok[]>>(`/blok/all`).then(({ data }) => {
         setBlok(data.data!);
+        setLoaded(false);
       });
     }
-  }, [blok, setBlok]);
+  }, [blok, setBlok, setLoaded]);
 
   return (
     <StyledSelect
