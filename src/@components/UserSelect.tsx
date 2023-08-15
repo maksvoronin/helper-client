@@ -19,7 +19,7 @@ const UserSelect: FC<{ onChange: (e: string) => void; defaultAuthed?: boolean }>
         setLoaded(false);
       });
     }
-  }, [user, users.length, setUsers, users, setUsersLoaded, usersLoaded, setLoaded]);
+  }, [user, setUsers, users, setUsersLoaded, usersLoaded, setLoaded]);
 
   return (
     <StyledSelect
