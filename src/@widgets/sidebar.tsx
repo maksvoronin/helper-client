@@ -5,7 +5,7 @@ import { Logo } from "../@assets";
 import { useAuthStoreContext } from "../@store";
 import { SearchPanel, SidebarAuthPanel, SidebarController } from "../@components";
 import { Link } from "react-router-dom";
-import config from "../config";
+import config, { dev_version } from "../config";
 
 const fadeSidebarMobile = keyframes`
   0% {
@@ -250,6 +250,7 @@ const Sidebar: FC = observer(() => {
             <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
               Чат Telegram
             </a>
+            <Link className="support" to={"/changelog"}>Версия {dev_version}</Link>
           </SidebarLinks>
         </SidebarContainer>
       )}

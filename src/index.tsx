@@ -43,6 +43,7 @@ import {
   System,
   Users,
   Welcome,
+  Changelog,
 } from "./@pages";
 import { authStore, AuthStoreContext } from "./@store";
 import { DocsCreateApp } from "./@pages/developers";
@@ -214,6 +215,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/road/edit",
     element: <EditRoad title="Изменение дороги" />
+  },
+  {
+    path: "/changelog",
+    element: <Changelog title="История версий" />
   }
 ]);
 
