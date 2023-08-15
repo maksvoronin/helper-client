@@ -3,18 +3,22 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, JournalMove } from "../@types";
-import { useJournalMoveStore } from "../@store";
+import { useJournalMoveStore, useLoaderStore } from "../@store";
 
 const JournalMoveSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
-  const { journalmove, setJournalMove } = useJournalMoveStore();
+  const { journalmove, setJournalMove, journalmoveLoaded, setJournalMoveLoaded } = useJournalMoveStore();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (journalmove && journalmove.length < 1) {
+    if (!journalmoveLoaded) {
+      setLoaded(true);
       $api.get<Response<JournalMove[]>>(`/journalmove/all`).then(({ data }) => {
         setJournalMove(data.data!);
+        setLoaded(false);
+        setJournalMoveLoaded(true);
       });
     }
-  }, [journalmove, setJournalMove]);
+  }, [journalmove, setJournalMove, setLoaded, journalmoveLoaded, setJournalMoveLoaded]);
 
   return (
     <StyledSelect

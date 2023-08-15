@@ -6,18 +6,19 @@ import { Response, Blok } from "../@types";
 import { useBlokStore, useLoaderStore } from "../@store";
 
 const BlokSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
-  const { blok, setBlok } = useBlokStore();
+  const { blok, setBlok, blokLoaded, setBlokLoaded } = useBlokStore();
   const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (blok && blok.length < 1) {
+    if (!blokLoaded) {
       setLoaded(true);
       $api.get<Response<Blok[]>>(`/blok/all`).then(({ data }) => {
         setBlok(data.data!);
         setLoaded(false);
+        setBlokLoaded(true);
       });
     }
-  }, [blok, setBlok, setLoaded]);
+  }, [blok, setBlok, setLoaded, blokLoaded, setBlokLoaded]);
 
   return (
     <StyledSelect

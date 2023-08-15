@@ -3,18 +3,22 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, Section } from "../@types";
-import { useSectionStoreContext } from "../@store";
+import { useLoaderStore, useSectionStoreContext } from "../@store";
 
 const SectionSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
-  const { sections, setSections } = useSectionStoreContext();
+  const { sections, setSections, sectionLoaded, setSectionLoaded } = useSectionStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (sections && sections.length < 1) {
+    if (!sectionLoaded) {
+      setLoaded(true);
       $api.get<Response<Section[]>>(`/section/all`).then(({ data }) => {
         setSections(data.data!);
+        setSectionLoaded(true);
+        setLoaded(false);
       });
     }
-  }, [sections, setSections]);
+  }, [sections, setSections, sectionLoaded, setLoaded, setSectionLoaded]);
 
   return (
     <StyledSelect

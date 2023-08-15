@@ -3,18 +3,22 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, PostScript } from "../@types";
-import { usePostScriptStoreContext } from "../@store";
+import { useLoaderStore, usePostScriptStoreContext } from "../@store";
 
 const PostScriptSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
-  const { postscripts, setPostScripts } = usePostScriptStoreContext();
+  const { postscripts, setPostScripts, postscriptsLoaded, setPostScriptsLoaded } = usePostScriptStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (postscripts && postscripts.length < 1) {
+    if (!postscriptsLoaded) {
+      setLoaded(true);
       $api.get<Response<PostScript[]>>(`/postscript/all`).then(({ data }) => {
         setPostScripts(data.data!);
+        setPostScriptsLoaded(true);
+        setLoaded(false);
       });
     }
-  }, [postscripts, setPostScripts]);
+  }, [postscripts, setPostScripts, postscriptsLoaded, setPostScriptsLoaded, setLoaded]);
 
   return (
     <StyledSelect

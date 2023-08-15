@@ -4,16 +4,23 @@ import { action, makeObservable, observable } from "mobx";
 
 class JournalmoveStore { 
   journalmove: JournalMove[] = [];
+  journalmoveLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       journalmove: observable,
-      setJournalMove: action.bound
+      journalmoveLoaded: observable,
+      setJournalMove: action.bound,
+      setJournalMoveLoaded: action.bound
     });
   }
 
   setJournalMove(journalmove: JournalMove[]) {
     this.journalmove = journalmove;
+  }
+
+  setJournalMoveLoaded(b: boolean) {
+    this.journalmoveLoaded = b;
   }
 }
 

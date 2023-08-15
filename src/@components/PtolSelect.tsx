@@ -3,18 +3,22 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, Ptol } from "../@types";
-import { usePtolStoreContext } from "../@store";
+import { useLoaderStore, usePtolStoreContext } from "../@store";
 
 const PtolSelect: FC<{ onChange: (e: string) => void }> = observer(({ onChange }) => {
-  const { ptols, setPtols } = usePtolStoreContext();
+  const { ptols, setPtols, ptolsLoaded, setPtolsLoaded } = usePtolStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (ptols && ptols.length < 1) {
+    if (!ptolsLoaded) {
+      setLoaded(true);
       $api.get<Response<Ptol[]>>(`/ptol/all`).then(({ data }) => {
+        setPtolsLoaded(true);
         setPtols(data.data!);
+        setLoaded(false);
       });
     }
-  }, [ptols, setPtols]);
+  }, [ptols, setPtols, ptolsLoaded, setPtolsLoaded, setLoaded]);
 
   return (
     <StyledSelect

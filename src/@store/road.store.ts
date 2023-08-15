@@ -4,16 +4,23 @@ import { action, makeObservable, observable } from "mobx";
 
 class RoadStore { 
   roads: Road[] = [];
+  roadsLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       roads: observable,
-      setRoads: action.bound
+      roadsLoaded: observable,
+      setRoads: action.bound,
+      setRoadsLoaded: action.bound
     });
   }
 
   setRoads(roads: Road[]) {
     this.roads = roads;
+  }
+
+  setRoadsLoaded(b: boolean) {
+    this.roadsLoaded = b;
   }
 }
 

@@ -4,12 +4,19 @@ import { action, makeObservable, observable } from "mobx";
 
 class SectionStore { 
   sections: Section[] = [];
+  sectionLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       sections: observable,
-      setSections: action.bound
+      sectionLoaded: observable,
+      setSections: action.bound,
+      setSectionLoaded: action.bound
     });
+  }
+
+  setSectionLoaded(b: boolean) {
+    this.sectionLoaded = b;
   }
 
   setSections(sections: Section[]) {

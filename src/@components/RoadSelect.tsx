@@ -3,18 +3,22 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, Road } from "../@types";
-import { useRoadStoreContext } from "../@store";
+import { useLoaderStore, useRoadStoreContext } from "../@store";
 
 const RoadSelect: FC<{ onChange: (e: string) => void; value?: string }> = observer(({ onChange, value }) => {
-  const { roads, setRoads } = useRoadStoreContext();
+  const { roads, setRoads, roadsLoaded, setRoadsLoaded } = useRoadStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (roads && roads.length < 1) {
+    if (!roadsLoaded) {
+      setLoaded(true);
       $api.get<Response<Road[]>>(`/road/all`).then(({ data }) => {
-        setRoads(data.data!.sort((a, b) => a.name < b.name ? -1 : 1));
+        setRoadsLoaded(true);
+        setRoads(data.data!.sort((a, b) => (a.name < b.name ? -1 : 1)));
+        setLoaded(false);
       });
     }
-  }, [roads, setRoads]);
+  }, [roads, setRoads, roadsLoaded, setRoadsLoaded, setLoaded]);
 
   if (value) {
     return (

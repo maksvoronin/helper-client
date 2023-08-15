@@ -4,16 +4,23 @@ import { action, makeObservable, observable } from "mobx";
 
 class LokomotiveNumberStore { 
   lokomotivenumbers: LokomotiveNumber[] = [];
+  lokomotivenumbersLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       lokomotivenumbers: observable,
-      setLokomotiveNumbers: action.bound
+      lokomotivenumbersLoaded: observable,
+      setLokomotiveNumbers: action.bound,
+      setLokomotiveNumbersLoaded: action.bound
     });
   }
 
   setLokomotiveNumbers(lokomotivenumbers: LokomotiveNumber[]) {
     this.lokomotivenumbers = lokomotivenumbers;
+  }
+
+  setLokomotiveNumbersLoaded(b: boolean) {
+    this.lokomotivenumbersLoaded = b;
   }
 }
 

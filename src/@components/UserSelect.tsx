@@ -3,19 +3,23 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import $api from "../@http";
 import { Response, User } from "../@types";
-import { useAuthStoreContext, useUserStore } from "../@store";
+import { useAuthStoreContext, useLoaderStore, useUserStore } from "../@store";
 
 const UserSelect: FC<{ onChange: (e: string) => void; defaultAuthed?: boolean }> = observer(({ onChange, defaultAuthed }) => {
-  const { users, setUsers } = useUserStore();
+  const { users, setUsers, setUsersLoaded, usersLoaded } = useUserStore();
   const { user } = useAuthStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (users && users.length < 1) {
+    if (!usersLoaded) {
+      setLoaded(true);
       $api.get<Response<User[]>>(`/user/all`).then(({ data }) => {
+        setUsersLoaded(true);
         setUsers(data.data!);
+        setLoaded(false);
       });
     }
-  }, [user, users.length, setUsers, users]);
+  }, [user, users.length, setUsers, users, setUsersLoaded, usersLoaded, setLoaded]);
 
   return (
     <StyledSelect

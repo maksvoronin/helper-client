@@ -3,18 +3,22 @@ import { FC, useEffect } from "react";
 import { StyledSelect } from "../@shared";
 import { Response, System } from "../@types";
 import $api from "../@http";
-import { useSystemStoreContext } from "../@store";
+import { useLoaderStore, useSystemStoreContext } from "../@store";
 
 const SystemSelect: FC<{ onChange: (e: string) => void; fullInfo?: Function; journals?: boolean }> = observer(({ onChange, fullInfo, journals }) => {
-  const { systems, setSystems } = useSystemStoreContext();
+  const { systems, setSystems, setSystemsLoaded, systemsLoaded } = useSystemStoreContext();
+  const { setLoaded } = useLoaderStore();
 
   useEffect(() => {
-    if (systems && systems.length < 1) {
+    if (!systemsLoaded) {
+      setLoaded(true);
       $api.get<Response<System[]>>(`/system/all`).then(({ data }) => {
+        setSystemsLoaded(true);
         setSystems(data.data!);
+        setLoaded(false);
       });
     }
-  }, [systems.length, setSystems, systems]);
+  }, [systems.length, setSystems, systems, setSystemsLoaded, systemsLoaded, setLoaded]);
 
   return (
     <StyledSelect

@@ -4,12 +4,19 @@ import { action, makeObservable, observable } from "mobx";
 
 class BlokS { 
   blok: Blok[] = [];
+  blokLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       blok: observable,
-      setBlok: action.bound
+      blokLoaded: observable,
+      setBlok: action.bound,
+      setBlokLoaded: action.bound
     });
+  }
+
+  setBlokLoaded(b: boolean) {
+    this.blokLoaded = b;
   }
 
   setBlok(blok: Blok[]) {

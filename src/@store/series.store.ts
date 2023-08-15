@@ -2,18 +2,25 @@ import { createContext, useContext } from "react";
 import { Series } from "../@types";
 import { action, makeObservable, observable } from "mobx";
 
-class SeriesStore { 
+class SeriesStore {
   series: Series[] = [];
+  seriesLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       series: observable,
-      setSeries: action.bound
+      seriesLoaded: observable,
+      setSeries: action.bound,
+      setSeriesLoaded: action.bound,
     });
   }
 
   setSeries(series: Series[]) {
     this.series = series;
+  }
+
+  setSeriesLoaded(b: boolean) {
+    this.seriesLoaded = b;
   }
 }
 

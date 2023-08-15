@@ -4,17 +4,25 @@ import { action, makeObservable, observable } from "mobx";
 
 class PostnumberS { 
   postnumber: PostNumber[] = [];
+  postnumberLoaded: boolean = false;
 
   constructor() {
     makeObservable(this, {
       postnumber: observable,
-      setPostNumber: action.bound
+      postnumberLoaded: observable,
+      setPostNumber: action.bound,
+      setPostNumberLoaded: action.bound
     });
   }
 
   setPostNumber(postnumber: PostNumber[]) {
     this.postnumber = postnumber;
   }
+
+  setPostNumberLoaded(b: boolean) {
+    this.postnumberLoaded = b;
+  }
+
 }
 
 const postNumberStore = new PostnumberS();
