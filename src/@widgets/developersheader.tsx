@@ -89,7 +89,7 @@ const OpenSidebar = styled.div`
     height: 2px;
     background: black;
   }
-  @media(min-width: 500px) {
+  @media(min-width: 501px) {
     display: none;
   }
 `;

@@ -9,6 +9,7 @@ import { ResultField } from "../@components";
 import $api from "../@http";
 import { useAuthStoreContext } from "../@store";
 import { useNavigate } from "react-router-dom";
+import { baseURIs } from "../config";
 
 const LoginWrapper = styled.div`
   width: 100%;
@@ -94,8 +95,8 @@ const Login: FC<PageProps> = observer(({ title }) => {
           <Input type={"password"} placeholder="Ваш пароль" onChange={({ target }: any) => setPassword(target.value)} value={password} />
           <Button onClick={sendData}>Войти</Button>
           <ResultField status={formError.status} message={formError.message} />
-          <Link to={"/recovery"}>Восстановить пароль</Link>
-          <Link to={"/register"}>Зарегистрироваться</Link>
+          <Link to={`${baseURIs.auth}/recovery`}>Восстановить пароль</Link>
+          <Link to={`${baseURIs.auth}/register`}>Зарегистрироваться</Link>
         </LoginForm>
       </LoginWrapper>
     </DefaultLayout>

@@ -6,6 +6,7 @@ import $api from "../@http";
 import { styled } from "styled-components";
 import { Link as DefaultLink } from "react-router-dom";
 import { useLoaderStore, useSearchStoreContext } from "../@store";
+import { baseURIs } from "../config";
 
 const SearchResultBlock = styled.div`
   padding: 15px;
@@ -89,7 +90,7 @@ const SearchPanel: FC<{ initialValue?: string }> = observer(({ initialValue }) =
                       <>
                         <Tag>Пользователи</Tag>
                         {searchResult.users.map((e: User) => (
-                          <Link key={e._id} to={`/profile/${e._id}`}>
+                          <Link key={e._id} to={`${baseURIs.main}/profile/${e._id}`}>
                             {e.name} {e.surname}
                           </Link>
                         ))}
@@ -101,7 +102,7 @@ const SearchPanel: FC<{ initialValue?: string }> = observer(({ initialValue }) =
                         {searchResult.comments.map(
                           (e: Comment) =>
                             e.visible && (
-                              <Link key={e._id} to={`/comment/${e._id}`}>
+                              <Link key={e._id} to={`${baseURIs.main}/comment/${e._id}`}>
                                 {e.content}
                               </Link>
                             ),
@@ -114,14 +115,14 @@ const SearchPanel: FC<{ initialValue?: string }> = observer(({ initialValue }) =
                         {searchResult.decisions.map(
                           (e: Decision) =>
                             e.visible && (
-                              <Link key={e._id} to={`/decision/${e._id}`}>
+                              <Link key={e._id} to={`${baseURIs.main}/decision/${e._id}`}>
                                 {e.content}
                               </Link>
                             ),
                         )}
                       </>
                     )}
-                    <Link to={`/search?q=${searchText}`}>Открыть страницу поиска</Link>
+                    <Link to={`${baseURIs.main}/search?q=${searchText}`}>Открыть страницу поиска</Link>
                   </>
                 )}
           </>

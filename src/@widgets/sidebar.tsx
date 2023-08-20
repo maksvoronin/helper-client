@@ -5,7 +5,7 @@ import { Logo } from "../@assets";
 import { useAuthStoreContext } from "../@store";
 import { SearchPanel, SidebarAuthPanel, SidebarController } from "../@components";
 import { Link } from "react-router-dom";
-import config, { dev_version } from "../config";
+import config, { baseURIs, dev_version } from "../config";
 
 const fadeSidebarMobile = keyframes`
   0% {
@@ -217,7 +217,7 @@ const Sidebar: FC = observer(() => {
             )}
 
             <MobileLogoContainer>
-              <Link to={"/"} style={{ height: 42 }}>
+              <Link to={`${baseURIs.main}`} style={{ height: 42 }}>
                 <Logo />
               </Link>
             </MobileLogoContainer>
@@ -244,13 +244,13 @@ const Sidebar: FC = observer(() => {
           <SearchPanel />
           {!user.name ? <SidebarAuthPanel /> : <SidebarController />}
           <SidebarLinks>
-            {/* <Link className={"support"} to="/developers">
+            <Link className={"support"} to={`${baseURIs.developers}`}>
               Разработчикам
-            </Link> */}
+            </Link>
             <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
               Чат Telegram
             </a>
-            <Link className="support" to={"/changelog"}>Версия {dev_version}</Link>
+            <Link className="support" to={`${baseURIs.main}/changelog`}>Версия {dev_version}</Link>
           </SidebarLinks>
         </SidebarContainer>
       )}

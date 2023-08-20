@@ -5,6 +5,7 @@ import { FC } from "react";
 import { Container, ContainerSubTitle, ContainerText, ContainerTitle, Li, Ul } from "../@shared";
 import { useAuthStoreContext } from "../@store";
 import { Link } from "../@shared";
+import { baseURIs } from "../config";
 
 const My: FC<PageProps> = observer(({ title }) => {
   const { user } = useAuthStoreContext();
@@ -21,7 +22,7 @@ const My: FC<PageProps> = observer(({ title }) => {
           <Ul>
             {user.createdSystems.map((e) => (
               <Li key={e._id}>
-                <Link to={`/system/${e._id}`}>
+                <Link to={`${baseURIs.main}/system/${e._id}`}>
                   {e.name}
                 </Link>
               </Li>
@@ -35,7 +36,7 @@ const My: FC<PageProps> = observer(({ title }) => {
           <Ul>
             {user.createdComments.map((e) => (
               <Li key={e._id}>
-                <Link to={`/comment/${e._id}`}>
+                <Link to={`${baseURIs.main}/comment/${e._id}`}>
                   {e.content}
                 </Link>
               </Li>
@@ -49,7 +50,7 @@ const My: FC<PageProps> = observer(({ title }) => {
           <Ul>
             {user.createdDecisions.map((e) => (
               <Li key={e._id}>
-                <Link to={`/decision/${e._id}`}>
+                <Link to={`${baseURIs.main}/decision/${e._id}`}>
                   {e.content}
                 </Link>
               </Li>

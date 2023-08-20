@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import { PageProps } from "../../@types";
 import { MainLayout } from "../../@layouts";
 import { Container, ContainerTitle, Li, Ul, Link, FormText } from "../../@shared";
+import { baseURIs } from "../../config";
 
 const Admin: FC<PageProps> = observer(({ title }) => {
   return (
@@ -11,31 +12,31 @@ const Admin: FC<PageProps> = observer(({ title }) => {
         <ContainerTitle>Управление проектом</ContainerTitle>
         <Ul>
           <Li>
-            <Link to={"/admin/series/create"}>Добавить серию локомотива</Link>
+            <Link to={`${baseURIs.admin}/series/create`}>Добавить серию локомотива</Link>
           </Li>
           <Li>
-            <Link to={"/admin/road/create"}>Добавить дорогу</Link>
+            <Link to={`${baseURIs.admin}/road/create`}>Добавить дорогу</Link>
           </Li>
           <Li>
-            <Link to={"/admin/road/edit"}>Изменить дорогу</Link>
+            <Link to={`${baseURIs.admin}/road/edit`}>Изменить дорогу</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/ptol/create"}>Добавить ПТОЛ</Link>
+            <Link to={`${baseURIs.admin}/ptol/create`}>Добавить ПТОЛ</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/ptol/edit"}>Изменить ПТОЛ</Link>
+            <Link to={`${baseURIs.admin}/ptol/edit`}>Изменить ПТОЛ</Link>
           </Li>
           <Li>
-            <Link to={"/admin/system/create"}>Добавить систему</Link>
+            <Link to={`${baseURIs.admin}/system/create`}>Добавить систему</Link>
           </Li>
           <Li>
-            <Link to={"/admin/system/edit"}>Изменить систему</Link>
+            <Link to={`${baseURIs.admin}/system/edit`}>Изменить систему</Link>
           </Li>
           <Li>
-            <Link to={"/admin/background/create"}>Добавить фон</Link>
+            <Link to={`${baseURIs.admin}/background/create`}>Добавить фон</Link>
           </Li>
           <Li>
-            <Link to={"/admin/background/delete"}>Удалить фон</Link>
+            <Link to={`${baseURIs.admin}/background/delete`}>Удалить фон</Link>
           </Li>
         </Ul>
       </Container>
@@ -44,27 +45,27 @@ const Admin: FC<PageProps> = observer(({ title }) => {
         <ContainerTitle>Журналы</ContainerTitle>
         <Ul>
           <Li>
-            <Link to={"/admin/journals/postscript/create"}>Добавить приписку</Link>
+            <Link to={`${baseURIs.admin}/postscript/create`}>Добавить приписку</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/lokomotivenumber/create"}>Добавить номер локомотива</Link>
+            <Link to={`${baseURIs.admin}/lokomotivenumber/create`}>Добавить номер локомотива</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/section/create"}>Добавить секцию</Link>
+            <Link to={`${baseURIs.admin}/section/create`}>Добавить секцию</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/move/create"}>Добавить действие (что сделали)</Link>
+            <Link to={`${baseURIs.admin}/move/create`}>Добавить действие (что сделали)</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/blok/create"}>Добавить БЛОК</Link>
+            <Link to={`${baseURIs.admin}/blok/create`}>Добавить БЛОК</Link>
           </Li>
           <Li>
-            <Link to={"/admin/journals/postnumber/create"}>Добавить номер поставленного</Link>
+            <Link to={`${baseURIs.admin}/postnumber/create`}>Добавить номер поставленного</Link>
           </Li>
         </Ul>
         <FormText>Просмотр журналов</FormText>
         <Ul>
-          <Li><Link to={"/admin/journal/comments"}>Журнал замечаний локомотивов</Link></Li>
+          <Li><Link to={`${baseURIs.admin}/comments`}>Журнал замечаний локомотивов</Link></Li>
         </Ul>
       </Container>
 
@@ -72,13 +73,13 @@ const Admin: FC<PageProps> = observer(({ title }) => {
         <ContainerTitle>Статистика</ContainerTitle>
         <Ul>
           <Li>
-            <Link to={"/admin/users"}>Пользователи</Link>
+            <Link to={`${baseURIs.admin}/users`}>Пользователи</Link>
           </Li>
           <Li>
-            <Link to={"/admin/export"}>Экспорт</Link>
+            <Link to={`${baseURIs.admin}/export`}>Экспорт</Link>
           </Li>
           <Li>
-            <Link to={"/admin/stat"}>Статистика посещений</Link>
+            <Link to={`${baseURIs.admin}/stat`}>Статистика посещений</Link>
           </Li>
         </Ul>
       </Container>

@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
 import { styled } from "styled-components";
-import config from "../config";
+import config, { baseURIs } from "../config";
 import { DecisionBlock } from "../@components";
 
 const UserGrid = styled.div`
@@ -98,7 +98,7 @@ const Profile: FC<PageProps> = observer(({ title }) => {
             {comments &&
               comments.map((e: Comment) => (
                 <Li key={e._id}>
-                  <Link to={`/comment/${e._id}`}>{e.content}</Link>
+                  <Link to={`${baseURIs.main}/comment/${e._id}`}>{e.content}</Link>
                 </Li>
               ))}
           </Ul>

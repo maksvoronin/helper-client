@@ -81,9 +81,9 @@ const SidebarAuthPanel: FC = observer(() => {
         <span>Главная</span>
       </SidebarButton>
       <InfoText>Для использования всех возможностей сервиса Вам необходимо авторизоваться</InfoText>
-      <Button onClick={() => navigate("/login")}>Войти</Button>
-      <ButtonRegister onClick={() => navigate("/register")}>Зарегистрироваться</ButtonRegister>
-      <RecoveryLink to="/recovery" onClick={() => navigate("/recovery")}>
+      <Button onClick={() => navigate("/auth/login")}>Войти</Button>
+      <ButtonRegister onClick={() => navigate("/auth/register")}>Зарегистрироваться</ButtonRegister>
+      <RecoveryLink to="/recovery" onClick={() => navigate("/auth/recovery")}>
         Восстановить аккаунт
       </RecoveryLink>
     </SidebarAuthPanelContainer>

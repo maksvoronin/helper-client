@@ -1,3 +1,4 @@
+import Application from "./application.interface";
 import Background from "./background.interface";
 import Comment from "./comment.interface";
 import Decision from "./decision.interface";
@@ -25,4 +26,5 @@ export default interface User {
   road: Road;
   work: string;
   rating: number;
+  createdapps: Application[];
 }

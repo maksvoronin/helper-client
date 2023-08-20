@@ -9,6 +9,7 @@ import { useAuthStoreContext } from "../@store";
 import { useNavigate } from "react-router-dom";
 import $api from "../@http";
 import { alert } from "../@services";
+import { baseURIs } from "../config";
 
 const ActivateWrapper = styled.div`
   width: 100%;
@@ -84,7 +85,7 @@ const Activate: FC<PageProps> = observer(({ title }) => {
           </ContainerText>
           <ContainerText style={{ marginTop: 0 }}>
             Если Вы уже перешли по ссылке, то{" "}
-            <Link to={"/"} style={{ fontSize: 16 }}>
+            <Link to={`${baseURIs.main}`} style={{ fontSize: 16 }}>
               обновите страницу
             </Link>
           </ContainerText>

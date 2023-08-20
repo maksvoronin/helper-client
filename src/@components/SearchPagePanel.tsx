@@ -6,6 +6,7 @@ import { useSearchStoreContext } from "../@store";
 import $api from "../@http";
 import { Comment, Decision, Response, SearchResult, User } from "../@types";
 import { Link as DefaultLink } from "react-router-dom";
+import { baseURIs } from "../config";
 
 const SearchInput = styled(Input)`
   margin-top: 15px;
@@ -59,7 +60,7 @@ const SearchPagePanel: FC = observer(() => {
                 Пользователи <SizeText>{searchResult.users.length}</SizeText>
               </ContainerSubTitle>
               {searchResult.users.map((e: User) => (
-                <Link key={e._id} to={`/profile/${e._id}`}>
+                <Link key={e._id} to={`${baseURIs.main}/profile/${e._id}`}>
                   {e.name} {e.surname}
                 </Link>
               ))}
@@ -72,7 +73,7 @@ const SearchPagePanel: FC = observer(() => {
                 Замечания <SizeText>{searchResult.comments.length}</SizeText>
               </ContainerSubTitle>
               {searchResult.comments.map((e: Comment) => (
-                <Link key={e._id} to={`/comment/${e._id}`}>
+                <Link key={e._id} to={`${baseURIs.main}/comment/${e._id}`}>
                   {e.content}
                 </Link>
               ))}
@@ -85,7 +86,7 @@ const SearchPagePanel: FC = observer(() => {
                 Решения <SizeText>{searchResult.decisions.length}</SizeText>
               </ContainerSubTitle>
               {searchResult.decisions.map((e: Decision) => (
-                <Link key={e._id} to={`/decision/${e._id}`}>
+                <Link key={e._id} to={`${baseURIs.main}/decision/${e._id}`}>
                   {e.content}
                 </Link>
               ))}

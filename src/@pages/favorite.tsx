@@ -5,6 +5,7 @@ import { Container, ContainerSubTitle, ContainerText, ContainerTitle, Li, Link, 
 import { useAuthStoreContext } from "../@store";
 import { observer } from "mobx-react";
 import { styled } from "styled-components";
+import { baseURIs } from "../config";
 
 const H3 = styled.h3`
   margin-top: 10px;
@@ -28,7 +29,7 @@ const Subscribed: FC<PageProps> = observer(({ title }) => {
           <Ul>
             {user.subscribedSystems.map((e) => (
               <Li key={e._id}>
-                <Link to={`/system/${e._id}`}>{e.name}</Link>
+                <Link to={`${baseURIs.main}/system/${e._id}`}>{e.name}</Link>
               </Li>
             ))}
           </Ul>
@@ -39,13 +40,13 @@ const Subscribed: FC<PageProps> = observer(({ title }) => {
           <ContainerSubTitle>Замечания: {user.subscribedComments.length}</ContainerSubTitle>
           {user.subscribedComments.map((e) => (
             <div key={e._id}>
-              <Link to={`/comment/${e._id}`}>
+              <Link to={`${baseURIs.main}/comment/${e._id}`}>
                 <H3>{e.content}</H3>
               </Link>
               <Ul>
                 {e.decisions.map((e) => (
                   <Li key={e._id}>
-                    <Link to={`/decision/${e._id}`}>{e.content}</Link>
+                    <Link to={`${baseURIs.main}/decision/${e._id}`}>{e.content}</Link>
                   </Li>
                 ))}
               </Ul>

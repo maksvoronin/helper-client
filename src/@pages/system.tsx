@@ -5,6 +5,7 @@ import { MainLayout } from "../@layouts";
 import { Container, ContainerSubTitle, ContainerText, ContainerTitle, Li, Link, Ul } from "../@shared";
 import { useParams } from "react-router-dom";
 import $api from "../@http";
+import { baseURIs } from "../config";
 
 const SystemPage: FC<PageProps> = observer(({ title }) => {
   const { id } = useParams();
@@ -44,7 +45,7 @@ const SystemPage: FC<PageProps> = observer(({ title }) => {
           <Ul>
             {e.decisions.map((c) => (
               <Li key={c._id}>
-                <Link to={`/decision/${c._id}`}>
+                <Link to={`${baseURIs.main}/decision/${c._id}`}>
                   {c.content}
                 </Link>
               </Li>

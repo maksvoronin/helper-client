@@ -6,7 +6,7 @@ import { styled } from "styled-components";
 import Icon from "@mdi/react";
 import { mdiHeart, mdiHeartOutline, mdiPencil } from "@mdi/js";
 import { Commentaries } from "../@widgets";
-import config from "../config";
+import config, { baseURIs } from "../config";
 import { Link } from "react-router-dom";
 import { useAuthStoreContext, usePopupStoreContext } from "../@store";
 import $api from "../@http";
@@ -144,7 +144,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
       )}
       <UserInfo>
         <p>
-          <Link to={`/profile/${decision.by && decision.by._id}`}>
+          <Link to={`${baseURIs.main}/profile/${decision.by && decision.by._id}`}>
             {decision.by && decision.by.name} {decision.by && decision.by.surname}
           </Link>
           • {new Date(newDecision.created).toLocaleString("ru")}

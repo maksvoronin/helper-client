@@ -7,6 +7,7 @@ import { Button, Input, Link } from "../@shared";
 import { ResultField } from "../@components";
 import { alert } from "../@services";
 import $api from "../@http";
+import { baseURIs } from "../config";
 
 const RecoveryWrapper = styled.div`
   width: 100%;
@@ -79,8 +80,8 @@ const Recovery: FC<PageProps> = observer(({ title }) => {
           <Input placeholder="Ваша почта" value={email} onChange={({ target }: any) => setEmail(target.value)} />
           <Button onClick={sendData}>Восстановить</Button>
           <ResultField status={result.status} message={result.message} />
-          <Link to={"/register"}>Регистрация</Link>
-          <Link to={"/login"}>Войти</Link>
+          <Link to={`${baseURIs.auth}/register`}>Регистрация</Link>
+          <Link to={`${baseURIs.auth}/login`}>Войти</Link>
         </RecoveryForm>
       </RecoveryWrapper>
     </DefaultLayout>

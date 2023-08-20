@@ -12,6 +12,7 @@ import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { styled } from "styled-components";
 import { EditCommentPopup } from "../@popups";
+import { baseURIs } from "../config";
 
 const ControlButton = styled.button`
   height: 40px;
@@ -90,7 +91,7 @@ const DetailComment: FC<PageProps> = observer(({ title }) => {
         <ContainerText>Количество решений: {comment.decisions && comment.decisions.length}</ContainerText>
         <ContainerText>
           Автор:{" "}
-          <Link to={`/profile/${comment.by._id}`}>
+          <Link to={`${baseURIs.main}/profile/${comment.by._id}`}>
             {comment.by && comment.by.name} {comment.by && comment.by.surname}
           </Link>
         </ContainerText>

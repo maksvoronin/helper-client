@@ -24,3 +24,4 @@ export { default as Blok } from "./blok.interface";
 export { default as PostNumber } from "./postnumber.interface";
 export { default as CommentsJournal } from "./commentsjournal.interface";
 export { default as ProjectStat } from "./projectstat.interface";
+export { default as Application } from "./application.interface";

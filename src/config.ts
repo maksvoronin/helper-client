@@ -1,5 +1,5 @@
-export const dev_mode: boolean = false;
-export const dev_version: string = "2.3";
+export const dev_mode: boolean = true;
+export const dev_version: string = "2.4";
 
 const config = {
   dev_title: `Release v${dev_version} (Stat)`,
@@ -11,10 +11,18 @@ const config = {
 };
 
 export const changelog = [
+  { version: "2.4", steps: ["Платформа для разработчиков: создание приложений"] },
   { version: "2.3", steps: ["Добавлен модуль статистики"] },
   { version: "2.2", steps: ["Добавлен changelog", "Исправления бесконечных загрузок"] },
   { version: "2.1", steps: ["Добавление рейтинга", "Добавлены журналы", "Подключение рекламной сети"] },
   { version: "2.0", steps: ["Добавление комментариев", "Полный редизайн и рефакторинг проекта"] },
 ];
+
+export const baseURIs = {
+  main: "",
+  auth: "/auth",
+  developers: "/developers",
+  admin: "/admin",
+};
 
 export default config;

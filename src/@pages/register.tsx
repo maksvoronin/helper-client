@@ -9,6 +9,7 @@ import { ResultField, RoadSelect } from "../@components";
 import $api from "../@http";
 import { useAuthStoreContext } from "../@store";
 import { useNavigate } from "react-router-dom";
+import { baseURIs } from "../config";
 
 const RegisterWrapper = styled.div`
   width: 100%;
@@ -117,8 +118,8 @@ const Register: FC<PageProps> = observer(({ title }) => {
           <Input placeholder="Предприятие" value={work} onChange={({ target }: any) => setWork(target.value)} />
           <Button onClick={sendData}>Зарегистрироваться</Button>
           <ResultField status={error.status} message={error.message} />
-          <Link to="/recovery">Восстановить пароль</Link>
-          <Link to="/login">Войти</Link>
+          <Link to={`${baseURIs.auth}/recovery`}>Восстановить пароль</Link>
+          <Link to={`${baseURIs.auth}/login`}>Войти</Link>
         </RegisterForm>
       </RegisterWrapper>
     </DefaultLayout>
