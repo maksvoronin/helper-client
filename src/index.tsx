@@ -44,6 +44,7 @@ import {
   Users,
   Welcome,
   Changelog,
+  Stat,
 } from "./@pages";
 import { authStore, AuthStoreContext } from "./@store";
 import { DocsCreateApp } from "./@pages/developers";
@@ -219,6 +220,10 @@ const router = createBrowserRouter([
   {
     path: "/changelog",
     element: <Changelog title="История версий" />
+  },
+  {
+    path: "/admin/stat",
+    element: <Stat title={"Статистика запросов"} />
   }
 ]);
 

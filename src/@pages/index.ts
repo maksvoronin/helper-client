@@ -29,6 +29,7 @@ export {
   CreateRoad,
   EditRoad,
   CommentsCheck,
+  Stat,
 } from "./admin";
 export { default as Profile } from "./profile";
 export { default as DetailComment } from "./detailComment";

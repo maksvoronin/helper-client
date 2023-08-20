@@ -95,12 +95,14 @@ const SidebarUserInfo: FC = observer(() => {
         if(data.type === "error") return;
         setDecisionsPage(data.data!.countDecisions);
         setCommentsPage(data.data!.countComments);
+        setDecisions(data.data!.countDecisions);
+        setComments(data.data!.countComments);
       });
     } else {
       setCommentsPage(comments);
       setDecisionsPage(decisions);
     }
-  }, [comments, decisions, user, setCommentsPage, setDecisionsPage]);
+  }, [comments, decisions, user, setCommentsPage, setDecisionsPage, setDecisions, setComments]);
 
   return (
     <UserContainer>

@@ -77,6 +77,9 @@ const Admin: FC<PageProps> = observer(({ title }) => {
           <Li>
             <Link to={"/admin/export"}>Экспорт</Link>
           </Li>
+          <Li>
+            <Link to={"/admin/stat"}>Статистика посещений</Link>
+          </Li>
         </Ul>
       </Container>
     </MainLayout>

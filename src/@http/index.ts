@@ -8,6 +8,7 @@ const $api = axios.create({
 
 $api.interceptors.request.use((config) => {
   config.headers!.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  config.headers!["X-Platform"] = "web";
   return config;
 });
 
