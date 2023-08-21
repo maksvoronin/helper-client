@@ -4,7 +4,7 @@ import { IAlert } from '../@types';
 const alertsSubject = new Subject<IAlert>();
 const closedAlertsSubject = new Subject<number>();
 
-const alert = (type: "default" | "error", title: string, message: string, time: number): void => {
+const alert = (type: "default" | "error", title: string, message: string, time: number = 1.5): void => {
   alertsSubject.next({
     id: Math.round(window.performance.now()*10),
     title, type, message, time

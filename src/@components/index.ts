@@ -21,3 +21,4 @@ export { default as BlokSelect } from "./BlokSelect";
 export { default as UserSelect } from "./UserSelect";
 export { default as PostnumberSelect } from "./PostnumberSelect";
 export { default as Loader } from "./Loader";
+export { default as AppsCard } from "./AppsCard";

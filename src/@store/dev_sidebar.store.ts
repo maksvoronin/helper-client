@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { action, makeObservable, observable } from "mobx";
 
 class DevSidebarStore {
-  isDevSidebar: boolean = false;
+  isDevSidebar: "true" | "false" = "false";
 
   constructor() {
     makeObservable(this, {
@@ -11,7 +11,7 @@ class DevSidebarStore {
     });
   }
 
-  setDevSidebar(b: boolean) {
+  setDevSidebar(b: "true" | "false") {
     this.isDevSidebar = b;
   }
 }

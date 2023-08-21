@@ -2,7 +2,7 @@ export const dev_mode: boolean = true;
 export const dev_version: string = "2.4";
 
 const config = {
-  dev_title: `Release v${dev_version} (Stat)`,
+  dev_title: `Release v${dev_version} (Development Platform)`,
   API: dev_mode ? `http://192.168.0.105:1000/api` : `https://helper.voronin.xyz/api`,
   fileHost: dev_mode ? `http://192.168.0.105:1000/api/public` : `https://helper.voronin.xyz/api/public`,
   fileUpload: dev_mode ? `http://192.168.0.105:1000/api/file/upload` : `https://helper.voronin.xyz/api/file/upload`,
@@ -11,7 +11,7 @@ const config = {
 };
 
 export const changelog = [
-  { version: "2.4", steps: ["Платформа для разработчиков: создание приложений"] },
+  { version: "2.4", steps: ["Платформа для разработчиков: создание приложений", "Платформа для разработчиков: изменение приложения", "Платформа для разработчиков: список приложений"] },
   { version: "2.3", steps: ["Добавлен модуль статистики"] },
   { version: "2.2", steps: ["Добавлен changelog", "Исправления бесконечных загрузок"] },
   { version: "2.1", steps: ["Добавление рейтинга", "Добавлены журналы", "Подключение рекламной сети"] },

@@ -118,21 +118,21 @@ const DevelopersHeader: FC = observer(() => {
   const navigate = useNavigation();
 
   useEffect(() => {
-    setDevSidebar(false);
+    setDevSidebar("false");
   }, [navigate, setDevSidebar]);
 
   return (
     <Header>
       <HeaderContainer>
         <LogoContainer>
-          {isDevSidebar ? (
-            <CloseSidebar onClick={() => setDevSidebar(false)}>
+          {isDevSidebar === "true" ? (
+            <CloseSidebar onClick={() => setDevSidebar("false")}>
               <span></span>
               <span></span>
               <span></span>
             </CloseSidebar>
           ) : (
-            <OpenSidebar onClick={() => setDevSidebar(true)}>
+            <OpenSidebar onClick={() => setDevSidebar("true")}>
               <span></span>
               <span></span>
               <span></span>

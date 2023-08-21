@@ -3,16 +3,17 @@ import { FC } from "react";
 import { styled } from "styled-components";
 import { ListButton } from "../@components";
 import { Link } from "react-router-dom";
-import { useDevSidebarStoreContext } from "../@store";
+import { useAuthStoreContext, useDevSidebarStoreContext } from "../@store";
+import { baseURIs } from "../config";
 
-const Sidebar = styled.div<{mobileVisible: boolean}>`
+const Sidebar = styled.div<{ mobilevisible: "true" | "false" }>`
   max-width: 240px;
   width: 100%;
   position: sticky;
   top: 0px;
   @media (max-width: 500px) {
     position: fixed;
-    left: ${props => props.mobileVisible ? "0%" : "-100%"};
+    left: ${(props) => (props.mobilevisible === "true" ? "0%" : "-100%")};
     top: 50px;
     max-width: none;
     padding-left: 15px;
@@ -51,15 +52,16 @@ const NavButton = styled(Link)`
   }
 `;
 
-const docsURL = "/developers/docs";
+const docsURL = `${baseURIs.developers}/docs`;
 const style = { padding: "4px 10px" };
 const marginButtons = 15;
 
 const DevelopersSidebar: FC = observer(() => {
   const { isDevSidebar } = useDevSidebarStoreContext();
+  const { user } = useAuthStoreContext();
 
   return (
-    <Sidebar mobileVisible={isDevSidebar}>
+    <Sidebar mobilevisible={String(isDevSidebar) as unknown as "true" | "false"}>
       <Paragraph>Введение</Paragraph>
       <ListButton btnText="Приложение" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/createapp`}>Создание приложения</NavButton>
@@ -75,7 +77,6 @@ const DevelopersSidebar: FC = observer(() => {
       </ListButton>
       <ListButton btnText="series" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/methods/series`}>О методах</NavButton>
-
         <NavButton to={`${docsURL}/methods/series/all`}>all</NavButton>
         <NavButton to={`${docsURL}/methods/series/get`}>get</NavButton>
       </ListButton>
@@ -100,8 +101,21 @@ const DevelopersSidebar: FC = observer(() => {
         <NavButton to={`${docsURL}/methods/user`}>О методах</NavButton>
         <NavButton to={`${docsURL}/methods/user/get`}>get</NavButton>
       </ListButton>
+      {user && user.createdapps && user.createdapps.length > 0 && (
+        <>
+          <Paragraph>Приложения</Paragraph>
+          {user &&
+            user.createdapps &&
+            user.createdapps.map((e) => (
+              <NavButton to={`${baseURIs.developers}/apps/${e._id}`} key={e._id}>
+                {e.name}
+              </NavButton>
+            ))}
+            <NavButton to={`${baseURIs.developers}/apps`}>Мои приложения</NavButton>
+        </>
+      )}
       <Paragraph>Настройки</Paragraph>
-      <NavButton to={"/"}>Вернуться на сайт</NavButton>
+      <NavButton to={`${baseURIs.main || "/"}`}>Вернуться на сайт</NavButton>
     </Sidebar>
   );
 });
