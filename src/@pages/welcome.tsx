@@ -5,6 +5,7 @@ import { FC } from "react";
 import { styled } from "styled-components";
 import { Logo } from "../@assets";
 import { useNavigate } from "react-router-dom";
+import { baseURIs } from "../config";
 
 const WelcomeWrapper = styled.div`
   position: absolute;
@@ -74,7 +75,7 @@ const Welcome: FC<PageProps> = observer(({ title }) => {
         <WelcomePage>
           <Logo />
           <h1>Helper</h1>
-          <button onClick={() => navigate("/login")}>Войти в систему</button>
+          <button onClick={() => navigate(`${baseURIs.auth}/login`)}>Войти в систему</button>
           <p>Удобный помощник поиска неисправностей, обмена опытом и решения проблем для работников РЖД</p>
         </WelcomePage>
       </WelcomeWrapper>

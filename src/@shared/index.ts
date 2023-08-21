@@ -17,3 +17,4 @@ export { default as AdminContainer } from "./admincontainer";
 export { default as DevTitle } from "./devtitle";
 export { default as Checkbox } from "./checkbox";
 export { default as AppsContainer } from "./appscontainer";
+export { default as Code } from "./code";

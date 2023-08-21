@@ -16,13 +16,14 @@ const EditApplication: FC<{ app: Application; setApp: any }> = observer(({ app, 
   const { setVisible } = usePopupStoreContext();
 
   const [name, setName] = useState<string>(app.name || "");
+  const [joinURI, setJoinURI] = useState<string>(app.joinURI || "");
   const [description, setDescription] = useState<string>(app.description || "");
   const [usage, setUsage] = useState<string>(app.usage || "");
   const [status, setStatus] = useState<boolean>(app.status);
   const [changeToken, setChangeToken] = useState<boolean>(false);
 
   const sendData = () => {
-    $api.put<Response<Application>>("/application/edit", { id: app._id, name, description, usage, status, changeToken }).then(({ data }) => {
+    $api.put<Response<Application>>("/application/edit", { id: app._id, name, description, usage, status, changeToken, joinURI }).then(({ data }) => {
       if (data.type === "error" || !data.data) return alert("error", "Ошибка", String(data.data!));
       setApp(data.data);
       setVisible(false);
@@ -33,6 +34,7 @@ const EditApplication: FC<{ app: Application; setApp: any }> = observer(({ app, 
   return (
     <>
       <Input placeholder="Название" value={name} onChange={({ target }: any) => setName(target.value)} />
+      <Input placeholder="Ссылка авторизации" value={joinURI} onChange={({ target }: any) => setJoinURI(target.value)} />
       <Textarea placeholder="Описание" value={description} onChange={({ target }: any) => setDescription(target.value)} />
       <Textarea placeholder="Использование" value={usage} onChange={({ target }: any) => setUsage(target.value)} />
       <Row>

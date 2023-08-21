@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Commentary } from "../@types";
 import { observer } from "mobx-react";
 import { styled } from "styled-components";
-import config from "../config";
+import config, { baseURIs } from "../config";
 import { Link } from "react-router-dom";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
@@ -90,7 +90,7 @@ const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
         <>
           <Avatar src={`${config.fileHost}/${commentary.user.avatar}`} alt={"User avatar"} />
           <CommentBody>
-            <UserTitle to={`/profile/${commentary.user._id}`}>
+            <UserTitle to={`${baseURIs.main}/profile/${commentary.user._id}`}>
               {commentary.user.name} {commentary.user.surname}
             </UserTitle>
             <CommentText>{commentary.text}</CommentText>

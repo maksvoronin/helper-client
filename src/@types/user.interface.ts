@@ -27,4 +27,5 @@ export default interface User {
   work: string;
   rating: number;
   createdapps: Application[];
+  api_tokens: {appId: string, token: string}[];
 }

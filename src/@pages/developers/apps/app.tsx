@@ -58,7 +58,19 @@ const App: FC<PageProps> = observer(({ title }) => {
     <DevelopersLayout title={`${title} ${app.name}`}>
       <DevTitle>{app.name}</DevTitle>
       <FormText>Владелец</FormText>
-      <AppText><Link to={`${baseURIs.main}/profile/${app.owner._id}`}>{app.owner.name} {app.owner.surname}</Link></AppText>
+      <AppText>
+        <Link to={`${baseURIs.main}/profile/${app.owner._id}`}>
+          {app.owner.name} {app.owner.surname}
+        </Link>
+      </AppText>
+      <FormText>ID приложения</FormText>
+      <AppText>{app._id}</AppText>
+      {app.joinURI && (
+        <>
+          <FormText>Ссылка авторизации</FormText>
+          <AppText>{app.joinURI}</AppText>
+        </>
+      )}
       <FormText>Описание</FormText>
       <AppText>{app.description}</AppText>
       <FormText>Статус</FormText>

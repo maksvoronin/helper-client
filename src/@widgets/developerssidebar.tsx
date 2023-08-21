@@ -65,9 +65,13 @@ const DevelopersSidebar: FC = observer(() => {
       <Paragraph>Введение</Paragraph>
       <ListButton btnText="Приложение" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/createapp`}>Создание приложения</NavButton>
+        <NavButton to={`${docsURL}/forwhat`}>Для чего это нужно?</NavButton>
+        <NavButton to={`${docsURL}/controlapp`}>Управление приложением</NavButton>
+        <NavButton to={`${docsURL}/deleteapp`}>Удаление приложения</NavButton>
       </ListButton>
       <ListButton btnText="Работа с API" marginButtons={marginButtons} style={style}>
-        <NavButton to={`${docsURL}/create`}>Создание приложения</NavButton>
+        <NavButton to={`${docsURL}/start`}>Начало</NavButton>
+        <NavButton to={`${docsURL}/authorization`}>Авторизация</NavButton>
       </ListButton>
       <Paragraph>Методы</Paragraph>
       <ListButton btnText="system" marginButtons={marginButtons} style={style}>
@@ -111,8 +115,8 @@ const DevelopersSidebar: FC = observer(() => {
                 {e.name}
               </NavButton>
             ))}
-            <NavButton to={`${baseURIs.developers}/apps`}>Мои приложения</NavButton>
-            <NavButton to={`${baseURIs.developers}/apps/all`}>Все приложения</NavButton>
+          <NavButton to={`${baseURIs.developers}/apps`}>Мои приложения</NavButton>
+          <NavButton to={`${baseURIs.developers}/apps/all`}>Все приложения</NavButton>
         </>
       )}
       <Paragraph>Настройки</Paragraph>

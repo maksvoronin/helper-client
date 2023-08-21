@@ -4,7 +4,7 @@ import { useAuthStoreContext, useStatStoreContext } from "../@store";
 import $api from "../@http";
 import { Response, Stat } from "../@types";
 import { styled } from "styled-components";
-import config from "../config";
+import config, { baseURIs } from "../config";
 import { Link } from "react-router-dom";
 import { mdiCogOutline } from "@mdi/js";
 import Icon from "@mdi/react";
@@ -111,7 +111,7 @@ const SidebarUserInfo: FC = observer(() => {
           <UserContent>
             <UserAvatar style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} />
             <UserTexts>
-              <UserLink to={`/profile/${user._id}`}>
+              <UserLink to={`${baseURIs.main}/profile/${user._id}`}>
                 {user.name} {user.surname}
               </UserLink>
               <UserStat>

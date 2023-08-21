@@ -40,3 +40,5 @@ export { default as Welcome } from "./welcome";
 export { default as Rating } from "./rating";
 export { JournalComments } from "./journals";
 export { default as Changelog } from "./changelog";
+export { default as NotFound } from "./notfound";
+export { default as LoginApplication } from "./loginApplication";

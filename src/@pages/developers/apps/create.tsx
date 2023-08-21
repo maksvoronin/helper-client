@@ -12,13 +12,14 @@ import { useAuthStoreContext } from "../../../@store";
 const CreateAPIApplication: FC<PageProps> = observer(({ title }) => {
   const { user, setUser } = useAuthStoreContext();
   const [name, setName] = useState<string>("");
+  const [joinURI, setJoinURI] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [usage, setUsage] = useState<string>("");
 
   const navigate = useNavigate();
 
   const sendData = () => {
-    $api.post<Response<Application>>("/application/create", { name, description, usage }).then(({ data }) => {
+    $api.post<Response<Application>>("/application/create", { name, description, usage, joinURI }).then(({ data }) => {
       if(data.type === "error" || !data.data) return alert("error", "Ошибка", data.message);
       alert("default", "Успешно", `Приложение ${name} создано`);
       const newUser = user;
@@ -33,6 +34,8 @@ const CreateAPIApplication: FC<PageProps> = observer(({ title }) => {
       <DevTitle>Создание приложения</DevTitle>
       <FormText>Название приложения</FormText>
       <Input placeholder="Название" value={name} onChange={({ target }: any) => setName(target.value)} />
+      <FormText>Ссылка на страницу для входа (необязательно)</FormText>
+      <Input placeholder="https://helper.voronin.xyz/authed" value={joinURI} onChange={({ target }: any) => setJoinURI(target.value)} />
       <FormText>Описание</FormText>
       <Textarea placeholder="Приложение / виджет для..." value={description} onChange={({ target }: any) => setDescription(target.value)} />
       <FormText>Где и как им можно воспользоваться, краткий алгоритм работы</FormText>

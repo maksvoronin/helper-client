@@ -8,4 +8,5 @@ export default interface Application {
   usage: string;
   token: string;
   status: boolean;
+  joinURI?: string;
 }
