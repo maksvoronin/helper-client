@@ -9,6 +9,7 @@ const Code = styled.code`
   font-size: 14px;
   font-family: "Ubuntu Mono", monospace;
   margin-top: 16px;
+  overflow: auto;
 `;
 
 export default Code;
