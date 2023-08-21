@@ -72,27 +72,13 @@ const DevelopersSidebar: FC = observer(() => {
       <ListButton btnText="Работа с API" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/start`}>Начало</NavButton>
         <NavButton to={`${docsURL}/authorization`}>Авторизация</NavButton>
+        <NavButton to={`${docsURL}/responses`}>Ответы сервера</NavButton>
       </ListButton>
       <Paragraph>Методы</Paragraph>
       <ListButton btnText="system" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/methods/system`}>О методах</NavButton>
         <NavButton to={`${docsURL}/methods/system/all`}>all</NavButton>
         <NavButton to={`${docsURL}/methods/system/get`}>get</NavButton>
-      </ListButton>
-      <ListButton btnText="series" marginButtons={marginButtons} style={style}>
-        <NavButton to={`${docsURL}/methods/series`}>О методах</NavButton>
-        <NavButton to={`${docsURL}/methods/series/all`}>all</NavButton>
-        <NavButton to={`${docsURL}/methods/series/get`}>get</NavButton>
-      </ListButton>
-      <ListButton btnText="search" marginButtons={marginButtons} style={style}>
-        <NavButton to={`${docsURL}/methods/search`}>О методах</NavButton>
-        <NavButton to={`${docsURL}/methods/search/get`}>get</NavButton>
-      </ListButton>
-      <ListButton btnText="decision" marginButtons={marginButtons} style={style}>
-        <NavButton to={`${docsURL}/methods/decision`}>О методах</NavButton>
-        <NavButton to={`${docsURL}/methods/decision/all`}>all</NavButton>
-        <NavButton to={`${docsURL}/methods/decision/get`}>get</NavButton>
-        <NavButton to={`${docsURL}/methods/decision/user`}>user</NavButton>
       </ListButton>
       <ListButton btnText="comment" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/methods/comment`}>О методах</NavButton>
@@ -101,9 +87,11 @@ const DevelopersSidebar: FC = observer(() => {
         <NavButton to={`${docsURL}/methods/comment/user`}>user</NavButton>
         <NavButton to={`${docsURL}/methods/comment/system`}>system</NavButton>
       </ListButton>
-      <ListButton btnText="user" marginButtons={marginButtons} style={style}>
-        <NavButton to={`${docsURL}/methods/user`}>О методах</NavButton>
-        <NavButton to={`${docsURL}/methods/user/get`}>get</NavButton>
+      <ListButton btnText="decision" marginButtons={marginButtons} style={style}>
+        <NavButton to={`${docsURL}/methods/decision`}>О методах</NavButton>
+        <NavButton to={`${docsURL}/methods/decision/all`}>all</NavButton>
+        <NavButton to={`${docsURL}/methods/decision/get`}>get</NavButton>
+        <NavButton to={`${docsURL}/methods/decision/user`}>user</NavButton>
       </ListButton>
       {user && user.createdapps && user.createdapps.length > 0 && (
         <>

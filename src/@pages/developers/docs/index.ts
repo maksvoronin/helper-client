@@ -4,3 +4,4 @@ export { default as DocsControlApp } from "./controlapp";
 export { default as DocsDeleteApp } from "./deleteapp";
 export { default as DocsStart } from "./start";
 export { default as DocsAuthorization } from "./authorization";
+export { default as DocsResponse } from "./response";

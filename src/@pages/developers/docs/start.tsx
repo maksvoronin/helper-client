@@ -3,7 +3,7 @@ import { PageProps } from "../../../@types";
 import { FC } from "react";
 import { DevelopersLayout } from "../../../@layouts";
 import { Code, DevTitle, FormText, Li, Link, Ul } from "../../../@shared";
-import { baseURIs } from "../../../config";
+import config, { baseURIs } from "../../../config";
 
 const Start: FC<PageProps> = observer(({ title }) => {
   return (
@@ -13,7 +13,7 @@ const Start: FC<PageProps> = observer(({ title }) => {
         Чтобы начать работу с нашим API, Вам необходимо <Link to={`${baseURIs.developers}/apps/create`}>создать приложение</Link>. После, Вы получите токен, который должны будете указывать при работе с API.
       </FormText>
       <FormText>Для работы с HTTP API Вашим основным инструментом будет URI нашего API</FormText>
-      <Code>https://helper.voronin.xyz/api/&lt;TokenApp&gt;/&lt;MethodName&gt;?&lt;params&gt;</Code>
+      <Code>{config.publicapi}/&lt;TokenApp&gt;/&lt;MethodName&gt;?&lt;params&gt;</Code>
       <FormText>
         Где <code>TokenApp</code> - токен вашего приложения, <code>MethodName</code> - метод из перечня методов ниже и <code>params</code> - параметры метода
       </FormText>

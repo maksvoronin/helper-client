@@ -1,9 +1,10 @@
 export const dev_mode: boolean = true;
-export const dev_version: string = "2.4.1";
+export const dev_version: string = "2.4.2";
 
 const config = {
   dev_title: `Release v${dev_version} (Development Platform)`,
   API: dev_mode ? `http://192.168.0.105:1000/api` : `https://helper.voronin.xyz/api`,
+  publicapi: "https://helper.voronin.xyz/api/dev",
   fileHost: dev_mode ? `http://192.168.0.105:1000/api/public` : `https://helper.voronin.xyz/api/public`,
   fileUpload: dev_mode ? `http://192.168.0.105:1000/api/file/upload` : `https://helper.voronin.xyz/api/file/upload`,
   imageExt: [".bmp", ".gif", ".ico", ".png", ".jpg", ".jpeg", ".webp", ".heif", ".jp2", ".svg"],
@@ -11,6 +12,7 @@ const config = {
 };
 
 export const changelog = [
+  { version: "2.4.2", steps: ["Платформа для разработчиков: документация методов system", "Платформа для разработчиков: документация ответов на запросы"] },
   { version: "2.4.1", steps: ["Платформа для разработчиков: страница авторизации сторонних приложений", "Платформа для разработчиков: указание URI для авторизации"] },
   {
     version: "2.4",

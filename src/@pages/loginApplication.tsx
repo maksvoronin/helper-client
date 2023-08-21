@@ -105,7 +105,7 @@ const LoginApplication: FC<PageProps> = observer(({ title }) => {
     }
   }, [setAppId, appId, navigate, searchParams]);
 
-  if (!app || !app.joinURI)
+  if (!app || !app.joinURI || !app.status)
     return (
       <DefaultLayout title={title}>
         <LoginWrapper>
