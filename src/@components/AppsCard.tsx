@@ -42,11 +42,18 @@ const Disabled = styled(AppState)`
   color: #ff4747;
 `;
 
+const UserData = styled.p`
+  margin: 0;
+  padding: 0;
+  margin-top: 5px;
+`;
+
 const AppsCard: FC<{ app: Application }> = observer(({ app }) => {
   return (
     <Container to={`${baseURIs.developers}/apps/${app._id}`}>
       <AppTitle>{app.name}</AppTitle>
       {app.status ? <Enabled>Работает</Enabled> : <Disabled>Не работает</Disabled>}
+      <UserData>{app.owner.name} {app.owner.surname}</UserData>
     </Container>
   );
 });

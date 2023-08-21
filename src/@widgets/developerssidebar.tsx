@@ -112,6 +112,7 @@ const DevelopersSidebar: FC = observer(() => {
               </NavButton>
             ))}
             <NavButton to={`${baseURIs.developers}/apps`}>Мои приложения</NavButton>
+            <NavButton to={`${baseURIs.developers}/apps/all`}>Все приложения</NavButton>
         </>
       )}
       <Paragraph>Настройки</Paragraph>

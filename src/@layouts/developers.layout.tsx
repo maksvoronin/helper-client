@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useEffect } from "react";
 import { PageProps, Response, User } from "../@types";
 import { observer } from "mobx-react";
 import { styled } from "styled-components";
-import { AlertPanel, DevelopersHeader, DevelopersSidebar } from "../@widgets";
+import { AlertPanel, DevelopersHeader, DevelopersSidebar, Popup } from "../@widgets";
 import { useNavigate } from "react-router-dom";
 import { useAuthStoreContext } from "../@store";
 import $api from "../@http";
@@ -40,6 +40,7 @@ const DevelopersLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, ch
       <title>{title}</title>
       <AlertPanel />
       <DevelopersHeader />
+      <Popup />
       <Layout>
         <DevelopersSidebar />
         <div style={{width: "100%"}}>{children}</div>

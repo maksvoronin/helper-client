@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { Comment, PageProps, Response, System } from "../@types";
 import { FC, useEffect, useState } from "react";
 import { MainLayout } from "../@layouts";
-import { Container, ContainerSubTitle, ContainerText, ContainerTitle, Li, Link, Ul } from "../@shared";
+import { Container, ContainerSubTitle, ContainerText, ContainerTitle, FormText, Li, Link, Ul } from "../@shared";
 import { useParams } from "react-router-dom";
 import $api from "../@http";
 import { baseURIs } from "../config";
@@ -28,7 +28,11 @@ const SystemPage: FC<PageProps> = observer(({ title }) => {
     }
   }, [system]);
 
-  if (!system) return <></>;
+  if (!system) return (
+    <MainLayout title="Система не найдена">
+      <FormText>Система не найдена</FormText>
+    </MainLayout>
+  );;
 
   return (
     <MainLayout title={title}>

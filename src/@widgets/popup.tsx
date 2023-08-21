@@ -33,6 +33,8 @@ const PopupWrapper = styled.div`
 const PopupContainer = styled.div`
   min-width: 300px;
   min-height: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
   border-radius: 12px;
   background: white;
   padding: 20px;

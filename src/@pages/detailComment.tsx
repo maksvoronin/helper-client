@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { PageProps, Comment, Response, User } from "../@types";
 import { MainLayout } from "../@layouts";
 import { FC, useEffect, useState } from "react";
-import { Button, Container, ContainerText, ContainerTitle, Link } from "../@shared";
+import { Button, Container, ContainerText, ContainerTitle, FormText, Link } from "../@shared";
 import $api from "../@http";
 import { useParams } from "react-router-dom";
 import { DecisionBlock } from "../@components";
@@ -56,7 +56,12 @@ const DetailComment: FC<PageProps> = observer(({ title }) => {
     }
   }, [user, comment]);
 
-  if (!comment) return <></>;
+  if (!comment)
+    return (
+      <MainLayout title="Замечание не найдено">
+        <FormText>Замечание не найдено</FormText>
+      </MainLayout>
+    );
   const newUser = user;
 
   const subComment = () => {
