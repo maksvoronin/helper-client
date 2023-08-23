@@ -1,4 +1,4 @@
-import { AllApplications, App, Apps, CommentAbout, CommentAll, CommentGet, CommentSystem, CommentUser, CreateApplication, Developers, DocsAuthorization, DocsControlApp, DocsCreateApp, DocsDeleteApp, DocsForWhat, DocsResponse, DocsStart, NotFound, SystemAbout, SystemAll, SystemGet } from "../@pages/developers";
+import { AllApplications, App, Apps, CommentAbout, CommentAll, CommentGet, CommentSystem, CommentUser, CreateApplication, DecisionAbout, DecisionAll, DecisionGet, DecisionUser, Developers, DocsAuthorization, DocsControlApp, DocsCreateApp, DocsDeleteApp, DocsForWhat, DocsResponse, DocsStart, NotFound, SystemAbout, SystemAll, SystemGet } from "../@pages/developers";
 import { baseURIs } from "../config";
 
 const baseURI = baseURIs.developers;
@@ -20,6 +20,10 @@ const developerRoutes = [
   { path: `${baseURI}/docs/methods/comment/get`, element: <CommentGet title="Документация / Методы / comment / all" /> },
   { path: `${baseURI}/docs/methods/comment/user`, element: <CommentUser title="Документация / Методы / comment / all" /> },
   { path: `${baseURI}/docs/methods/comment/system`, element: <CommentSystem title="Документация / Методы / comment / all" /> },
+  { path: `${baseURI}/docs/methods/decision`, element: <DecisionAbout title="Документация / Методы / decision" /> },
+  { path: `${baseURI}/docs/methods/decision/all`, element: <DecisionAll title="Документация / Методы / decision / all" /> },
+  { path: `${baseURI}/docs/methods/decision/get`, element: <DecisionGet title="Документация / Методы / decision / get" /> },
+  { path: `${baseURI}/docs/methods/decision/user`, element: <DecisionUser title="Документация / Методы / decision / user" /> },
   { path: `${baseURI}/apps`, element: <Apps title="Мои приложения" /> },
   { path: `${baseURI}/apps/create`, element: <CreateApplication title="Создание приложения" /> },
   { path: `${baseURI}/apps/all`, element: <AllApplications title="Все приложения" /> },
