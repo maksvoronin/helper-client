@@ -20,8 +20,9 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--pageBackground);
-  @media ((max-width: 500px) or (max-height: 650px)) {
+  @media ((max-width: 500px) or (max-height: 440px)) {
     align-items: flex-start;
+    padding-top: 50px;
   }
 `;
 
@@ -35,7 +36,7 @@ const LoginContainer = styled.div`
   justify-content: center;
   padding: 30px;
   gap: 20px;
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     max-width: none;
     max-height: none;
     width: 100%;
@@ -43,6 +44,7 @@ const LoginContainer = styled.div`
     padding-top: 60px;
     justify-content: start;
     flex-direction: column;
+    gap: 0;
   }
 `;
 
@@ -51,6 +53,15 @@ const AboutApplication = styled.div`
   height: 100%;
   border-right: 1px solid #e2e2e2;
   padding-right: 30px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    p:last-child {
+      border-bottom: 1px solid rgb(226, 226, 226);
+      margin-bottom: 0;
+      padding-bottom: 14px;
+    }
+  }
 `;
 
 const LoginForm = styled.div`
@@ -60,6 +71,14 @@ const LoginForm = styled.div`
   align-items: center;
   gap: 20px;
   justify-content: flex-start;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding-top: 20px;
+    margin-top: auto;
+    svg {
+      display: none;
+    }
+  }
 `;
 
 const ApplicationTitle = styled.h2`
@@ -77,6 +96,10 @@ const LoginTitle = styled.h1`
   font-size: 28px;
   color: #333;
   margin: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const LoginApplication: FC<PageProps> = observer(({ title }) => {

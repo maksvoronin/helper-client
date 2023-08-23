@@ -1,3 +1,4 @@
+import Event from "./event.interface";
 import User from "./user.interface";
 
 export default interface System {
@@ -8,5 +9,5 @@ export default interface System {
   visible: boolean,
   created: number,
   usingJournals: boolean,
-  events: {}
+  events: Event[];
 }

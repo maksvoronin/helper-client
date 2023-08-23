@@ -1,5 +1,5 @@
 export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.2";
+export const dev_version: string = "2.4.3";
 
 const config = {
   dev_title: `Release v${dev_version} (Development Platform)`,
@@ -12,6 +12,7 @@ const config = {
 };
 
 export const changelog = [
+  { version: "2.4.3", steps: ["Платформа для разработчиков: документация методов comment", "Платформа для разработчиков: документация методов decision", "Платформа для разработчиков: адаптив для входа сторонних приложений"] },
   { version: "2.4.2", steps: ["Платформа для разработчиков: документация методов system", "Платформа для разработчиков: документация ответов на запросы"] },
   { version: "2.4.1", steps: ["Платформа для разработчиков: страница авторизации сторонних приложений", "Платформа для разработчиков: указание URI для авторизации"] },
   {
