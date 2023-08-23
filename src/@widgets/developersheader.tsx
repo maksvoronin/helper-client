@@ -3,7 +3,7 @@ import { FC, useEffect } from "react";
 import { styled } from "styled-components";
 import { Logo } from "../@assets";
 import { useAuthStoreContext, useDevSidebarStoreContext } from "../@store";
-import config from "../config";
+import config, { baseURIs } from "../config";
 import { Link, useNavigation } from "react-router-dom";
 
 const Header = styled.div`
@@ -150,7 +150,7 @@ const DevelopersHeader: FC = observer(() => {
             </UserText>
           </UserContainer>
         ) : (
-          <SidebarLogin to={"/login"}>Войти</SidebarLogin>
+          <SidebarLogin to={`${baseURIs.auth}/login`}>Войти</SidebarLogin>
         )}
       </HeaderContainer>
     </Header>
