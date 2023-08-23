@@ -8,7 +8,10 @@ import { styled } from "styled-components";
 
 const DateSubTitle = styled.span`
   font-weight: 400;
-  opacity: 0.6;
+  font-size: 16px;
+  color: #999;
+  display: block;
+  margin-left: 5px;
 `;
 
 const Changelog: FC<PageProps> = observer(({ title }) => {
@@ -20,7 +23,7 @@ const Changelog: FC<PageProps> = observer(({ title }) => {
       {changelog.map((e) => (
         <Container key={Math.random() * e.version.length}>
           <ContainerSubTitle>
-            {e.version} <DateSubTitle>{e.date}</DateSubTitle>
+            {e.version} <DateSubTitle>• {e.date}</DateSubTitle>
           </ContainerSubTitle>
           <Ul>
             {e.steps.map((f) => (

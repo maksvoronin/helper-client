@@ -1,5 +1,5 @@
 export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.2";
+export const dev_version: string = "2.4.1";
 
 const config = {
   dev_title: `Release v${dev_version} (Development Platform)`,
