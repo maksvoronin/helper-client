@@ -84,6 +84,7 @@ const DevelopersSidebar: FC = observer(() => {
       <NavButton to={`${docsURL}/interfaces/background`}>background</NavButton>
       <NavButton to={`${docsURL}/interfaces/road`}>road</NavButton>
       <NavButton to={`${docsURL}/interfaces/application`}>application</NavButton>
+      <NavButton to={`${docsURL}/interfaces/series`}>series</NavButton>
       
       <Paragraph>Методы</Paragraph>
       <ListButton btnText="system" marginButtons={marginButtons} style={style}>

@@ -7,3 +7,4 @@ export { default as InterfaceCommentary } from "./commentary";
 export { default as InterfaceBackground } from "./background";
 export { default as InterfaceRoad } from "./road";
 export { default as InterfaceApplication } from "./application";
+export { default as InterfaceSeries } from "./series";

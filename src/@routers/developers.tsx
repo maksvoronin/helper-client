@@ -1,4 +1,4 @@
-import { AllApplications, App, Apps, CommentAbout, CommentAll, CommentGet, CommentSystem, CommentUser, CreateApplication, DecisionAbout, DecisionAll, DecisionGet, DecisionUser, Developers, DocsAuthorization, DocsControlApp, DocsCreateApp, DocsDeleteApp, DocsForWhat, DocsResponse, DocsStart, InterfaceApplication, InterfaceBackground, InterfaceComment, InterfaceCommentary, InterfaceDecision, InterfaceEvent, InterfaceRoad, InterfaceSystem, InterfaceUser, NotFound, SystemAbout, SystemAll, SystemGet } from "../@pages/developers";
+import { AllApplications, App, Apps, CommentAbout, CommentAll, CommentGet, CommentSystem, CommentUser, CreateApplication, DecisionAbout, DecisionAll, DecisionGet, DecisionUser, Developers, DocsAuthorization, DocsControlApp, DocsCreateApp, DocsDeleteApp, DocsForWhat, DocsResponse, DocsStart, InterfaceApplication, InterfaceBackground, InterfaceComment, InterfaceCommentary, InterfaceDecision, InterfaceEvent, InterfaceRoad, InterfaceSeries, InterfaceSystem, InterfaceUser, NotFound, SystemAbout, SystemAll, SystemGet } from "../@pages/developers";
 import { baseURIs } from "../config";
 
 const baseURI = baseURIs.developers;
@@ -33,6 +33,7 @@ const developerRoutes = [
   { path: `${baseURI}/docs/interfaces/background`, element: <InterfaceBackground title="Документация / Интерфейсы / background" /> },
   { path: `${baseURI}/docs/interfaces/road`, element: <InterfaceRoad title="Документация / Интерфейсы / road" /> },
   { path: `${baseURI}/docs/interfaces/application`, element: <InterfaceApplication title="Документация / Интерфейсы / application" /> },
+  { path: `${baseURI}/docs/interfaces/series`, element: <InterfaceSeries title="Документация / Интерфейсы / series" /> },
   { path: `${baseURI}/apps`, element: <Apps title="Мои приложения" /> },
   { path: `${baseURI}/apps/create`, element: <CreateApplication title="Создание приложения" /> },
   { path: `${baseURI}/apps/all`, element: <AllApplications title="Все приложения" /> },

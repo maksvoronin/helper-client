@@ -3,4 +3,4 @@ export { DocsCreateApp, DocsForWhat, DocsControlApp, DocsDeleteApp, DocsStart, D
 export { CreateApplication, Apps, App, AllApplications } from "./apps";
 export { default as NotFound } from "./notfound";
 export { SystemAbout, SystemAll, SystemGet, CommentAbout, CommentAll, CommentGet, CommentUser, CommentSystem, DecisionAbout, DecisionAll, DecisionGet, DecisionUser } from "./docs/methods";
-export { InterfaceSystem, InterfaceComment, InterfaceDecision, InterfaceUser, InterfaceEvent, InterfaceCommentary, InterfaceBackground, InterfaceRoad, InterfaceApplication } from "./docs/interfaces";
+export { InterfaceSystem, InterfaceComment, InterfaceDecision, InterfaceUser, InterfaceEvent, InterfaceCommentary, InterfaceBackground, InterfaceRoad, InterfaceApplication, InterfaceSeries } from "./docs/interfaces";
