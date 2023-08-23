@@ -4,6 +4,12 @@ import { MainLayout } from "../@layouts";
 import { FC } from "react";
 import { Container, ContainerSubTitle, ContainerTitle, Li, Ul } from "../@shared";
 import { changelog } from "../config";
+import { styled } from "styled-components";
+
+const DateSubTitle = styled.span`
+  font-weight: 400;
+  opacity: 0.6;
+`;
 
 const Changelog: FC<PageProps> = observer(({ title }) => {
   return (
@@ -13,7 +19,9 @@ const Changelog: FC<PageProps> = observer(({ title }) => {
       </Container>
       {changelog.map((e) => (
         <Container key={Math.random() * e.version.length}>
-          <ContainerSubTitle>{e.version}</ContainerSubTitle>
+          <ContainerSubTitle>
+            {e.version} <DateSubTitle>{e.date}</DateSubTitle>
+          </ContainerSubTitle>
           <Ul>
             {e.steps.map((f) => (
               <Li key={Math.random() * f.length}>{f}</Li>
