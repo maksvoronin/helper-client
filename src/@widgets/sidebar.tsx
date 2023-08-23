@@ -247,9 +247,6 @@ const Sidebar: FC = observer(() => {
             <Link className={"support"} to={`${baseURIs.developers}`}>
               Разработчикам
             </Link>
-            <a className={"support"} href="https://t.me/+G0fh6FON9AYxZGIy" target={"_blank"} rel="noreferrer">
-              Чат Telegram
-            </a>
             <Link className="support" to={`${baseURIs.main}/changelog`}>Версия {dev_version}</Link>
           </SidebarLinks>
         </SidebarContainer>
