@@ -8,5 +8,5 @@ export default interface Background {
   type: "image" | "color";
   content: string;
   author: User;
-  events: Event;
+  events: Event[];
 }

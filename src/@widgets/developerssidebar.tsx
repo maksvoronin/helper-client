@@ -74,6 +74,17 @@ const DevelopersSidebar: FC = observer(() => {
         <NavButton to={`${docsURL}/authorization`}>Авторизация</NavButton>
         <NavButton to={`${docsURL}/responses`}>Ответы сервера</NavButton>
       </ListButton>
+      <Paragraph>Интерфейсы</Paragraph>
+      <NavButton to={`${docsURL}/interfaces/system`}>system</NavButton>
+      <NavButton to={`${docsURL}/interfaces/comment`}>comment</NavButton>
+      <NavButton to={`${docsURL}/interfaces/decision`}>decision</NavButton>
+      <NavButton to={`${docsURL}/interfaces/user`}>user</NavButton>
+      <NavButton to={`${docsURL}/interfaces/event`}>event</NavButton>
+      <NavButton to={`${docsURL}/interfaces/commentary`}>commentary</NavButton>
+      <NavButton to={`${docsURL}/interfaces/background`}>background</NavButton>
+      <NavButton to={`${docsURL}/interfaces/road`}>road</NavButton>
+      <NavButton to={`${docsURL}/interfaces/application`}>application</NavButton>
+      
       <Paragraph>Методы</Paragraph>
       <ListButton btnText="system" marginButtons={marginButtons} style={style}>
         <NavButton to={`${docsURL}/methods/system`}>О методах</NavButton>
