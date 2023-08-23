@@ -16,6 +16,7 @@ const Header = styled.div`
   align-items: center;
   padding-left: 15px;
   padding-right: 15px;
+  z-index: 1;
 `;
 
 const HeaderContainer = styled.div`
