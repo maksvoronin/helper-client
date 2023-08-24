@@ -99,7 +99,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
           </Link>
         </ContainerText>
         <ContainerText>Создано: {new Date(comment.created).toLocaleString("ru")}</ContainerText>
-        {user && comment && (user._id === comment.by._id || user.permissions > 4) && (
+        {user && comment.by && (user._id === comment.by._id || user.permissions > 4) && (
           <Button
             style={{ marginTop: 10 }}
             onClick={() => {
