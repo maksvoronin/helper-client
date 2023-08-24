@@ -94,7 +94,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
         <ContainerText>Количество решений: {comment.decisions && comment.decisions.length}</ContainerText>
         <ContainerText>
           Автор:{" "}
-          <Link to={`${baseURIs.main}/profile/${comment.by._id}`}>
+          <Link to={comment.by && `${baseURIs.main}/profile/${comment.by._id}`}>
             {comment.by && comment.by.name} {comment.by && comment.by.surname}
           </Link>
         </ContainerText>
