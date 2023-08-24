@@ -58,7 +58,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
 
   useEffect(() => {
     if(user && user.subscribedComments && comment) {
-      user.subscribedComments.find((e) => e._id === comment._id) ? setCommentLiked(true) : setCommentLiked(false);
+      user.subscribedComments && user.subscribedComments.find((e) => e._id === comment._id) ? setCommentLiked(true) : setCommentLiked(false);
     }
   }, [user, comment]);
 
@@ -99,7 +99,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
           </Link>
         </ContainerText>
         <ContainerText>Создано: {new Date(comment.created).toLocaleString("ru")}</ContainerText>
-        {(user._id === comment.by._id || user.permissions > 4) && (
+        {user && comment && (user._id === comment.by._id || user.permissions > 4) && (
           <Button
             style={{ marginTop: 10 }}
             onClick={() => {
