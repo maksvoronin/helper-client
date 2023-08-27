@@ -95,6 +95,7 @@ const SidebarLinks = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: auto;
   a.support {
     display: block;
     font-size: 13px;
@@ -217,7 +218,7 @@ const Sidebar: FC = observer(() => {
             )}
 
             <MobileLogoContainer>
-              <Link to={`${baseURIs.main}`} style={{ height: 42 }}>
+              <Link to={`${baseURIs.main || "/"}`} style={{ height: 42 }}>
                 <Logo />
               </Link>
             </MobileLogoContainer>

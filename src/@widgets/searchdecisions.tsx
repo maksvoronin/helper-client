@@ -217,9 +217,9 @@ const SearchDecisions: FC = observer(() => {
             setSelectedFullComment(e);
           }}
         />
-        {user.name && (
+        {
           <ControlRow>
-            {selectedSystem ? (
+            {isAuth && selectedSystem ? (
               systemLiked ? (
                 <ControlButton onClick={unSubSystem}>
                   <Icon path={mdiHeart} size={"18px"} />
@@ -234,7 +234,7 @@ const SearchDecisions: FC = observer(() => {
             ) : (
               <></>
             )}
-            {selectedComment ? (
+            {isAuth && selectedComment ? (
               commentLiked ? (
                 <ControlButton onClick={unSubComment}>
                   <Icon path={mdiHeart} size={"18px"} />
@@ -256,7 +256,7 @@ const SearchDecisions: FC = observer(() => {
               </ControlButton>
             )}
           </ControlRow>
-        )}
+        }
       </Container>
       {selectedComment ? (
         decisions.length > 0 ? (

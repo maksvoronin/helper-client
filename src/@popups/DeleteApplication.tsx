@@ -17,12 +17,6 @@ const DeleteButton = styled(Button)`
   }
 `;
 
-const CancelButton = styled(Button)`
-  background: #eef3f7;
-  color: var(--primaryText);
-  font-weight: 500;
-`;
-
 const DeleteApplication: FC<{ appId: string; appTitle: string }> = observer(({ appId, appTitle }) => {
   const { setVisible } = usePopupStoreContext();
   const navigate = useNavigate();
@@ -40,7 +34,6 @@ const DeleteApplication: FC<{ appId: string; appTitle: string }> = observer(({ a
     <>
       <ContainerText>Вы уверены, что хотите навсегда удалить приложение {appTitle}?</ContainerText>
       <DeleteButton onClick={sendData}>Да, удалить приложение навсегда</DeleteButton>
-      <CancelButton onClick={() => setVisible(false)}>Отменить</CancelButton>
     </>
   );
 });

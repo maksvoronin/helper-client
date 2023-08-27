@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import { FC } from "react";
 import { keyframes, styled } from "styled-components";
 import { usePopupStoreContext } from "../@store";
+import { CancelButton } from "../@shared";
 
 const fade = keyframes`
   0% {
@@ -25,33 +26,43 @@ const PopupWrapper = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${fade} 0.3s alternate;
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     background: rgba(255, 255, 255, 0.8);
   }
 `;
 
 const PopupContainer = styled.div`
-  min-width: 300px;
-  min-height: 200px;
+  min-width: 420px;
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 12px;
   background: white;
-  padding: 20px;
+  padding: 30px 30px;
   position: relative;
+  @media(max-width: 500px) {
+    min-width: 320px;
+  }
+
+  @media(max-width: 400px) {
+    min-width: auto;
+    max-width: calc(100% - 60px);
+  }
 `;
 
 const PopupTitle = styled.h1`
   color: var(--primaryText);
   text-align: center;
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: 500;
+  margin-top: 0;
+  padding: 0;
 `;
 
 const PopupInner = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 `;
 
 const PopupClose = styled.div`
@@ -82,7 +93,10 @@ const Popup: FC = observer(() => {
       <PopupContainer>
         <PopupClose onClick={() => setVisible(false)}>+</PopupClose>
         <PopupTitle>{title}</PopupTitle>
-        <PopupInner>{content}</PopupInner>
+        <PopupInner>
+          {content}
+          <CancelButton onClick={() => setVisible(false)}>Отменить</CancelButton>
+        </PopupInner>
       </PopupContainer>
     </PopupWrapper>
   );

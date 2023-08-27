@@ -1,8 +1,8 @@
 export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.1";
+export const dev_version: string = "2.4.2";
 
 const config = {
-  dev_title: `Release v${dev_version} (Development Platform)`,
+  dev_title: `Release v${dev_version} (Fixes and Improvement)`,
   API: dev_mode ? `http://192.168.0.105:1000/api` : `https://helper.voronin.xyz/api`,
   publicapi: "https://helper.voronin.xyz/api/dev",
   fileHost: dev_mode ? `http://192.168.0.105:1000/api/public` : `https://helper.voronin.xyz/api/public`,
@@ -12,6 +12,16 @@ const config = {
 };
 
 export const changelog = [
+  {
+    version: "2.4.2",
+    date: "27.08.2023",
+    steps: [
+      "Убраны кнопки лайков и отслеживания у не авторизованных пользователей",
+      "У не авторизованных пользователей добавлена кнопка перехода к системе при поиске решений",
+      "На странице системы добавлена кнопка отслеживания",
+      "Обновлён дизайн поп-апов"
+    ]
+  },
   {
     version: "2.4.1",
     date: "23.08.2023",

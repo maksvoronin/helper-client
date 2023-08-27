@@ -16,6 +16,8 @@ const SizeText = styled.span`
   font-style: italic;
   font-weight: 500;
   opacity: 0.6;
+  margin-left: 4px;
+  font-size: 18px;
 `;
 
 const Link = styled(DefaultLink)`
@@ -57,7 +59,7 @@ const SearchPagePanel: FC = observer(() => {
           {searchResult && searchResult.users.length > 0 && (
             <Container>
               <ContainerSubTitle>
-                Пользователи <SizeText>{searchResult.users.length}</SizeText>
+                Пользователи <SizeText>• {searchResult.users.length}</SizeText>
               </ContainerSubTitle>
               {searchResult.users.map((e: User) => (
                 <Link key={e._id} to={`${baseURIs.main}/profile/${e._id}`}>
@@ -70,7 +72,7 @@ const SearchPagePanel: FC = observer(() => {
           {searchResult && searchResult.comments.length > 0 && (
             <Container>
               <ContainerSubTitle>
-                Замечания <SizeText>{searchResult.comments.length}</SizeText>
+                Замечания <SizeText>• {searchResult.comments.length}</SizeText>
               </ContainerSubTitle>
               {searchResult.comments.map((e: Comment) => (
                 <Link key={e._id} to={`${baseURIs.main}/comment/${e._id}`}>
@@ -83,7 +85,7 @@ const SearchPagePanel: FC = observer(() => {
           {searchResult && searchResult.decisions.length > 0 && (
             <Container>
               <ContainerSubTitle>
-                Решения <SizeText>{searchResult.decisions.length}</SizeText>
+                Решения <SizeText>• {searchResult.decisions.length}</SizeText>
               </ContainerSubTitle>
               {searchResult.decisions.map((e: Decision) => (
                 <Link key={e._id} to={`${baseURIs.main}/decision/${e._id}`}>

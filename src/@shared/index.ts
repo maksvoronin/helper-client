@@ -18,3 +18,5 @@ export { default as DevTitle } from "./devtitle";
 export { default as Checkbox } from "./checkbox";
 export { default as AppsContainer } from "./appscontainer";
 export { default as Code } from "./code";
+export { default as ControlButton } from "./controlbutton";
+export { default as CancelButton } from "./cancelbutton";
