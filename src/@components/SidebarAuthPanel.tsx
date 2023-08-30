@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { Button, Link as LinkStyled } from "../@shared";
+import { Button, FormText, Link as LinkStyled } from "../@shared";
 import { mdiHomeOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 
@@ -10,21 +10,9 @@ const SidebarAuthPanelContainer = styled.div`
   display: flex;
   gap: 15px;
   flex-direction: column;
-  @media (max-width: var(--mobileWidth)) {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
-    .join {
-      width: 40%;
-    }
-    a {
-      width: 100%;
-    }
-  }
 `;
 
-const InfoText = styled.p`
+const InfoText = styled(FormText)`
   line-height: 1.46;
   margin: 0;
 `;
@@ -33,10 +21,6 @@ const ButtonRegister = styled(Button)`
   border: 1px solid #d8d8d8;
   background-color: white;
   color: black;
-
-  @media (max-width: var(--mobileWidth)) {
-    width: 58%;
-  }
 `;
 
 const RecoveryLink = styled(LinkStyled)`
@@ -56,7 +40,8 @@ const SidebarButton = styled(Link)`
   user-select: none;
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: var(--primaryText);
+  transition: transform 0.2s;
   &:hover {
     background-color: rgba(100, 100, 100, 0.1);
   }
@@ -68,6 +53,9 @@ const SidebarButton = styled(Link)`
     color: var(--accentColor);
     width: 20px;
     height: 20px;
+  }
+  span {
+    color: var(--primaryText);
   }
 `;
 
