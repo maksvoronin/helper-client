@@ -6,7 +6,7 @@ const FileLabel = styled.label`
   display: block;
   border-radius: 12px;
   background: #e8f5ff00;
-  color: white;
+  color: var(--primaryText);
   font-size: 14px;
   margin-top: 15px;
   margin-bottom: 15px;

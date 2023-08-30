@@ -7,7 +7,7 @@ import { Background, PageProps, Response, User } from "../@types";
 import $api from "../@http";
 import styled from "styled-components";
 import { AlertPanel, Popup, Sidebar } from "../@widgets";
-import { useAuthStoreContext } from "../@store";
+import { useAuthStoreContext, useThemeStore } from "../@store";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../@components";
 
@@ -62,6 +62,7 @@ const Ads = styled.div`
 
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
+  const { theme } = useThemeStore();
   const [backgroundImage, setBackgroundImage] = useState<Background>();
   const navigate = useNavigate();
 
@@ -117,6 +118,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
         style={{
           background: `${backgroundImage ? `url(${config.API}/public/${backgroundImage.content})` : `url(${defaultBG})`}`,
         }}
+        className={`theme__${theme}`}
       >
         <Loader />
         <Sidebar />

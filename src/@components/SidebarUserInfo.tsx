@@ -12,7 +12,7 @@ import Icon from "@mdi/react";
 const UserContainer = styled.div`
   padding-left: 14px;
   border-radius: 12px;
-  background-color: white;
+  background-color: var(--pageBackground);
   margin-top: auto;
   bottom: 40px;
   width: calc(100% - 14px);
@@ -20,10 +20,7 @@ const UserContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   min-height: 70px;
-  border: 1px solid #c7c7c7;
-  @media (max-width: var(--mobileWidth)) {
-    display: none;
-  }
+  border: var(--primaryBorder);
 
   @media(max-height: 600px) {
     margin-top: 30px;
@@ -53,7 +50,7 @@ const UserLink = styled(Link)`
   display: block;
   padding-top: 14px;
   font-weight: bold;
-  color: inherit;
+  color: var(--primaryText);
   text-decoration: none;
   &:hover {
     text-decoration: underline;
@@ -64,11 +61,12 @@ const UserStat = styled.span`
   font-size: 12px;
   display: block;
   padding-bottom: 14px;
+  color: var(--primaryText);
 `;
 
 const SettingsButton = styled(Link)`
   padding-left: 15px;
-  border-left: 1px solid #c7c7c7;
+  border-left: var(--primaryBorder);
   height: 100%;
   display: flex;
   align-items: center;
@@ -78,7 +76,7 @@ const SettingsButton = styled(Link)`
   color: var(--accentColor);
   min-height: 70px;
   &:hover {
-    background: #f9f9f9;
+    background: var(--hoverBackground);
   }
 `;
 

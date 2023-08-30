@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 const FormText = styled.p`
   margin-bottom: 5px;
+  color: var(--primaryText);
   a {
     font-size: 16px;
   }

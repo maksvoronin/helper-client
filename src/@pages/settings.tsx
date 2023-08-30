@@ -2,9 +2,9 @@ import { observer } from "mobx-react";
 import { Background, PageProps, Response, User } from "../@types";
 import { MainLayout } from "../@layouts";
 import { FC, createRef, useEffect, useState } from "react";
-import { Button, Container, ContainerTitle, Input, InputFile } from "../@shared";
+import { Button, Checkbox, Container, ContainerTitle, FormText, Input, InputFile } from "../@shared";
 import { styled } from "styled-components";
-import { useAuthStoreContext, useLoaderStore } from "../@store";
+import { useAuthStoreContext, useLoaderStore, useThemeStore } from "../@store";
 import config from "../config";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
@@ -62,6 +62,9 @@ const ColumnUserInfo = styled.div`
   @media (max-width: 500px) {
     width: 100%;
   }
+  p {
+    margin-bottom: 5px;
+  }
 `;
 
 const ColumnUserInput = styled.div`
@@ -95,20 +98,23 @@ const BackgroundBlock = styled.div`
   }
   p {
     text-align: center;
+    padding-bottom: 8px;
   }
 `;
 
 const ActiveBackgroundBlock = styled(BackgroundBlock)`
-  background-color: #c7c7c7;
+  background-color: var(--pageBackground);
 `;
 
 const LogoutButton = styled(Button)`
   background: #ff3a3a;
+  color: white;
 `;
 
 const Settings: FC<PageProps> = observer(({ title }) => {
   const { user, setUser } = useAuthStoreContext();
   const { setLoaded } = useLoaderStore();
+  const { theme, setTheme } = useThemeStore();
 
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
@@ -155,6 +161,10 @@ const Settings: FC<PageProps> = observer(({ title }) => {
       });
     }
   });
+
+  useEffect(() => {
+    window.localStorage.theme = theme;
+  }, [theme]);
 
   useEffect(() => {
     if (fileName) {
@@ -263,16 +273,16 @@ const Settings: FC<PageProps> = observer(({ title }) => {
           <ColumnUserInfo>
             <RowUserInfo>
               <ColumnUserInput>
-                <p>Имя</p>
+                <FormText>Имя</FormText>
                 <Input placeholder="Ваше имя" onChange={({ target }: any) => setName(target.value)} value={name} />
               </ColumnUserInput>
               <ColumnUserInput>
-                <p>Фамилия</p>
+                <FormText>Фамилия</FormText>
                 <Input placeholder="Ваша фамилия" onChange={({ target }: any) => setSurname(target.value)} value={surname} />
               </ColumnUserInput>
             </RowUserInfo>
             <ColumnUserInput>
-              <p>Телефон</p>
+              <FormText>Телефон</FormText>
               <Input placeholder={"Номер телефона"} onChange={({ target }: any) => setPhone(target.value)} value={phone} />
             </ColumnUserInput>
             <Button onClick={sendUserData}>Сохранить</Button>
@@ -284,11 +294,11 @@ const Settings: FC<PageProps> = observer(({ title }) => {
         <ContainerTitle>Служебные настройки</ContainerTitle>
         <ColumnUserInfo>
           <ColumnUserInput>
-            <p>Дорога</p>
+            <FormText>Дорога</FormText>
             <RoadSelect onChange={(e) => setSelectedRoad(e)} value={selectedRoad} />
           </ColumnUserInput>
           {/* <ColumnUserInput>
-            <p>Предприятие</p>
+            <FormText>Предприятие</FormText>
             <WorkSelect onChange={(e) => setSelectedRoad(e)} />
           </ColumnUserInput> */}
           <Button onClick={sendWorkData}>Сохранить</Button>
@@ -297,6 +307,9 @@ const Settings: FC<PageProps> = observer(({ title }) => {
 
       <Container>
         <ContainerTitle>Настройки сайта</ContainerTitle>
+        <Checkbox defaultValue={theme === "dark"} onChange={(e) => setTheme(e ? "dark" : "light")}>
+          Тёмная тема
+        </Checkbox>
         <Backgrounds>
           {backgrounds &&
             backgrounds.map((e) =>
@@ -304,12 +317,12 @@ const Settings: FC<PageProps> = observer(({ title }) => {
                 selectedBackground?.content === e.content ? (
                   <ActiveBackgroundBlock key={e._id}>
                     <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />
-                    <p>{e.title}</p>
+                    <FormText>{e.title}</FormText>
                   </ActiveBackgroundBlock>
                 ) : (
                   <BackgroundBlock onClick={() => setSelectedBackground(e)} key={e._id}>
                     <img src={`${config.fileHost}/${e.content}`} alt={"Page background"} />
-                    <p>{e.title}</p>
+                    <FormText>{e.title}</FormText>
                   </BackgroundBlock>
                 )
               ) : (
@@ -324,17 +337,17 @@ const Settings: FC<PageProps> = observer(({ title }) => {
         <ColumnUserInfo>
           <RowUserInfo>
             <ColumnUserInput>
-              <p>Почта</p>
+              <FormText>Почта</FormText>
               <Input placeholder={"Ваша почта"} onChange={({ target }: any) => setEmail(target.value)} value={email} />
             </ColumnUserInput>
           </RowUserInfo>
           <RowUserInfo>
             <ColumnUserInput>
-              <p>Пароль</p>
+              <FormText>Пароль</FormText>
               <Input type={"password"} placeholder="Пароль" onChange={({ target }: any) => setPassword(target.value)} value={password} />
             </ColumnUserInput>
             <ColumnUserInput>
-              <p>Новый пароль</p>
+              <FormText>Новый пароль</FormText>
               <Input type={"password"} placeholder="Новый пароль" onChange={({ target }: any) => setPasswordNew(target.value)} value={passwordNew} />
             </ColumnUserInput>
           </RowUserInfo>

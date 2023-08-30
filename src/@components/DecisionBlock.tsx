@@ -16,18 +16,19 @@ import { EditDecisionPopup } from "../@popups";
 const DecisionText = styled.p`
   margin: 0;
   padding: 0;
+  color: var(--primaryText);
 `;
 
 const UserInfo = styled.div`
   display: flex;
-  border-top: 1px solid #c7c7c7;
-  border-bottom: 1px solid #c7c7c7;
+  border-top: var(--primaryBorder);
+  border-bottom: var(--primaryBorder);
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-style: italic;
-  color: #565656;
+  color: var(--primaryText);
   font-weight: 500;
   justify-content: space-between;
   align-items: center;
@@ -64,6 +65,7 @@ const LikeButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: var(--primaryText);
   &:hover {
     background-color: rgba(100, 100, 100, 0.1);
   }

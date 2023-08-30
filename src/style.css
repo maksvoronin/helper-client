@@ -1,14 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
+.theme__light,
 :root {
-  --pageBackground: #f9f9f9;
   --defaultFont: -apple-system, BlinkMacSystemFont, "Inter", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --pageBackground: #f9f9f9;
+  --accentButtonBackground: var(--accentColor);
+  --accentButtonForeground: #fff;
+  --cancelButtonBackground: #eef3f7;
+  --cancelButtonForeground: var(--primaryText);
+  --hoverBackground: #eeeeee;
+  --accentBackground: #fff;
   --blockBoxShadow: 0px 4px 15px rgb(231, 231, 231);
-  --mobileWidth: 1000px;
   --accentColor: #4978ff;
-  --primaryText: rgb(31, 35, 40);
+  --primaryText: rgb(9, 9, 10);
   --containerBackground: rgba(249, 249, 249, 0.8);
   --developersWrapperWidth: 1400px;
+  --primaryBorder: 1px solid #c7c7c7;
+  --activeCheckbox: var(--accentColor);
+  --checkboxBorder: 1px solid #999;
+}
+
+.theme__dark {
+  --blockBoxShadow: 0px 4px 15px rgb(36, 36, 36);
+  --pageBackground: #252525;
+  --accentButtonBackground: #cfcfcf;
+  --accentButtonForeground: #0f0f0f;
+  --cancelButtonBackground: #eef3f7;
+  --cancelButtonForeground: var(--primaryText);
+  --accentBackground: #252525;
+  --accentColor: #f0f0f0;
+  --hoverBackground: #303030;
+  --primaryText: rgb(219, 222, 226);
+  --containerBackground: rgba(43, 43, 43, 0.8);
+  --developersWrapperWidth: 1400px;
+  --primaryBorder: 1px solid #1b1b1b;
+  --activeCheckbox: #242424;
+  --checkboxBorder: 1px solid #999;
 }
 
 @media (max-width: 1000px) {

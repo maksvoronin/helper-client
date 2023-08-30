@@ -5,6 +5,7 @@ const Ul = styled.ul`
   padding: 0;
   padding-left: 20px;
   list-style: square;
+  color: var(--primaryText);
 `;
 
 export default Ul;

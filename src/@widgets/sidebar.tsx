@@ -23,7 +23,7 @@ const SidebarContainer = styled.div`
   height: calc(100vh - 45px);
   max-height: 100%;
   width: 100%;
-  background-color: rgba(249, 249, 249, 0.8);
+  background-color: var(--containerBackground);
   backdrop-filter: blur(70px);
   padding: 20px;
   overflow-y: auto;
@@ -36,7 +36,7 @@ const SidebarContainer = styled.div`
     position: fixed;
     left: -100%;
     animation: ${fadeSidebarMobile} 0.2s ease-in forwards alternate;
-    background: white;
+    background: var(--containerBackground);
     max-width: none;
     width: calc(100vw - 40px);
     height: calc(100vh - 105px);
@@ -88,6 +88,7 @@ const LogoText = styled.div`
   font-weight: 600;
   font-size: 16px;
   margin-left: 12px;
+  color: var(--primaryText);
 `;
 
 const SidebarLinks = styled.div`

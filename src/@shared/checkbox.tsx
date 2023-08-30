@@ -19,6 +19,7 @@ const Container = styled.label`
     user-select: none;
     margin: 0;
     padding: 0;
+    color: var(--primaryText);
   }
 
   p::before {
@@ -27,17 +28,17 @@ const Container = styled.label`
     width: 15px;
     height: 15px;
     border-radius: 4px;
-    border: 1px solid #c7c7c7;
+    border: var(--checkboxBorder);
     background: transparent;
     transition: background-color 0.2s;
   }
   input:checked + p::before {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M0.5 2.5L3 5L7.5 0.5" stroke="white"/></svg>');
-    background-color: var(--accentColor);
+    background-color: var(--activeCheckbox);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60%;
-    border: 1px solid var(--accentColor);
+    border: 1px solid var(--activeCheckbox);
   }
 `;
 

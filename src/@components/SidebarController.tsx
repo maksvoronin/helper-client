@@ -41,7 +41,7 @@ const SidebarButton = styled(Link)`
   user-select: none;
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: var(--primaryText);
   &:hover {
     background-color: rgba(100, 100, 100, 0.1);
   }
@@ -53,6 +53,9 @@ const SidebarButton = styled(Link)`
     color: var(--accentColor);
     width: 20px;
     height: 20px;
+  }
+  span {
+    color: var(--primaryText);
   }
 `;
 

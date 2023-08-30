@@ -18,6 +18,7 @@ const CommentariesBlock = styled.div`
 const CommentBlockTitle = styled.h2`
   font-size: 14px;
   font-weight: 500;
+  color: var(--primaryText);
 `;
 
 const CommentInput = styled.div`

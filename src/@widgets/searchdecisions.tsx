@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import { FC, createRef, useEffect, useState } from "react";
-import { Button, Container, ContainerText, ContainerTitle, FileLabel, InputFile, Textarea } from "../@shared";
+import { Button, Container, ContainerText, ContainerTitle, ControlButton, FileLabel, FormText, InputFile, Textarea } from "../@shared";
 import { styled } from "styled-components";
 import { Comment, Decision, Response, System, User } from "../@types";
 import $api from "../@http";
@@ -11,31 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuthStoreContext, useLoaderStore, usePopupStoreContext } from "../@store";
 import { alert } from "../@services/alerting.service";
 import config from "../config";
-
-const Text = styled.p`
-  margin-bottom: 5px;
-`;
-
-const ControlButton = styled.button`
-  height: 36px;
-  border: none;
-  background: transparent;
-  width: 100%;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: background 0.2s, transform 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  &:hover {
-    background-color: rgba(100, 100, 100, 0.1);
-  }
-  &:active {
-    transform: scale(0.98);
-  }
-`;
 
 const ControlRow = styled.div`
   display: flex;
@@ -202,14 +177,14 @@ const SearchDecisions: FC = observer(() => {
     <>
       <Container>
         <ContainerTitle>Помощник поиска неисправностей</ContainerTitle>
-        <Text>Система</Text>
+        <FormText>Система</FormText>
         <SystemSelect
           onChange={(e: string) => setSelectedSystem(e)}
           fullInfo={(e: System) => {
             setSelectedFullSystem(e);
           }}
         />
-        <Text>Замечание</Text>
+        <FormText>Замечание</FormText>
         <CommentSelect
           comments={comments}
           onChange={(e: string) => setSelectedComment(e)}

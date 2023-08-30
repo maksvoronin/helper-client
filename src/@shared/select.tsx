@@ -17,9 +17,9 @@ const fadeOptionContainer = keyframes`
 const SelectContainer = styled.div`
   width: calc(100% - 30px);
   border-radius: 12px;
-  border: 1px solid #c7c7c7;
+  border: var(--primaryBorder);
   height: 46px;
-  background: white;
+  background: var(--accentBackground);
   position: relative;
   padding-left: 15px;
   padding-right: 15px;
@@ -37,7 +37,7 @@ const Options = styled.div`
   position: absolute;
   width: 100%;
   border-radius: 12px;
-  border: 1px solid #c7c7c7;
+  border: var(--primaryBorder);
   left: 0;
   top: calc(100% + 10px);
   animation: ${fadeOptionContainer} 0.2s ease-in forwards alternate;

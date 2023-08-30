@@ -27,12 +27,14 @@ const CommentText = styled.p`
   margin: 0;
   padding: 0;
   font-size: 14px;
+  color: var(--primaryText);
 `;
 
 const CommentControl = styled.div`
   display: flex;
   gap: 5px;
   margin-top: 3px;
+  color: var(--primaryText);
 `;
 
 const UserTitle = styled(Link)`
@@ -58,7 +60,7 @@ const EditButton = styled.div`
 
 const DeleteButton = styled(EditButton)`
   &:hover {
-    color: red;
+    color: #ff3535;
   }
 `;
 

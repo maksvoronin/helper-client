@@ -13,10 +13,11 @@ const Table = styled.table`
   backdrop-filter: blur(50px);
 
   tr {
+    color: var(--primaryText);
     @media(max-width: 500px) {
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid #c7c7c7;
+      border-bottom: var(--primaryBorder);
       gap: 2px;
       margin-bottom: 5px;
     }
