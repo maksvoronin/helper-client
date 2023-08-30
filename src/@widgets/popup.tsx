@@ -17,7 +17,7 @@ const PopupWrapper = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--popupWrapperBackground);
   left: 0;
   top: 0;
   z-index: 1000;
@@ -27,7 +27,7 @@ const PopupWrapper = styled.div`
   align-items: center;
   animation: ${fade} 0.3s alternate;
   @media (max-width: 500px) {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--pageBackground);
   }
 `;
 
@@ -36,7 +36,7 @@ const PopupContainer = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 12px;
-  background: white;
+  background: var(--popupBackground);
   padding: 30px 30px;
   position: relative;
   @media(max-width: 500px) {

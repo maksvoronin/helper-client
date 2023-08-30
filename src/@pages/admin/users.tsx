@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { PageProps, Response, User } from "../../@types";
 import { observer } from "mobx-react";
 import { MainLayout } from "../../@layouts";
-import { AdminContainer, ContainerText, ContainerTitle } from "../../@shared";
+import { AdminContainer, ContainerText, ContainerTitle, FormText } from "../../@shared";
 import $api from "../../@http";
 import { styled } from "styled-components";
 import { RoadSelect } from "../../@components";
@@ -12,12 +12,13 @@ const Table = styled.table`
   border-radius: 12px;
   padding: 20px;
   backdrop-filter: blur(50px);
+  color: var(--primaryText);
 
   tr {
     @media (max-width: 500px) {
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid #c7c7c7;
+      border-bottom: var(--primaryBorder);
       gap: 2px;
       margin-bottom: 5px;
     }
@@ -30,7 +31,7 @@ const FilterRow = styled.div`
   flex-wrap: wrap;
 `;
 
-const Count = styled.p`
+const Count = styled(FormText)`
   margin: 0;
   text-align: center;
   width: 100%;

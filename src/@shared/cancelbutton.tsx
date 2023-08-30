@@ -2,13 +2,13 @@ import { styled } from "styled-components";
 import Button from "./button";
 
 const CancelButton = styled(Button)`
-  background: #eef3f7;
+  background: var(--cancelButtonBackground);
   color: var(--primaryText);
   font-weight: 500;
   transition: background 0.2s, transform 0.2s;
 
   &:hover {
-    background: #e2e7eb;
+    background: var(--cancelButtonBackground__hover);
   }
 
   &:active {

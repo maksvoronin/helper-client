@@ -8,8 +8,6 @@ const FileLabel = styled.label`
   background: #e8f5ff00;
   color: var(--primaryText);
   font-size: 14px;
-  margin-top: 15px;
-  margin-bottom: 15px;
   cursor: pointer;
   color: var(--accentColor);
 

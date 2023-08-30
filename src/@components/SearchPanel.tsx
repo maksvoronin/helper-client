@@ -10,14 +10,15 @@ import { baseURIs } from "../config";
 
 const SearchResultBlock = styled.div`
   padding: 15px;
-  background-color: white;
+  background-color: var(--pageBackground);
   border-radius: 12px;
-  border: 1px solid #d8d8d8;
+  border: var(--primaryBorder);
   margin-top: 5px;
   position: absolute;
   width: calc(100% - 30px);
   transition: left 0.3s;
   left: -200%;
+  color: var(--primaryText);
 `;
 
 const Tag = styled.div`

@@ -7,6 +7,7 @@
   --accentButtonBackground: var(--accentColor);
   --accentButtonForeground: #fff;
   --cancelButtonBackground: #eef3f7;
+  --cancelButtonBackground__hover: #e2e7eb;
   --cancelButtonForeground: var(--primaryText);
   --hoverBackground: #eeeeee;
   --accentBackground: #fff;
@@ -18,6 +19,7 @@
   --primaryBorder: 1px solid #c7c7c7;
   --activeCheckbox: var(--accentColor);
   --checkboxBorder: 1px solid #999;
+  --popupWrapperBackground: rgba(255, 255, 255, 0.2);
 }
 
 .theme__dark {
@@ -25,7 +27,8 @@
   --pageBackground: #252525;
   --accentButtonBackground: #cfcfcf;
   --accentButtonForeground: #0f0f0f;
-  --cancelButtonBackground: #eef3f7;
+  --cancelButtonBackground: #3a3a3a;
+  --cancelButtonBackground__hover: rgb(73, 73, 73);
   --cancelButtonForeground: var(--primaryText);
   --accentBackground: #252525;
   --accentColor: #f0f0f0;
@@ -36,6 +39,8 @@
   --primaryBorder: 1px solid #1b1b1b;
   --activeCheckbox: #242424;
   --checkboxBorder: 1px solid #999;
+  --popupWrapperBackground: rgba(0, 0, 0, 0.2);
+  --popupBackground: #2e2e2e;
 }
 
 @media (max-width: 1000px) {

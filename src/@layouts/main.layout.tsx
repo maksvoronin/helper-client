@@ -123,12 +123,10 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
         <Loader />
         <Sidebar />
         <MainContent>{children}</MainContent>
-        {
-          !dev_mode && <Ads id="ads"></Ads>
-        }
+        {!dev_mode && <Ads id="ads"></Ads>}
         {dev_mode && <DevMark>{config.dev_title}</DevMark>}
+        <Popup />
       </MainGrid>
-      <Popup />
       <AlertPanel />
     </>
   );

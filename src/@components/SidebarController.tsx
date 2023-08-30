@@ -42,6 +42,7 @@ const SidebarButton = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   color: var(--primaryText);
+  transition: transform 0.2s;
   &:hover {
     background-color: rgba(100, 100, 100, 0.1);
   }
