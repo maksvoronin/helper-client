@@ -2,10 +2,9 @@ import { observer } from "mobx-react";
 import { FC, useEffect, useState } from "react";
 import { Container, ContainerSubTitle, ContainerTitle, Input } from "../@shared";
 import { styled } from "styled-components";
-import { useSearchStoreContext } from "../@store";
 import $api from "../@http";
 import { Comment, Decision, Response, SearchResult, User } from "../@types";
-import { Link as DefaultLink } from "react-router-dom";
+import { Link as DefaultLink, useSearchParams } from "react-router-dom";
 import { baseURIs } from "../config";
 
 const SearchInput = styled(Input)`
@@ -36,8 +35,8 @@ const Link = styled(DefaultLink)`
 `;
 
 const SearchPagePanel: FC = observer(() => {
-  const { searchText } = useSearchStoreContext();
-  const [searchedText, setSearchedText] = useState<string>(searchText || "");
+  const [params] = useSearchParams();
+  const [searchedText, setSearchedText] = useState<string>(params.get("q") || "");
   const [searchResult, setSearchResult] = useState<SearchResult>();
 
   useEffect(() => {

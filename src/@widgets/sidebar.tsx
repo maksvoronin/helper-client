@@ -48,7 +48,7 @@ const SidebarWrapper = styled.div`
   position: fixed;
   top: 0;
   height: 60px;
-  background: white;
+  background: var(--containerBackground);
   width: calc(100% - 30px);
   z-index: 999;
   display: flex;
@@ -112,7 +112,7 @@ const OpenSidebar = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  border: 1px solid #c7c7c7;
+  border: var(--primaryBorder);
   display: flex;
   align-items: center;
   justify-content: center;

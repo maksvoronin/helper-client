@@ -20,6 +20,7 @@
   --activeCheckbox: var(--accentColor);
   --checkboxBorder: 1px solid #999;
   --popupWrapperBackground: rgba(255, 255, 255, 0.2);
+  --popupBackground: white;
 }
 
 .theme__dark {
@@ -46,6 +47,10 @@
 @media (max-width: 1000px) {
   :root {
     --containerBackground: rgba(249, 249, 249, 1);
+  }
+
+  .theme__dark {
+    --containerBackground: rgba(43, 43, 43, 1);
   }
 }
 

@@ -1,8 +1,8 @@
-export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.3";
+export const dev_mode: boolean = true;
+export const dev_version: string = "2.4.4";
 
 const config = {
-  dev_title: `Release v${dev_version} (Themes)`,
+  dev_title: `Release v${dev_version} (Fixs)`,
   API: dev_mode ? `http://192.168.0.105:1000/api` : `https://helper.voronin.xyz/api`,
   publicapi: "https://helper.voronin.xyz/api/dev",
   fileHost: dev_mode ? `http://192.168.0.105:1000/api/public` : `https://helper.voronin.xyz/api/public`,
@@ -12,6 +12,15 @@ const config = {
 };
 
 export const changelog = [
+  {
+    version: "2.4.4",
+    date: "05.09.2023",
+    steps: [
+      "Изменён цвет в тёмной теме у шапки в мобильной версии",
+      "Исправлен фон у поп-апов",
+      "Исправлена страница поиска"
+    ]
+  },
   {
     version: "2.4.3",
     date: "31.08.2023",
