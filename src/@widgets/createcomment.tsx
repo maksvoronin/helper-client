@@ -78,6 +78,7 @@ const CreateComment: FC = observer(() => {
         onClick={(e: any) => {
           fileName && unlinkFile(e);
         }}
+        style={{marginTop: 10, marginBottom: 15}}
       >
         {fileName ? `Открепить файл ${uploadedFile}` : "Прикрепить файл к решению"}
       </FileLabel>

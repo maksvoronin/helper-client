@@ -1,4 +1,25 @@
-import { Admin, CreateSeries, CreateSystem, EditSystem, Users, Export, CreateBackground, DeleteBackground, CreateBlok, CreateJournalMove, CreateLokomotiveNumber, CreatePostNumber, CreatePostscript, CreatePtol, CreateRoad, CreateSection, EditPtol, EditRoad, Stat } from "../@pages";
+import { ProtectedRoute } from "../@components";
+import {
+  Admin,
+  CreateSeries,
+  CreateSystem,
+  EditSystem,
+  Users,
+  Export,
+  CreateBackground,
+  DeleteBackground,
+  CreateBlok,
+  CreateJournalMove,
+  CreateLokomotiveNumber,
+  CreatePostNumber,
+  CreatePostscript,
+  CreatePtol,
+  CreateRoad,
+  CreateSection,
+  EditPtol,
+  EditRoad,
+  Stat,
+} from "../@pages";
 import { baseURIs } from "../config";
 
 const baseURI = baseURIs.admin;
@@ -6,79 +27,155 @@ const baseURI = baseURIs.admin;
 const adminRoutes = [
   {
     path: `/${baseURI}`,
-    element: <Admin title={`Управление`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <Admin title={`Управление`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/series/create`,
-    element: <CreateSeries title={`Добавление серии`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateSeries title={`Добавление серии`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/system/create`,
-    element: <CreateSystem title={`Добавление системы`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateSystem title={`Добавление системы`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/system/edit`,
-    element: <EditSystem title={`Изменение системы`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <EditSystem title={`Изменение системы`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/users`,
-    element: <Users title={`Статистика по пользователям`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <Users title={`Статистика по пользователям`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/export`,
-    element: <Export title={`Экспорт таблиц`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <Export title={`Экспорт таблиц`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/background/create`,
-    element: <CreateBackground title={`Добавление фона`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateBackground title={`Добавление фона`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/background/delete`,
-    element: <DeleteBackground title={`Удаление фона`} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <DeleteBackground title={`Удаление фона`} />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/ptol/create`,
-    element: <CreatePtol title="Добавление ПТОЛа" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreatePtol title="Добавление ПТОЛа" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/ptol/edit`,
-    element: <EditPtol title="Изменение ПТОЛа" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <EditPtol title="Изменение ПТОЛа" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/postscript/create`,
-    element: <CreatePostscript title="Добавление приписки" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreatePostscript title="Добавление приписки" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/lokomotivenumber/create`,
-    element: <CreateLokomotiveNumber title="Добавление номера локомотива" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateLokomotiveNumber title="Добавление номера локомотива" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/section/create`,
-    element: <CreateSection title="Добавление секции" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateSection title="Добавление секции" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/move/create`,
-    element: <CreateJournalMove title="Добавление действия" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateJournalMove title="Добавление действия" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/blok/create`,
-    element: <CreateBlok title="Добавление БЛОКа" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateBlok title="Добавление БЛОКа" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/postnumber/create`,
-    element: <CreatePostNumber title="Добавление № поставленного" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreatePostNumber title="Добавление № поставленного" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/road/create`,
-    element: <CreateRoad title="Создание дороги" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <CreateRoad title="Создание дороги" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/road/edit`,
-    element: <EditRoad title="Изменение дороги" />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <EditRoad title="Изменение дороги" />
+      </ProtectedRoute>
+    ),
   },
   {
     path: `/${baseURI}/stat`,
-    element: <Stat title={"Статистика запросов"} />,
+    element: (
+      <ProtectedRoute permissions={5} authSecure>
+        <Stat title={"Статистика запросов"} />
+      </ProtectedRoute>
+    ),
   },
 ];
 

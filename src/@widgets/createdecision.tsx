@@ -74,6 +74,7 @@ const CreateDecision: FC = observer(() => {
       <Textarea placeholder="Текст решения" value={content} onChange={({ target }: any) => setContent(target.value)} />
       <FileLabel
         htmlFor="file"
+        style={{marginTop: 10, marginBottom: 15}}
         onClick={(e: any) => {
           fileName && unlinkFile(e);
         }}

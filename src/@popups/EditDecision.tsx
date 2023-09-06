@@ -26,6 +26,7 @@ const EditDecision: FC<{ decision: Decision; setDecision: any }> = observer(({ d
       $api.post(`${config.fileUpload}`, formData, { headers: { "Content-Type": "multipart/form-data" } }).then(({ data }) => {
         setUploadedFile(data.data.file);
         setLoaded(false);
+        alert("default", "Успешно", "Решение изменено");
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

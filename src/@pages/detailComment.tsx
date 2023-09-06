@@ -91,12 +91,12 @@ const DetailComment: FC<PageProps> = observer(({ title }) => {
           </Button>
         )}
         {isAuth ? commentLiked ? (
-          <ControlButton onClick={unSubComment}>
+          <ControlButton onClick={unSubComment} style={{marginTop: 15}}>
             <Icon path={mdiHeart} size={"18px"} />
             Не отслеживать замечание
           </ControlButton>
         ) : (
-          <ControlButton onClick={subComment}>
+          <ControlButton onClick={subComment} style={{marginTop: 15}}>
             <Icon path={mdiHeartOutline} size={"18px"} />
             Отслеживать замечание
           </ControlButton>

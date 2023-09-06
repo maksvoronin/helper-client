@@ -4,7 +4,7 @@ import { MainLayout } from "../@layouts";
 import { FC, createRef, useEffect, useState } from "react";
 import { Button, Checkbox, Container, ContainerTitle, FormText, Input, InputFile } from "../@shared";
 import { styled } from "styled-components";
-import { useAuthStoreContext, useLoaderStore, useThemeStore } from "../@store";
+import { useAdsStore, useAuthStoreContext, useLoaderStore, useThemeStore } from "../@store";
 import config from "../config";
 import $api from "../@http";
 import { alert } from "../@services/alerting.service";
@@ -115,6 +115,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const { user, setUser } = useAuthStoreContext();
   const { setLoaded } = useLoaderStore();
   const { theme, setTheme } = useThemeStore();
+  const { ads, setAds } = useAdsStore();
 
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
@@ -132,7 +133,6 @@ const Settings: FC<PageProps> = observer(({ title }) => {
   const [fileName, setFileName] = useState<string>("");
 
   const [selectedRoad, setSelectedRoad] = useState<string>("");
-
   const newUser = user;
 
   useEffect(() => {
@@ -297,10 +297,6 @@ const Settings: FC<PageProps> = observer(({ title }) => {
             <FormText>Дорога</FormText>
             <RoadSelect onChange={(e) => setSelectedRoad(e)} value={selectedRoad} />
           </ColumnUserInput>
-          {/* <ColumnUserInput>
-            <FormText>Предприятие</FormText>
-            <WorkSelect onChange={(e) => setSelectedRoad(e)} />
-          </ColumnUserInput> */}
           <Button onClick={sendWorkData}>Сохранить</Button>
         </ColumnUserInfo>
       </Container>
@@ -310,6 +306,7 @@ const Settings: FC<PageProps> = observer(({ title }) => {
         <Checkbox defaultValue={theme === "dark"} onChange={(e) => setTheme(e ? "dark" : "light")}>
           Тёмная тема
         </Checkbox>
+        {user.permissions > 4 ? <Checkbox defaultValue={ads} onChange={(e) => setAds(e)} style={{marginTop: 10}}>Отключить рекламу</Checkbox> : <></>}
         <Backgrounds>
           {backgrounds &&
             backgrounds.map((e) =>

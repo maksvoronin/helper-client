@@ -27,7 +27,7 @@ const SystemPage: FC<PageProps> = observer(({ title }) => {
       setSystem(data.data);
       user._id && user.subscribedSystems.find((e) => e._id === system?._id) ? setSystemLiked(true) : setSystemLiked(false);
     });
-  });
+  }, [id, system?._id, user?._id, user?.subscribedSystems]);
 
   useEffect(() => {
     if (system) {
@@ -79,12 +79,12 @@ const SystemPage: FC<PageProps> = observer(({ title }) => {
         <ContainerText>Дата создания: {new Date(system.created).toLocaleString("ru")}</ContainerText>
         {isAuth ? (
           systemLiked ? (
-            <ControlButton onClick={unSubSystem}>
+            <ControlButton onClick={unSubSystem} style={{marginTop: 15}}>
               <Icon path={mdiHeart} size={"18px"} />
               Не отслеживать систему
             </ControlButton>
           ) : (
-            <ControlButton onClick={subSystem}>
+            <ControlButton onClick={subSystem} style={{marginTop: 15}}>
               <Icon path={mdiHeartOutline} size={"18px"} />
               Отслеживать систему
             </ControlButton>

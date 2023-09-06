@@ -1,3 +1,4 @@
+import { ProtectedRoute } from "../@components";
 import { AllApplications, App, Apps, CommentAbout, CommentAll, CommentGet, CommentSystem, CommentUser, CreateApplication, DecisionAbout, DecisionAll, DecisionGet, DecisionUser, Developers, DocsAuthorization, DocsControlApp, DocsCreateApp, DocsDeleteApp, DocsForWhat, DocsResponse, DocsStart, InterfaceApplication, InterfaceBackground, InterfaceComment, InterfaceCommentary, InterfaceDecision, InterfaceEvent, InterfaceRoad, InterfaceSeries, InterfaceSystem, InterfaceUser, NotFound, SystemAbout, SystemAll, SystemGet } from "../@pages/developers";
 import { baseURIs } from "../config";
 
@@ -34,9 +35,9 @@ const developerRoutes = [
   { path: `${baseURI}/docs/interfaces/road`, element: <InterfaceRoad title="Документация / Интерфейсы / road" /> },
   { path: `${baseURI}/docs/interfaces/application`, element: <InterfaceApplication title="Документация / Интерфейсы / application" /> },
   { path: `${baseURI}/docs/interfaces/series`, element: <InterfaceSeries title="Документация / Интерфейсы / series" /> },
-  { path: `${baseURI}/apps`, element: <Apps title="Мои приложения" /> },
-  { path: `${baseURI}/apps/create`, element: <CreateApplication title="Создание приложения" /> },
-  { path: `${baseURI}/apps/all`, element: <AllApplications title="Все приложения" /> },
+  { path: `${baseURI}/apps`, element: <ProtectedRoute authSecure><Apps title="Мои приложения" /></ProtectedRoute> },
+  { path: `${baseURI}/apps/create`, element: <ProtectedRoute authSecure><CreateApplication title="Создание приложения" /></ProtectedRoute> },
+  { path: `${baseURI}/apps/all`, element: <ProtectedRoute authSecure><AllApplications title="Все приложения" /></ProtectedRoute> },
   { path: `${baseURI}/apps/:id`, element: <App title="Приложение" /> },
   { path: `${baseURI}/*`, element: <NotFound /> },
 ];

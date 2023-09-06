@@ -6,6 +6,7 @@ import { useAuthStoreContext } from "../@store";
 import { observer } from "mobx-react";
 import { styled } from "styled-components";
 import { baseURIs } from "../config";
+import { DecisionBlock } from "../@components";
 
 const H3 = styled.h3`
   margin-top: 10px;
@@ -54,6 +55,7 @@ const Subscribed: FC<PageProps> = observer(({ title }) => {
           ))}
         </Container>
       )}
+      {user.likedDecisions && user.likedDecisions.length > 0 && user.likedDecisions.map((e) => <DecisionBlock decision={e} key={e._id} />)}
     </MainLayout>
   );
 });

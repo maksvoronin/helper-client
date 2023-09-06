@@ -22,3 +22,4 @@ export { default as UserSelect } from "./UserSelect";
 export { default as PostnumberSelect } from "./PostnumberSelect";
 export { default as Loader } from "./Loader";
 export { default as AppsCard } from "./AppsCard";
+export { default as ProtectedRoute } from "./ProtectedRoute";

@@ -42,10 +42,10 @@ const Container = styled.label`
   }
 `;
 
-const Checkbox: FC<PropsWithChildren<{ defaultValue?: boolean; onChange?: (bool: boolean) => void }>> = observer(({ defaultValue, onChange, children }) => {
+const Checkbox: FC<PropsWithChildren<{ defaultValue?: boolean; onChange?: (bool: boolean) => void, style?: object }>> = observer(({ defaultValue, onChange, children, style }) => {
   const [checked, setChecked] = useState<boolean>(defaultValue || false);
   return (
-    <Container>
+    <Container style={style}>
       <input
         type="checkbox"
         defaultChecked={checked}

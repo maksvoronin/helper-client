@@ -13,7 +13,6 @@ const ControlButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  margin-top: 10px;
   color: var(--primaryText);
   &:hover {
     background-color: rgba(100, 100, 100, 0.1);

@@ -23,6 +23,7 @@ const CheckCommentsJournal: FC<PageProps> = observer(({ title }) => {
   useEffect(() => {
     $api.get<Response<CommentsJournal[]>>("/commentsjournal/all").then(({ data }) => {
       setList(data.data!);
+      console.log(data.data!);
     });
   }, [setList]);
 

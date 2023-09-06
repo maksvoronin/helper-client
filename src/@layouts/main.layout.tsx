@@ -7,7 +7,7 @@ import { Background, PageProps, Response, User } from "../@types";
 import $api from "../@http";
 import styled from "styled-components";
 import { AlertPanel, Popup, Sidebar } from "../@widgets";
-import { useAuthStoreContext, useThemeStore } from "../@store";
+import { useAdsStore, useAuthStoreContext, useThemeStore } from "../@store";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../@components";
 
@@ -63,6 +63,7 @@ const Ads = styled.div`
 const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
   const { theme } = useThemeStore();
+  const { ads } = useAdsStore();
   const [backgroundImage, setBackgroundImage] = useState<Background>();
   const navigate = useNavigate();
 
@@ -86,7 +87,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   }, [user, user.background]);
 
   useEffect(() => {
-    if (!dev_mode) {
+    if (!dev_mode || (!ads && user.permissions > 4)) {
       const yaDiv = document.createElement("div");
       yaDiv.setAttribute("id", "yandex_rtb_R-A-2536124-1");
       const yaScript = document.createElement("script");
@@ -109,7 +110,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       })`;
       document.body.appendChild(mobileScript);
     }
-  }, []);
+  }, [ads, user.permissions]);
 
   return (
     <>

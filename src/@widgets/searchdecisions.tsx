@@ -68,7 +68,7 @@ const CreateDecisionPopup: FC<{ selectedComment: string }> = observer(({ selecte
           fileName && unlinkFile(e);
         }}
       >
-        {fileName ? `Открепить файл ${uploadedFile}` : "Прикрепить другой файл к решению"}
+        {fileName ? `Открепить файл ${uploadedFile}` : "Прикрепить файл к решению"}
       </FileLabel>
       <InputFile type={"file"} id="file" onChange={({ target }: any) => setFileName(target.value)} ref={fileInput} />
       <Button onClick={sendData}>Создать</Button>

@@ -8,6 +8,7 @@ const Textarea = styled.textarea`
   min-height: 70px;
   font-size: 13px;
   resize: vertical;
+  color: var(--primaryText);
   background: var(--accentBackground);
 `;
 

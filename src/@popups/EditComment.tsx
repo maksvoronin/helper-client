@@ -15,6 +15,7 @@ const EditComment: FC<{comment: Comment, setComment: any}> = observer(({comment,
       if(data.type === "error") return alert("error", "Ошибка", String(data.data!), 1.5);
       setComment(data.data!);
       setVisible(false);
+      alert("default", "Успешно", "Замечание изменено");
     })
   }
 

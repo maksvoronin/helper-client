@@ -17,6 +17,7 @@ const CommentaryEditForm: FC<{comment: Commentary, setComment: any}> = observer(
       alert("default", "Успешно", "Комментарий изменен", 1.5);
       setComment(data.data!);
       setVisible(false);
+      alert("default", "Успешно", "Комментарий изменен");
     });
   };
   return (

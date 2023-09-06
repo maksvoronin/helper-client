@@ -4,10 +4,8 @@ import { observer } from "mobx-react";
 import { styled } from "styled-components";
 import config, { baseURIs } from "../config";
 import { Link } from "react-router-dom";
-import $api from "../@http";
-import { alert } from "../@services/alerting.service";
 import { useAuthStoreContext, usePopupStoreContext } from "../@store";
-import { EditCommentaryPopup } from "../@popups";
+import { DeleteCommentary, EditCommentaryPopup } from "../@popups";
 
 const Comment = styled.div`
   display: flex;
@@ -77,11 +75,9 @@ const CommentaryBlock: FC<{ comment: Commentary }> = observer(({ comment }) => {
   const [deletedCommentary, setDeletedCommentary] = useState<boolean>(false);
 
   const deleteCommentary = () => {
-    $api.put(`/decision/uncommentary`, { id: commentary._id }).then(({ data }) => {
-      if (data.type === "error") return alert("error", "Произошла ошибка", data.data, 1.5);
-      setDeletedCommentary(true);
-      alert("default", "Успешно", "Комментарий удалён", 1.5);
-    });
+    setVisible(true);
+    setTitle("Удаление комментария");
+    setContent(<DeleteCommentary commentaryId={commentary._id} action={(e) => setDeletedCommentary(e)} />)
   };
 
   return (

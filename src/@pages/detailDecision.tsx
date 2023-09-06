@@ -12,6 +12,7 @@ import { alert } from "../@services";
 import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { baseURIs } from "../config";
+import NotFound from "./notfound";
 
 const DetailDecision: FC<PageProps> = observer(({ title }) => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
     }
   }, [user, comment]);
 
-  if (!decision || !comment) return <></>;
+  if (!decision || !comment) return <NotFound />;
 
   const subComment = () => {
     $api.post<Response<User>>("/comment/subscribe", { id: decision.comment._id }).then(({ data }) => {
@@ -90,12 +91,12 @@ const DetailDecision: FC<PageProps> = observer(({ title }) => {
         )}
         {isAuth ? (
           commentLiked ? (
-            <ControlButton onClick={unSubComment}>
+            <ControlButton onClick={unSubComment} style={{marginTop: 15}}>
               <Icon path={mdiHeart} size={"18px"} />
               Не отслеживать замечание
             </ControlButton>
           ) : (
-            <ControlButton onClick={subComment}>
+            <ControlButton onClick={subComment} style={{marginTop: 15}}>
               <Icon path={mdiHeartOutline} size={"18px"} />
               Отслеживать замечание
             </ControlButton>

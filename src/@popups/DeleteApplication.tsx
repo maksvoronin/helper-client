@@ -23,7 +23,7 @@ const DeleteApplication: FC<{ appId: string; appTitle: string }> = observer(({ a
 
   const sendData = () => {
     $api.post<Response>("/application/delete", { id: appId }).then(({ data }) => {
-      if (data.type === "error") alert("error", "Ошибка", data.message);
+      if (data.type === "error") return alert("error", "Ошибка", data.message);
       alert("default", "Успешно", "Приложение удалено");
       navigate(`${baseURIs.developers}/apps`);
       setVisible(false);

@@ -1,5 +1,5 @@
-export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.4";
+export const dev_mode: boolean = true;
+export const dev_version: string = "2.4.5";
 
 const config = {
   dev_title: `Release v${dev_version} (Fixs)`,
@@ -12,6 +12,13 @@ const config = {
 };
 
 export const changelog = [
+  {
+    version: "2.4.5",
+    date: "07.09.2023",
+    steps: [
+      "Исправления и улучшения"
+    ]
+  },
   {
     version: "2.4.4",
     date: "05.09.2023",
@@ -28,7 +35,7 @@ export const changelog = [
       "Изменено поведение при нажатии кнопки",
       "Исправлены отступы у формы загрузки файла",
       "Добавлена тёмная тема",
-      "Все компаненты стилизованы в единую палитру",
+      "Все компоненты стилизованы в единую палитру",
       "Добавлен чекбокс переключения темы в настройках",
     ],
   },
