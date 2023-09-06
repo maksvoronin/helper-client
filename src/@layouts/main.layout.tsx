@@ -87,8 +87,9 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   }, [user, user.background]);
 
   useEffect(() => {
-    if(dev_mode) return;
+    if (dev_mode) return;
     if (!ads || user.permissions < 4) {
+      console.log(!ads || user.permissions < 4, { ads, p: user.permissions < 4 });
       const yaDiv = document.createElement("div");
       yaDiv.setAttribute("id", "yandex_rtb_R-A-2536124-1");
       const yaScript = document.createElement("script");

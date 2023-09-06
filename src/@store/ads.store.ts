@@ -2,7 +2,7 @@ import { action, makeObservable, observable } from "mobx";
 import React from "react";
 
 class AdsStore {
-  ads: boolean = window.localStorage.ads || false;
+  ads: boolean = window.localStorage.ads === "true" || false;
   constructor() {
     makeObservable(this, {
       ads: observable,
