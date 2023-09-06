@@ -87,7 +87,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
   }, [user, user.background]);
 
   useEffect(() => {
-    if (!dev_mode || (!ads && user.permissions > 4)) {
+    if (!dev_mode || (ads && user.permissions > 4)) {
       const yaDiv = document.createElement("div");
       yaDiv.setAttribute("id", "yandex_rtb_R-A-2536124-1");
       const yaScript = document.createElement("script");
@@ -124,7 +124,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
         <Loader />
         <Sidebar />
         <MainContent>{children}</MainContent>
-        {!dev_mode && <Ads id="ads"></Ads>}
+        {(!dev_mode || (ads && user.permissions > 4)) && <Ads id="ads"></Ads>}
         {dev_mode && <DevMark>{config.dev_title}</DevMark>}
         <Popup />
       </MainGrid>
