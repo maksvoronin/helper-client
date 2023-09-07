@@ -6,7 +6,7 @@ import { AlertPanel, DevelopersHeader, DevelopersSidebar, Popup } from "../@widg
 import { useNavigate } from "react-router-dom";
 import { useAuthStoreContext, useThemeStore } from "../@store";
 import $api from "../@http";
-import config from "../config";
+import config, { dev_mode } from "../config";
 
 const Layout = styled.div`
   max-width: var(--developersWrapperWidth);
@@ -62,7 +62,7 @@ const DevelopersLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, ch
           <DevelopersSidebar />
           <div style={{ width: "100%" }}>{children}</div>
         </Layout>
-        <DevVersion>{config.dev_title}</DevVersion>
+        {dev_mode && <DevVersion>{config.dev_title}</DevVersion>}
       </MainGrid>
     </>
   );
