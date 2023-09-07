@@ -32,7 +32,7 @@ const Paragraph = styled.p`
   font-weight: 500;
   margin: 0;
   font-size: 14px;
-  color: #555;
+  color: var(--primaryText, #555);
   margin-bottom: 5px;
   margin-top: 5px;
   &:nth-child(1) {
@@ -43,7 +43,7 @@ const Paragraph = styled.p`
 const NavButton = styled(Link)`
   font-size: 13px;
   text-decoration: none;
-  color: var(--textPrimary, #555);
+  color: var(--primaryText, #555);
   padding: 4px 10px;
   border-radius: 8px;
   display: block;

@@ -122,7 +122,7 @@ const OpenSidebar = styled.div`
   span {
     width: 12px;
     height: 2px;
-    background: black;
+    background: var(--primaryText);
   }
 `;
 

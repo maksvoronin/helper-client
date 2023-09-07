@@ -21,6 +21,13 @@
   --checkboxBorder: 1px solid #999;
   --popupWrapperBackground: rgba(255, 255, 255, 0.2);
   --popupBackground: white;
+
+  --developersPrimaryText: #000;
+  --developersContainerBackground: #fff;
+  --developersBorder: 1px solid #eee;
+  --developersTextCodeBackground: #ebecec;
+  --developersCodeBackground: #f6f7f8;
+  --developersCodeBorder: 1px solid #e7e7e7;
 }
 
 .theme__dark {
@@ -42,6 +49,14 @@
   --checkboxBorder: 1px solid #7c7c7c;
   --popupWrapperBackground: rgba(0, 0, 0, 0.2);
   --popupBackground: #2e2e2e;
+
+  --developersPrimaryText: #eeeeee;
+  --developersContainerBackground: #1f1f1f;
+  --developersBorder: 1px solid #3b3b3b;
+  --developersTextCodeBackground: #333333;
+  --developersCodeBackground: #262729;
+  --developersCodeBorder: 1px solid #333333;
+
 }
 
 @media (max-width: 1000px) {

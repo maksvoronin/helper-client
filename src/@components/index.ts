@@ -23,3 +23,4 @@ export { default as PostnumberSelect } from "./PostnumberSelect";
 export { default as Loader } from "./Loader";
 export { default as AppsCard } from "./AppsCard";
 export { default as ProtectedRoute } from "./ProtectedRoute";
+export { default as ThemeToggler } from "./ThemeToggler";

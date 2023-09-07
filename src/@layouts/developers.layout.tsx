@@ -4,8 +4,9 @@ import { observer } from "mobx-react";
 import { styled } from "styled-components";
 import { AlertPanel, DevelopersHeader, DevelopersSidebar, Popup } from "../@widgets";
 import { useNavigate } from "react-router-dom";
-import { useAuthStoreContext } from "../@store";
+import { useAuthStoreContext, useThemeStore } from "../@store";
 import $api from "../@http";
+import config from "../config";
 
 const Layout = styled.div`
   max-width: var(--developersWrapperWidth);
@@ -17,8 +18,23 @@ const Layout = styled.div`
   padding-right: 15px;
 `;
 
+const DevVersion = styled.code`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-family: "Courier New", Courier, monospace;
+  color: var(--developersPrimaryText);
+`;
+
+const MainGrid = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background: var(--developersContainerBackground);
+`;
+
 const DevelopersLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children }) => {
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
+  const { theme } = useThemeStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,13 +54,16 @@ const DevelopersLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, ch
   return (
     <>
       <title>{title}</title>
-      <AlertPanel />
-      <DevelopersHeader />
-      <Popup />
-      <Layout>
-        <DevelopersSidebar />
-        <div style={{width: "100%"}}>{children}</div>
-      </Layout>
+      <MainGrid className={`theme__${theme}`}>
+        <AlertPanel />
+        <DevelopersHeader />
+        <Popup />
+        <Layout>
+          <DevelopersSidebar />
+          <div style={{ width: "100%" }}>{children}</div>
+        </Layout>
+        <DevVersion>{config.dev_title}</DevVersion>
+      </MainGrid>
     </>
   );
 });

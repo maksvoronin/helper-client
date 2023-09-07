@@ -1,8 +1,8 @@
-export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.5";
+export const dev_mode: boolean = true;
+export const dev_version: string = "2.4.6";
 
 const config = {
-  dev_title: `Release v${dev_version} (Fixes and Improvement)`,
+  dev_title: `Release v${dev_version} (Developers Dark Theme)`,
   API: dev_mode ? `http://192.168.0.105:1000/api` : `https://helper.voronin.xyz/api`,
   publicapi: "https://helper.voronin.xyz/api/dev",
   fileHost: dev_mode ? `http://192.168.0.105:1000/api/public` : `https://helper.voronin.xyz/api/public`,
@@ -12,6 +12,14 @@ const config = {
 };
 
 export const changelog = [
+  {
+    version: "2.4.6",
+    date: "07.09.2023",
+    steps: [
+      "Платформа для разработчиков: добавлена тёмная тема",
+      "Исправления и улучшения"
+    ]
+  },
   {
     version: "2.4.5",
     date: "06.09.2023",

@@ -9,7 +9,7 @@ const FormText = styled.p`
 
   code {
     font-family: "Ubuntu Mono", monospace;
-    background: #ebecec;
+    background: var(--developersTextCodeBackground);
     padding: 2px 6px;
     border-radius: 8px;
     font-size: 16px;

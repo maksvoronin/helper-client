@@ -5,13 +5,14 @@ import { Logo } from "../@assets";
 import { useAuthStoreContext, useDevSidebarStoreContext } from "../@store";
 import config, { baseURIs } from "../config";
 import { Link, useNavigation } from "react-router-dom";
+import { ThemeToggler } from "../@components";
 
 const Header = styled.div`
   height: 50px;
-  border-bottom: 1px solid #eee;
+  border-bottom: var(--developersBorder);
   position: sticky;
   top: 0;
-  background: white;
+  background: var(--developersContainerBackground);
   display: flex;
   align-items: center;
   padding-left: 15px;
@@ -33,6 +34,7 @@ const LogoContainer = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  color: var(--primaryText);
 
   @media (max-width: 500px) {
     p {
@@ -57,6 +59,7 @@ const UserText = styled.div``;
 const UserName = styled.p`
   margin: 0;
   font-size: 14px;
+  color: var(--primaryText);
 `;
 const UserEmail = styled(UserName)`
   font-size: 12px;
@@ -88,9 +91,9 @@ const OpenSidebar = styled.div`
   span {
     width: 12px;
     height: 2px;
-    background: black;
+    background: var(--primaryText);
   }
-  @media(min-width: 501px) {
+  @media (min-width: 501px) {
     display: none;
   }
 `;
@@ -142,17 +145,20 @@ const DevelopersHeader: FC = observer(() => {
           <Logo size={40} />
           <p>Helper Разработчикам</p>
         </LogoContainer>
-        {user.name ? (
-          <UserContainer>
-            <UserAvatar src={`${config.fileHost}/${user.avatar}`} alt={"User avatar"} />
-            <UserText>
-              <UserName>{user.name}</UserName>
-              <UserEmail>{user.email}</UserEmail>
-            </UserText>
-          </UserContainer>
-        ) : (
-          <SidebarLogin to={`${baseURIs.auth}/login`}>Войти</SidebarLogin>
-        )}
+        <div style={{display: "flex", alignItems: "center", gap: 15}}>
+          <ThemeToggler />
+          {user.name ? (
+            <UserContainer>
+              <UserAvatar src={`${config.fileHost}/${user.avatar}`} alt={"User avatar"} />
+              <UserText>
+                <UserName>{user.name}</UserName>
+                <UserEmail>{user.email}</UserEmail>
+              </UserText>
+            </UserContainer>
+          ) : (
+            <SidebarLogin to={`${baseURIs.auth}/login`}>Войти</SidebarLogin>
+          )}
+        </div>
       </HeaderContainer>
     </Header>
   );
