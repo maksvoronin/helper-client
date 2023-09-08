@@ -12,7 +12,7 @@ const H3 = styled.h3`
   margin-top: 10px;
   margin-bottom: 5px;
   font-size: 18px;
-  color: #444444;
+  color: var(--primaryText);
 `;
 
 const Subscribed: FC<PageProps> = observer(({ title }) => {

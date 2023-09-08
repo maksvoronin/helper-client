@@ -1,8 +1,8 @@
-export const dev_mode: boolean = false;
-export const dev_version: string = "2.4.6";
+export const dev_mode: boolean = true;
+export const dev_version: string = "2.4.7";
 
 const config = {
-  dev_title: `Release v${dev_version} (Developers Dark Theme)`,
+  dev_title: `Release v${dev_version} (Fixes and Improvement)`,
   API: dev_mode ? `http://192.168.0.105:1000/api` : `https://helper.voronin.xyz/api`,
   publicapi: "https://helper.voronin.xyz/api/dev",
   fileHost: dev_mode ? `http://192.168.0.105:1000/api/public` : `https://helper.voronin.xyz/api/public`,
@@ -12,6 +12,14 @@ const config = {
 };
 
 export const changelog = [
+  {
+    version: "2.4.7",
+    date: "08.09.2023",
+    steps: [
+      "На странице избранного исправлен цвет ссылки на замечания",
+      "Платформа для разработчиков: цвет текста на странице приложения"
+    ]
+  },
   {
     version: "2.4.6",
     date: "07.09.2023",

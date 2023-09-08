@@ -14,6 +14,7 @@ import { baseURIs } from "../../../config";
 const AppText = styled.p`
   margin-top: 0px;
   font-size: 14px;
+  color: var(--primaryText);
 `;
 
 const Row = styled.div`
