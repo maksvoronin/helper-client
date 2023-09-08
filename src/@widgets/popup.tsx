@@ -39,6 +39,7 @@ const PopupContainer = styled.div`
   background: var(--popupBackground);
   padding: 30px 30px;
   position: relative;
+  border: var(--popupBorder);
   @media(max-width: 500px) {
     min-width: 320px;
   }
@@ -71,8 +72,9 @@ const PopupClose = styled.div`
   top: -10px;
   width: 20px;
   height: 20px;
-  border: 1px solid #c7c7c7;
-  background-color: #fff;
+  border: var(--primaryBorder);
+  background-color: var(--popupBackground);
+  color: var(--primaryText);
   border-radius: 12px;
   display: flex;
   justify-content: center;

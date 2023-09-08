@@ -21,6 +21,7 @@
   --checkboxBorder: 1px solid #999;
   --popupWrapperBackground: rgba(255, 255, 255, 0.2);
   --popupBackground: white;
+  --popupBorder: 1px solid #dfdfdf;
 
   --developersPrimaryText: #000;
   --developersContainerBackground: #fff;
@@ -49,6 +50,7 @@
   --checkboxBorder: 1px solid #7c7c7c;
   --popupWrapperBackground: rgba(0, 0, 0, 0.2);
   --popupBackground: #2e2e2e;
+  --popupBorder: 1px solid #3a3a3a;
 
   --developersPrimaryText: #eeeeee;
   --developersContainerBackground: #1f1f1f;
