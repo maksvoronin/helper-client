@@ -3,12 +3,9 @@ import "./style.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import { dev_mode } from "./config";
-import {
-  CommentsCheck,
-  JournalComments,
-} from "./@pages";
+import { CommentsCheck, JournalComments } from "./@pages";
 import { authStore, AuthStoreContext } from "./@store";
-import { adminRoutes, developerRoutes, mainRoutes } from "./@routers";
+import { adminRoutes, blogRoutes, developerRoutes, mainRoutes } from "./@routers";
 import authRoutes from "./@routers/auth";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
@@ -18,6 +15,7 @@ const router = createBrowserRouter([
   ...developerRoutes,
   ...adminRoutes,
   ...authRoutes,
+  ...blogRoutes,
   {
     path: "/journals/comments",
     element: <JournalComments title="Журнал замечаний локомотива" />,
