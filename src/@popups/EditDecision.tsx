@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { FC, useState, createRef, useEffect } from "react";
 import $api from "../@http";
-import { Input, FileLabel, InputFile, Button } from "../@shared";
+import { FileLabel, InputFile, Button, Textarea } from "../@shared";
 import { usePopupStoreContext, useLoaderStore } from "../@store";
 import { Decision, Response } from "../@types";
 import config from "../config";
@@ -51,7 +51,7 @@ const EditDecision: FC<{ decision: Decision; setDecision: any }> = observer(({ d
 
   return (
     <>
-      <Input placeholder="Текст решения" value={text} onChange={({ target }: any) => setText(target.value)} />
+      <Textarea placeholder="Текст решения" value={text} onChange={({ target }: any) => setText(target.value)} />
       <FileLabel
         htmlFor="file"
         onClick={(e: any) => {

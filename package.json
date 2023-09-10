@@ -1,6 +1,6 @@
 {
   "name": "helper-client",
-  "version": "2.4",
+  "version": "2.5",
   "private": true,
   "dependencies": {
     "@mdi/js": "^7.0.96",

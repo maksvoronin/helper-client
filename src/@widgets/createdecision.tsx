@@ -1,11 +1,12 @@
 import { FC, useEffect, useState, createRef } from "react";
 import { Button, FileLabel, FormText, InputFile, Textarea } from "../@shared";
-import { CommentSelect, ResultField, SystemSelect } from "../@components";
-import { Comment, FormStatus, Response } from "../@types";
+import { CommentSelect, SystemSelect } from "../@components";
+import { Comment, Response } from "../@types";
 import $api from "../@http";
 import config from "../config";
 import { observer } from "mobx-react";
 import { useLoaderStore } from "../@store";
+import { alert } from "../@services";
 
 const CreateDecision: FC = observer(() => {
   const { setLoaded } = useLoaderStore();
@@ -21,7 +22,6 @@ const CreateDecision: FC = observer(() => {
 
   const [uploadedFile, setUploadedFile] = useState<string>("");
 
-  const [postData, setPostData] = useState<FormStatus>({} as FormStatus);
 
   useEffect(() => {
     if (fileName) {
@@ -47,11 +47,11 @@ const CreateDecision: FC = observer(() => {
   const sendData = () => {
     $api.post(`/decision/create`, { comment: selectedComment, content, file: uploadedFile }).then(({ data }) => {
       if (data.type === "error") {
-        return setPostData({ status: false, message: data.data });
+        return alert("error", "Ошибка", data.message);
       } else {
         setContent("");
         unlinkFile();
-        return setPostData({ status: true, message: "Успешно!" });
+        return alert("default", "Успешно", data.message);
       }
     });
   };
@@ -74,7 +74,7 @@ const CreateDecision: FC = observer(() => {
       <Textarea placeholder="Текст решения" value={content} onChange={({ target }: any) => setContent(target.value)} />
       <FileLabel
         htmlFor="file"
-        style={{marginTop: 10, marginBottom: 15}}
+        style={{ marginTop: 10, marginBottom: 15 }}
         onClick={(e: any) => {
           fileName && unlinkFile(e);
         }}
@@ -83,7 +83,6 @@ const CreateDecision: FC = observer(() => {
       </FileLabel>
       <InputFile type={"file"} id="file" onChange={({ target }: any) => setFileName(target.value)} ref={fileInput} />
       <Button onClick={sendData}>Сохранить</Button>
-      <ResultField status={postData.status} message={postData.message} />
     </>
   );
 });

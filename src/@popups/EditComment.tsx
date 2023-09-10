@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { usePopupStoreContext } from "../@store";
 import { Comment, Response } from "../@types";
 import { alert } from "../@services";
-import { Button, Input } from "../@shared";
+import { Button, Textarea } from "../@shared";
 
 const EditComment: FC<{comment: Comment, setComment: any}> = observer(({comment, setComment}) => {
   const [text, setText] = useState<string>(comment.content);
@@ -20,7 +20,7 @@ const EditComment: FC<{comment: Comment, setComment: any}> = observer(({comment,
   }
 
   return <>
-    <Input value={text} onChange={({target}: any) => setText(target.value)} />
+    <Textarea value={text} onChange={({target}: any) => setText(target.value)} />
     <Button onClick={sendData}>Сохранить</Button>
   </>;
 });

@@ -249,6 +249,7 @@ const Sidebar: FC = observer(() => {
             <Link className={"support"} to={`${baseURIs.developers}`}>
               Разработчикам
             </Link>
+            <Link className="support" to={`${baseURIs.blog}`}>Блог</Link>
             <Link className="support" to={`${baseURIs.main}/changelog`}>Версия {dev_version}</Link>
           </SidebarLinks>
         </SidebarContainer>

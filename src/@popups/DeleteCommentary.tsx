@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { Button, CancelButton, ContainerText } from "../@shared";
+import { Button, ContainerText } from "../@shared";
 import { observer } from "mobx-react";
 import { FC } from "react";
 import { usePopupStoreContext } from "../@store";
@@ -31,7 +31,6 @@ const DeleteCommentary: FC<{ commentaryId: string; action?: (b: boolean) => void
     <>
       <ContainerText>Вы уверены, что хотите удалить комментарий?</ContainerText>
       <DeleteButton onClick={sendData}>Да, удалить комментарий</DeleteButton>
-      <CancelButton onClick={() => setVisible(false)}>Отмена</CancelButton>
     </>
   );
 });

@@ -25,3 +25,4 @@ export { default as PostNumber } from "./postnumber.interface";
 export { default as CommentsJournal } from "./commentsjournal.interface";
 export { default as ProjectStat } from "./projectstat.interface";
 export { default as Application } from "./application.interface";
+export { default as Blog } from "./blog.interface";
