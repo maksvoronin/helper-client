@@ -86,7 +86,7 @@ const Post: FC = observer(() => {
       <Container>
         <Header>
           <BlogTitle>{post.title}</BlogTitle>
-          <BlogAuthor>{post.description}</BlogAuthor>
+          <BlogAuthor>{post.description} • просмотры: {post.views}</BlogAuthor>
         </Header>
         <Article>
           <CoverImage style={post.cover ? { backgroundImage: `url(${config.fileHost}/${post.cover})` } : {}} />

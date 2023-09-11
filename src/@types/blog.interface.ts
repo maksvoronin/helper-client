@@ -9,4 +9,5 @@ export default interface Blog {
   text: string;
   cover: string;
   created: number;
+  views: number;
 }
