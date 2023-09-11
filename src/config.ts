@@ -1,4 +1,4 @@
-export const dev_mode: boolean = true;
+export const dev_mode: boolean = false;
 export const dev_version: string = "2.5";
 
 const config = {
