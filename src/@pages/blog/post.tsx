@@ -33,6 +33,7 @@ const BlogAuthor = styled.p`
 const BlogParagraph = styled.pre`
   position: relative;
   margin: 0;
+  white-space: break-spaces;
 `;
 
 const Header = styled.div`

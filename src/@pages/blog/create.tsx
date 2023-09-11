@@ -100,6 +100,7 @@ const BlogAuthor = styled.p<{ placeholder: string; label: string; edited: string
 const BlogParagraph = styled.pre<{ placeholder: string; label: string; edited: string }>`
   position: relative;
   margin: 0;
+  white-space: break-spaces;
   &::before {
     content: "${(props) => props.placeholder}";
     position: absolute;
