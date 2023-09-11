@@ -42,4 +42,4 @@ export { JournalComments } from "./journals";
 export { default as Changelog } from "./changelog";
 export { default as NotFound } from "./notfound";
 export { default as LoginApplication } from "./loginApplication";
-export { CreateBlog, PostBlog, EditBlog } from "./blog";
+export { CreateBlog, PostBlog, EditBlog, AllPosts } from "./blog";

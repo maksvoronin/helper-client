@@ -1,14 +1,10 @@
 import { ProtectedRoute } from "../@components";
-import { CreateBlog, EditBlog, PostBlog } from "../@pages";
+import { AllPosts, CreateBlog, EditBlog, PostBlog } from "../@pages";
 import { baseURIs } from "../config";
 
 const baseURI = baseURIs.blog;
 
 const blogRoutes = [
-  {
-    path: `${baseURI}`,
-    element: <CreateBlog title="Блог" />,
-  },
   {
     path: `${baseURI}/create`,
     element: (
@@ -30,9 +26,9 @@ const blogRoutes = [
     ),
   },
   {
-    path: `${baseURI}/:id`,
-    element: <CreateBlog title="Блог" />,
-  },
+    path: `${baseURI}`,
+    element: <AllPosts title="Блог Helper" />
+  }
 ];
 
 export default blogRoutes;

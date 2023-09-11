@@ -24,3 +24,4 @@ export { default as Loader } from "./Loader";
 export { default as AppsCard } from "./AppsCard";
 export { default as ProtectedRoute } from "./ProtectedRoute";
 export { default as ThemeToggler } from "./ThemeToggler";
+export { default as BlogCard } from "./BlogCard";

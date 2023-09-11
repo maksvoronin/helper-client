@@ -7,3 +7,4 @@ export { default as CreateDecision } from "./createdecision";
 export { default as Popup } from "./popup";
 export { default as DevelopersSidebar } from "./developerssidebar";
 export { default as DevelopersHeader } from "./developersheader";
+export { default as BlogHeader } from "./blogheader";

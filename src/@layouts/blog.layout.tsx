@@ -5,12 +5,14 @@ import styled from "styled-components";
 import { useAuthStoreContext } from "../@store";
 import $api from "../@http";
 import { useNavigate } from "react-router-dom";
-import { AlertPanel, Popup } from "../@widgets";
+import { AlertPanel, BlogHeader, Popup } from "../@widgets";
 import config, { dev_mode } from "../config";
 
 const Layout = styled.div`
   max-width: 768px;
   margin: 0 auto;
+  padding: 0;
+  margin-bottom: 30px;
   @media (max-width: 812px) {
     padding-left: 15px;
     padding-right: 15px;
@@ -18,7 +20,7 @@ const Layout = styled.div`
 `;
 
 const DevMark = styled.p`
-  position: absolute;
+  position: fixed;
   right: 0px;
   top: 0px;
   margin: 0;
@@ -27,7 +29,6 @@ const DevMark = styled.p`
 `;
 
 const BlogLayout: FC<PropsWithChildren<PageProps>> = observer(({ children, title }) => {
-
   const { user, isAuth, setAuth, setUser } = useAuthStoreContext();
   const navigate = useNavigate();
 
@@ -50,7 +51,10 @@ const BlogLayout: FC<PropsWithChildren<PageProps>> = observer(({ children, title
     <>
       <title>{title}</title>
       {dev_mode && <DevMark>{config.dev_title}</DevMark>}
-      <Layout>{children}</Layout>
+      <Layout>
+        <BlogHeader />
+        {children}
+      </Layout>
       <AlertPanel />
       <Popup />
     </>

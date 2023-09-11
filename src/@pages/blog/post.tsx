@@ -7,7 +7,7 @@ import { Blog, Response } from "../../@types";
 import styled from "styled-components";
 import config, { baseURIs } from "../../config";
 import { useAuthStoreContext, usePopupStoreContext } from "../../@store";
-import { Button, CancelButton } from "../../@shared";
+import { Button, CancelButton, Link } from "../../@shared";
 import { DeletePostBlog } from "../../@popups";
 
 const Container = styled.div`
@@ -92,6 +92,7 @@ const Post: FC = observer(() => {
         </Article>
         <BlogParagraph>{post.text}</BlogParagraph>
       </Container>
+      <Link to={`${baseURIs.blog}`} style={{marginTop: 15, display: "block", textAlign: "center"}}>Вернуться в блог</Link>
       {user.permissions > 2 && (
         <div style={{ display: "flex", gap: 10, flexDirection: "column", marginTop: 20 }}>
           <Button onClick={() => navigate(`${baseURIs.blog}/${post.link}/edit`)}>Изменить</Button>
