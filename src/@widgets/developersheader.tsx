@@ -49,10 +49,13 @@ const UserContainer = styled.div`
   gap: 10px;
 `;
 
-const UserAvatar = styled.img`
+const UserAvatar = styled.div`
+  background-color: #c7c7c7;
   width: 40px;
   height: 40px;
   border-radius: 50px;
+  background-position: 0px 80%;
+  background-size: 100%;
 `;
 
 const UserText = styled.div``;
@@ -149,7 +152,7 @@ const DevelopersHeader: FC = observer(() => {
           <ThemeToggler />
           {user.name ? (
             <UserContainer>
-              <UserAvatar src={`${config.fileHost}/${user.avatar}`} alt={"User avatar"} />
+              <UserAvatar style={{ backgroundImage: `url(${config.API}/public/${user.avatar})` }} />
               <UserText>
                 <UserName>{user.name}</UserName>
                 <UserEmail>{user.email}</UserEmail>
