@@ -41,6 +41,10 @@ const BlogParagraph = styled.pre`
       text-decoration: underline;
     }
   }
+
+  img {
+    max-width: 100%;
+  }
 `;
 
 const Header = styled.div`
