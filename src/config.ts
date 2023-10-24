@@ -1,5 +1,5 @@
 export const dev_mode: boolean = false;
-export const dev_version: string = "2.5";
+export const dev_version: string = "2.5.1";
 
 const config = {
   dev_title: `Release v${dev_version} (Blog)`,
@@ -12,6 +12,11 @@ const config = {
 };
 
 export const changelog = [
+  {
+    version: "2.5.1",
+    date: "24.10.2023",
+    steps: ["Теперь ссылки в блоге доступны для перехода"]
+  },
   {
     version: "2.5",
     date: "10.09.2023",

@@ -34,6 +34,13 @@ const BlogParagraph = styled.pre`
   position: relative;
   margin: 0;
   white-space: break-spaces;
+  a {
+    color: #0084ff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -86,22 +93,30 @@ const Post: FC = observer(() => {
       <Container>
         <Header>
           <BlogTitle>{post.title}</BlogTitle>
-          <BlogAuthor>{post.description} • просмотры: {post.views}</BlogAuthor>
+          <BlogAuthor>
+            {post.description} • просмотры: {post.views}
+          </BlogAuthor>
         </Header>
         <Article>
           <CoverImage style={post.cover ? { backgroundImage: `url(${config.fileHost}/${post.cover})` } : {}} />
         </Article>
-        <BlogParagraph>{post.text}</BlogParagraph>
+        <BlogParagraph dangerouslySetInnerHTML={{ __html: post.text && post.text.replace(/((https|http)?:\/\/[^\s]+)/g, `<a href="$1" target="_blank">$1</a>`) }}></BlogParagraph>
       </Container>
-      <Link to={`${baseURIs.blog}`} style={{marginTop: 15, display: "block", textAlign: "center"}}>Вернуться в блог</Link>
+      <Link to={`${baseURIs.blog}`} style={{ marginTop: 15, display: "block", textAlign: "center" }}>
+        Вернуться в блог
+      </Link>
       {user.permissions > 2 && (
         <div style={{ display: "flex", gap: 10, flexDirection: "column", marginTop: 20 }}>
           <Button onClick={() => navigate(`${baseURIs.blog}/${post.link}/edit`)}>Изменить</Button>
-          <CancelButton onClick={() => {
-            setTitle("Удаление записи");
-            setContent(<DeletePostBlog postId={`${post._id}`} />)
-            setVisible(true);
-          }}>Удалить</CancelButton>
+          <CancelButton
+            onClick={() => {
+              setTitle("Удаление записи");
+              setContent(<DeletePostBlog postId={`${post._id}`} />);
+              setVisible(true);
+            }}
+          >
+            Удалить
+          </CancelButton>
         </div>
       )}
     </BlogLayout>
