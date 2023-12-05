@@ -128,6 +128,10 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
     });
   };
 
+  if(!decision) return <></>
+
+  if(!decision.by) return <Container>Без автора</Container>
+
   return (
     <Container>
       <DecisionText>{newDecision.content}</DecisionText>
