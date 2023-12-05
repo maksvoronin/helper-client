@@ -130,8 +130,6 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
 
   if(!decision) return <></>
 
-  if(!decision.by) return <Container>Без автора</Container>
-
   return (
     <Container>
       <DecisionText>{newDecision.content}</DecisionText>
@@ -158,7 +156,7 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
           • {new Date(newDecision.created).toLocaleString("ru")}
         </p>
         <ButtonContainer>
-          {user && user._id ? (
+          {user && user._id && newDecision.by ? (
             (user._id === newDecision.by._id || user.permissions > 4) && (
               <LikeButton
                 onClick={() => {
