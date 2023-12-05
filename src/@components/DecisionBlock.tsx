@@ -146,9 +146,11 @@ const DecisionBlock: FC<{ decision: Decision }> = observer(({ decision }) => {
       )}
       <UserInfo>
         <p>
-          <Link to={`${baseURIs.main}/profile/${decision.by && decision.by._id}`}>
-            {decision.by && decision.by.name} {decision.by && decision.by.surname}
-          </Link>
+          {decision.by && (
+            <Link to={`${baseURIs.main}/profile/${decision.by && decision.by._id}`}>
+              {decision.by && decision.by.name} {decision.by && decision.by.surname}
+            </Link>
+          )}
           • {new Date(newDecision.created).toLocaleString("ru")}
         </p>
         <ButtonContainer>
