@@ -94,7 +94,7 @@ const Register: FC<PageProps> = observer(({ title }) => {
       if(data.type === "error" || typeof data.data! === "string") return setError({status: false, message: String(data.data!)});
       setUser(data.data!.user);
       localStorage.token = data.data!.accessToken;
-      navigate("/activate");
+      navigate("/auth/activate");
     });
   };
 

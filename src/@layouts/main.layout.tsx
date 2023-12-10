@@ -78,7 +78,7 @@ const MainLayout: FC<PropsWithChildren<PageProps>> = observer(({ title, children
       });
     }
     if (!user.isActivated && isAuth) {
-      navigate("/activate");
+      navigate("/auth/activate");
     }
   }, [user.name, setUser, isAuth, setAuth, navigate, user.isActivated]);
 

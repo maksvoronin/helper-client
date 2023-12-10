@@ -43,7 +43,7 @@ const BlogLayout: FC<PropsWithChildren<PageProps>> = observer(({ children, title
       });
     }
     if (!user.isActivated && isAuth) {
-      navigate("/activate");
+      navigate("/auth/activate");
     }
   }, [user.name, setUser, isAuth, setAuth, navigate, user.isActivated]);
 
